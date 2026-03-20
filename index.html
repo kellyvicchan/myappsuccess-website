@@ -3,7 +3,25 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MyAppSuccess — College Admissions Consulting</title>
+<title>MyAppSuccess — The Premier College App Bootcamp</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABRklEQVR4nO2Vy46FMAxDj6v73w0/jmfRB70PRNFcZjZ4U6kKsZM6AW7cuHERnEkGHcWlq8gByP8gwH4m7WL+QoCNCERggHa+irocBjmTZogv8cAZnBYwW9lULqNTAvpYxXyLd3NlEnFSQLUWg8l0VoRdxLc8j1MCopBJGHBzvd3vDsnblEiY5RT7pt5G45Z7fY5PU9Dvxu+mPZBzYlyrgchbK7Ww9gp3cyAtrKqdax6YfwIbSaY6QcBaOpFaS6sgC/xaKap3ZT07LawG5gVElBSV3WjzQjWjxFrPIlKbkFa5xLq9vTXjYJHzflyEKZ3p1Y6GrNUXsWUxixw937EAW0Qcxy1hKELKUGz/gS6oeOkJ31vFOYTd292uK7k+kdfYX6G88tihZelG3cQN5KVTvMV8BfZ7pTmntzG+GBrIVKbyxo0b+/gBVlW0FfDDmFYAAAAASUVORK5CYII=" />
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABRklEQVR4nO2Vy46FMAxDj6v73w0/jmfRB70PRNFcZjZ4U6kKsZM6AW7cuHERnEkGHcWlq8gByP8gwH4m7WL+QoCNCERggHa+irocBjmTZogv8cAZnBYwW9lULqNTAvpYxXyLd3NlEnFSQLUWg8l0VoRdxLc8j1MCopBJGHBzvd3vDsnblEiY5RT7pt5G45Z7fY5PU9Dvxu+mPZBzYlyrgchbK7Ww9gp3cyAtrKqdax6YfwIbSaY6QcBaOpFaS6sgC/xaKap3ZT07LawG5gVElBSV3WjzQjWjxFrPIlKbkFa5xLq9vTXjYJHzflyEKZ3p1Y6GrNUXsWUxixw937EAW0Qcxy1hKELKUGz/gS6oeOkJ31vFOYTd292uK7k+kdfYX6G88tihZelG3cQN5KVTvMV8BfZ7pTmntzG+GBrIVKbyxo0b+/gBVlW0FfDDmFYAAAAASUVORK5CYII=" />
+
+<!-- Open Graph / link preview -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="MyAppSuccess — The Premier College App Bootcamp" />
+<meta property="og:description" content="Expert guidance and resources from Ivy League graduates, for every student, at every starting point. With direct connections to admissions offices, we help you build the strongest application possible." />
+<meta property="og:image" content="https://myappsuccess.com/og-image.jpg" />
+<meta property="og:url" content="https://myappsuccess.com" />
+<meta property="og:site_name" content="MyAppSuccess" />
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="MyAppSuccess — The Premier College App Bootcamp" />
+<meta name="twitter:description" content="Expert guidance and resources from Ivy League graduates, for every student, at every starting point." />
+<meta name="twitter:image" content="https://myappsuccess.com/og-image.jpg" />
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -368,7 +386,7 @@
     .hero-badge { font-size: 0.68rem; padding: 0.35rem 0.8rem; margin-bottom: 1.2rem; }
     .hero-sub { font-size: 0.95rem; margin-bottom: 1.5rem; }
     .hero-cta-row { gap: 0.7rem; flex-direction: column; align-items: center; }
-    .hero-cta-row .btn-gold { width: 100%; max-width: 320px; justify-content: center; }
+    .hero-cta-row .btn-gold, .hero-cta-row .btn-hero { width: 100%; max-width: 320px; justify-content: center; min-width: unset; }
     .hero-trust { gap: 1.2rem; flex-wrap: wrap; }
     .trust-divider { display: none; }
 
@@ -501,6 +519,24 @@
     .hamburger { display: flex; }
     .nav-links { display: none; }
   }
+
+  /* HERO BUTTONS — equal size */
+  .btn-hero {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 200px; text-align: center;
+    background: var(--gold); color: var(--navy);
+    font-family: var(--font); font-weight: 800; font-size: 0.95rem;
+    padding: 0.9rem 1.5rem; border-radius: 10px; border: 2px solid var(--gold);
+    text-decoration: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s, border-color 0.2s;
+    box-shadow: 0 4px 20px rgba(240,180,30,0.35);
+  }
+  .btn-hero:hover { background: var(--gold-dark); border-color: var(--gold-dark); transform: translateY(-2px); }
+  .btn-hero-outline {
+    background: transparent; color: var(--white);
+    border-color: rgba(255,255,255,0.4); box-shadow: none;
+  }
+  .btn-hero-outline:hover { background: rgba(255,255,255,0.08); border-color: var(--gold); color: var(--white); }
 </style>
 </head>
 <body>
@@ -541,9 +577,9 @@
     <h1 class="hero-h1">Your <span class="highlight">dream school</span><br>is within reach.</h1>
     <p class="hero-sub">Expert guidance and resources from Ivy League graduates, for every student, at every starting point. With direct connections to admissions offices, we help you build the strongest application possible.</p>
     <div class="hero-cta-row">
-      <a href="form.html" class="btn-gold">Apply to the Bootcamp</a>
-      <a href="service-form.html" class="btn-gold" style="background:transparent;color:var(--white);border:2px solid rgba(255,255,255,0.4);">Book a 1:1 Service</a>
-      <a href="#outcomes" class="btn-gold" style="background:transparent;color:var(--white);border:2px solid rgba(255,255,255,0.4);">See Our Results</a>
+      <a href="form.html" class="btn-hero">Apply to the Bootcamp</a>
+      <a href="service-form.html" class="btn-hero btn-hero-outline">Book a 1:1 Service</a>
+      <a href="#outcomes" class="btn-hero btn-hero-outline">See Our Results</a>
     </div>
     <div class="hero-trust">
       <div class="trust-item"><div class="trust-num">10+</div><div class="trust-label">Years Experience</div></div>
@@ -663,17 +699,15 @@
           <span class="tag" style="grid-column:1/-1;font-style:italic;">And Many More</span>
         </div>
       </div>
-      <div>
-        <div class="outcome-tags-block">
-          <h4>Graduate Acceptances</h4>
-          <div class="tag-row" style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
-            <span class="tag">Cornell</span>
-            <span class="tag">Columbia</span>
-            <span class="tag">Johns Hopkins</span>
-            <span class="tag">University of Pennsylvania</span>
-            <span class="tag">Rutgers</span>
-            <span class="tag" style="grid-column:1/-1;font-style:italic;">And Many More</span>
-          </div>
+      <div class="fade-in">
+        <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.9rem;">Graduate Acceptances</p>
+        <div class="tag-row" style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+          <span class="tag">Cornell</span>
+          <span class="tag">Columbia</span>
+          <span class="tag">Johns Hopkins</span>
+          <span class="tag">University of Pennsylvania</span>
+          <span class="tag">Rutgers</span>
+          <span class="tag" style="grid-column:1/-1;font-style:italic;">And Many More</span>
         </div>
       </div>
     </div>
@@ -685,7 +719,7 @@
   <div class="container">
     <div class="section-eyebrow fade-in">Bootcamp Series</div>
     <h2 class="section-h2 fade-in">Train like a <span class="accent">top candidate.</span></h2>
-    <p class="section-p fade-in" style="max-width:720px;">This is not a guarantee you will get into your dream school. It is a guarantee you will become the strongest version of yourself as a candidate. We work alongside you to build your application, your confidence, and your story. You will learn how to communicate who you are, what you stand for, and why you belong. Getting into a great school is a likely outcome. Becoming a stronger, more self-aware person is a certain one.</p>
+    <p class="fade-in" style="font-size:1rem;color:rgba(255,255,255,0.75);line-height:1.8;margin-bottom:2rem;">This is not a guarantee you will get into your dream school. It is a guarantee you will become the strongest version of yourself as a candidate. We work alongside you to build your application, your confidence, and your story. You will learn how to communicate who you are, what you stand for, and why you belong. Getting into a great school is a likely outcome. Becoming a stronger, more self-aware person is a certain one.</p>
 
     <div class="bootcamp-grid">
       <div class="bootcamp-card fade-in">
@@ -768,7 +802,7 @@
   <div class="container">
     <div class="section-eyebrow fade-in">Flexible Packages</div>
     <h2 class="section-h2 fade-in">One-on-one support for <span class="accent">every need.</span></h2>
-    <p class="section-p fade-in">Need targeted help outside the bootcamp? Choose a format that fits your timeline and goals.</p>
+    <p class="fade-in" style="font-size:1rem;color:var(--muted);line-height:1.75;">Need targeted help outside the bootcamp? Choose a format that fits your timeline and goals.</p>
 
     <div class="pricing-grid">
       <div class="price-card fade-in" data-service="Virtual Review ($150)">
@@ -782,7 +816,6 @@
         </ul>
       </div>
       <div class="price-card fade-in" data-service="1:1 Video Session ($200/hr)">
-        <div class="featured-badge" style="visibility:hidden;">Most Popular</div>
         <h3>1:1 Video Session</h3>
         <div class="price-amount">$200 / hr</div>
         <p>Live video call with your advisor for real-time strategy, feedback, and deep-dive application review.</p>
@@ -794,8 +827,8 @@
         </ul>
 
       </div>
-      <div class="price-card fade-in" data-service="Custom / Retainer (contact for quote)">
-        <h3>Custom / Retainer</h3>
+      <div class="price-card fade-in" data-service="Custom Retainer (contact for quote)">
+        <h3>Custom Retainer</h3>
         <div class="price-amount">Contact for quote</div>
         <p>Full-season support from start to finish. Best for students applying to multiple schools.</p>
         <ul>
