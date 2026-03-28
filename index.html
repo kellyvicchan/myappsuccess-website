@@ -67,7 +67,7 @@
   .hero {
     min-height: calc(100vh - 52px); background: var(--navy);
     display: flex; align-items: center; justify-content: center;
-    padding: 160px 3rem 4rem; position: relative; overflow: hidden; text-align: center;
+    padding: 200px 3rem 4rem; position: relative; overflow: hidden; text-align: center;
   }
   .hero::before {
     content: ''; position: absolute; inset: 0;
@@ -164,11 +164,11 @@
     color: var(--navy); margin-bottom: 1rem; letter-spacing: -0.02em;
   }
   .section-h2 .accent { color: var(--gold-dark); }
-  .section-p { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 540px; }
+  .section-p { font-size: 1rem; color: var(--muted); line-height: 1.75; }
 
   /* ABOUT */
   .about { background: var(--off-white); }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-grid { display: flex; flex-direction: column; gap: 2.5rem; }
   .about-cards { display: flex; flex-direction: column; gap: 1rem; }
   .about-card {
     background: white; border-radius: 14px; padding: 1.5rem;
@@ -184,7 +184,7 @@
   }
   .about-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
   .about-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
-  .cred-block { background: var(--navy); border-radius: 20px; padding: 2.5rem; color: white; }
+  .cred-block { background: #6b7280; border-radius: 20px; padding: 2.5rem; color: white; }
   .cred-block h3 { font-size: 1.3rem; font-weight: 800; color: var(--gold); margin-bottom: 0.7rem; }
   .cred-block p { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 1.5rem; }
   .chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
@@ -196,12 +196,22 @@
   }
   .field-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .field-chip {
-    background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.08); color: white;
+    border: 1px solid rgba(255,255,255,0.2);
     border-radius: 6px; font-size: 0.75rem; font-weight: 500; padding: 0.3rem 0.7rem;
   }
 
   /* OUTCOMES */
-  .outcomes { background: white; }
+  .outcomes { background: var(--navy); }
+  .outcomes .section-eyebrow { background: rgba(240,180,30,0.15); border-color: rgba(240,180,30,0.4); color: var(--gold); }
+  .outcomes .section-h2 { color: white; }
+  .outcomes .section-h2 .accent { color: var(--gold); }
+  .outcomes .section-p { color: rgba(255,255,255,0.7); }
+  .outcomes .tag {
+    background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+  }
+  .outcomes .tag:hover { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); cursor: default; }
   .outcomes-top { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem; align-items: start; }
   .school-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
   .school-pill {
@@ -210,7 +220,7 @@
     font-size: 0.82rem; font-weight: 600; color: var(--navy);
     transition: border-color 0.15s, background 0.15s;
   }
-  .school-pill:hover { border-color: var(--gold); background: var(--gold-bg); }
+  .school-pill:hover { border-color: var(--border); background: var(--off-white); cursor: default; }
   .school-pill.top { color: var(--gold-dark); border-color: var(--gold); background: var(--gold-bg); }
   .outcome-tags-block { margin-top: 1.5rem; }
   .outcome-tags-block h4 {
@@ -283,8 +293,12 @@
   .bc-addons li strong { color: var(--gold); }
 
   /* PRICING */
-  .pricing { background: var(--off-white); }
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .pricing { background: var(--white); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .price-card h3 { font-size: 1rem; }
+  .price-card .price-amount { font-size: 1.3rem; margin: 0.2rem 0 0; }
+  .price-card p { font-size: 0.85rem; color: var(--muted); margin: 0.2rem 0 0; }
+  .price-card ul { margin: 0; }
   .price-card {
     background: white; border-radius: 16px; border: 2px solid var(--border); padding: 2rem;
     display: flex; flex-direction: column;
@@ -339,7 +353,7 @@
   .testimonials .section-h2 { color: white; }
   .testimonials .section-p { color: rgba(255,255,255,0.6); }
   .testimonials .section-eyebrow { background: rgba(240,180,30,0.15); border-color: rgba(240,180,30,0.4); color: var(--gold); }
-  .test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .test-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; margin-top: 3rem; }
 
   .test-card {
     background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1);
@@ -371,7 +385,7 @@
   /* ── TABLET 1100px ── */
   @media (max-width: 1100px) {
     .about-grid { gap: 3rem; }
-    .test-grid { grid-template-columns: repeat(2,1fr); }
+    .test-grid { grid-template-columns: 1fr; }
     /* bc-price-grid and pricing-grid stay 3-col on tablet */
     .outcomes-top { gap: 2.5rem; }
   }
@@ -384,7 +398,7 @@
     .hamburger { display: flex; }
 
     /* HERO */
-    .hero { padding: 130px 1.2rem 2.5rem; min-height: auto; }
+    .hero { padding: 170px 1.2rem 2.5rem; min-height: auto; }
     .hero-badge { font-size: 0.68rem; padding: 0.35rem 0.8rem; margin-bottom: 1.2rem; }
     .hero-sub { font-size: 0.95rem; margin-bottom: 1.5rem; }
     .hero-cta-row { gap: 0.7rem; flex-direction: column; align-items: center; }
@@ -399,7 +413,8 @@
     .section-p { font-size: 0.92rem; max-width: 100%; }
 
     /* WHO WE ARE */
-    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-grid { gap: 1.5rem; }
+    .about-cards { grid-template-columns: 1fr; }
     .about-card { padding: 1.2rem; }
     .cred-block { padding: 1.8rem; }
 
@@ -439,7 +454,7 @@
     .section-h2 { font-size: clamp(1.4rem, 7vw, 1.8rem); }
     .bc-price-grid { grid-template-columns: 1fr; }
     .test-grid { grid-template-columns: 1fr; }
-    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-grid { flex-direction: column; }
     .cred-block { padding: 1.4rem; }
     .bootcamp-card { padding: 1.2rem; }
     .about-card { padding: 1rem; }
@@ -495,7 +510,7 @@
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   .mobile-menu {
-    display: none; position: fixed; top: 72px; left: 0; right: 0;
+    display: none; position: fixed; top: 110px; left: 0; right: 0;
     background: white; border-bottom: 2px solid var(--gold);
     box-shadow: 0 8px 24px rgba(30,70,110,0.12);
     z-index: 99; padding: 1rem 0;
@@ -528,7 +543,7 @@
     .nav-links { display: none; }
   }
 
-  /* HERO BUTTONS — equal size */
+  /* HERO BUTTONS: equal size */
   .btn-hero {
     display: inline-flex; align-items: center; justify-content: center;
     min-width: 200px; text-align: center;
@@ -572,9 +587,11 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#outcomes">Outcomes</a></li>
+    <li><a href="#pricing">1:1 Sessions</a></li>
     <li><a href="#bootcamp">Bootcamp</a></li>
-    <li><a href="#pricing">Packages</a></li>
+    <li><a href="#templates">Templates</a></li>
     <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="form.html" class="nav-cta">Get Started</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -587,11 +604,18 @@
   <ul>
     <li><a href="#about" onclick="closeMenu()">About</a></li>
     <li><a href="#outcomes" onclick="closeMenu()">Outcomes</a></li>
+    <li><a href="#pricing" onclick="closeMenu()">1:1 Sessions</a></li>
     <li><a href="#bootcamp" onclick="closeMenu()">Bootcamp</a></li>
-    <li><a href="#pricing" onclick="closeMenu()">Packages</a></li>
+    <li><a href="#templates" onclick="closeMenu()">Templates</a></li>
     <li><a href="#testimonials" onclick="closeMenu()">Reviews</a></li>
-    <li><a href="form.html" class="mob-cta">Join Bootcamp Waitlist</a></li>
+    <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
+    <li><a href="form.html" class="mob-cta">Apply to Join the Waitlist</a></li>
   </ul>
+</div>
+
+<!-- WAITLIST BANNER -->
+<div style="background:var(--gold);text-align:center;padding:0.6rem 1.5rem;font-size:0.82rem;font-weight:700;color:var(--navy);letter-spacing:0.03em;position:fixed;top:72px;left:0;right:0;z-index:99;">
+  Waitlist only at this time. <a href="form.html" style="color:var(--navy);text-decoration:underline;">Apply below to reserve your spot</a>
 </div>
 
 <!-- HERO -->
@@ -600,18 +624,18 @@
   <div class="hero-arc2"></div>
   <div class="hero-inner">
     <h1 class="hero-h1">Your <span class="highlight">dream school</span><br>is within reach.</h1>
-    <p class="hero-sub">Ivy League-level guidance, tailored to students at every starting point of the application.<br>Real strategy. Real guidance. Real results.</p>
+    <p class="hero-sub">Ivy League-trained guidance built to develop you as a candidate, not just polish your application. We give you the tools and frameworks to get where you want to go.</p>
     <div class="hero-cta-row">
-      <a href="form.html" class="btn-hero">Join Bootcamp Waitlist</a>
+      <a href="form.html" class="btn-hero">Apply to Join the Waitlist</a>
       <a href="#outcomes" class="btn-hero btn-hero-outline">See Our Results</a>
     </div>
-    <p style="margin-top:1rem;margin-bottom:3rem;font-size:0.82rem;color:rgba(255,255,255,0.45);">Looking for one-on-one help? <a href="#pricing" style="color:var(--gold);text-decoration:underline;font-weight:600;">See our 1:1 services</a></p>
+    <p style="margin-top:1rem;margin-bottom:3rem;font-size:0.82rem;color:rgba(255,255,255,0.45);">Looking for one-on-one help? <a href="#pricing" style="color:var(--gold);text-decoration:underline;font-weight:600;">See our available services</a></p>
     <div class="hero-trust">
       <div class="trust-item"><div class="trust-num">20+</div><div class="trust-label">Years Experience</div></div>
       <div class="trust-divider"></div>
       <div class="trust-item"><div class="trust-num">110+</div><div class="trust-label">School Acceptances</div></div>
       <div class="trust-divider"></div>
-      <div class="trust-item"><div class="trust-num">100%</div><div class="trust-label">Human, Non-AI Work</div></div>
+      <div class="trust-item"><div class="trust-num">100%</div><div class="trust-label">Student-First Approach</div></div>
     </div>
   </div>
 </section>
@@ -652,61 +676,43 @@
       <div>
         <div class="section-eyebrow fade-in">Who We Are</div>
         <h2 class="section-h2 fade-in">Advisors who have <span class="accent">been there.</span></h2>
-        <p class="section-p fade-in">Our team includes mentors from Harvard, Cornell, and Johns Hopkins, alongside advisors from MIT, Stanford, and the University of Pennsylvania. With 20+ years of combined experience, we have guided students of all backgrounds through the college admissions process, providing the strategy, structure, and support needed to succeed.</p>
-        <div class="about-cards" style="margin-top:2rem;">
-          <div class="about-card fade-in">
+        <p class="section-p fade-in">Mentors from Harvard, Cornell, Johns Hopkins, MIT, Stanford, and Penn with 20+ years of combined experience guiding students of all backgrounds through the college admissions process.</p>
+
+        <div style="margin-top:2rem;display:flex;flex-direction:column;gap:1rem;">
+          <!-- Featured: Why We Started -->
+          <div class="about-card fade-in" style="border-left:4px solid var(--gold);background:white;">
             <div class="card-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M15.5 15.5L20 20"/><path d="M11 8v6M8 11h6"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div>
-              <h4>Elite Access, Real Connections</h4>
-              <p>Direct relationships with admissions offices at various universities across the country.</p>
+              <h4>Why We Started</h4>
+              <p>Our founders navigated the US college process with no family guidance. One earned a QuestBridge Scholarship to Cornell, later working at Accenture and Harvard. The other transferred to Cornell and earned a Master's from Johns Hopkins, going on to work at Apple, Goldman Sachs, and Adobe. We built My App Success so every student has access to what we had to piece together ourselves.</p>
             </div>
           </div>
-          <div class="about-card fade-in">
-            <div class="card-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <!-- Two smaller cards -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="about-card fade-in">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M15.5 15.5L20 20"/><path d="M11 8v6M8 11h6"/></svg>
+              </div>
+              <div>
+                <h4>Elite Access, Real Connections</h4>
+                <p>Direct relationships with admissions offices across the country. Custom strategy curated to build relationships with every school.</p>
+              </div>
             </div>
-            <div>
-              <h4>Human, Non-AI Work</h4>
-              <p>Every review, edit, and strategy session is done by a real expert. Your story deserves human attention.</p>
-            </div>
-          </div>
-          <div class="about-card fade-in">
-            <div class="card-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <div>
-              <h4>All Students Welcome</h4>
-              <p>Undergraduate applicants, transfer students, GED candidates, gap-year students, international applicants, women's and liberal arts college candidates, and career changers.</p>
+            <div class="about-card fade-in">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              </div>
+              <div>
+                <h4>What Makes Us Different</h4>
+                <p>We help you understand your own narrative and build your profile with intention. Your application will stand out because it reflects something real and specific to you. We also specialize in nontraditional candidates and know how to turn unconventional paths into compelling stories.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="fade-in">
-        <div class="cred-block">
-          <p style="margin-bottom:0.8rem;font-size:0.82rem;color:rgba(255,255,255,0.5);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Majors We've Supported</p>
-          <div class="field-chips">
-            <span class="field-chip">Business</span>
-            <span class="field-chip">MBA</span>
-            <span class="field-chip">Computer Science</span>
-            <span class="field-chip">Biological Engineering</span>
-            <span class="field-chip">Chemical Engineering</span>
-            <span class="field-chip">Systems Engineering</span>
-            <span class="field-chip">Information Science</span>
-            <span class="field-chip">Information Technology</span>
-            <span class="field-chip">Cognitive Science</span>
-            <span class="field-chip">Nursing</span>
-            <span class="field-chip">Pre-Law</span>
-            <span class="field-chip">Pre-Architecture</span>
-            <span class="field-chip">Psychology</span>
-            <span class="field-chip">Veterinary</span>
-            <span class="field-chip">History</span>
-            <span class="field-chip">Undecided</span>
-            <span class="field-chip" style="font-style:italic;opacity:0.7;">And Many More</span>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -717,38 +723,121 @@
     <div class="section-eyebrow fade-in">Admissions Outcomes</div>
     <h2 class="section-h2 fade-in">School <span class="accent">Acceptances</span></h2>
     <p class="section-p fade-in">Students we have helped get accepted, from undergraduate to graduate and professional programs.</p>
-    <p style="font-size:0.72rem;color:var(--muted);margin-top:0.5rem;margin-bottom:1.5rem;">&#9733; = graduate acceptance also on record</p>
-    <div style="margin-top:1rem;" class="fade-in">
-      <div class="tag-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;">
-        <span class="tag">Bryn Mawr College</span>
-        <span class="tag">Columbia University &#9733;</span>
-        <span class="tag">Cornell University &#9733;</span>
-        <span class="tag">Dartmouth College</span>
-        <span class="tag">Georgia Institute of Technology</span>
-        <span class="tag">Harvard University</span>
-        <span class="tag">Johns Hopkins University &#9733;</span>
-        <span class="tag">New York University</span>
-        <span class="tag">Rutgers University &#9733;</span>
-        <span class="tag">Smith College</span>
-        <span class="tag">University of Florida</span>
-        <span class="tag">University of Miami</span>
-        <span class="tag">University of Pennsylvania &#9733;</span>
-        <span class="tag">University of Southern California</span>
-        <span class="tag">Vanderbilt University</span>
-        <span class="tag" style="grid-column:1/-1;font-style:italic;text-align:center;">And Many More</span>
+    <p style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:0.5rem;margin-bottom:2rem;">&#9733; = graduate acceptance also on record</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;" class="fade-in">
+
+      <!-- LEFT: Schools as clean ruled list -->
+      <div>
+        <ul style="list-style:none;">
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Bryn Mawr College</li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Columbia University <span style="color:var(--gold);">&#9733;</span></li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Cornell University <span style="color:var(--gold);">&#9733;</span></li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Dartmouth College <span style="color:var(--gold);">&#9733;</span></li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Georgia Institute of Technology</li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Harvard University</li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Johns Hopkins University <span style="color:var(--gold);">&#9733;</span></li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">New York University <span style="color:var(--gold);">&#9733;</span></li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Rutgers University <span style="color:var(--gold);">&#9733;</span></li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Smith College</li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">University of Florida</li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">University of Miami</li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">University of Pennsylvania <span style="color:var(--gold);">&#9733;</span></li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">University of Southern California</li>
+          <li style="display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Vanderbilt University</li>
+          <li style="padding:0.65rem 0;font-size:0.82rem;color:rgba(255,255,255,0.4);font-style:italic;">And Many More</li>
+        </ul>
       </div>
+
+      <!-- RIGHT: Majors + Types stacked -->
+      <div style="display:flex;flex-direction:column;gap:2.5rem;">
+        <div>
+          <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:0.9rem;">Majors We've Supported</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Business</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">MBA</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Computer Science</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Biological Engineering</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Chemical Engineering</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Systems Engineering</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Information Science</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Information Technology</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Cognitive Science</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Nursing</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Pre-Law</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Pre-Architecture</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Psychology</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Veterinary</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">History</span>
+            <span style="background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;">Undecided</span>
+            <span style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.08);border-radius:6px;font-size:0.75rem;padding:0.3rem 0.7rem;font-style:italic;">And Many More</span>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:0.9rem;">Types of Students We've Supported</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+            <span class="tag">All high school grade students</span>
+            <span class="tag">Seniors on a tight timeline</span>
+            <span class="tag">Competitive program applicants</span>
+            <span class="tag">International students</span>
+            <span class="tag">Prospective transfer students</span>
+            <span class="tag">Scholarship applicants</span>
+            <span class="tag">GED candidates</span>
+            <span class="tag">Gap year students</span>
+            <span class="tag">Women's and liberal arts college candidates</span>
+            <span class="tag">Student athlete recruits</span>
+            <span class="tag">Career changers</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+</section>
 
+<!-- ONE-ON-ONE SESSIONS -->
+<section class="pricing" id="pricing">
   <div class="container">
-    <div style="margin-top:2rem;" class="fade-in">
-      <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Who do our services support?</p>
-      <div class="tag-row" style="flex-wrap:wrap;gap:0.5rem;">
-        <span class="tag">Juniors and rising seniors</span>
-        <span class="tag">Seniors on a tight timeline</span>
-        <span class="tag">Competitive program applicants</span>
-        <span class="tag">International students</span>
+    <div class="section-eyebrow fade-in">One-on-One Sessions</div>
+    <h2 class="section-h2 fade-in">Need hands-on guidance? <span class="accent">We've got you.</span></h2>
+    <p class="section-p fade-in" style="margin-bottom:2rem;">Whether you need a focused essay review, real-time strategy call, or on demand support, our one-on-one sessions give you direct access to an expert advisor on your schedule and for your specific needs.</p>
+
+    <div class="pricing-grid">
+      <div class="price-card fade-in" data-service="Virtual Review ($150)">
+        <h3>Virtual Review</h3>
+        <div class="price-amount">$150</div>
+        <p>Written feedback on your essay, resume, portfolio, or any part of your application.</p>
+        <ul>
+          <li><span class="check">+</span>Written comments and suggestions</li>
+          <li><span class="check">+</span>Essay, resume, portfolio, or any other application part</li>
+          <li><span class="check">+</span>2 revisions included</li>
+        </ul>
       </div>
+      <div class="price-card fade-in" data-service="1:1 Video Consultation ($200/hr)">
+        <h3>1:1 Video Consultation</h3>
+        <div class="price-amount">$200/hr</div>
+        <p>Live call with your advisor for real-time strategy and application review.</p>
+        <ul>
+          <li><span class="check">+</span>Direct access to your advisor</li>
+          <li><span class="check">+</span>Talk through your overall admissions strategy or interview prep</li>
+          <li><span class="check">+</span>Live review of any part of your application</li>
+        </ul>
+      </div>
+      <div class="price-card fade-in" data-service="Custom Retainer (contact for quote)">
+        <h3>Custom Retainer</h3>
+        <div class="price-amount">Contact for quote</div>
+        <p>Full range dedicated support to walk students through the entire process.</p>
+        <ul>
+          <li><span class="check">+</span>Dedicated advisor for any range of time</li>
+          <li><span class="check">+</span>Unlimited async support</li>
+          <li><span class="check">+</span>Custom strategy to every school</li>
+          <li><span class="check">+</span>Priority access to 1:1 sessions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pricing-cta fade-in" style="margin-top:2.5rem;">
+      <a href="service-form.html" class="btn-gold">Book Your Session</a>
     </div>
   </div>
 </section>
@@ -777,9 +866,9 @@
       <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:1.5rem;">One-time payment for the full 8-week program. All plans include access to resources and community after the program ends.</p>
       <div class="bc-price-grid">
 
-        <!-- FOUNDATION -->
+        <!-- FOUNDATIONAL -->
         <div class="bc-price-card static">
-          <div class="bc-tier">Foundation</div>
+          <div class="bc-tier">Foundational</div>
           <div style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-bottom:0.2rem;text-decoration:line-through;">$2,000 value</div>
           <div class="bc-price">$1,999 <span>one-time</span></div>
           <p style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:1rem;">~2 hrs/week commitment</p>
@@ -797,10 +886,10 @@
           </ul>
         </div>
 
-        <!-- ACCELERATOR -->
+        <!-- PROSPECT -->
         <div class="bc-price-card popular interactive">
           <div class="bc-badge">Most Popular</div>
-          <div class="bc-tier">Accelerator</div>
+          <div class="bc-tier">Prospect</div>
           <div style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-bottom:0.2rem;text-decoration:line-through;">$5,225 value</div>
           <div class="bc-price">$3,499 <span>one-time</span></div>
           <p style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:1rem;">~4 hrs/week commitment</p>
@@ -813,18 +902,19 @@
           </ul>
           <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:1rem 0 0.6rem;">Outcomes</p>
           <ul>
-            <li><span class="bc-check">+</span>Everything in Foundation</li>
+            <li><span class="bc-check">+</span>Everything in Foundational</li>
             <li><span class="bc-check">+</span>Expert-level guidance on resume and essay</li>
             <li><span class="bc-check">+</span>Guided templates for letters of continued interest, resume, and essay</li>
             <li><span class="bc-check">+</span>Guidance on internships and jobs students can participate in</li>
             <li><span class="bc-check">+</span>Exposure to admissions representatives</li>
             <li><span class="bc-check">+</span>Live Q&amp;A with individual question opportunities and live reviews</li>
+            <li><span class="bc-check">+</span><strong style="color:var(--gold);">Prospect Fellow certification upon completion</strong></li>
           </ul>
         </div>
 
-        <!-- ELITE -->
+        <!-- VANTAGE -->
         <div class="bc-price-card static">
-          <div class="bc-tier">Elite</div>
+          <div class="bc-tier">Vantage</div>
           <div style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-bottom:0.2rem;text-decoration:line-through;">$5,825 value</div>
           <div class="bc-price">$3,999 <span>one-time</span></div>
           <p style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:1rem;">~6 hrs/week commitment</p>
@@ -838,16 +928,17 @@
           </ul>
           <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:1rem 0 0.6rem;">Outcomes</p>
           <ul>
-            <li><span class="bc-check">+</span>Everything in Foundation and Accelerator</li>
+            <li><span class="bc-check">+</span>Everything in Foundational and Prospect</li>
             <li><span class="bc-check">+</span>Guaranteed draft of your essay, catered to you</li>
             <li><span class="bc-check">+</span>Tailored guidance for your specific applications: Common App, UC, CSU, and UT systems</li>
+            <li><span class="bc-check">+</span><strong style="color:var(--gold);">Vantage Fellow certification upon completion</strong></li>
           </ul>
         </div>
 
       </div>
       <div class="bc-addons">
-        <h4>Add-Ons Available</h4>
-        <p style="margin-top:0.5rem;font-size:0.8rem;color:rgba(255,255,255,0.45);"><a href="#pricing" style="color:var(--gold);text-decoration:underline;">See our Additional Offerings</a> for standalone 1-on-1 sessions and pricing.</p>
+        <h4>Need one-on-one help instead?</h4>
+        <p style="margin-top:0.5rem;font-size:0.8rem;color:rgba(255,255,255,0.45);"><a href="#pricing" style="color:var(--gold);text-decoration:underline;">See our One-on-One Sessions</a> for standalone sessions and pricing.</p>
       </div>
     </div>
 
@@ -857,50 +948,202 @@
   </div>
 </section>
 
-<!-- FLEXIBLE PACKAGES -->
-<section class="pricing" id="pricing">
+<!-- TEMPLATES -->
+<section style="background:var(--off-white);padding:6rem 0;" id="templates">
   <div class="container">
-    <div class="section-eyebrow fade-in">Additional Offerings</div>
-    <h2 class="section-h2 fade-in">One-on-one support for <span class="accent">every need.</span></h2>
+    <div class="section-eyebrow fade-in">Templates &amp; Resources</div>
+    <h2 class="section-h2 fade-in">Built from real <span class="accent">admitted applications.</span></h2>
+    <p class="section-p fade-in" style="margin-bottom:0.4rem;">Every resource comes from what actually works. Real admitted student materials, adapted into frameworks you can apply to your own story.</p>
+    <p class="section-p fade-in" style="margin-bottom:2.5rem;">All templates are included at no extra cost in every Bootcamp plan. Purchase any individually below, or save with the full bundle.</p>
 
-    <div class="pricing-grid">
-      <div class="price-card fade-in" data-service="Virtual Review ($150)">
-        <h3>Virtual Review</h3>
-        <div class="price-amount">$150</div>
-        <p>Written feedback on your essay, resume, portfolio, or full application.</p>
-        <ul>
-          <li><span class="check">+</span>Written comments and suggestions</li>
-          <li><span class="check">+</span>Essay, resume, portfolio, or application</li>
-          <li><span class="check">+</span>2 revisions included</li>
-        </ul>
+    <div style="display:flex;flex-direction:column;gap:0.7rem;margin-bottom:2rem;">
+      <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
+        <button onclick="toggleCat('cat-guides')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
+          <div style="display:flex;align-items:center;gap:0.9rem;">
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Application Resources</span>
+            <span style="font-size:0.75rem;color:var(--muted);">11 resources</span>
+          </div>
+          <svg id="arr-cat-guides" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="cat-guides" style="display:none;padding:0 1.5rem 0.5rem;">
+          <ul style="list-style:none;">
+          <li onclick="openTemplateModal('Roadmap, Timeline & Checklist', 'A week-by-week plan and submission checklist from start to decision day.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Roadmap, Timeline & Checklist</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Guide to Picking Your School & Major', 'A framework for building a strategic, realistic college list aligned with your goals.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Guide to Picking Your School & Major</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Application Platforms Guide', 'Common App, UC, CSU, and UT: how each platform works and what to watch for.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Application Platforms Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Early Decision / Admissions Guide', 'When to apply early, what it means, and how to use it strategically.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Early Decision / Admissions Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Extracurriculars Guide', 'How to present your activities in a way that stands out to admissions readers.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Extracurriculars Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Guide to College Special Programs', 'An overview of honors programs, dual degrees, accelerated tracks, and other special admissions pathways.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Guide to College Special Programs</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Building Relationships with Schools', 'How to demonstrate genuine interest and build connections with admissions offices.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Building Relationships with Schools</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Scholarships Guide', 'Covers local, regional, and national scholarships as well as college-specific scholarship opportunities.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Scholarships Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('How to Get an Internship in High School', 'Curated pathways and strategies to strengthen your profile with real-world experience.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>How to Get an Internship in High School</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Interview Prep Guide', 'How to prepare for college interviews: common questions, what to wear, and how to leave a lasting impression.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Interview Prep Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Portfolio Guide', 'How to build and present a portfolio for art, design, architecture, and other programs that require one.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Portfolio Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          </ul>
+        </div>
       </div>
-      <div class="price-card fade-in" data-service="1:1 Video Session ($200/hr)">
-        <h3>1:1 Video Session</h3>
-        <div class="price-amount">$200/hr</div>
-        <p>Live call with your advisor for real-time strategy and application review.</p>
-        <ul>
-          <li><span class="check">+</span>Direct access to your advisor</li>
-          <li><span class="check">+</span>Application strategy and roadmap</li>
-          <li><span class="check">+</span>Essay and personal statement coaching</li>
-          <li><span class="check">+</span>Interview prep</li>
-        </ul>
-
+      <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
+        <button onclick="toggleCat('cat-essay')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
+          <div style="display:flex;align-items:center;gap:0.9rem;">
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Essay Guides</span>
+            <span style="font-size:0.75rem;color:var(--muted);">4 resources</span>
+          </div>
+          <svg id="arr-cat-essay" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="cat-essay" style="display:none;padding:0 1.5rem 0.5rem;">
+          <ul style="list-style:none;">
+          <li onclick="openTemplateModal('Essay Brainstorming Guide', 'Prompts and exercises to find your strongest personal narrative.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Essay Brainstorming Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Advanced Essay Brainstorming Guide', 'Deeper exercises for supplemental essays and school-specific prompts.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Advanced Essay Brainstorming Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Successful Essays Examples', 'Real admitted essays with line-by-line breakdowns explaining what made them work.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Successful Essays Examples</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Guide to Discussing Sensitive Topics & Family History', 'How to approach difficult personal experiences with honesty, intention, and strength.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Guide to Discussing Sensitive Topics & Family History</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          </ul>
+        </div>
       </div>
-      <div class="price-card fade-in" data-service="Custom Retainer (contact for quote)">
-        <h3>Custom Retainer</h3>
-        <div class="price-amount">Contact for quote</div>
-        <p>End-to-end support for students applying to multiple schools.</p>
-        <ul>
-          <li><span class="check">+</span>Dedicated advisor all season</li>
-          <li><span class="check">+</span>Unlimited async support</li>
-          <li><span class="check">+</span>School selection strategy</li>
-          <li><span class="check">+</span>Priority access</li>
-        </ul>
+      <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
+        <button onclick="toggleCat('cat-lor')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
+          <div style="display:flex;align-items:center;gap:0.9rem;">
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Letter of Recommendation Resources</span>
+            <span style="font-size:0.75rem;color:var(--muted);">3 resources</span>
+          </div>
+          <svg id="arr-cat-lor" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="cat-lor" style="display:none;padding:0 1.5rem 0.5rem;">
+          <ul style="list-style:none;">
+          <li onclick="openTemplateModal('Letter of Recommendation Template', 'A ready-to-use template for requesting a strong letter of recommendation.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Letter of Recommendation Template</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Letter of Recommendation Brag Sheet Template', 'A structured brag sheet to share with your recommender so they can write the most compelling letter possible.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Letter of Recommendation Brag Sheet Template</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('How to Ask for a Letter of Recommendation', 'How to ask, what to include, and how to make it easy for your recommender.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>How to Ask for a Letter of Recommendation</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          </ul>
+        </div>
+      </div>
+      <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
+        <button onclick="toggleCat('cat-resume')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
+          <div style="display:flex;align-items:center;gap:0.9rem;">
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Resume Resources</span>
+            <span style="font-size:0.75rem;color:var(--muted);">2 resources</span>
+          </div>
+          <svg id="arr-cat-resume" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="cat-resume" style="display:none;padding:0 1.5rem 0.5rem;">
+          <ul style="list-style:none;">
+          <li onclick="openTemplateModal('Resume Template', 'A proven format for presenting your experience clearly and compellingly.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Resume Template</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('Resume Tips Checklist', 'A checklist to review your resume before submitting, covering formatting, language, and content.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Resume Tips Checklist</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          </ul>
+        </div>
+      </div>
+      <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
+        <button onclick="toggleCat('cat-test')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
+          <div style="display:flex;align-items:center;gap:0.9rem;">
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Test Prep</span>
+            <span style="font-size:0.75rem;color:var(--muted);">3 resources</span>
+          </div>
+          <svg id="arr-cat-test" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="cat-test" style="display:none;padding:0 1.5rem 0.5rem;">
+          <ul style="list-style:none;">
+          <li onclick="openTemplateModal('SAT Prep Guide', 'SAT strategy, section breakdown, and how your score fits into your overall application.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>SAT Prep Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('ACT Prep Guide', 'ACT strategy, section breakdown, and how your score fits into your overall application.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>ACT Prep Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          <li onclick="openTemplateModal('TOEFL Prep Guide', 'TOEFL strategy and guidance for international applicants navigating English proficiency requirements.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
+            <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>TOEFL Prep Guide</span>
+            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+          </li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="pricing-cta fade-in" style="margin-top:2.5rem;">
-      <a href="service-form.html" class="btn-gold">Book Your Session</a>
+    <!-- BUNDLE BAR -->
+    <div style="background:var(--gold);border-radius:14px;padding:1.4rem 1.8rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;" class="fade-in">
+      <div>
+        <div style="font-size:1rem;font-weight:800;color:var(--navy);">Full Library &mdash; All 23 Resources</div>
+        <div style="font-size:0.82rem;color:var(--navy);opacity:0.7;margin-top:0.2rem;">Save over $100 versus purchasing individually</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:1.2rem;flex-shrink:0;">
+        <div>
+          <div style="font-size:0.72rem;color:var(--navy);opacity:0.45;text-decoration:line-through;">$575 individual</div>
+          <div style="font-size:1.1rem;font-weight:800;color:var(--navy);">$299 bundle</div>
+        </div>
+        <a href="templates-purchase.html" style="display:inline-flex;align-items:center;background:var(--navy);color:white;font-weight:800;font-size:0.82rem;padding:0.7rem 1.4rem;border-radius:10px;text-decoration:none;">Get All 23</a>
+      </div>
+    </div>
+
+  </div>
+  <!-- TEMPLATE MODAL -->
+  <div id="tmpl-modal" style="display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;padding:1.5rem;">
+    <div onclick="closeTemplateModal()" style="position:absolute;inset:0;background:rgba(30,70,110,0.45);backdrop-filter:blur(3px);"></div>
+    <div style="position:relative;background:white;border-radius:18px;padding:2rem;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(30,70,110,0.2);">
+      <button onclick="closeTemplateModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;line-height:1;">&#10005;</button>
+      <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:0.5rem;">Resource</div>
+      <h3 id="tmpl-modal-title" style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:0.8rem;font-family:var(--font);"></h3>
+      <p id="tmpl-modal-desc" style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.4rem;"></p>
+      <div style="display:flex;gap:0.75rem;">
+        <a href="templates-purchase.html" style="display:inline-block;font-size:0.82rem;font-weight:800;background:var(--gold);color:var(--navy);padding:0.6rem 1.3rem;border-radius:9px;text-decoration:none;">Purchase for $25</a>
+        <button onclick="closeTemplateModal()" style="font-size:0.82rem;font-weight:600;background:none;border:1.5px solid var(--border);color:var(--muted);padding:0.6rem 1.1rem;border-radius:9px;cursor:pointer;font-family:var(--font);">Close</button>
+      </div>
     </div>
   </div>
 </section>
@@ -954,14 +1197,6 @@
       </div>
       <div class="test-card fade-in">
         <div class="stars">★★★★★</div>
-        <p class="test-quote">"The entire mood and tone of my essay was changed while the events and experiences explained were the same or similar."</p>
-        <div class="test-attr">
-          <div class="test-avatar">SS</div>
-          <div><div class="test-name">Sarah S, Florida</div><div class="test-detail">Current High School Senior</div></div>
-        </div>
-      </div>
-      <div class="test-card fade-in">
-        <div class="stars">★★★★★</div>
         <p class="test-quote">"I loved working with My App Success. The team helped with rearranging my words so clearly it felt like magic."</p>
         <div class="test-attr">
           <div class="test-avatar">SS</div>
@@ -1009,7 +1244,7 @@
   <div class="container">
     <div class="section-eyebrow fade-in">FAQ</div>
     <h2 class="section-h2 fade-in">Common <span class="accent">questions</span></h2>
-    <p class="section-p fade-in" style="margin-top:0.5rem;">About the <a href="#bootcamp" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">Bootcamp</a> and <a href="#pricing" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">Additional Offerings</a></p>
+    <p class="section-p fade-in" style="margin-top:0.5rem;">About the <a href="#bootcamp" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">Bootcamp</a> and <a href="#pricing" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">One-on-One Sessions</a></p>
     <div class="faq-list fade-in" style="margin-top:2.5rem;">
 
       <div class="faq-item">
@@ -1080,8 +1315,8 @@
 <!-- NEWSLETTER -->
 <section class="newsletter">
   <div class="newsletter-inner">
-    <h3>Stay in the loop</h3>
-    <p>Get admissions tips, resource updates, and insights from our team, straight to your inbox.</p>
+    <h3>Stay in the Loop</h3>
+    <p>Get admissions tips, resource updates, and insights from our team, straight to your inbox. Biweekly emails, no spam. Opt out any time.</p>
     <form class="newsletter-form" action="https://formsubmit.co/12ideas12months@gmail.com" method="POST" onsubmit="handleNewsletter(event)">
       <input type="hidden" name="_subject" value="New Newsletter Signup - MyAppSuccess" />
       <input type="hidden" name="_captcha" value="false" />
@@ -1099,6 +1334,29 @@
 </footer>
 
 <script>
+  function toggleCat(id) {
+    var panel = document.getElementById(id);
+    var arrow = document.getElementById('arr-' + id);
+    var isOpen = panel.style.display === 'block';
+    panel.style.display = isOpen ? 'none' : 'block';
+    arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+  }
+
+  function openTemplateModal(title, desc) {
+    document.getElementById('tmpl-modal-title').innerHTML = title;
+    document.getElementById('tmpl-modal-desc').textContent = desc;
+    var modal = document.getElementById('tmpl-modal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeTemplateModal() {
+    document.getElementById('tmpl-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeTemplateModal();
+  });
+
   function handleNewsletter(e) {
     e.preventDefault();
     e.target.style.display = 'none';
