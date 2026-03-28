@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free Admissions Profile Analysis | MyAppSuccess</title>
+<link rel="icon" type="image/png" href="/favicon.png" />
+<meta property="og:title" content="Free Admissions Profile Analysis | MyAppSuccess" />
+<meta property="og:description" content="Find out your real chances of getting into your dream schools. Get a personalized admissions profile in minutes." />
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #1e466e;
+  --navy-mid: #285888;
+  --navy-light: #2d6399;
+  --gold: #f0b41e;
+  --gold-dark: #c99012;
+  --gold-bg: #fef9e6;
+  --white: #ffffff;
+  --off-white: #f5f7fa;
+  --text: #1e466e;
+  --muted: #5c6a82;
+  --border: #e2e8f0;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warn: #d97706;
+  --font: 'League Spartan', sans-serif;
+  --radius: 14px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--text); background: var(--off-white); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 68px;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 2px 16px rgba(30,70,110,0.07);
+}
+.nav-logo { font-size: 1.1rem; font-weight: 800; color: var(--navy); text-decoration: none; letter-spacing: -0.02em; }
+.nav-logo span { color: var(--gold-dark); }
+.nav-back { font-size: 0.82rem; font-weight: 600; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+.nav-back:hover { color: var(--navy); }
+
+/* ── HERO BANNER ── */
+.quiz-hero {
+  background: var(--navy); padding: 110px 2rem 3rem; text-align: center;
+  position: relative; overflow: hidden;
+}
+.quiz-hero.slim {
+  padding: 90px 2rem 1.2rem;
+}
+.quiz-hero.slim h1 { font-size: 1.2rem; margin-bottom: 0; }
+.quiz-hero.slim .quiz-badge { margin-bottom: 0.6rem; }
+.quiz-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(240,180,30,0.12) 0%, transparent 70%);
+}
+.quiz-hero-inner { position: relative; max-width: 680px; margin: 0 auto; }
+.quiz-badge {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  background: rgba(240,180,30,0.15); border: 1px solid rgba(240,180,30,0.4);
+  color: var(--gold); border-radius: 999px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.4rem 1rem; margin-bottom: 1.4rem;
+}
+.quiz-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+.quiz-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: white; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.quiz-hero h1 .hl { color: var(--gold); }
+.quiz-hero p { font-size: 0.98rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 520px; margin: 0 auto; }
+
+/* ── PROGRESS ── */
+.progress-wrap { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 68px; z-index: 50; }
+.progress-inner { max-width: 860px; margin: 0 auto; padding: 0.9rem 2rem; display: flex; align-items: center; gap: 1rem; }
+.progress-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
+.progress-bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-dark)); border-radius: 999px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+.progress-steps { display: flex; gap: 0.3rem; }
+.ps { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background 0.3s; }
+.ps.done { background: var(--gold); }
+.ps.active { background: var(--navy); }
+
+/* ── QUIZ CONTAINER ── */
+.quiz-main { max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem 6rem; }
+
+/* ── STEP CARD ── */
+.step-card {
+  background: white; border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  box-shadow: 0 2px 16px rgba(30,70,110,0.05);
+  padding: 2.5rem 2.5rem 2rem;
+  display: none; animation: slideUp 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.step-card.active { display: block; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+.step-num { font-size: 0.7rem; font-weight: 700; color: var(--gold-dark); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.step-title { font-size: 1.5rem; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+.step-sub { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 2rem; }
+
+/* ── FORM ELEMENTS ── */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+.form-row.full { grid-template-columns: 1fr; }
+.form-row.three { grid-template-columns: 1fr 1fr 1fr; }
+
+.field { display: flex; flex-direction: column; gap: 0.45rem; }
+.field label { font-size: 0.78rem; font-weight: 700; color: var(--navy); letter-spacing: 0.02em; }
+.field label .req { color: var(--gold-dark); }
+
+.field input, .field select, .field textarea {
+  width: 100%; padding: 0.75rem 1rem;
+  border: 2px solid var(--border); border-radius: 10px;
+  font-family: var(--font); font-size: 0.9rem; color: var(--text);
+  background: white; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--navy); box-shadow: 0 0 0 3px rgba(30,70,110,0.08);
+}
+.field input.error, .field select.error { border-color: var(--danger); }
+.field .hint { font-size: 0.75rem; color: var(--muted); }
+.field textarea { resize: vertical; min-height: 90px; }
+
+/* TOGGLE SELECTOR */
+.toggle-group { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.tog-btn {
+  padding: 0.65rem 1.3rem; border-radius: 9px;
+  border: 2px solid var(--border); background: white;
+  font-family: var(--font); font-size: 0.88rem; font-weight: 600;
+  color: var(--muted); cursor: pointer; transition: all 0.18s;
+}
+.tog-btn:hover { border-color: var(--navy-mid); color: var(--navy); }
+.tog-btn.selected { border-color: var(--navy); background: var(--navy); color: white; }
+.tog-btn.selected.gold { border-color: var(--gold-dark); background: var(--gold); color: var(--navy); }
+
+/* CHECKBOX GRID */
+.check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.check-item {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.75rem 1rem; border-radius: 10px;
+  border: 2px solid var(--border); background: white;
+  cursor: pointer; transition: all 0.18s; user-select: none;
+}
+.check-item:hover { border-color: var(--navy-mid); }
+.check-item.checked { border-color: var(--navy); background: rgba(30,70,110,0.04); }
+.check-item input[type="checkbox"] { display: none; }
+.check-box {
+  width: 18px; height: 18px; border-radius: 5px;
+  border: 2px solid var(--border); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.18s; background: white;
+}
+.check-item.checked .check-box { background: var(--navy); border-color: var(--navy); }
+.check-box::after { content: '\2713'; font-size: 0.65rem; color: white; opacity: 0; transition: opacity 0.18s; }
+.check-item.checked .check-box::after { opacity: 1; }
+.check-label { font-size: 0.84rem; font-weight: 600; color: var(--muted); }
+.check-item.checked .check-label { color: var(--navy); }
+.check-emoji { font-size: 1rem; }
+
+/* SCHOOL SEARCH */
+.school-slots { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1rem; }
+.school-slot { position: relative; }
+.school-slot-label {
+  font-size: 0.72rem; font-weight: 700; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem;
+}
+.school-search-wrap { position: relative; }
+.school-search-input {
+  width: 100%; padding: 0.75rem 1rem 0.75rem 2.8rem;
+  border: 2px solid var(--border); border-radius: 10px;
+  font-family: var(--font); font-size: 0.9rem; color: var(--text);
+  background: white; outline: none; transition: border-color 0.2s;
+}
+.school-search-input:focus { border-color: var(--navy); }
+.school-search-icon { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
+.school-dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 200;
+  background: white; border: 2px solid var(--border); border-radius: 10px;
+  max-height: 220px; overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(30,70,110,0.12); display: none;
+}
+.school-dropdown.open { display: block; }
+.school-option {
+  padding: 0.65rem 1rem; cursor: pointer; font-size: 0.86rem;
+  border-bottom: 1px solid var(--border); transition: background 0.15s;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.school-option:last-child { border-bottom: none; }
+.school-option:hover { background: var(--off-white); }
+.school-option .s-name { font-weight: 700; color: var(--navy); }
+.school-option .s-meta { font-size: 0.75rem; color: var(--muted); }
+.school-selected {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 1rem; border: 2px solid var(--navy); border-radius: 10px;
+  background: rgba(30,70,110,0.04);
+}
+.school-selected .s-info .s-name { font-size: 0.9rem; font-weight: 700; color: var(--navy); }
+.school-selected .s-info .s-meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+.school-clear { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.1rem; padding: 0.2rem; transition: color 0.2s; }
+.school-clear:hover { color: var(--danger); }
+.school-add-more { font-size: 0.82rem; font-weight: 600; color: var(--navy-mid); cursor: pointer; background: none; border: none; font-family: var(--font); padding: 0; display: flex; align-items: center; gap: 0.3rem; transition: color 0.2s; }
+.school-add-more:hover { color: var(--gold-dark); }
+.slot-optional { display: none; }
+.slot-optional.visible { display: block; }
+
+/* GPA & SCORES */
+.score-hint {
+  background: var(--gold-bg); border: 1.5px solid var(--gold);
+  border-radius: 10px; padding: 0.8rem 1rem; margin-top: 0.8rem;
+  font-size: 0.8rem; color: var(--gold-dark); font-weight: 600; line-height: 1.5;
+}
+
+/* STEP NAV */
+.btn-back {
+  padding: 0.75rem 1.5rem; border-radius: 10px;
+  border: 2px solid var(--border); background: white;
+  font-family: var(--font); font-size: 0.88rem; font-weight: 700;
+  color: var(--muted); cursor: pointer; transition: all 0.18s;
+}
+.btn-back:hover { border-color: var(--navy); color: var(--navy); }
+.btn-next {
+  padding: 0.78rem 2rem; border-radius: 10px;
+  background: var(--navy); color: white;
+  font-family: var(--font); font-size: 0.92rem; font-weight: 700;
+  border: none; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.btn-next:hover { background: var(--navy-mid); transform: translateY(-1px); }
+.btn-next.gold-btn { background: var(--gold); color: var(--navy); box-shadow: 0 4px 16px rgba(240,180,30,0.4); }
+.btn-next.gold-btn:hover { background: var(--gold-dark); }
+
+/* ── LEAD CAPTURE ── */
+.lead-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(20,40,65,0.88); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem; display: none;
+}
+.lead-overlay.open { display: flex; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.lead-modal {
+  background: white; border-radius: 20px;
+  max-width: 480px; width: 100%; padding: 2.5rem;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+  animation: slideUp 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.lead-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.lead-modal h2 { font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+.lead-modal p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.8rem; }
+.lead-fields { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.4rem; }
+.lead-fields input {
+  padding: 0.78rem 1rem; border: 2px solid var(--border); border-radius: 10px;
+  font-family: var(--font); font-size: 0.9rem; color: var(--text);
+  outline: none; transition: border-color 0.2s; width: 100%;
+}
+.lead-fields input:focus { border-color: var(--navy); }
+.lead-submit {
+  width: 100%; padding: 0.9rem; border-radius: 10px;
+  background: var(--gold); color: var(--navy); font-family: var(--font);
+  font-size: 0.95rem; font-weight: 800; border: none; cursor: pointer;
+  transition: all 0.2s; box-shadow: 0 4px 16px rgba(240,180,30,0.4);
+}
+.lead-submit:hover { background: var(--gold-dark); transform: translateY(-1px); }
+.lead-privacy { font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: 0.8rem; line-height: 1.5; }
+
+/* ── LOADING ── */
+.loading-screen {
+  display: none; text-align: center; padding: 4rem 2rem;
+}
+.loading-screen.active { display: block; }
+.loader-ring {
+  width: 60px; height: 60px; margin: 0 auto 1.5rem;
+  border: 4px solid var(--border); border-top-color: var(--navy);
+  border-radius: 50%; animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-school-name { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; }
+.loading-sub { font-size: 0.88rem; color: var(--muted); }
+.loading-tips { margin-top: 2.5rem; max-width: 460px; margin-left: auto; margin-right: auto; }
+.loading-tip {
+  background: white; border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 1rem 1.2rem; font-size: 0.84rem; color: var(--muted); line-height: 1.6;
+  display: none;
+}
+.loading-tip.show { display: block; animation: slideUp 0.4s ease; }
+
+/* ── RESULTS ── */
+.results-section { display: none; }
+.results-section.active { display: block; }
+.results-header { text-align: center; margin-bottom: 2.5rem; }
+.results-header h2 { font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+.results-header p { font-size: 0.92rem; color: var(--muted); }
+
+.results-grid { display: grid; gap: 1.5rem; }
+.results-grid.one { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+.results-grid.two { grid-template-columns: 1fr 1fr; }
+.results-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+.result-card {
+  background: white; border-radius: var(--radius); overflow: hidden;
+  border: 2px solid var(--border); box-shadow: 0 2px 16px rgba(30,70,110,0.06);
+}
+.result-card-header {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.result-school { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.2rem; }
+.result-school-meta { font-size: 0.75rem; color: var(--muted); }
+
+.verdict-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  border-radius: 999px; font-size: 0.75rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase; padding: 0.35rem 0.9rem;
+  margin: 0.8rem 0 0.5rem;
+}
+.verdict-badge.reach { background: #fee2e2; color: #991b1b; }
+.verdict-badge.hard-target { background: #fff7ed; color: #9a3412; }
+.verdict-badge.target { background: #fef9c3; color: #713f12; }
+.verdict-badge.likely { background: #dcfce7; color: #14532d; }
+.verdict-badge.safety { background: #d1fae5; color: #064e3b; }
+
+.chance-bar-wrap { margin: 0.8rem 0; }
+.chance-bar-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem; }
+.chance-pct { font-size: 1.5rem; font-weight: 800; color: var(--navy); }
+.chance-pct-label { font-size: 0.72rem; color: var(--muted); font-weight: 600; }
+.chance-track { height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.chance-fill { height: 100%; border-radius: 999px; transition: width 1s cubic-bezier(0.4,0,0.2,1); }
+.fill-reach { background: linear-gradient(90deg, #f87171, #dc2626); }
+.fill-hard-target { background: linear-gradient(90deg, #fb923c, #ea580c); }
+.fill-target { background: linear-gradient(90deg, #fbbf24, #d97706); }
+.fill-likely { background: linear-gradient(90deg, #4ade80, #16a34a); }
+.fill-safety { background: linear-gradient(90deg, #34d399, #059669); }
+
+.result-card-body { padding: 1.2rem 1.5rem 1.5rem; }
+.result-section-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.7rem; margin-top: 1.2rem;
+}
+.result-section-label:first-child { margin-top: 0; }
+
+.strength-item, .weak-item {
+  display: flex; gap: 0.7rem; align-items: flex-start;
+  padding: 0.7rem 0.8rem; border-radius: 9px; margin-bottom: 0.5rem;
+  font-size: 0.83rem; line-height: 1.55;
+}
+.strength-item { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.strength-item .si-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 0.1rem; }
+.strength-item .si-text strong { color: var(--success); font-weight: 700; display: block; margin-bottom: 0.1rem; font-size: 0.8rem; }
+.strength-item .si-text span { color: #15803d; }
+.weak-item { background: #fff7ed; border: 1px solid #fed7aa; }
+.weak-item .si-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 0.1rem; }
+.weak-item .si-text strong { color: var(--warn); font-weight: 700; display: block; margin-bottom: 0.1rem; font-size: 0.8rem; }
+.weak-item .si-text span { color: #92400e; }
+
+.ai-summary {
+  background: var(--off-white); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 1rem 1.1rem;
+  font-size: 0.84rem; color: var(--text); line-height: 1.7;
+  margin-top: 0.5rem;
+}
+.ai-summary-loading { color: var(--muted); font-style: italic; display: flex; align-items: center; gap: 0.5rem; }
+.mini-loader { width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
+
+/* SCORE COMPARE TABLE */
+.score-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.8rem; }
+.score-table th { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--border); }
+.score-table td { padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--border); color: var(--text); font-weight: 600; }
+.score-table tr:last-child td { border-bottom: none; }
+.score-table .above { color: var(--success); }
+.score-table .below { color: var(--danger); }
+.score-table .within { color: var(--warn); }
+
+/* CTA SECTION */
+.results-cta {
+  background: var(--navy); border-radius: var(--radius); padding: 2.5rem;
+  text-align: center; margin-top: 2.5rem;
+}
+.results-cta h3 { font-size: 1.4rem; font-weight: 800; color: white; margin-bottom: 0.6rem; letter-spacing: -0.02em; }
+.results-cta h3 .hl { color: var(--gold); }
+.results-cta p { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 1.8rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+.cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-cta-gold {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--gold); color: var(--navy); font-family: var(--font);
+  font-weight: 800; font-size: 0.92rem; padding: 0.85rem 1.8rem;
+  border-radius: 10px; border: none; cursor: pointer; text-decoration: none;
+  transition: all 0.2s; box-shadow: 0 4px 16px rgba(240,180,30,0.4);
+}
+.btn-cta-gold:hover { background: var(--gold-dark); transform: translateY(-2px); }
+.btn-cta-outline {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: transparent; color: white; font-family: var(--font);
+  font-weight: 600; font-size: 0.9rem; padding: 0.85rem 1.8rem;
+  border-radius: 10px; border: 2px solid rgba(255,255,255,0.25); cursor: pointer;
+  text-decoration: none; transition: all 0.2s;
+}
+.btn-cta-outline:hover { border-color: var(--gold); background: rgba(240,180,30,0.08); }
+.retake-link { text-align: center; margin-top: 1.5rem; }
+.retake-link button { background: none; border: none; font-family: var(--font); font-size: 0.82rem; font-weight: 600; color: var(--muted); cursor: pointer; text-decoration: underline; transition: color 0.2s; }
+.retake-link button:hover { color: var(--navy); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 0 1.2rem; }
+  .quiz-hero { padding: 90px 1.2rem 2.5rem; }
+  .quiz-main { padding: 1.5rem 1rem 5rem; }
+  .step-card { padding: 1.8rem 1.4rem 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-row.three { grid-template-columns: 1fr; }
+  .check-grid { grid-template-columns: 1fr 1fr; }
+  .results-grid.two, .results-grid.three { grid-template-columns: 1fr; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+  .btn-cta-gold, .btn-cta-outline { width: 100%; max-width: 320px; justify-content: center; }
+  .btn-back, .btn-next { width: 100%; justify-content: center; }
+  .progress-steps { display: none; }
+}
+@media (max-width: 480px) {
+  .step-title { font-size: 1.25rem; }
+  .lead-modal { padding: 1.8rem; }
+}
+
+
+/* LOW ACCEPTANCE RATE — essay importance callout */
+.essay-callout {
+  background: #fff7ed;
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-top: 1rem;
+  font-size: 0.83rem;
+  line-height: 1.65;
+  color: #7c4700;
+}
+.essay-callout strong {
+  color: var(--navy);
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+}
+.essay-callout a {
+  color: var(--navy);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Validation */
+.field .err-msg { font-size: 0.75rem; color: var(--danger); display: none; margin-top: -0.2rem; }
+.field.has-error .err-msg { display: block; }
+.field.has-error input, .field.has-error select { border-color: var(--danger); }
+
+/* ── CONFIRMATION SCREEN ── */
+.confirmation-screen {
+  display: none; text-align: center; padding: 5rem 2rem;
+  max-width: 520px; margin: 0 auto;
+}
+.confirmation-screen.active { display: block; animation: slideUp 0.4s cubic-bezier(0.4,0,0.2,1); }
+.confirmation-icon { font-size: 4rem; margin-bottom: 1.5rem; }
+.confirmation-screen h2 { font-size: 1.8rem; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.confirmation-screen p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 0.5rem; }
+.confirmation-email-note {
+  display: inline-block; margin-top: 1.5rem;
+  background: var(--gold-bg); border: 1.5px solid var(--gold);
+  border-radius: 10px; padding: 0.9rem 1.4rem;
+  font-size: 0.85rem; font-weight: 600; color: var(--gold-dark); line-height: 1.5;
+}
+/* ── FLOATING NAV ── */
+.floating-nav {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+  background: rgba(255,255,255,0.97);
+  border-top: 1.5px solid var(--border);
+  box-shadow: 0 -4px 20px rgba(30,70,110,0.08);
+  padding: 0.9rem 2rem;
+}
+.floating-nav.visible { display: flex; align-items: center; justify-content: flex-end; gap: 1rem; }
+.floating-nav-step { font-size: 0.78rem; font-weight: 700; color: var(--muted); }
+.floating-nav-btns { display: flex; gap: 0.7rem; }
+.floating-nav .btn-back { padding: 0.65rem 1.3rem; font-size: 0.88rem; white-space: nowrap; }
+.floating-nav .btn-next { padding: 0.65rem 1.5rem; font-size: 0.88rem; white-space: nowrap; }
+@media (max-width: 480px) {
+  .floating-nav { padding: 0.75rem 1rem; }
+  .floating-nav-step { display: none; }
+}
+/* ── FOOTER ── */
+#quiz-footer { display: none; }
+#quiz-footer.visible { display: block; }
+footer { background: var(--navy); padding: 1.8rem 3rem; text-align: center; border-top: 2px solid rgba(240,180,30,0.2); }
+footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+@media (max-width: 480px) { footer { padding: 1.5rem 1.2rem; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://myappsuccess.com" class="nav-logo">MyApp<span>Success</span></a>
+</nav>
+
+<!-- HERO -->
+<div class="quiz-hero" id="quiz-hero">
+  <div class="quiz-hero-inner">
+    <div class="quiz-badge"><span class="quiz-badge-dot"></span> Free Admissions Profile Analysis</div>
+    <h1>What Are Your Real Chances of <span class="hl">Getting In?</span></h1>
+  </div>
+</div>
+
+<!-- START SCREEN -->
+<div id="start-screen" style="max-width:860px;margin:0 auto;padding:2.5rem 2rem 6rem;">
+  <div style="background:white;border-radius:14px;border:1.5px solid var(--border);box-shadow:0 2px 16px rgba(30,70,110,0.05);padding:2.5rem;text-align:center;">
+    <p style="font-size:1rem;color:var(--muted);line-height:1.75;max-width:560px;margin:0 auto 1.8rem;">Answer a few questions and get a personalized breakdown of your admissions profile from our algorithm and data models, including your strongest assets and expert tips to improve areas that can be improved.</p>
+    <button class="btn-next gold-btn" style="font-size:1rem;padding:0.9rem 2.5rem;margin:0 auto;" onclick="startQuiz()">Start Quiz →</button>
+    <p style="font-size:0.75rem;color:var(--muted);margin-top:1.4rem;line-height:1.6;max-width:500px;margin-left:auto;margin-right:auto;">Results are based on median published statistics and MyAppSuccess's knowledge of admissions decisions. This tool is for informational purposes only and does not guarantee any admissions outcomes.</p>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap" id="progress-wrap" style="display:none;">
+  <div class="progress-inner">
+    <span class="progress-label" id="progress-label">Step 1 of 6</span>
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="progress-fill" style="width:16.6%"></div></div>
+    <div class="progress-steps" id="progress-steps">
+      <div class="ps active" id="ps-1"></div>
+      <div class="ps" id="ps-2"></div>
+      <div class="ps" id="ps-3"></div>
+      <div class="ps" id="ps-4"></div>
+      <div class="ps" id="ps-5"></div>
+      <div class="ps" id="ps-6"></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="quiz-main" id="quiz-main" style="display:none;">
+
+  <!-- STEP 1: Who are you -->
+  <div class="step-card active" id="step-1">
+    <div class="step-num">Step 1 of 6</div>
+    <h2 class="step-title">Let's start with you</h2>
+    <p class="step-sub">Tell us a bit about who's filling this out and where you're applying from.</p>
+
+    <div style="margin-bottom:1.4rem;">
+      <div class="field" style="margin-bottom:1rem;"><label>Who is filling this out? <span class="req">*</span></label></div>
+      <div class="toggle-group" id="user-type-group">
+        <button class="tog-btn selected" data-val="student" onclick="selectToggle('user-type-group', this)"> I'm the student</button>
+        <button class="tog-btn" data-val="parent" onclick="selectToggle('user-type-group', this)">‍‍ I'm a parent</button>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1.4rem;">
+      <div class="field" style="margin-bottom:1rem;"><label>Where are you applying from? <span class="req">*</span></label></div>
+      <div class="toggle-group" id="origin-group">
+        <button class="tog-btn selected" data-val="domestic" onclick="selectToggle('origin-group', this)"> US (Domestic)</button>
+        <button class="tog-btn" data-val="international" onclick="selectToggle('origin-group', this)"> International</button>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1.4rem;" id="origin-country-wrap" style="display:none;">
+      <div class="field">
+        <label>Country of origin</label>
+        <input type="text" id="origin-country" placeholder="e.g. South Korea, India, Brazil..." />
+      </div>
+    </div>
+
+    <div style="margin-bottom:1.4rem;">
+      <div class="field" style="margin-bottom:1rem;"><label>Application type <span class="req">*</span></label></div>
+      <div class="toggle-group" id="app-type-group">
+        <button class="tog-btn selected" data-val="freshman" onclick="selectToggle('app-type-group', this)"> Freshman (HS Senior/Junior)</button>
+        <button class="tog-btn" data-val="transfer" onclick="selectToggle('app-type-group', this)"> Transfer/Other</button>
+      </div>
+    </div>
+</div>
+
+  <!-- STEP 2: Schools -->
+  <div class="step-card" id="step-2">
+    <div class="step-num">Step 2 of 6</div>
+    <h2 class="step-title">Which schools are you considering?</h2>
+    <p class="step-sub">Search and select up to 3 schools. We'll evaluate your profile against each one's admitted class data.</p>
+
+    <div class="school-slots">
+      <!-- School 1 -->
+      <div class="school-slot" id="slot-1">
+        <div class="school-slot-label">School 1 <span style="color:var(--gold-dark)">*</span></div>
+        <div class="school-search-wrap" id="search-wrap-1">
+          <span class="school-search-icon"></span>
+          <input type="text" class="school-search-input" id="school-input-1" placeholder="Search schools (e.g. Harvard, UCLA, Michigan...)" oninput="searchSchools(1, this.value)" onfocus="openDropdown(1)" />
+          <div class="school-dropdown" id="school-dropdown-1"></div>
+        </div>
+        <div class="school-selected" id="selected-display-1" style="display:none;">
+          <div class="s-info">
+            <div class="s-name" id="sel-name-1"></div>
+            <div class="s-meta" id="sel-meta-1"></div>
+          </div>
+          <button class="school-clear" onclick="clearSchool(1)" title="Remove"></button>
+        </div>
+      </div>
+      <!-- School 2 -->
+      <div class="school-slot slot-optional" id="slot-2">
+        <div class="school-slot-label">School 2 <span style="color:var(--muted);font-weight:500;">(optional)</span></div>
+        <div class="school-search-wrap" id="search-wrap-2">
+          <span class="school-search-icon"></span>
+          <input type="text" class="school-search-input" id="school-input-2" placeholder="Add a second school..." oninput="searchSchools(2, this.value)" onfocus="openDropdown(2)" />
+          <div class="school-dropdown" id="school-dropdown-2"></div>
+        </div>
+        <div class="school-selected" id="selected-display-2" style="display:none;">
+          <div class="s-info">
+            <div class="s-name" id="sel-name-2"></div>
+            <div class="s-meta" id="sel-meta-2"></div>
+          </div>
+          <button class="school-clear" onclick="clearSchool(2)" title="Remove"></button>
+        </div>
+      </div>
+      <!-- School 3 -->
+      <div class="school-slot slot-optional" id="slot-3">
+        <div class="school-slot-label">School 3 <span style="color:var(--muted);font-weight:500;">(optional)</span></div>
+        <div class="school-search-wrap" id="search-wrap-3">
+          <span class="school-search-icon"></span>
+          <input type="text" class="school-search-input" id="school-input-3" placeholder="Add a third school..." oninput="searchSchools(3, this.value)" onfocus="openDropdown(3)" />
+          <div class="school-dropdown" id="school-dropdown-3"></div>
+        </div>
+        <div class="school-selected" id="selected-display-3" style="display:none;">
+          <div class="s-info">
+            <div class="s-name" id="sel-name-3"></div>
+            <div class="s-meta" id="sel-meta-3"></div>
+          </div>
+          <button class="school-clear" onclick="clearSchool(3)" title="Remove"></button>
+        </div>
+      </div>
+    </div>
+
+    <button class="school-add-more" id="add-school-2-btn" onclick="showSlot(2)">＋ Add a second school</button>
+    <button class="school-add-more" id="add-school-3-btn" onclick="showSlot(3)" style="display:none;margin-top:0.5rem;">＋ Add a third school</button>
+</div>
+
+  <!-- STEP 3: Major -->
+  <div class="step-card" id="step-3">
+    <div class="step-num">Step 3 of 6</div>
+    <h2 class="step-title">What are you planning to study?</h2>
+    <p class="step-sub">Your intended major affects how competitive your application is. Some programs admit far fewer students than the overall school rate.</p>
+
+    <div class="form-row full" style="margin-bottom:1.2rem;">
+      <div class="field" id="field-major">
+        <label>Intended major/field of study <span class="req">*</span></label>
+        <select id="major-select">
+          <option value="">— Select your intended major —</option>
+          <optgroup label="STEM">
+            <option value="computer_science">Computer Science/Software Engineering</option>
+            <option value="data_science">Data Science/Statistics</option>
+            <option value="engineering_ee">Electrical Engineering</option>
+            <option value="engineering_me">Mechanical Engineering</option>
+            <option value="engineering_ce">Civil/Environmental Engineering</option>
+            <option value="engineering_chem">Chemical Engineering</option>
+            <option value="engineering_bio">Biomedical Engineering</option>
+            <option value="mathematics">Mathematics/Applied Math</option>
+            <option value="physics">Physics/Astronomy</option>
+            <option value="chemistry">Chemistry/Biochemistry</option>
+            <option value="biology">Biology/Life Sciences</option>
+            <option value="neuroscience">Neuroscience/Cognitive Science</option>
+            <option value="environmental">Environmental Science/Sustainability</option>
+          </optgroup>
+          <optgroup label="Health & Medicine">
+            <option value="pre_med">Pre-Med/Pre-Health</option>
+            <option value="nursing">Nursing</option>
+            <option value="public_health">Public Health</option>
+            <option value="pharmacy">Pharmacy/Pharmacology</option>
+          </optgroup>
+          <optgroup label="Business & Economics">
+            <option value="business_finance">Finance/Accounting</option>
+            <option value="business_marketing">Marketing/Advertising</option>
+            <option value="business_mgmt">Business Management/Entrepreneurship</option>
+            <option value="economics">Economics</option>
+          </optgroup>
+          <optgroup label="Social Sciences & Humanities">
+            <option value="political_science">Political Science/Government</option>
+            <option value="psychology">Psychology</option>
+            <option value="sociology">Sociology/Anthropology</option>
+            <option value="history">History</option>
+            <option value="english">English/Literature/Writing</option>
+            <option value="philosophy">Philosophy</option>
+            <option value="communications">Communications/Journalism</option>
+            <option value="linguistics">Linguistics</option>
+            <option value="international">International Relations/Global Studies</option>
+          </optgroup>
+          <optgroup label="Arts & Design">
+            <option value="architecture">Architecture/Urban Planning</option>
+            <option value="fine_arts">Fine Arts/Studio Art</option>
+            <option value="graphic_design">Graphic Design/UX Design</option>
+            <option value="film">Film/Media Studies</option>
+            <option value="music">Music/Music Theory/Performance</option>
+            <option value="theater">Theater/Performing Arts</option>
+          </optgroup>
+          <optgroup label="Education & Law">
+            <option value="education">Education</option>
+            <option value="pre_law">Pre-Law/Legal Studies</option>
+          </optgroup>
+          <optgroup label="Other">
+            <option value="undecided">Undecided/Exploring</option>
+            <option value="other">Other</option>
+          </optgroup>
+        </select>
+        <div class="err-msg">Please select your intended major.</div>
+      </div>
+    </div>
+
+    <div class="form-row full">
+      <div class="field">
+        <label>Major competitiveness note</label>
+        <div class="score-hint" id="major-hint" style="display:none;"></div>
+      </div>
+    </div>
+</div>
+
+  <!-- STEP 4: Academics -->
+  <div class="step-card" id="step-4">
+    <div class="step-num">Step 4 of 6</div>
+    <h2 class="step-title">Your Academic Profile</h2>
+    <p class="step-sub">Be as accurate as possible. This is the core of how schools evaluate you on paper.</p>
+
+    <div class="form-row">
+      <div class="field" id="field-gpa">
+        <label>GPA <span class="req">*</span></label>
+        <input type="number" id="gpa-input" step="0.01" min="0" max="5.0" placeholder="e.g. 3.85" />
+        <div class="err-msg">Please enter a valid GPA (0–5.0).</div>
+      </div>
+      <div class="field">
+        <label>GPA Scale</label>
+        <div class="toggle-group" id="gpa-type-group" style="margin-top:0.3rem;">
+          <button class="tog-btn selected" style="padding:0.5rem 0.9rem;font-size:0.82rem;" data-val="unweighted" onclick="selectToggle('gpa-type-group', this)">Unweighted (4.0)</button>
+          <button class="tog-btn" style="padding:0.5rem 0.9rem;font-size:0.82rem;" data-val="weighted" onclick="selectToggle('gpa-type-group', this)">Weighted (5.0)</button>
+        </div>
+        <div class="hint" style="margin-top:0.4rem;">Unweighted is the standard 4.0 scale.</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label>Class Rank (optional)</label>
+        <select id="class-rank">
+          <option value="">— Select rank percentile —</option>
+          <option value="top1">Top 1%</option>
+          <option value="top5">Top 5%</option>
+          <option value="top10">Top 10%</option>
+          <option value="top25">Top 25%</option>
+          <option value="top50">Top 50%</option>
+          <option value="below50">Below top 50%</option>
+          <option value="no_rank">School doesn't rank</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Course Rigor</label>
+        <select id="course-rigor">
+          <option value="">— Select —</option>
+          <option value="mostly_ap">Mostly AP/IB courses</option>
+          <option value="some_ap">Some AP/IB courses</option>
+          <option value="honors">Honors/Dual Enrollment</option>
+          <option value="standard">Standard/Regular curriculum</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="margin: 0.5rem 0 1.2rem; border-top: 1px solid var(--border); padding-top: 1.2rem;">
+      <div class="field" style="margin-bottom:0.8rem;"><label>Test scores (optional, check test-optional schools)</label></div>
+      <div class="toggle-group" id="test-type-group" style="margin-bottom:1rem;">
+        <button class="tog-btn selected" data-val="none" onclick="selectToggle('test-type-group', this); toggleTests('none')">No scores/Test-optional</button>
+        <button class="tog-btn" data-val="sat" onclick="selectToggle('test-type-group', this); toggleTests('sat')">SAT</button>
+        <button class="tog-btn" data-val="act" onclick="selectToggle('test-type-group', this); toggleTests('act')">ACT</button>
+        <button class="tog-btn" data-val="both" onclick="selectToggle('test-type-group', this); toggleTests('both')">Both</button>
+      </div>
+
+      <div id="sat-fields" style="display:none;">
+        <div class="form-row three">
+          <div class="field"><label>SAT Total</label><input type="number" id="sat-total" min="400" max="1600" placeholder="e.g. 1480" /></div>
+          <div class="field"><label>SAT EBRW</label><input type="number" id="sat-ebrw" min="200" max="800" placeholder="e.g. 740" /></div>
+          <div class="field"><label>SAT Math</label><input type="number" id="sat-math" min="200" max="800" placeholder="e.g. 740" /></div>
+        </div>
+      </div>
+      <div id="act-fields" style="display:none;">
+        <div class="form-row">
+          <div class="field"><label>ACT Composite</label><input type="number" id="act-composite" min="1" max="36" placeholder="e.g. 33" /></div>
+          <div class="field"><label>ACT Best Section</label>
+            <select id="act-best">
+              <option value="">— Optional —</option>
+              <option value="english">English</option>
+              <option value="math">Math</option>
+              <option value="reading">Reading</option>
+              <option value="science">Science</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row full">
+      <div class="field" id="field-gpa-v">
+        <div class="err-msg" id="gpa-err">Please enter your GPA.</div>
+      </div>
+    </div>
+</div>
+
+  <!-- STEP 5: Extracurriculars -->
+  <div class="step-card" id="step-5">
+    <div class="step-num">Step 5 of 6</div>
+    <h2 class="step-title">Activities &amp; Involvement</h2>
+    <p class="step-sub">Check everything that applies. Depth and leadership matter more than the number of boxes you check.</p>
+
+    <div class="field" style="margin-bottom:1rem;"><label>Extracurricular activities (select all that apply)</label></div>
+    <div class="check-grid" id="ec-grid">
+      <label class="check-item">
+        <input type="checkbox" value="varsity_sport" /><div class="check-box"></div>
+        <span class="check-label">Varsity sport(s)</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="sport_leadership" /><div class="check-box"></div>
+        <span class="check-label">Team captain/sport leadership</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="student_gov" /><div class="check-box"></div>
+        <span class="check-label">Student government/class officer</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="nhs" /><div class="check-box"></div>
+        <span class="check-label">National Honor Society (NHS)</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="arts_music" /><div class="check-box"></div>
+        <span class="check-label">Arts, music, or performance</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="arts_leadership" /><div class="check-box"></div>
+        <span class="check-label">Lead role/first chair/featured artist</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="research" /><div class="check-box"></div>
+        <span class="check-label">Academic research/lab work</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="research_published" /><div class="check-box"></div>
+        <span class="check-label">Published/presented research</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="volunteering" /><div class="check-box"></div>
+        <span class="check-label">Community service/volunteering</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="volunteering_leadership" /><div class="check-box"></div>
+        <span class="check-label">Founded or led a community initiative</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="entrepreneurship" /><div class="check-box"></div>
+        <span class="check-label">Started a business/startup</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="debate_model_un" /><div class="check-box"></div>
+        <span class="check-label">Debate team/Model UN</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="internship" /><div class="check-box"></div>
+        <span class="check-label">Internship or professional work experience</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="work_job" /><div class="check-box"></div>
+        <span class="check-label">Part-time job (shows responsibility)</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="national_award" /><div class="check-box"></div>
+        <span class="check-label">National-level award or competition win</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="state_regional_award" /><div class="check-box"></div>
+        <span class="check-label">State or regional award/competition</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="stem_club" /><div class="check-box"></div>
+        <span class="check-label">STEM club (robotics, coding, math team…)</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="newspaper_media" /><div class="check-box"></div>
+        <span class="check-label">School newspaper/yearbook/media</span>
+      </label>
+    </div>
+
+    <div style="margin-top:1.5rem;" class="field">
+      <label>Leadership roles held (outside of the checkboxes above)</label>
+      <input type="text" id="other-leadership" placeholder="e.g. President of Chess Club, Eagle Scout, Youth Pastor..." />
+    </div>
+</div>
+
+  <!-- STEP 6: Special Considerations -->
+  <div class="step-card" id="step-6">
+    <div class="step-num">Step 6 of 6</div>
+    <h2 class="step-title">Special Considerations</h2>
+    <p class="step-sub">These factors can meaningfully shift your admissions odds. Check everything that applies.</p>
+
+    <div class="field" style="margin-bottom:1rem;"><label>Special Considerations</label></div>
+    <div class="check-grid" id="hook-grid">
+      <label class="check-item">
+        <input type="checkbox" value="first_gen" /><div class="check-box"></div>
+        <span class="check-label">First-generation college student</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="legacy" /><div class="check-box"></div>
+        <span class="check-label">Legacy applicant (parent/sibling attended)</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="recruited_athlete" /><div class="check-box"></div>
+        <span class="check-label">Recruited athlete (coach expressed interest)</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="urm" /><div class="check-box"></div>
+        <span class="check-label">Underrepresented minority (URM)</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="geo_diversity" /><div class="check-box"></div>
+        <span class="check-label">Geographic diversity (rural or underrepresented state)</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="low_income" /><div class="check-box"></div>
+        <span class="check-label">Low-income / Pell Grant eligible</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="disability" /><div class="check-box"></div>
+        <span class="check-label">Disability / learning difference disclosed</span>
+      </label>
+      <label class="check-item">
+        <input type="checkbox" value="military" /><div class="check-box"></div>
+        <span class="check-label">Military family / veteran background</span>
+      </label>
+    </div>
+
+    <div style="margin-top:1.5rem; margin-bottom:1rem; display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;"><div class="field"><label>Candidate background <span style="font-weight:500;color:var(--muted);">(optional)</span></label><select id="ethnicity-select"><option value="">Prefer not to say</option><option value="white">White/Caucasian</option><option value="black">Black/African American</option><option value="hispanic">Hispanic/Latino</option><option value="asian">Asian/Asian American</option><option value="native">Native American/Alaska Native</option><option value="pacific">Native Hawaiian/Pacific Islander</option><option value="multiracial">Multiracial</option><option value="other_eth">Other/Not listed</option></select><div class="hint">Shared only to give your results more context. Completely optional.</div></div><div class="field"><label>Gender identity <span style="font-weight:500;color:var(--muted);">(optional)</span></label><select id="gender-select"><option value="">Prefer not to say</option><option value="woman">Woman</option><option value="man">Man</option><option value="nonbinary">Non-binary/Genderqueer</option><option value="trans_woman">Transgender woman</option><option value="trans_man">Transgender man</option><option value="other_gender">Other/Not listed</option></select><div class="hint">Some schools seek gender diversity in their class. Will not affect your score. Completely optional.</div></div></div><div style="margin-top:1.5rem; margin-bottom:1.5rem;">
+      <div class="field">
+        <label>Anything else we should know? (optional)</label>
+        <textarea id="special-text" placeholder="This is your space. Share whatever feels important, whether that's something you've been carrying, a part of your story that doesn't fit in a checkbox, or context that would help someone understand you better as a person. Nothing is too small."></textarea>
+        <div class="hint">This helps our algorithm and data models produce a more personalized assessment.</div>
+      </div>
+    </div>
+</div>
+
+  <!-- LOADING STATE -->
+  <div class="loading-screen" id="loading-screen">
+    <div class="loader-ring"></div>
+    <div class="loading-school-name" id="loading-title">Analyzing your profile…</div>
+    <div class="loading-sub" id="loading-sub">Our algorithm and data models are reviewing your application against each school's admitted class data.</div>
+    <div class="loading-tips">
+      <div class="loading-tip" id="tip-1"> Most top-25 schools receive 50,000+ applications per year. Standing out requires more than just grades.</div>
+      <div class="loading-tip" id="tip-2"> A student's GPA and test scores explain only about 40% of admissions decisions at selective schools.</div>
+      <div class="loading-tip" id="tip-3"> Essays and extracurriculars can swing borderline decisions. They are the human story behind your numbers.</div>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION SCREEN -->
+  <div class="confirmation-screen" id="confirmation-screen">
+    <div class="confirmation-icon"></div>
+    <h2>Your results are on their way!</h2>
+    <p>We're preparing your personalized admissions profile and sending it to <strong id="confirmation-email-display"></strong>.</p>
+    <p>Your full breakdown includes school-by-school admission probabilities, your key strengths, and areas to work on for each school.</p>
+    <div class="confirmation-email-note">
+      Check your inbox in the next few minutes.<br>
+      Don't see it? Check your spam or promotions folder.
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-section" id="results-section">
+    <div class="results-header">
+      <h2>Your Admissions Profile</h2>
+      <p id="results-subhead">Here's how your profile compares to admitted students at your chosen schools.</p>
+    </div>
+    <div class="results-grid" id="results-grid"></div>
+
+    <div class="results-cta">
+      <h3>Want to <span class="hl">strengthen your application?</span></h3>
+      <p>Our team of Ivy League graduates has helped hundreds of students get into their dream schools. Book a free strategy call or join our 8-week bootcamp, tailored to exactly where you are today.</p>
+      <div class="cta-buttons">
+        <a href="https://myappsuccess.com/#pricing" class="btn-cta-gold"> Book a Free Strategy Call</a>
+        <a href="https://myappsuccess.com/#bootcamp" class="btn-cta-outline">Learn About the Bootcamp →</a>
+      </div>
+    </div>
+    <div class="retake-link"><button onclick="resetQuiz()">↺ Start over with different info</button></div>
+  </div>
+
+</div><!-- /quiz-main -->
+
+<!-- LEAD CAPTURE MODAL -->
+<div class="lead-overlay" id="lead-overlay">
+  <div class="lead-modal">
+    <div class="lead-icon">📬</div>
+    <h2>Where should we send your results?</h2>
+    <p>Enter your name and email and we'll send your full personalized admissions profile — including school-by-school breakdowns, your strengths and areas to strengthen, and an AI-generated assessment — straight to your inbox.</p>
+    <div class="lead-fields">
+      <input type="text" id="lead-name" placeholder="Your first name" />
+      <input type="email" id="lead-email" placeholder="Your email address" />
+    </div>
+    <button class="lead-submit" onclick="submitLead()">Email My Results →</button>
+    <p class="lead-privacy">🔒 No spam. Ever. Your results will be emailed to you instantly. You can unsubscribe at any time.</p>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// SCHOOL DATABASE — Top 200 US Universities with admissions data
+// ═══════════════════════════════════════════════════════════════
+const SCHOOLS = [
+  // IVIES & ELITE
+  {id:'harvard',name:'Harvard University',loc:'Cambridge, MA',rank:1,accept:3.4,satLow:1500,satHigh:1600,actLow:34,actHigh:36,gpaAvg:3.96,type:'private',tier:'ivy'},
+  {id:'mit',name:'MIT',loc:'Cambridge, MA',rank:2,accept:3.9,satLow:1510,satHigh:1590,actLow:34,actHigh:36,gpaAvg:3.97,type:'private',tier:'ivy'},
+  {id:'stanford',name:'Stanford University',loc:'Stanford, CA',rank:3,accept:3.7,satLow:1500,satHigh:1600,actLow:34,actHigh:36,gpaAvg:3.96,type:'private',tier:'ivy'},
+  {id:'yale',name:'Yale University',loc:'New Haven, CT',rank:4,accept:4.6,satLow:1500,satHigh:1600,actLow:34,actHigh:36,gpaAvg:3.95,type:'private',tier:'ivy'},
+  {id:'princeton',name:'Princeton University',loc:'Princeton, NJ',rank:5,accept:4.7,satLow:1500,satHigh:1600,actLow:34,actHigh:36,gpaAvg:3.91,type:'private',tier:'ivy'},
+  {id:'columbia',name:'Columbia University',loc:'New York, NY',rank:6,accept:3.9,satLow:1500,satHigh:1590,actLow:34,actHigh:36,gpaAvg:3.92,type:'private',tier:'ivy'},
+  {id:'upenn',name:'University of Pennsylvania',loc:'Philadelphia, PA',rank:7,accept:5.9,satLow:1500,satHigh:1580,actLow:34,actHigh:36,gpaAvg:3.93,type:'private',tier:'ivy'},
+  {id:'brown',name:'Brown University',loc:'Providence, RI',rank:9,accept:5.5,satLow:1490,satHigh:1570,actLow:34,actHigh:36,gpaAvg:3.94,type:'private',tier:'ivy'},
+  {id:'dartmouth',name:'Dartmouth College',loc:'Hanover, NH',rank:12,accept:6.4,satLow:1480,satHigh:1570,actLow:33,actHigh:36,gpaAvg:3.94,type:'private',tier:'ivy'},
+  {id:'cornell',name:'Cornell University',loc:'Ithaca, NY',rank:11,accept:7.7,satLow:1470,satHigh:1570,actLow:33,actHigh:35,gpaAvg:3.92,type:'private',tier:'ivy'},
+  // ELITE PRIVATES
+  {id:'caltech',name:'California Institute of Technology',loc:'Pasadena, CA',rank:2,accept:3.9,satLow:1530,satHigh:1600,actLow:35,actHigh:36,gpaAvg:4.19,type:'private',tier:'elite'},
+  {id:'chicago',name:'University of Chicago',loc:'Chicago, IL',rank:8,accept:5.4,satLow:1510,satHigh:1600,actLow:34,actHigh:36,gpaAvg:4.48,type:'private',tier:'elite'},
+  {id:'duke',name:'Duke University',loc:'Durham, NC',rank:10,accept:6.3,satLow:1490,satHigh:1580,actLow:34,actHigh:36,gpaAvg:3.94,type:'private',tier:'elite'},
+  {id:'vanderbilt',name:'Vanderbilt University',loc:'Nashville, TN',rank:13,accept:6.7,satLow:1500,satHigh:1590,actLow:34,actHigh:36,gpaAvg:3.83,type:'private',tier:'elite'},
+  {id:'northwestern',name:'Northwestern University',loc:'Evanston, IL',rank:9,accept:6.8,satLow:1490,satHigh:1580,actLow:34,actHigh:36,gpaAvg:4.10,type:'private',tier:'elite'},
+  {id:'jhu',name:'Johns Hopkins University',loc:'Baltimore, MD',rank:10,accept:7.0,satLow:1510,satHigh:1590,actLow:34,actHigh:36,gpaAvg:3.90,type:'private',tier:'elite'},
+  {id:'rice',name:'Rice University',loc:'Houston, TX',rank:17,accept:8.6,satLow:1510,satHigh:1590,actLow:34,actHigh:36,gpaAvg:3.96,type:'private',tier:'elite'},
+  {id:'notredame',name:'University of Notre Dame',loc:'Notre Dame, IN',rank:20,accept:12.7,satLow:1400,satHigh:1540,actLow:33,actHigh:35,gpaAvg:4.06,type:'private',tier:'elite'},
+  {id:'georgetown',name:'Georgetown University',loc:'Washington, DC',rank:22,accept:12.0,satLow:1380,satHigh:1570,actLow:33,actHigh:35,gpaAvg:3.90,type:'private',tier:'elite'},
+  {id:'carnegiemellon',name:'Carnegie Mellon University',loc:'Pittsburgh, PA',rank:22,accept:11.0,satLow:1500,satHigh:1590,actLow:34,actHigh:36,gpaAvg:3.87,type:'private',tier:'elite'},
+  {id:'emory',name:'Emory University',loc:'Atlanta, GA',rank:22,accept:11.4,satLow:1400,satHigh:1560,actLow:32,actHigh:35,gpaAvg:3.79,type:'private',tier:'elite'},
+  {id:'washu',name:'Washington University in St. Louis',loc:'St. Louis, MO',rank:24,accept:12.0,satLow:1500,satHigh:1590,actLow:34,actHigh:36,gpaAvg:4.01,type:'private',tier:'elite'},
+  {id:'tufts',name:'Tufts University',loc:'Medford, MA',rank:28,accept:10.6,satLow:1430,satHigh:1560,actLow:32,actHigh:35,gpaAvg:3.85,type:'private',tier:'high_selective'},
+  {id:'usc',name:'University of Southern California',loc:'Los Angeles, CA',rank:25,accept:11.0,satLow:1390,satHigh:1560,actLow:32,actHigh:35,gpaAvg:3.79,type:'private',tier:'high_selective'},
+  {id:'boston_college',name:'Boston College',loc:'Chestnut Hill, MA',rank:35,accept:17.0,satLow:1350,satHigh:1530,actLow:31,actHigh:34,gpaAvg:3.92,type:'private',tier:'high_selective'},
+  {id:'nyu',name:'New York University',loc:'New York, NY',rank:35,accept:8.0,satLow:1350,satHigh:1540,actLow:31,actHigh:34,gpaAvg:3.71,type:'private',tier:'high_selective'},
+  {id:'bu',name:'Boston University',loc:'Boston, MA',rank:42,accept:14.0,satLow:1330,satHigh:1510,actLow:30,actHigh:34,gpaAvg:3.71,type:'private',tier:'high_selective'},
+  {id:'tulane',name:'Tulane University',loc:'New Orleans, LA',rank:44,accept:11.0,satLow:1330,satHigh:1510,actLow:30,actHigh:34,gpaAvg:3.65,type:'private',tier:'high_selective'},
+  {id:'wake_forest',name:'Wake Forest University',loc:'Winston-Salem, NC',rank:28,accept:21.0,satLow:1320,satHigh:1510,actLow:31,actHigh:34,gpaAvg:3.90,type:'private',tier:'high_selective'},
+  {id:'lehigh',name:'Lehigh University',loc:'Bethlehem, PA',rank:56,accept:34.0,satLow:1270,satHigh:1490,actLow:28,actHigh:33,gpaAvg:3.73,type:'private',tier:'selective'},
+  {id:'fordham',name:'Fordham University',loc:'Bronx, NY',rank:68,accept:43.0,satLow:1220,satHigh:1440,actLow:27,actHigh:32,gpaAvg:3.58,type:'private',tier:'selective'},
+  {id:'american',name:'American University',loc:'Washington, DC',rank:77,accept:35.0,satLow:1220,satHigh:1430,actLow:27,actHigh:32,gpaAvg:3.65,type:'private',tier:'selective'},
+  {id:'northeastern',name:'Northeastern University',loc:'Boston, MA',rank:51,accept:6.7,satLow:1430,satHigh:1560,actLow:33,actHigh:35,gpaAvg:3.90,type:'private',tier:'high_selective'},
+  {id:'case_western',name:'Case Western Reserve University',loc:'Cleveland, OH',rank:49,accept:27.0,satLow:1400,satHigh:1570,actLow:32,actHigh:35,gpaAvg:3.91,type:'private',tier:'high_selective'},
+  {id:'rpi',name:'Rensselaer Polytechnic Institute',loc:'Troy, NY',rank:53,accept:51.0,satLow:1320,satHigh:1510,actLow:28,actHigh:33,gpaAvg:3.90,type:'private',tier:'selective'},
+  {id:'villanova',name:'Villanova University',loc:'Villanova, PA',rank:52,accept:24.0,satLow:1310,satHigh:1490,actLow:30,actHigh:34,gpaAvg:3.94,type:'private',tier:'selective'},
+  {id:'ga_tech',name:'Georgia Institute of Technology',loc:'Atlanta, GA',rank:33,accept:17.0,satLow:1400,satHigh:1570,actLow:32,actHigh:35,gpaAvg:4.07,type:'public',tier:'flagship'},
+  // TOP PUBLIC
+  {id:'uc_berkeley',name:'UC Berkeley',loc:'Berkeley, CA',rank:15,accept:11.4,satLow:1310,satHigh:1560,actLow:31,actHigh:35,gpaAvg:4.15,type:'public',tier:'flagship'},
+  {id:'ucla',name:'UCLA',loc:'Los Angeles, CA',rank:20,accept:8.8,satLow:1280,satHigh:1550,actLow:29,actHigh:35,gpaAvg:4.18,type:'public',tier:'flagship'},
+  {id:'michigan',name:'University of Michigan',loc:'Ann Arbor, MI',rank:23,accept:17.7,satLow:1360,satHigh:1540,actLow:33,actHigh:35,gpaAvg:3.91,type:'public',tier:'flagship'},
+  {id:'unc',name:'UNC Chapel Hill',loc:'Chapel Hill, NC',rank:28,accept:17.4,satLow:1290,satHigh:1480,actLow:28,actHigh:34,gpaAvg:4.42,type:'public',tier:'flagship'},
+  {id:'virginia',name:'University of Virginia',loc:'Charlottesville, VA',rank:28,accept:18.5,satLow:1340,satHigh:1530,actLow:31,actHigh:35,gpaAvg:4.18,type:'public',tier:'flagship'},
+  {id:'uc_san_diego',name:'UC San Diego',loc:'La Jolla, CA',rank:34,accept:23.7,satLow:1290,satHigh:1530,actLow:29,actHigh:34,gpaAvg:4.10,type:'public',tier:'flagship'},
+  {id:'uc_davis',name:'UC Davis',loc:'Davis, CA',rank:38,accept:38.7,satLow:1180,satHigh:1470,actLow:26,actHigh:33,gpaAvg:4.03,type:'public',tier:'flagship'},
+  {id:'uc_santa_barbara',name:'UC Santa Barbara',loc:'Santa Barbara, CA',rank:32,accept:26.0,satLow:1230,satHigh:1500,actLow:28,actHigh:34,gpaAvg:4.14,type:'public',tier:'flagship'},
+  {id:'uc_irvine',name:'UC Irvine',loc:'Irvine, CA',rank:35,accept:21.0,satLow:1160,satHigh:1450,actLow:25,actHigh:33,gpaAvg:4.08,type:'public',tier:'flagship'},
+  {id:'uc_santa_cruz',name:'UC Santa Cruz',loc:'Santa Cruz, CA',rank:83,accept:47.0,satLow:1100,satHigh:1380,actLow:23,actHigh:30,gpaAvg:3.77,type:'public',tier:'solid'},
+  {id:'uc_riverside',name:'UC Riverside',loc:'Riverside, CA',rank:97,accept:57.0,satLow:1060,satHigh:1340,actLow:21,actHigh:28,gpaAvg:3.91,type:'public',tier:'solid'},
+  {id:'florida',name:'University of Florida',loc:'Gainesville, FL',rank:28,accept:22.8,satLow:1330,satHigh:1510,actLow:30,actHigh:34,gpaAvg:4.30,type:'public',tier:'flagship'},
+  {id:'florida_state',name:'Florida State University',loc:'Tallahassee, FL',rank:54,accept:25.0,satLow:1190,satHigh:1370,actLow:25,actHigh:30,gpaAvg:4.06,name_short:'FSU',type:'public',tier:'solid'},
+  {id:'texas_austin',name:'University of Texas at Austin',loc:'Austin, TX',rank:32,accept:28.9,satLow:1210,satHigh:1500,actLow:27,actHigh:34,gpaAvg:3.74,type:'public',tier:'flagship'},
+  {id:'texas_am',name:'Texas A&M University',loc:'College Station, TX',rank:68,accept:57.0,satLow:1140,satHigh:1370,actLow:24,actHigh:31,gpaAvg:3.68,type:'public',tier:'solid'},
+  {id:'ohio_state',name:'Ohio State University',loc:'Columbus, OH',rank:49,accept:54.0,satLow:1230,satHigh:1450,actLow:28,actHigh:33,gpaAvg:3.79,type:'public',tier:'solid'},
+  {id:'penn_state',name:'Penn State University',loc:'University Park, PA',rank:68,accept:56.0,satLow:1130,satHigh:1360,actLow:24,actHigh:31,gpaAvg:3.60,type:'public',tier:'solid'},
+  {id:'purdue',name:'Purdue University',loc:'West Lafayette, IN',rank:49,accept:53.0,satLow:1180,satHigh:1440,actLow:25,actHigh:33,gpaAvg:3.73,type:'public',tier:'solid'},
+  {id:'illinois',name:'University of Illinois Urbana-Champaign',loc:'Champaign, IL',rank:35,accept:45.0,satLow:1240,satHigh:1510,actLow:27,actHigh:34,gpaAvg:3.83,type:'public',tier:'solid'},
+  {id:'wisconsin',name:'University of Wisconsin-Madison',loc:'Madison, WI',rank:49,accept:49.0,satLow:1290,satHigh:1490,actLow:28,actHigh:33,gpaAvg:3.85,type:'public',tier:'solid'},
+  {id:'minnesota',name:'University of Minnesota',loc:'Minneapolis, MN',rank:54,accept:68.0,satLow:1230,satHigh:1480,actLow:26,actHigh:31,gpaAvg:3.73,type:'public',tier:'accessible'},
+  {id:'indiana',name:'Indiana University Bloomington',loc:'Bloomington, IN',rank:68,accept:74.0,satLow:1100,satHigh:1360,actLow:24,actHigh:31,gpaAvg:3.71,type:'public',tier:'accessible'},
+  {id:'michigan_state',name:'Michigan State University',loc:'East Lansing, MI',rank:68,accept:76.0,satLow:1090,satHigh:1330,actLow:22,actHigh:29,gpaAvg:3.70,type:'public',tier:'accessible'},
+  {id:'rutgers',name:'Rutgers University',loc:'New Brunswick, NJ',rank:54,accept:65.0,satLow:1150,satHigh:1390,actLow:24,actHigh:30,gpaAvg:3.73,type:'public',tier:'solid'},
+  {id:'pitt',name:'University of Pittsburgh',loc:'Pittsburgh, PA',rank:55,accept:57.0,satLow:1220,satHigh:1430,actLow:27,actHigh:32,gpaAvg:3.79,type:'public',tier:'solid'},
+  {id:'colorado',name:'University of Colorado Boulder',loc:'Boulder, CO',rank:80,accept:84.0,satLow:1150,satHigh:1380,actLow:24,actHigh:30,gpaAvg:3.63,type:'public',tier:'accessible'},
+  {id:'arizona',name:'University of Arizona',loc:'Tucson, AZ',rank:97,accept:85.0,satLow:1070,satHigh:1320,actLow:19,actHigh:27,gpaAvg:3.40,type:'public',tier:'accessible'},
+  {id:'arizona_state',name:'Arizona State University',loc:'Tempe, AZ',rank:117,accept:87.5,satLow:1050,satHigh:1310,actLow:19,actHigh:27,gpaAvg:3.52,type:'public',tier:'open'},
+  {id:'iowa',name:'University of Iowa',loc:'Iowa City, IA',rank:83,accept:83.0,satLow:1120,satHigh:1370,actLow:22,actHigh:28,gpaAvg:3.71,type:'public',tier:'accessible'},
+  {id:'nebraska',name:'University of Nebraska-Lincoln',loc:'Lincoln, NE',rank:117,accept:78.0,satLow:1070,satHigh:1340,actLow:22,actHigh:28,gpaAvg:3.56,type:'public',tier:'accessible'},
+  {id:'unc_charlotte',name:'UNC Charlotte',loc:'Charlotte, NC',rank:157,accept:76.0,satLow:1050,satHigh:1290,actLow:19,actHigh:26,gpaAvg:3.63,type:'public',tier:'accessible'},
+  {id:'washington',name:'University of Washington',loc:'Seattle, WA',rank:49,accept:45.0,satLow:1230,satHigh:1490,actLow:27,actHigh:33,gpaAvg:3.82,type:'public',tier:'solid'},
+  {id:'uw_madison',name:'UW-Madison',loc:'Madison, WI',rank:49,accept:49.0,satLow:1290,satHigh:1490,actLow:28,actHigh:33,gpaAvg:3.85,type:'public',tier:'solid'},
+  // LIBERAL ARTS
+  {id:'williams',name:'Williams College',loc:'Williamstown, MA',rank:1,accept:9.4,satLow:1460,satHigh:1580,actLow:33,actHigh:36,gpaAvg:4.05,type:'private',tier:'elite_lac'},
+  {id:'amherst',name:'Amherst College',loc:'Amherst, MA',rank:2,accept:9.0,satLow:1460,satHigh:1580,actLow:33,actHigh:36,gpaAvg:4.06,type:'private',tier:'elite_lac'},
+  {id:'swarthmore',name:'Swarthmore College',loc:'Swarthmore, PA',rank:3,accept:8.8,satLow:1450,satHigh:1570,actLow:33,actHigh:36,gpaAvg:3.95,type:'private',tier:'elite_lac'},
+  {id:'wellesley',name:'Wellesley College',loc:'Wellesley, MA',rank:4,accept:16.0,satLow:1380,satHigh:1540,actLow:31,actHigh:35,gpaAvg:3.83,type:'private',tier:'elite_lac'},
+  {id:'middlebury',name:'Middlebury College',loc:'Middlebury, VT',rank:6,accept:15.0,satLow:1380,satHigh:1540,actLow:31,actHigh:34,gpaAvg:3.87,type:'private',tier:'elite_lac'},
+  {id:'bowdoin',name:'Bowdoin College',loc:'Brunswick, ME',rank:5,accept:8.9,satLow:1400,satHigh:1560,actLow:32,actHigh:35,gpaAvg:3.91,type:'private',tier:'elite_lac'},
+  {id:'claremont_mckenna',name:'Claremont McKenna College',loc:'Claremont, CA',rank:9,accept:9.4,satLow:1430,satHigh:1570,actLow:32,actHigh:35,gpaAvg:3.93,type:'private',tier:'elite_lac'},
+  {id:'davidson',name:'Davidson College',loc:'Davidson, NC',rank:13,accept:16.6,satLow:1330,satHigh:1510,actLow:30,actHigh:34,gpaAvg:3.91,type:'private',tier:'high_selective_lac'},
+  {id:'colgate',name:'Colgate University',loc:'Hamilton, NY',rank:16,accept:21.0,satLow:1310,satHigh:1490,actLow:30,actHigh:33,gpaAvg:3.78,type:'private',tier:'high_selective_lac'},
+  {id:'hamilton',name:'Hamilton College',loc:'Clinton, NY',rank:17,accept:14.0,satLow:1370,satHigh:1540,actLow:31,actHigh:35,gpaAvg:3.86,type:'private',tier:'high_selective_lac'},
+  {id:'harvey_mudd',name:'Harvey Mudd College',loc:'Claremont, CA',rank:3,accept:10.6,satLow:1510,satHigh:1600,actLow:34,actHigh:36,gpaAvg:4.17,type:'private',tier:'elite_lac'},
+  {id:'vassar',name:'Vassar College',loc:'Poughkeepsie, NY',rank:14,accept:19.0,satLow:1380,satHigh:1540,actLow:31,actHigh:35,gpaAvg:3.82,type:'private',tier:'high_selective_lac'},
+  {id:'bates',name:'Bates College',loc:'Lewiston, ME',rank:22,accept:13.0,satLow:1320,satHigh:1510,actLow:30,actHigh:34,gpaAvg:3.79,type:'private',tier:'high_selective_lac'},
+  {id:'colby',name:'Colby College',loc:'Waterville, ME',rank:18,accept:11.4,satLow:1340,satHigh:1510,actLow:30,actHigh:34,gpaAvg:3.87,type:'private',tier:'high_selective_lac'},
+  {id:'grinnell',name:'Grinnell College',loc:'Grinnell, IA',rank:10,accept:14.2,satLow:1360,satHigh:1540,actLow:31,actHigh:35,gpaAvg:3.93,type:'private',tier:'elite_lac'},
+  {id:'carleton',name:'Carleton College',loc:'Northfield, MN',rank:8,accept:16.5,satLow:1400,satHigh:1570,actLow:31,actHigh:35,gpaAvg:3.88,type:'private',tier:'elite_lac'},
+  {id:'macalester',name:'Macalester College',loc:'St. Paul, MN',rank:25,accept:31.0,satLow:1300,satHigh:1480,actLow:30,actHigh:33,gpaAvg:3.83,type:'private',tier:'high_selective_lac'},
+  {id:'oberlin',name:'Oberlin College',loc:'Oberlin, OH',rank:30,accept:29.0,satLow:1280,satHigh:1470,actLow:29,actHigh:33,gpaAvg:3.67,type:'private',tier:'high_selective_lac'},
+  {id:'barnard',name:'Barnard College',loc:'New York, NY',rank:12,accept:10.4,satLow:1400,satHigh:1560,actLow:32,actHigh:35,gpaAvg:3.95,type:'private',tier:'elite_lac'},
+  {id:'bryn_mawr',name:'Bryn Mawr College',loc:'Bryn Mawr, PA',rank:30,accept:32.0,satLow:1270,satHigh:1480,actLow:28,actHigh:33,gpaAvg:3.86,type:'private',tier:'high_selective_lac'},
+  {id:'smith',name:'Smith College',loc:'Northampton, MA',rank:16,accept:29.0,satLow:1290,satHigh:1510,actLow:29,actHigh:34,gpaAvg:3.89,type:'private',tier:'high_selective_lac'},
+  {id:'skidmore',name:'Skidmore College',loc:'Saratoga Springs, NY',rank:41,accept:28.0,satLow:1220,satHigh:1430,actLow:27,actHigh:31,gpaAvg:3.63,type:'private',tier:'selective_lac'},
+  {id:'kenyon',name:'Kenyon College',loc:'Gambier, OH',rank:29,accept:31.0,satLow:1270,satHigh:1490,actLow:29,actHigh:33,gpaAvg:3.84,type:'private',tier:'high_selective_lac'},
+  // SPECIALIZED & OTHERS
+  {id:'george_washington',name:'George Washington University',loc:'Washington, DC',rank:63,accept:42.0,satLow:1260,satHigh:1470,actLow:28,actHigh:33,gpaAvg:3.83,type:'private',tier:'selective'},
+  {id:'american_u',name:'American University',loc:'Washington, DC',rank:77,accept:35.0,satLow:1220,satHigh:1430,actLow:27,actHigh:32,gpaAvg:3.65,type:'private',tier:'selective'},
+  {id:'drexel',name:'Drexel University',loc:'Philadelphia, PA',rank:97,accept:75.0,satLow:1150,satHigh:1390,actLow:25,actHigh:31,gpaAvg:3.68,type:'private',tier:'selective'},
+  {id:'marquette',name:'Marquette University',loc:'Milwaukee, WI',rank:97,accept:83.0,satLow:1120,satHigh:1350,actLow:23,actHigh:29,gpaAvg:3.68,type:'private',tier:'accessible'},
+  {id:'depaul',name:'DePaul University',loc:'Chicago, IL',rank:117,accept:70.0,satLow:1080,satHigh:1330,actLow:22,actHigh:28,gpaAvg:3.50,type:'private',tier:'accessible'},
+  {id:'loyola_chicago',name:'Loyola University Chicago',loc:'Chicago, IL',rank:97,accept:75.0,satLow:1110,satHigh:1360,actLow:23,actHigh:29,gpaAvg:3.69,type:'private',tier:'accessible'},
+  {id:'santa_clara',name:'Santa Clara University',loc:'Santa Clara, CA',rank:51,accept:41.0,satLow:1280,satHigh:1500,actLow:30,actHigh:34,gpaAvg:3.89,type:'private',tier:'selective'},
+  {id:'gonzaga',name:'Gonzaga University',loc:'Spokane, WA',rank:77,accept:62.0,satLow:1170,satHigh:1380,actLow:25,actHigh:31,gpaAvg:3.72,type:'private',tier:'selective'},
+  {id:'fordham_u',name:'Fordham University',loc:'New York, NY',rank:68,accept:43.0,satLow:1220,satHigh:1440,actLow:27,actHigh:32,gpaAvg:3.58,type:'private',tier:'selective'},
+  {id:'university_richmond',name:'University of Richmond',loc:'Richmond, VA',rank:24,accept:27.0,satLow:1310,satHigh:1490,actLow:30,actHigh:34,gpaAvg:3.84,type:'private',tier:'selective'},
+  {id:'bucknell',name:'Bucknell University',loc:'Lewisburg, PA',rank:35,accept:37.0,satLow:1280,satHigh:1470,actLow:29,actHigh:33,gpaAvg:3.72,type:'private',tier:'selective'},
+  {id:'denison',name:'Denison University',loc:'Granville, OH',rank:47,accept:27.0,satLow:1250,satHigh:1450,actLow:27,actHigh:32,gpaAvg:3.62,type:'private',tier:'selective_lac'},
+  {id:'dickinson',name:'Dickinson College',loc:'Carlisle, PA',rank:51,accept:39.0,satLow:1220,satHigh:1440,actLow:27,actHigh:32,gpaAvg:3.58,type:'private',tier:'selective_lac'},
+  {id:'gettysburg',name:'Gettysburg College',loc:'Gettysburg, PA',rank:50,accept:43.0,satLow:1210,satHigh:1410,actLow:26,actHigh:31,gpaAvg:3.62,type:'private',tier:'selective_lac'},
+  {id:'union_ny',name:'Union College',loc:'Schenectady, NY',rank:38,accept:45.0,satLow:1230,satHigh:1430,actLow:26,actHigh:31,gpaAvg:3.61,type:'private',tier:'selective_lac'},
+  {id:'trinity_ct',name:'Trinity College',loc:'Hartford, CT',rank:46,accept:25.0,satLow:1250,satHigh:1450,actLow:28,actHigh:32,gpaAvg:3.73,type:'private',tier:'selective_lac'},
+  {id:'wheaton_ma',name:'Wheaton College',loc:'Norton, MA',rank:55,accept:58.0,satLow:1200,satHigh:1400,actLow:26,actHigh:31,gpaAvg:3.69,type:'private',tier:'selective_lac'},
+  {id:'muhlenberg',name:'Muhlenberg College',loc:'Allentown, PA',rank:68,accept:55.0,satLow:1200,satHigh:1390,actLow:26,actHigh:30,gpaAvg:3.64,type:'private',tier:'selective_lac'},
+  {id:'ursinus',name:'Ursinus College',loc:'Collegeville, PA',rank:91,accept:72.0,satLow:1120,satHigh:1330,actLow:22,actHigh:28,gpaAvg:3.57,type:'private',tier:'accessible_lac'},
+  // MORE NOTABLE
+  {id:'william_mary',name:'College of William & Mary',loc:'Williamsburg, VA',rank:33,accept:33.0,satLow:1290,satHigh:1490,actLow:29,actHigh:34,gpaAvg:4.08,type:'public',tier:'solid'},
+  {id:'uc_los_angeles',name:'UCLA',loc:'Los Angeles, CA',rank:20,accept:8.8,satLow:1280,satHigh:1550,actLow:29,actHigh:35,gpaAvg:4.18,type:'public',tier:'flagship'},
+  {id:'miami',name:'University of Miami',loc:'Coral Gables, FL',rank:49,accept:27.0,satLow:1290,satHigh:1490,actLow:30,actHigh:34,gpaAvg:3.87,type:'private',tier:'high_selective'},
+  {id:'penn_state_up',name:'Penn State University Park',loc:'University Park, PA',rank:68,accept:56.0,satLow:1130,satHigh:1360,actLow:24,actHigh:31,gpaAvg:3.60,type:'public',tier:'solid'},
+  {id:'georgia',name:'University of Georgia',loc:'Athens, GA',rank:51,accept:41.0,satLow:1210,satHigh:1430,actLow:28,actHigh:33,gpaAvg:4.04,type:'public',tier:'solid'},
+  {id:'clemson',name:'Clemson University',loc:'Clemson, SC',rank:75,accept:43.0,satLow:1220,satHigh:1440,actLow:27,actHigh:33,gpaAvg:4.28,type:'public',tier:'solid'},
+  {id:'nc_state',name:'NC State University',loc:'Raleigh, NC',rank:80,accept:44.0,satLow:1220,satHigh:1430,actLow:26,actHigh:32,gpaAvg:4.28,type:'public',tier:'solid'},
+  {id:'auburn',name:'Auburn University',loc:'Auburn, AL',rank:97,accept:76.0,satLow:1100,satHigh:1330,actLow:22,actHigh:29,gpaAvg:3.79,type:'public',tier:'accessible'},
+  {id:'alabama',name:'University of Alabama',loc:'Tuscaloosa, AL',rank:148,accept:80.0,satLow:1060,satHigh:1310,actLow:21,actHigh:30,gpaAvg:3.54,type:'public',tier:'accessible'},
+  {id:'baylor',name:'Baylor University',loc:'Waco, TX',rank:68,accept:37.0,satLow:1180,satHigh:1390,actLow:25,actHigh:31,gpaAvg:3.72,type:'private',tier:'selective'},
+  {id:'smu',name:'Southern Methodist University',loc:'Dallas, TX',rank:66,accept:42.0,satLow:1260,satHigh:1460,actLow:28,actHigh:33,gpaAvg:3.72,type:'private',tier:'selective'},
+  {id:'tulane_u',name:'Tulane University',loc:'New Orleans, LA',rank:44,accept:11.0,satLow:1330,satHigh:1510,actLow:30,actHigh:34,gpaAvg:3.65,type:'private',tier:'high_selective'},
+  {id:'loyola_md',name:'Loyola University Maryland',loc:'Baltimore, MD',rank:97,accept:64.0,satLow:1120,satHigh:1330,actLow:23,actHigh:29,gpaAvg:3.59,type:'private',tier:'accessible'},
+  {id:'xavier',name:'Xavier University',loc:'Cincinnati, OH',rank:117,accept:76.0,satLow:1060,satHigh:1310,actLow:22,actHigh:28,gpaAvg:3.55,type:'private',tier:'accessible'},
+  {id:'seton_hall',name:'Seton Hall University',loc:'South Orange, NJ',rank:148,accept:77.0,satLow:1060,satHigh:1280,actLow:21,actHigh:27,gpaAvg:3.50,type:'private',tier:'accessible'},
+];
+
+// ═══════════════════════════════════════════════════════════════
+// MAJOR COMPETITIVENESS DATA
+// ═══════════════════════════════════════════════════════════════
+const MAJOR_DATA = {
+  computer_science:   {label:'Computer Science',competition:'very_high',note:'CS is among the most competitive programs at nearly every top school. Acceptance rates within CS can be 50–70% lower than overall school rates.'},
+  data_science:       {label:'Data Science/Statistics',competition:'very_high',note:'One of the fastest-growing programs. Highly competitive, especially at technical schools.'},
+  engineering_ee:     {label:'Electrical Engineering',competition:'high',note:'Rigorous program with high demand. Strong math/physics background is essential.'},
+  engineering_me:     {label:'Mechanical Engineering',competition:'high',note:'Competitive at top schools. Your STEM profile and rigor will be heavily scrutinized.'},
+  engineering_ce:     {label:'Civil/Environmental Engineering',competition:'moderate',note:'Moderately competitive. Environmental focus adds appeal at sustainability-forward schools.'},
+  engineering_chem:   {label:'Chemical Engineering',competition:'high',note:'Highly technical. Schools evaluate your chemistry and math preparation closely.'},
+  engineering_bio:    {label:'Biomedical Engineering',competition:'very_high',note:'Extremely competitive. Schools with dedicated BME programs have some of the lowest within-major acceptance rates of any field.'},
+  mathematics:        {label:'Mathematics',competition:'high',note:'Strong program at research universities. High test scores (especially math) are key.'},
+  physics:            {label:'Physics',competition:'moderate',note:'Moderate competition, but strong SAT Math/ACT Science is expected.'},
+  chemistry:          {label:'Chemistry',competition:'moderate',note:'Moderate competition. Pre-med students often list this; labs and research help.'},
+  biology:            {label:'Biology/Life Sciences',competition:'high',note:'Popular pre-med path. High volume of applicants means research and lab experience stand out.'},
+  neuroscience:       {label:'Neuroscience',competition:'very_high',note:'Competitive niche. Research experience is almost required for top programs.'},
+  environmental:      {label:'Environmental Science',competition:'moderate',note:'A growing field with increasing competition. Hands-on lab, research, or fieldwork experience is valued at top programs.'},
+  pre_med:            {label:'Pre-Med',competition:'very_high',note:'One of the most competitive tracks. GPA, shadowing, research, and volunteer hours all matter.'},
+  nursing:            {label:'Nursing',competition:'high',note:'Direct-entry nursing programs are among the most competitive professional tracks. Clinical hours, healthcare volunteering, and a strong science GPA are all critical.'},
+  public_health:      {label:'Public Health',competition:'moderate',note:'Growing popularity post-2020. Community service and research are valued.'},
+  pharmacy:           {label:'Pharmacy',competition:'moderate',note:'Specific pharm schools vary widely. Look for schools with direct PharmD pathways.'},
+  business_finance:   {label:'Finance/Accounting',competition:'very_high',note:'Business and finance programs at highly selective schools are extremely competitive. A strong quantitative background and demonstrated interest are essential.'},
+  business_marketing: {label:'Marketing/Advertising',competition:'moderate',note:'Moderate competition. Portfolio of creative work and internships help.'},
+  business_mgmt:      {label:'Business Management',competition:'high',note:'Popular major. Leadership experience, internships, and demonstrated initiative stand out.'},
+  economics:          {label:'Economics',competition:'high',note:'Top economics programs (Ivy League, UChicago) are extremely competitive. Math skills are key.'},
+  political_science:  {label:'Political Science',competition:'moderate',note:'Competitive, especially at schools with strong political programs. Debate experience, internships, and civic engagement strengthen your application.'},
+  psychology:         {label:'Psychology',competition:'moderate',note:'One of the most popular majors, with average competition, but research experience helps at top schools.'},
+  sociology:          {label:'Sociology/Anthropology',competition:'low',note:'Lower competition than STEM. Unique perspective and research interests help you stand out.'},
+  history:            {label:'History',competition:'low',note:'Less competitive major. Strong writing samples and intellectual curiosity are valued.'},
+  english:            {label:'English/Literature',competition:'low',note:'Lower volume competitive. Strong essays and original writing can set you apart.'},
+  philosophy:         {label:'Philosophy',competition:'low',note:'Less popular major. Intellectual rigor and original essays can make you memorable.'},
+  communications:     {label:'Communications/Journalism',competition:'moderate',note:'Competitive at schools with strong journalism programs. A portfolio, published work, or real-world media experience sets strong candidates apart.'},
+  linguistics:        {label:'Linguistics',competition:'low',note:'Niche major with lower competition. Being bilingual or multilingual is an asset.'},
+  international:      {label:'International Relations',competition:'high',note:'Very competitive at schools with strong IR programs. Demonstrated language skills, global experience, and a clear worldview help your application stand out.'},
+  architecture:       {label:'Architecture',competition:'high',note:'Portfolio is critical. Architecture programs at selective schools evaluate your creative work as heavily as your academic profile.'},
+  fine_arts:          {label:'Fine Arts',competition:'moderate',note:'Portfolio quality is everything. Academic stats matter less than at other programs.'},
+  graphic_design:     {label:'Graphic Design/UX Design',competition:'moderate',note:'Portfolio-driven. A strong body of work can overcome middling test scores.'},
+  film:               {label:'Film/Media',competition:'high',note:'Extremely competitive at top film programs. A strong creative portfolio or demonstrated production experience is essential.'},
+  music:              {label:'Music',competition:'high',note:'Performance audition carries major weight. Top conservatories and programs are very selective.'},
+  theater:            {label:'Theater/Performing Arts',competition:'high',note:'Audition-based programs. Academic stats are secondary to talent and portfolio.'},
+  education:          {label:'Education',competition:'low',note:'Lower competition. Passion for teaching and community involvement carry weight.'},
+  pre_law:            {label:'Pre-Law/Legal Studies',competition:'moderate',note:'Debate, mock trial, and internships at law firms or government help distinguish applicants.'},
+  undecided:          {label:'Undecided',competition:'low',note:'Undecided applicants are evaluated on overall profile. Flexibility can be an asset. Schools like students who are intellectually curious.'},
+  other:              {label:'Other',competition:'moderate',note:'Competition varies widely by program. We\'ll evaluate your profile against the school\'s overall admitted class data.'},
+};
+
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+let state = {
+  currentStep: 1,
+  totalSteps: 6,
+  userType: 'student',
+  origin: 'domestic',
+  country: '',
+  appType: 'freshman',
+  schools: [null, null, null],
+  major: '',
+  gpa: null,
+  gpaType: 'unweighted',
+  classRank: '',
+  courseRigor: '',
+  testType: 'none',
+  satTotal: null, satEBRW: null, satMath: null,
+  actComposite: null,
+  extracurriculars: [],
+  hooks: [],
+  otherLeadership: '',
+  specialText: '',
+  ethnicity: '',
+  gender: '',
+  leadName: '',
+  leadEmail: '',
+};
+
+// ═══════════════════════════════════════════════════════════════
+// STEP NAV
+// ═══════════════════════════════════════════════════════════════
+function goStep(n) {
+  if (n > state.currentStep && !validateStep(state.currentStep)) return;
+  document.getElementById('step-' + state.currentStep).classList.remove('active');
+  if (n <= state.totalSteps) {
+    document.getElementById('step-' + n).classList.add('active');
+    state.currentStep = n;
+    updateProgress();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+}
+
+function updateProgress() {
+  const pct = (state.currentStep / state.totalSteps) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = 'Step ' + state.currentStep + ' of ' + state.totalSteps;
+  for (let i = 1; i <= state.totalSteps; i++) {
+    const ps = document.getElementById('ps-' + i);
+    ps.className = 'ps' + (i < state.currentStep ? ' done' : i === state.currentStep ? ' active' : '');
+  }
+  updateFloatingNav();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// VALIDATION
+// ═══════════════════════════════════════════════════════════════
+function validateStep(step) {
+  if (step === 2) {
+    if (!state.schools[0]) {
+      alert('Please select at least one school to continue.');
+      return false;
+    }
+  }
+  if (step === 3) {
+    const sel = document.getElementById('major-select');
+    if (!sel.value) {
+      document.getElementById('field-major').classList.add('has-error');
+      return false;
+    }
+    document.getElementById('field-major').classList.remove('has-error');
+    state.major = sel.value;
+  }
+  if (step === 4) {
+    const gpa = parseFloat(document.getElementById('gpa-input').value);
+    if (isNaN(gpa) || gpa < 0 || gpa > 5.0) {
+      document.getElementById('field-gpa').classList.add('has-error');
+      return false;
+    }
+    document.getElementById('field-gpa').classList.remove('has-error');
+    state.gpa = gpa;
+    state.classRank = document.getElementById('class-rank').value;
+    state.courseRigor = document.getElementById('course-rigor').value;
+    const st = document.getElementById('sat-total').value;
+    const se = document.getElementById('sat-ebrw').value;
+    const sm = document.getElementById('sat-math').value;
+    const ac = document.getElementById('act-composite').value;
+    state.satTotal = st ? parseInt(st) : null;
+    state.satEBRW = se ? parseInt(se) : null;
+    state.satMath = sm ? parseInt(sm) : null;
+    state.actComposite = ac ? parseInt(ac) : null;
+  }
+  return true;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TOGGLE HELPERS
+// ═══════════════════════════════════════════════════════════════
+function selectToggle(groupId, btn) {
+  document.querySelectorAll('#' + groupId + ' .tog-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const val = btn.getAttribute('data-val');
+  if (groupId === 'user-type-group') state.userType = val;
+  if (groupId === 'origin-group') {
+    state.origin = val;
+    document.getElementById('origin-country-wrap').style.display = val === 'international' ? 'block' : 'none';
+  }
+  if (groupId === 'app-type-group') state.appType = val;
+  if (groupId === 'gpa-type-group') state.gpaType = val;
+}
+
+// Checkbox items — event delegation for reliable multi-select
+// Works for both #ec-grid (extracurriculars) and #hook-grid (special considerations)
+// Uses DOMContentLoaded so all labels are present before binding; no onclick on labels.
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('#ec-grid, #hook-grid').forEach(function (grid) {
+    grid.addEventListener('click', function (e) {
+      var item = e.target.closest('.check-item');
+      if (!item) return;
+      // Let the native checkbox click bubble normally; we only handle clicks on the rest of the item
+      if (e.target.type === 'checkbox') return;
+      item.classList.toggle('checked');
+      var cb = item.querySelector('input[type="checkbox"]');
+      if (cb) cb.checked = item.classList.contains('checked');
+    });
+  });
+});
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+function toggleTests(type) {
+  state.testType = type;
+  document.getElementById('sat-fields').style.display = (type === 'sat' || type === 'both') ? 'block' : 'none';
+  document.getElementById('act-fields').style.display = (type === 'act' || type === 'both') ? 'block' : 'none';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SCHOOL SEARCH
+// ═══════════════════════════════════════════════════════════════
+function searchSchools(slot, query) {
+  const dropdown = document.getElementById('school-dropdown-' + slot);
+  if (!query.trim()) { dropdown.classList.remove('open'); return; }
+  const q = query.toLowerCase();
+  const matches = SCHOOLS.filter(s =>
+    s.name.toLowerCase().includes(q) ||
+    s.loc.toLowerCase().includes(q)
+  ).slice(0, 10);
+  dropdown.innerHTML = matches.length ? matches.map(s =>
+    `<div class="school-option" onclick="selectSchool(${slot}, '${s.id}')">
+      <div>
+        <div class="s-name">${s.name}</div>
+        <div class="s-meta">${s.loc} · #${s.rank} · ${s.accept}% accept</div>
+      </div>
+    </div>`
+  ).join('') : '<div class="school-option" style="color:var(--muted)">No results. Try a different name</div>';
+  dropdown.classList.add('open');
+}
+
+function openDropdown(slot) {
+  const input = document.getElementById('school-input-' + slot);
+  if (input.value.trim()) searchSchools(slot, input.value);
+}
+
+function selectSchool(slot, id) {
+  const school = SCHOOLS.find(s => s.id === id);
+  if (!school) return;
+  state.schools[slot - 1] = school;
+  document.getElementById('school-dropdown-' + slot).classList.remove('open');
+  document.getElementById('search-wrap-' + slot).style.display = 'none';
+  const disp = document.getElementById('selected-display-' + slot);
+  disp.style.display = 'flex';
+  document.getElementById('sel-name-' + slot).textContent = school.name;
+  document.getElementById('sel-meta-' + slot).textContent = school.loc + ' · #' + school.rank + ' US News · ' + school.accept + '% acceptance rate';
+  // Show next slot button
+  if (slot === 1) document.getElementById('add-school-2-btn').style.display = 'flex';
+  if (slot === 2) document.getElementById('add-school-3-btn').style.display = 'flex';
+}
+
+function clearSchool(slot) {
+  state.schools[slot - 1] = null;
+  document.getElementById('selected-display-' + slot).style.display = 'none';
+  document.getElementById('search-wrap-' + slot).style.display = 'block';
+  document.getElementById('school-input-' + slot).value = '';
+}
+
+function showSlot(n) {
+  document.getElementById('slot-' + n).classList.add('visible');
+  document.getElementById('add-school-' + n + '-btn').style.display = 'none';
+}
+
+// Close dropdowns on outside click
+document.addEventListener('click', e => {
+  [1,2,3].forEach(slot => {
+    const wrap = document.getElementById('search-wrap-' + slot);
+    if (wrap && !wrap.contains(e.target)) {
+      document.getElementById('school-dropdown-' + slot).classList.remove('open');
+    }
+  });
+});
+
+// Major hint
+document.getElementById('major-select').addEventListener('change', function() {
+  const data = MAJOR_DATA[this.value];
+  const hint = document.getElementById('major-hint');
+  if (data) {
+    const colors = {very_high: '#dc2626', high: '#d97706', moderate: '#2563eb', low: '#16a34a'};
+    const labels = {very_high: ' Very High Competition', high: ' High Competition', moderate: ' Moderate Competition', low: ' Lower Competition'};
+    hint.innerHTML = `<strong style="color:${colors[data.competition]}">${labels[data.competition]}</strong><br>${data.note}`;
+    hint.style.display = 'block';
+    state.major = this.value;
+  } else {
+    hint.style.display = 'none';
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SCORING ENGINE
+// ═══════════════════════════════════════════════════════════════
+//
+// Algorithm overview (total possible: 100 pts before cap):
+//
+//  GPA              30 pts  – Normalized to 4.0 scale; compared against school avg
+//  Test Scores      20 pts  – SAT/ACT vs school mid-50% range; 12 pts if test-optional
+//  Course Rigor      8 pts  – Mostly AP/IB (8) → Some AP (5) → Honors (3) → Standard (0)
+//  Extracurriculars 20 pts  – Volume (up to 12) + leadership bonus (4) + high-value EC (4)
+//  Hooks            10 pts  – Recruited athlete (10), legacy (6), first-gen (5), URM (5), etc.
+//  Major Penalty  -8 to +2  – Very high competition (−8) → high (−4) → moderate (0) → low (+2)
+//  Class Rank     -3 to +5  – Top 1% (+5), top 5% (+4) … below 50% (−3)
+//  Special Text     +3 pts  – Awarded when "anything else" textarea exceeds 100 chars
+//  International    −6 pts  – Separate, more selective applicant pool
+//
+//  Score → chanceRaw mapping (scaled off school's real acceptance rate):
+//    ≥ 80  → rate × 3.5    |  ≥ 65 → rate × 2.2  |  ≥ 50 → rate × 1.3
+//    ≥ 35  → rate × 0.75   |   <35 → rate × 0.35
+//  chanceRaw clamped to [0.01, 0.92] → chancePercent = round(chanceRaw × 100)
+//
+//  Verdict thresholds:  Safety ≥65%  |  Likely ≥45%  |  Target ≥25%
+//                       Hard Target ≥12%  |  Reach <12%
+//
+// ═══════════════════════════════════════════════════════════════
+function scoreProfile(school) {
+  let score = 0;
+  let strengths = [];
+  let weaknesses = [];
+  const selectedSchools = state.schools.filter(Boolean);
+
+  // Normalize GPA to 4.0 scale
+  let normGPA = state.gpa;
+  if (state.gpaType === 'weighted') normGPA = Math.min(4.0, state.gpa * 0.80 + 0.1);
+
+  // ── GPA (30 pts) ──
+  const gpaDiff = normGPA - school.gpaAvg;
+  let gpaScore = 0;
+  if (gpaDiff >= 0.15) { gpaScore = 30; strengths.push({title:'Strong GPA', text:`Your GPA of ${state.gpa} (${state.gpaType}) is above ${school.name}'s typical admitted GPA of ${school.gpaAvg}. This is one of your strongest quantitative assets.`}); }
+  else if (gpaDiff >= -0.1) { gpaScore = 22; }
+  else if (gpaDiff >= -0.25) { gpaScore = 14; weaknesses.push({title:'GPA Slightly Below Average', text:`Admitted students typically show a ${school.gpaAvg} GPA. Yours is ${state.gpa}. Strong upward trends or context in your essay can help offset this.`}); }
+  else { gpaScore = 6; weaknesses.push({title:'GPA Significantly Below Average', text:`${school.name}'s admitted class averages ${school.gpaAvg}. Your ${state.gpa} GPA creates a meaningful gap. Consider addressing grade trends directly in your application.`}); }
+  score += gpaScore;
+
+  // ── Test Scores (20 pts) ──
+  let testScore = 0;
+  if (state.testType === 'none') {
+    testScore = 12; // test-optional neutral
+  } else if (state.satTotal) {
+    const mid = (school.satLow + school.satHigh) / 2;
+    const diff = state.satTotal - mid;
+    if (diff >= 50) { testScore = 20; strengths.push({title:'Above-Range SAT Score', text:`Your SAT of ${state.satTotal} is above ${school.name}'s middle 50% range (${school.satLow}–${school.satHigh}). This strengthens your academic candidacy significantly.`}); }
+    else if (diff >= -50) { testScore = 15; }
+    else if (diff >= -100) { testScore = 9; weaknesses.push({title:'SAT Below Middle 50%', text:`Your SAT of ${state.satTotal} falls below ${school.name}'s mid-50% range of ${school.satLow}–${school.satHigh}. If you can retest, targeting ${school.satHigh} would be ideal.`}); }
+    else { testScore = 4; weaknesses.push({title:'SAT Significantly Below Range', text:`Your SAT of ${state.satTotal} is well below what ${school.name} typically sees (${school.satLow}–${school.satHigh}). Strong application components elsewhere are crucial.`}); }
+  } else if (state.actComposite) {
+    const midACT = (school.actLow + school.actHigh) / 2;
+    const diff = state.actComposite - midACT;
+    if (diff >= 1.5) { testScore = 20; strengths.push({title:'Strong ACT Score', text:`Your ACT of ${state.actComposite} is above ${school.name}'s typical range (${school.actLow}–${school.actHigh}).`}); }
+    else if (diff >= -1) { testScore = 15; }
+    else if (diff >= -3) { testScore = 9; weaknesses.push({title:'ACT Below Middle 50%', text:`Your ACT of ${state.actComposite} falls below ${school.name}'s mid-50% range of ${school.actLow}–${school.actHigh}.`}); }
+    else { testScore = 4; weaknesses.push({title:'ACT Significantly Below Range', text:`Your ACT is well outside ${school.name}'s typical range. Your essays and extracurriculars will need to compensate.`}); }
+  }
+  score += testScore;
+
+  // ── Major Competitiveness Adjustment (-10 to 0) ──
+  const majorData = MAJOR_DATA[state.major] || {competition:'moderate'};
+  const majorPenalty = {very_high: -8, high: -4, moderate: 0, low: 2}[majorData.competition] || 0;
+  score += majorPenalty;
+  if (majorData.competition === 'very_high') {
+    weaknesses.push({title:`Hyper-Competitive Major (${majorData.label})`, text:`${majorData.label} is one of the most competitive programs at most schools. Effective acceptance rates can be 2–3x lower than the overall school rate. A differentiated story is critical.`});
+  }
+
+  // ── Course Rigor (8 pts) ──
+  const rigorScores = {'mostly_ap':8,'some_ap':5,'honors':3,'standard':0,'':4};
+  const rigorPts = rigorScores[state.courseRigor] || 4;
+  score += rigorPts;
+  if (state.courseRigor === 'mostly_ap') strengths.push({title:'Strong Course Rigor', text:'Taking mostly AP/IB courses shows colleges you challenged yourself academically. This is one of the most important factors in holistic review.'});
+  if (state.courseRigor === 'standard' || state.courseRigor === '') {
+    if (school.accept < 20) weaknesses.push({title:'Course Rigor May Be a Concern', text:'Highly selective schools scrutinize course rigor closely. If you had access to AP/IB courses and didn\'t take them, admissions readers may view that as a missed opportunity.'});
+  }
+
+  // ── Extracurriculars (20 pts) ──
+  const checkedEC = Array.from(document.querySelectorAll('#ec-grid input[type=checkbox]')).filter(c => c.closest('.check-item').classList.contains('checked')).map(c => c.value);
+  state.extracurriculars = checkedEC;
+  let ecScore = 0;
+  const leadershipIndicators = ['sport_leadership','arts_leadership','student_gov','volunteering_leadership','entrepreneurship'];
+  const highValueEC = ['national_award','research_published','recruited_athlete','entrepreneurship'];
+  const hasLeadership = checkedEC.some(v => leadershipIndicators.includes(v));
+  const hasHighValue = checkedEC.some(v => highValueEC.includes(v));
+  ecScore += Math.min(12, checkedEC.length * 1.5);
+  if (hasLeadership) ecScore += 4;
+  if (hasHighValue) ecScore += 4;
+  score += Math.min(20, ecScore);
+  if (hasHighValue) strengths.push({title:'High-Impact Extracurricular', text:'You have at least one nationally competitive or standout extracurricular, such as a national award, published research, recruited athlete status, or entrepreneurship. These are profile-builders that very few applicants have.'});
+  if (!hasLeadership && checkedEC.length > 0) weaknesses.push({title:'Extracurriculars Lack Demonstrated Leadership', text:'You\'re involved in activities, but leadership roles: captain, president, founder. These signal impact and initiative. Even taking on smaller leadership responsibilities can help.'});
+  if (checkedEC.length === 0) weaknesses.push({title:'No Extracurriculars Listed', text:'Extracurriculars are a major component of holistic review. Schools want to see who you are outside the classroom. Even community service, work experience, or personal projects count.'});
+
+  // ── Hooks (10 pts) ──
+  const checkedHooks = Array.from(document.querySelectorAll('#hook-grid input[type=checkbox]')).filter(c => c.closest('.check-item').classList.contains('checked')).map(c => c.value);
+  state.hooks = checkedHooks;
+  let hookScore = 0;
+  const hookValues = {recruited_athlete:10, legacy:6, first_gen:5, urm:5, geo_diversity:4, low_income:4, military:3, disability:2};
+  checkedHooks.forEach(h => { hookScore += (hookValues[h] || 0); });
+  score += Math.min(10, hookScore);
+  if (checkedHooks.includes('recruited_athlete')) strengths.push({title:'Recruited Athlete Status', text:'Recruited athletes have dramatically higher admission odds, often 5–10x higher than the general pool, if the coach has expressed genuine interest. This is a major advantage.'});
+  if (checkedHooks.includes('first_gen')) strengths.push({title:'First-Generation College Student', text:'Being a first-generation student is a meaningful hook at many schools, particularly those with strong financial aid and access initiatives. It adds authentic context to your story.'});
+  if (checkedHooks.includes('legacy') && school.type === 'private') strengths.push({title:'Legacy Applicant', text:'Legacy status can modestly improve odds at private universities, particularly if a parent attended. The effect is strongest at schools like Harvard, Penn, and Dartmouth.'});
+
+  // ── International Penalty ──
+  if (state.origin === 'international') {
+    score -= 6;
+    weaknesses.push({title:'International Applicant Pool', text:'International students compete in a separate, more selective pool. Top schools typically admit 3–5x fewer international applicants as a percentage. A standout story and exceptional scores are non-negotiable.'});
+  }
+
+  // ── Special Text boost ──
+  if ((state.specialText || '').length > 100) score += 3;
+
+  // ── Class Rank bonus ──
+  const rankBonus = {top1:5, top5:4, top10:3, top25:1, top50:0, below50:-3, no_rank:0, '':0};
+  score += rankBonus[state.classRank] || 0;
+  if (state.classRank === 'top1' || state.classRank === 'top5') strengths.push({title:`Elite Class Rank (${state.classRank.replace('top','')}%)`, text:`Being in the top ${state.classRank.replace('top','')}% of your class is a strong positive signal, especially at highly selective schools that evaluate you relative to your school context.`});
+
+  // Cap and determine verdict
+  score = Math.max(0, Math.min(100, score));
+  let chanceRaw = 0;
+  const r = school.accept / 100;
+
+  if (score >= 80) chanceRaw = r * 3.5;
+  else if (score >= 65) chanceRaw = r * 2.2;
+  else if (score >= 50) chanceRaw = r * 1.3;
+  else if (score >= 35) chanceRaw = r * 0.75;
+  else chanceRaw = r * 0.35;
+
+  chanceRaw = Math.min(chanceRaw, 0.92);
+  chanceRaw = Math.max(chanceRaw, 0.01);
+  const chancePercent = Math.round(chanceRaw * 100);
+
+  let verdictKey, verdictLabel;
+  if (chancePercent >= 65) { verdictKey = 'safety'; verdictLabel = ' Safety'; }
+  else if (chancePercent >= 45) { verdictKey = 'likely'; verdictLabel = ' Likely'; }
+  else if (chancePercent >= 25) { verdictKey = 'target'; verdictLabel = ' Target'; }
+  else if (chancePercent >= 12) { verdictKey = 'hard-target'; verdictLabel = ' Hard Target'; }
+  else { verdictKey = 'reach'; verdictLabel = ' Reach'; }
+
+  // Dedupe and limit
+  const uniqueStrengths = strengths.slice(0, 3);
+  const uniqueWeaknesses = weaknesses.slice(0, 3);
+
+  return { score, chancePercent, verdictKey, verdictLabel, strengths: uniqueStrengths, weaknesses: uniqueWeaknesses };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SUBMIT & LEAD CAPTURE
+// ═══════════════════════════════════════════════════════════════
+function submitQuiz() {
+  if (!validateStep(6)) return;
+  state.specialText = document.getElementById('special-text').value;
+  state.ethnicity = document.getElementById('ethnicity-select').value;
+  state.gender = document.getElementById('gender-select').value;
+  state.hooks = Array.from(document.querySelectorAll('#hook-grid input[type=checkbox]')).filter(c => c.closest('.check-item').classList.contains('checked')).map(c => c.value);
+  // Show lead modal
+  document.getElementById('lead-overlay').classList.add('open');
+}
+
+function submitLead() {
+  const name = document.getElementById('lead-name').value.trim();
+  const email = document.getElementById('lead-email').value.trim();
+  if (!name) { document.getElementById('lead-name').style.borderColor = 'var(--danger)'; return; }
+  if (!email || !email.includes('@')) { document.getElementById('lead-email').style.borderColor = 'var(--danger)'; return; }
+  state.leadName = name;
+  state.leadEmail = email;
+  document.getElementById('lead-overlay').classList.remove('open');
+  showConfirmation();
+  runAnalysisForEmail();
+}
+
+function startQuiz() {
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('quiz-hero').classList.add('slim');
+  document.getElementById('quiz-hero').style.display = 'block';
+  document.getElementById('progress-wrap').style.display = 'block';
+  document.getElementById('quiz-main').style.display = 'block';
+  document.getElementById('floating-nav').classList.add('visible');
+  updateFloatingNav();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goStart() {
+  document.getElementById('start-screen').style.display = 'block';
+  document.getElementById('quiz-hero').classList.remove('slim');
+  document.getElementById('quiz-hero').style.display = 'block';
+  document.getElementById('progress-wrap').style.display = 'none';
+  document.getElementById('quiz-main').style.display = 'none';
+  document.getElementById('floating-nav').classList.remove('visible');
+  document.getElementById('step-1').classList.remove('active');
+  state.currentStep = 1;
+  document.getElementById('step-1').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateFloatingNav() {
+  const step = state.currentStep;
+  document.getElementById('floating-nav-step').textContent = 'Step ' + step + ' of ' + state.totalSteps;
+  const backBtn = document.getElementById('floating-back');
+  const nextBtn = document.getElementById('floating-next');
+  backBtn.style.display = 'inline-flex';
+  if (step === 6) {
+    nextBtn.textContent = 'Analyze My Profile →';
+    nextBtn.classList.add('gold-btn');
+  } else {
+    nextBtn.textContent = 'Continue →';
+    nextBtn.classList.remove('gold-btn');
+    nextBtn.classList.add('gold-btn'); // keep gold throughout
+  }
+}
+
+function floatingBack() {
+  if (state.currentStep === 1) { goStart(); return; }
+  goStep(state.currentStep - 1);
+}
+
+function floatingNext() {
+  if (state.currentStep === 6) { submitQuiz(); return; }
+  goStep(state.currentStep + 1);
+}
+function showConfirmation() {
+  // Hide all quiz steps and progress bar
+  for (let i = 1; i <= 6; i++) {
+    const el = document.getElementById('step-' + i);
+    if (el) el.classList.remove('active');
+  }
+  document.getElementById('progress-wrap').style.display = 'none';
+  document.getElementById('quiz-hero').classList.remove('slim');
+  document.getElementById('floating-nav').classList.remove('visible');
+  document.getElementById('quiz-footer').classList.add('visible');
+  // Show confirmation screen with user's email
+  document.getElementById('confirmation-email-display').textContent = state.leadEmail;
+  document.getElementById('confirmation-screen').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ANALYSIS & EMAIL DELIVERY
+// ═══════════════════════════════════════════════════════════════
+async function runAnalysisForEmail() {
+  const selectedSchools = state.schools.filter(Boolean);
+  const scores = selectedSchools.map(s => scoreProfile(s));
+
+  // Generate AI summaries for each school (returns text, no DOM updates)
+  const aiSummaries = await Promise.all(
+    selectedSchools.map((school, i) => generateAISummaryText(school, scores[i]))
+  );
+
+  // Build plain-text email body
+  let emailBody = `Hi ${state.leadName},\n\nHere is your personalized college admissions profile from MyAppSuccess.\n\n`;
+  emailBody += `== YOUR PROFILE ==\n`;
+  emailBody += `GPA: ${state.gpa} (${state.gpaType})\n`;
+  if (state.satTotal) emailBody += `SAT: ${state.satTotal}\n`;
+  if (state.actComposite) emailBody += `ACT: ${state.actComposite}\n`;
+  emailBody += `Intended Major: ${(MAJOR_DATA[state.major] || {label: state.major}).label}\n`;
+  emailBody += `Application Type: ${state.appType} | Origin: ${state.origin}\n\n`;
+
+  selectedSchools.forEach((school, i) => {
+    const res = scores[i];
+    const satRange = school.satLow + '–' + school.satHigh;
+    const actRange = school.actLow + '–' + school.actHigh;
+
+    emailBody += `== ${school.name.toUpperCase()} ==\n`;
+    emailBody += `${school.loc} · #${school.rank} US News · ${school.accept}% Overall Acceptance\n`;
+    emailBody += `Verdict: ${res.verdictLabel.trim()} | Estimated Probability: ${res.chancePercent}%\n\n`;
+    emailBody += `Your GPA: ${state.gpa} (${state.gpaType === 'weighted' ? 'W' : 'UW'}) vs School Avg: ${school.gpaAvg}\n`;
+    if (state.satTotal) emailBody += `Your SAT: ${state.satTotal} vs School Range: ${satRange}\n`;
+    if (state.actComposite) emailBody += `Your ACT: ${state.actComposite} vs School Range: ${actRange}\n`;
+    emailBody += `Acceptance Rate: ${school.accept}%\n\n`;
+
+    if (res.strengths.length) {
+      emailBody += `YOUR STRENGTHS:\n`;
+      res.strengths.forEach(s => { emailBody += `• ${s.title}: ${s.text}\n`; });
+      emailBody += '\n';
+    }
+    if (res.weaknesses.length) {
+      emailBody += `AREAS TO STRENGTHEN:\n`;
+      res.weaknesses.forEach(w => { emailBody += `• ${w.title}: ${w.text}\n`; });
+      emailBody += '\n';
+    }
+    emailBody += `PERSONALIZED ASSESSMENT:\n${aiSummaries[i]}\n\n`;
+    emailBody += `─────────────────────────────────────────\n\n`;
+  });
+
+  emailBody += `Want to strengthen your application? Our team of Ivy League graduates has helped hundreds of students get into their dream schools.\n`;
+  emailBody += `Book a free strategy call: https://myappsuccess.com/#pricing\n`;
+  emailBody += `Learn about the 8-week bootcamp: https://myappsuccess.com/#bootcamp\n\n`;
+  emailBody += `— The MyAppSuccess Team\n`;
+
+  // Send via FormSubmit
+  try {
+    const formData = new FormData();
+    formData.append('name', state.leadName);
+    formData.append('email', state.leadEmail);
+    formData.append('_subject', `Your College Admissions Profile — MyAppSuccess`);
+    formData.append('_template', 'box');
+    formData.append('_captcha', 'false');
+    formData.append('message', emailBody);
+
+    await fetch('https://formsubmit.co/' + state.leadEmail, {
+      method: 'POST',
+      body: formData
+    });
+  } catch (err) {
+    // Silent fail — confirmation screen is already shown
+    console.warn('FormSubmit delivery failed:', err);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CLAUDE API CALL — returns text for email (no DOM updates)
+// ═══════════════════════════════════════════════════════════════
+async function generateAISummaryText(school, result) {
+  const majorLabel = (MAJOR_DATA[state.major] || {label: state.major}).label;
+  const ecList = state.extracurriculars.join(', ') || 'none listed';
+  const hookList = state.hooks.join(', ') || 'none';
+
+  const prompt = `You are an expert college admissions counselor writing a concise, personalized assessment for a student. Be direct, encouraging but honest, and specific.
+
+Student profile:
+- Applicant type: ${state.userType === 'parent' ? "Parent inquiring on behalf of student" : "Student"}, ${state.appType} applicant
+- Origin: ${state.origin === 'international' ? 'International (' + (state.country || 'unspecified') + ')' : 'US Domestic'}
+- GPA: ${state.gpa} (${state.gpaType})
+- Class rank: ${state.classRank || 'not provided'}
+- Course rigor: ${state.courseRigor || 'not specified'}
+- Test scores: ${state.satTotal ? 'SAT ' + state.satTotal : ''}${state.actComposite ? 'ACT ' + state.actComposite : ''}${state.testType === 'none' ? 'Test-optional / no scores submitted' : ''}
+- Intended major: ${majorLabel}
+- Extracurriculars: ${ecList}
+- Special hooks: ${hookList}
+- Additional context: ${state.specialText || 'None provided'}
+
+Target school: ${school.name} (${school.loc})
+- US News Rank: #${school.rank}
+- Acceptance rate: ${school.accept}%
+- Typical SAT: ${school.satLow}–${school.satHigh}
+- Typical GPA: ${school.gpaAvg}
+
+Estimated admission probability based on scoring model: ${result.chancePercent}% (${result.verdictLabel})
+
+Write a 3–4 sentence personalized admissions assessment. Address: (1) the most important factor helping this applicant, (2) the most important thing they should do to improve their chances, and (3) one specific, actionable recommendation tailored to this school. Keep it under 120 words. Do not use bullet points. Write in second person ("you").`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "anthropic-dangerous-direct-browser-access": "true"
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 200,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await response.json();
+    return (data.content && data.content[0] && data.content[0].text)
+      ? data.content[0].text
+      : 'Unable to generate a personalized assessment at this time. Please review the key strengths and areas to strengthen above for guidance.';
+  } catch (err) {
+    return 'Personalized assessment temporarily unavailable. Your profile analysis above reflects your results accurately.';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RESET
+// ═══════════════════════════════════════════════════════════════
+function resetQuiz() {
+  location.reload();
+}
+</script>
+<!-- FLOATING NAV -->
+<div class="floating-nav" id="floating-nav">
+  <div class="floating-nav-btns">
+    <button class="btn-back" id="floating-back" onclick="floatingBack()">← Back</button>
+    <button class="btn-next gold-btn" id="floating-next" onclick="floatingNext()">Continue →</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div id="quiz-footer">
+  <footer>
+    <p>myappsuccess.com &nbsp;&middot;&nbsp; Gain Acceptance to Your Dream College</p>
+    <p style="margin-top:0.4rem;">&copy; 2026</p>
+  </footer>
+</div>
+
+</body>
+</html>
