@@ -773,22 +773,13 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
       <div id="sat-fields" style="display:none;">
         <div class="form-row three">
           <div class="field"><label>SAT Total</label><input type="number" id="sat-total" min="400" max="1600" placeholder="e.g. 1480" /></div>
-          <div class="field"><label>SAT EBRW</label><input type="number" id="sat-ebrw" min="200" max="800" placeholder="e.g. 740" /></div>
+          <div class="field"><label>SAT Reading & Writing</label><input type="number" id="sat-ebrw" min="200" max="800" placeholder="e.g. 740" /></div>
           <div class="field"><label>SAT Math</label><input type="number" id="sat-math" min="200" max="800" placeholder="e.g. 740" /></div>
         </div>
       </div>
       <div id="act-fields" style="display:none;">
         <div class="form-row">
           <div class="field"><label>ACT Composite</label><input type="number" id="act-composite" min="1" max="36" placeholder="e.g. 33" /></div>
-          <div class="field"><label>ACT Best Section</label>
-            <select id="act-best">
-              <option value="">— Optional —</option>
-              <option value="english">English</option>
-              <option value="math">Math</option>
-              <option value="reading">Reading</option>
-              <option value="science">Science</option>
-            </select>
-          </div>
         </div>
       </div>
     </div>
@@ -877,6 +868,10 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
         <span class="check-label">STEM club (robotics, coding, math team…)</span>
       </label>
       <label class="check-item">
+        <input type="checkbox" value="culture_club" /><div class="check-box"></div>
+        <span class="check-label">Culture club / cultural organization</span>
+      </label>
+      <label class="check-item">
         <input type="checkbox" value="newspaper_media" /><div class="check-box"></div>
         <span class="check-label">School newspaper/yearbook/media</span>
       </label>
@@ -909,14 +904,6 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
         <span class="check-label">Recruited athlete (coach expressed interest)</span>
       </label>
       <label class="check-item">
-        <input type="checkbox" value="urm" /><div class="check-box"></div>
-        <span class="check-label">Underrepresented minority (URM)</span>
-      </label>
-      <label class="check-item">
-        <input type="checkbox" value="geo_diversity" /><div class="check-box"></div>
-        <span class="check-label">Geographic diversity (rural or underrepresented state)</span>
-      </label>
-      <label class="check-item">
         <input type="checkbox" value="low_income" /><div class="check-box"></div>
         <span class="check-label">Low-income / Pell Grant eligible</span>
       </label>
@@ -930,10 +917,49 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
       </label>
     </div>
 
-    <div style="margin-top:1.5rem; margin-bottom:1rem; display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;"><div class="field"><label>Candidate background <span style="font-weight:500;color:var(--muted);">(optional)</span></label><select id="ethnicity-select"><option value="">Prefer not to say</option><option value="white">White/Caucasian</option><option value="black">Black/African American</option><option value="hispanic">Hispanic/Latino</option><option value="asian">Asian/Asian American</option><option value="native">Native American/Alaska Native</option><option value="pacific">Native Hawaiian/Pacific Islander</option><option value="multiracial">Multiracial</option><option value="other_eth">Other/Not listed</option></select><div class="hint">Shared only to give your results more context. Completely optional.</div></div><div class="field"><label>Gender identity <span style="font-weight:500;color:var(--muted);">(optional)</span></label><select id="gender-select"><option value="">Prefer not to say</option><option value="woman">Woman</option><option value="man">Man</option><option value="nonbinary">Non-binary/Genderqueer</option><option value="trans_woman">Transgender woman</option><option value="trans_man">Transgender man</option><option value="other_gender">Other/Not listed</option></select><div class="hint">Some schools seek gender diversity in their class. Will not affect your score. Completely optional.</div></div></div><div style="margin-top:1.5rem; margin-bottom:1.5rem;">
+    <div style="margin-top:1.5rem; margin-bottom:1rem; display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;">
+      <div class="field">
+        <label>Are you Hispanic or Latino? <span style="font-weight:500;color:var(--muted);">(optional)</span></label>
+        <select id="hispanic-select">
+          <option value="">Prefer not to say</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <div class="hint">Completely optional. Used only to give your results more context.</div>
+      </div>
+      <div class="field">
+        <label>Candidate background <span style="font-weight:500;color:var(--muted);">(optional)</span></label>
+        <select id="ethnicity-select">
+          <option value="">Prefer not to say</option>
+          <option value="white">White/Caucasian</option>
+          <option value="black">Black/African American</option>
+          <option value="asian">Asian/Asian American</option>
+          <option value="native">Native American/Alaska Native</option>
+          <option value="pacific">Native Hawaiian/Pacific Islander</option>
+          <option value="multiracial">Multiracial</option>
+          <option value="other_eth">Other/Not listed</option>
+        </select>
+        <div class="hint">Shared only to give your results more context. Completely optional.</div>
+      </div>
+    </div>
+    <div style="margin-top:0; margin-bottom:1rem; display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;">
+      <div class="field">
+        <label>Gender identity <span style="font-weight:500;color:var(--muted);">(optional)</span></label>
+        <select id="gender-select">
+          <option value="">Prefer not to say</option>
+          <option value="woman">Woman</option>
+          <option value="man">Man</option>
+          <option value="nonbinary">Non-binary/Genderqueer</option>
+          <option value="trans_woman">Transgender woman</option>
+          <option value="trans_man">Transgender man</option>
+          <option value="other_gender">Other/Not listed</option>
+        </select>
+        <div class="hint">Some schools seek gender diversity in their class. Will not affect your score. Completely optional.</div>
+      </div>
+    </div><div style="margin-top:1.5rem; margin-bottom:1.5rem;">
       <div class="field">
         <label>Anything else we should know? (optional)</label>
-        <textarea id="special-text" placeholder="This is your space. Share whatever feels important, whether that's something you've been carrying, a part of your story that doesn't fit in a checkbox, or context that would help someone understand you better as a person. Nothing is too small."></textarea>
+        <textarea id="special-text" placeholder="This is your space. Share whatever feels important, whether that's something you've been carrying, a part of your story that doesn't fit in a checkbox, or context that would help someone understand you better as a person."></textarea>
         <div class="hint">This helps our algorithm and data models produce a more personalized assessment.</div>
       </div>
     </div>
@@ -987,15 +1013,14 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
 <!-- LEAD CAPTURE MODAL -->
 <div class="lead-overlay" id="lead-overlay">
   <div class="lead-modal">
-    <div class="lead-icon">📬</div>
     <h2>Where should we send your results?</h2>
-    <p>Enter your name and email and we'll send your full personalized admissions profile — including school-by-school breakdowns, your strengths and areas to strengthen, and an AI-generated assessment — straight to your inbox.</p>
+    <p>Enter your name and email and we'll send your full personalized admissions profile — including school-by-school breakdowns, your strengths and areas to strengthen — straight to your inbox.</p>
     <div class="lead-fields">
       <input type="text" id="lead-name" placeholder="Your first name" />
       <input type="email" id="lead-email" placeholder="Your email address" />
     </div>
     <button class="lead-submit" onclick="submitLead()">Email My Results →</button>
-    <p class="lead-privacy">🔒 No spam. Ever. Your results will be emailed to you instantly. You can unsubscribe at any time.</p>
+    <p class="lead-privacy">By clicking above you agree to receive your results and subscribe to our newsletter. No spam, ever. Unsubscribe any time.</p>
   </div>
 </div>
 
@@ -1209,6 +1234,7 @@ let state = {
   otherLeadership: '',
   specialText: '',
   ethnicity: '',
+  hispanic: '',
   gender: '',
   leadName: '',
   leadEmail: '',
@@ -1561,6 +1587,7 @@ function submitQuiz() {
   if (!validateStep(6)) return;
   state.specialText = document.getElementById('special-text').value;
   state.ethnicity = document.getElementById('ethnicity-select').value;
+  state.hispanic = document.getElementById('hispanic-select').value;
   state.gender = document.getElementById('gender-select').value;
   state.hooks = Array.from(document.querySelectorAll('#hook-grid input[type=checkbox]')).filter(c => c.closest('.check-item').classList.contains('checked')).map(c => c.value);
   // Show lead modal
