@@ -8,6 +8,7 @@
 <meta property="og:title" content="Free Admissions Profile Analysis | MyAppSuccess" />
 <meta property="og:description" content="Find out your real chances of getting into your dream schools. Get a personalized admissions profile in minutes." />
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -1026,6 +1027,28 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
 
 <script>
 // ═══════════════════════════════════════════════════════════════
+// EMAILJS CONFIG
+// ═══════════════════════════════════════════════════════════════
+const EMAILJS_PUBLIC_KEY  = 'xrWiBF2-X6Ycko_hz';
+const EMAILJS_SERVICE_ID  = 'service_8tmjqil';
+const EMAILJS_TEMPLATE_ID = 'template_lsclkoh';
+
+function verdictColors(key) {
+  const map = {
+    'reach':       { bg: '#fee2e2', color: '#991b1b' },
+    'hard-target': { bg: '#fff7ed', color: '#9a3412' },
+    'target':      { bg: '#fef9c3', color: '#713f12' },
+    'likely':      { bg: '#dcfce7', color: '#14532d' },
+    'safety':      { bg: '#d1fae5', color: '#064e3b' },
+  };
+  return map[key] || { bg: '#f5f7fa', color: '#1e466e' };
+}
+
+function formatItems(items) {
+  if (!items || !items.length) return 'None identified.';
+  return items.map(i => `<strong>${i.title}:</strong> ${i.text}`).join('<br><br>');
+}
+// ═══════════════════════════════════════════════════════════════
 // SCHOOL DATABASE — Top 200 US Universities with admissions data
 // ═══════════════════════════════════════════════════════════════
 const SCHOOLS = [
@@ -1675,72 +1698,72 @@ function showConfirmation() {
 // ANALYSIS & EMAIL DELIVERY
 // ═══════════════════════════════════════════════════════════════
 async function runAnalysisForEmail() {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
   const selectedSchools = state.schools.filter(Boolean);
   const scores = selectedSchools.map(s => scoreProfile(s));
 
-  // Generate AI summaries for each school (returns text, no DOM updates)
-  const aiSummaries = await Promise.all(
-    selectedSchools.map((school, i) => generateAISummaryText(school, scores[i]))
-  );
+  const majorLabel = (MAJOR_DATA[state.major] || { label: state.major }).label;
 
-  // Build plain-text email body
-  let emailBody = `Hi ${state.leadName},\n\nHere is your personalized college admissions profile from MyAppSuccess.\n\n`;
-  emailBody += `== YOUR PROFILE ==\n`;
-  emailBody += `GPA: ${state.gpa} (${state.gpaType})\n`;
-  if (state.satTotal) emailBody += `SAT: ${state.satTotal}\n`;
-  if (state.actComposite) emailBody += `ACT: ${state.actComposite}\n`;
-  emailBody += `Intended Major: ${(MAJOR_DATA[state.major] || {label: state.major}).label}\n`;
-  emailBody += `Application Type: ${state.appType} | Origin: ${state.origin}\n\n`;
+  let testScores = 'Not submitted';
+  if (state.satTotal)     testScores = `SAT ${state.satTotal}`;
+  if (state.actComposite) testScores = testScores === 'Not submitted'
+    ? `ACT ${state.actComposite}`
+    : `${testScores} / ACT ${state.actComposite}`;
 
-  selectedSchools.forEach((school, i) => {
-    const res = scores[i];
-    const satRange = school.satLow + '–' + school.satHigh;
-    const actRange = school.actLow + '–' + school.actHigh;
+  // ── Recommendation logic — replace these with your own conditions ──
+  let recommendation_headline = 'Your next step is a free strategy call with our team.';
+  let recommendation_description = 'Based on your profile, one of our Ivy League counselors can map out a personalized action plan for your application. Book a free 30-minute call at myappsuccess.com/#pricing.';
 
-    emailBody += `== ${school.name.toUpperCase()} ==\n`;
-    emailBody += `${school.loc} · #${school.rank} US News · ${school.accept}% Overall Acceptance\n`;
-    emailBody += `Verdict: ${res.verdictLabel.trim()} | Estimated Probability: ${res.chancePercent}%\n\n`;
-    emailBody += `Your GPA: ${state.gpa} (${state.gpaType === 'weighted' ? 'W' : 'UW'}) vs School Avg: ${school.gpaAvg}\n`;
-    if (state.satTotal) emailBody += `Your SAT: ${state.satTotal} vs School Range: ${satRange}\n`;
-    if (state.actComposite) emailBody += `Your ACT: ${state.actComposite} vs School Range: ${actRange}\n`;
-    emailBody += `Acceptance Rate: ${school.accept}%\n\n`;
+  const templateParams = {
+    to_name:                    state.leadName,
+    to_email:                   state.leadEmail,
+    gpa:                        state.gpa,
+    gpa_type:                   state.gpaType === 'weighted' ? 'Weighted' : 'Unweighted',
+    test_scores:                testScores,
+    major_label:                majorLabel,
+    app_type:                   state.appType,
+    recommendation_headline:    recommendation_headline,
+    recommendation_description: recommendation_description,
+  };
 
-    if (res.strengths.length) {
-      emailBody += `YOUR STRENGTHS:\n`;
-      res.strengths.forEach(s => { emailBody += `• ${s.title}: ${s.text}\n`; });
-      emailBody += '\n';
+  const slotKeys = ['s1', 's2', 's3'];
+  slotKeys.forEach((slot, i) => {
+    const school = selectedSchools[i];
+    const res    = scores[i];
+
+    if (!school) {
+      ['name','meta','verdict','badge_bg','badge_color',
+       'chance','your_gpa','school_gpa','your_sat','school_sat',
+       'your_act','school_act','strengths','weaknesses'
+      ].forEach(k => { templateParams[`${slot}_${k}`] = ''; });
+      return;
     }
-    if (res.weaknesses.length) {
-      emailBody += `AREAS TO STRENGTHEN:\n`;
-      res.weaknesses.forEach(w => { emailBody += `• ${w.title}: ${w.text}\n`; });
-      emailBody += '\n';
-    }
-    emailBody += `PERSONALIZED ASSESSMENT:\n${aiSummaries[i]}\n\n`;
-    emailBody += `─────────────────────────────────────────\n\n`;
+
+    const colors   = verdictColors(res.verdictKey);
+    const satRange = school.satLow && school.satHigh ? `${school.satLow} to ${school.satHigh}` : 'N/A';
+    const actRange = school.actLow && school.actHigh ? `${school.actLow} to ${school.actHigh}` : 'N/A';
+
+    templateParams[`${slot}_name`]        = school.name;
+    templateParams[`${slot}_meta`]        = `${school.loc} · #${school.rank} US News · ${school.accept}% Overall Acceptance`;
+    templateParams[`${slot}_verdict`]     = res.verdictLabel.trim();
+    templateParams[`${slot}_badge_bg`]    = colors.bg;
+    templateParams[`${slot}_badge_color`] = colors.color;
+    templateParams[`${slot}_chance`]      = res.chancePercent;
+    templateParams[`${slot}_your_gpa`]    = `${state.gpa} (${state.gpaType === 'weighted' ? 'W' : 'UW'})`;
+    templateParams[`${slot}_school_gpa`]  = school.gpaAvg;
+    templateParams[`${slot}_your_sat`]    = state.satTotal  || 'N/A';
+    templateParams[`${slot}_school_sat`]  = satRange;
+    templateParams[`${slot}_your_act`]    = state.actComposite || 'N/A';
+    templateParams[`${slot}_school_act`]  = actRange;
+    templateParams[`${slot}_strengths`]   = formatItems(res.strengths);
+    templateParams[`${slot}_weaknesses`]  = formatItems(res.weaknesses);
   });
 
-  emailBody += `Want to strengthen your application? Our team of Ivy League graduates has helped hundreds of students get into their dream schools.\n`;
-  emailBody += `Book a free strategy call: https://myappsuccess.com/#pricing\n`;
-  emailBody += `Learn about the 8-week bootcamp: https://myappsuccess.com/#bootcamp\n\n`;
-  emailBody += `— The MyAppSuccess Team\n`;
-
-  // Send via FormSubmit
   try {
-    const formData = new FormData();
-    formData.append('name', state.leadName);
-    formData.append('email', state.leadEmail);
-    formData.append('_subject', `Your College Admissions Profile — MyAppSuccess`);
-    formData.append('_template', 'box');
-    formData.append('_captcha', 'false');
-    formData.append('message', emailBody);
-
-    await fetch('https://formsubmit.co/' + state.leadEmail, {
-      method: 'POST',
-      body: formData
-    });
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
   } catch (err) {
-    // Silent fail — confirmation screen is already shown
-    console.warn('FormSubmit delivery failed:', err);
+    console.warn('EmailJS delivery failed:', err);
   }
 }
 
@@ -1807,6 +1830,7 @@ function resetQuiz() {
 </script>
 <!-- FLOATING NAV -->
 <div class="floating-nav" id="floating-nav">
+  <span class="floating-nav-step" id="floating-nav-step">Step 1 of 6</span>
   <div class="floating-nav-btns">
     <button class="btn-back" id="floating-back" onclick="floatingBack()">← Back</button>
     <button class="btn-next gold-btn" id="floating-next" onclick="floatingNext()">Continue →</button>
