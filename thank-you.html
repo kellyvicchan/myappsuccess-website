@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thank You - MyAppSuccess</title>
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1e4b78;
+    --navy-mid: #265d96;
+    --gold: #f0b41e;
+    --gold-dark: #c99012;
+    --gold-bg: #fef9e6;
+    --white: #ffffff;
+    --off-white: #f5f7fa;
+    --blue-light: #eef3fb;
+    --text: #1e4b78;
+    --muted: #5c6a82;
+    --border: #d0d9e8;
+    --font: 'League Spartan', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--off-white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 72px;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 2px solid var(--gold);
+    box-shadow: 0 2px 16px rgba(30,75,120,0.07);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-logo img { height: 44px; width: auto; display: block; mix-blend-mode: multiply; }
+  .nav-link {
+    font-size: 0.88rem; font-weight: 600; text-decoration: none;
+    color: var(--navy); display: flex; align-items: center; gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--gold-dark); }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem 6rem;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 8px 48px rgba(30,75,120,0.1);
+    padding: 4rem 3.5rem;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    animation: fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* CHECK ICON */
+  .icon-wrap {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    background: var(--navy);
+    margin: 0 auto 2rem;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .icon-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    animation: ringPulse 1.2s ease 0.8s both;
+    opacity: 0;
+  }
+  @keyframes ringPulse {
+    0%   { transform: scale(0.8); opacity: 0; }
+    50%  { opacity: 1; }
+    100% { transform: scale(1.15); opacity: 0; }
+  }
+  .icon-wrap svg {
+    width: 42px; height: 42px;
+  }
+
+  /* EYEBROW */
+  .eyebrow {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.5rem; margin-bottom: 0.75rem;
+  }
+  .eyebrow::before,
+  .eyebrow::after {
+    content: ''; display: block; width: 20px; height: 2px; background: var(--gold);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  h1 .accent { color: var(--gold); }
+
+  .sub {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* NEXT STEPS */
+  .steps {
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem 1.8rem;
+    margin-bottom: 2.5rem;
+    text-align: left;
+  }
+  .steps-title {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--navy);
+    margin-bottom: 1rem; padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gold);
+  }
+  .step-item {
+    display: flex; align-items: flex-start; gap: 0.9rem;
+    margin-bottom: 0.85rem;
+  }
+  .step-item:last-child { margin-bottom: 0; }
+  .step-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--navy); color: white;
+    font-size: 0.75rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-text {
+    font-size: 0.9rem; font-weight: 500; color: var(--muted);
+    line-height: 1.55;
+  }
+  .step-text strong { color: var(--navy); font-weight: 700; }
+
+  /* CTA BUTTONS */
+  .cta-group {
+    display: flex; flex-direction: column; gap: 0.85rem; align-items: center;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--gold); color: var(--navy);
+    font-family: var(--font); font-weight: 800; font-size: 0.95rem;
+    padding: 0.9rem 2.5rem; border-radius: 10px;
+    text-decoration: none; transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 20px rgba(240,180,30,0.35);
+  }
+  .btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); }
+
+  .btn-secondary {
+    font-size: 0.85rem; font-weight: 600;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--navy); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    padding: 1.5rem 3rem;
+    text-align: center;
+    margin-top: auto;
+  }
+  footer p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+  /* CONFETTI DOTS */
+  .confetti-dot {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1.2rem; }
+    .card { padding: 2.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" style="text-decoration:none;">
+    <div class="nav-logo">
+      <img src="/apple-touch-icon.png" alt="My App Success" style="height:44px;width:auto;display:block;mix-blend-mode:multiply;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+      <span style="display:none;font-family:'League Spartan',sans-serif;font-weight:800;color:var(--navy);font-size:1.1rem;">MyAppSuccess</span>
+    </div>
+  </a>
+  <a href="index.html" class="nav-link">Back to homepage</a>
+</nav>
+
+<main>
+  <div class="card">
+
+    <div class="icon-wrap">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="eyebrow">Submission Confirmed</div>
+
+    <h1>You're all set, <span class="accent">we've got it!</span></h1>
+
+    <p class="sub">
+      Thank you for reaching out to MyAppSuccess. Our team has received your submission and will be in touch shortly.
+    </p>
+
+    <div class="steps">
+      <div class="steps-title">What happens next</div>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Check your inbox.</strong> A confirmation email is on its way. Check your spam or promotions folder if you don't see it.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>We'll review your submission</strong> within 1-2 business days and reach out to discuss next steps.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Get ready to strengthen your application.</strong> We're excited to help you get into your dream school.</div>
+      </div>
+    </div>
+
+    <div class="cta-group">
+      <a href="index.html" class="btn-primary">Back to MyAppSuccess</a>
+      <a href="quiz.html" class="btn-secondary">Take the free admissions quiz</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>myappsuccess.com &nbsp;·&nbsp; Gain Acceptance to Your Dream College &nbsp;·&nbsp; © 2026</p>
+</footer>
+
+<script>
+  // Burst a handful of gold confetti dots on load
+  (function() {
+    const colors = ['#f0b41e', '#1e4b78', '#c99012', '#265d96', '#fef9e6'];
+    for (let i = 0; i < 28; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('confetti-dot');
+      const size = Math.random() * 10 + 5;
+      dot.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        background: ${colors[Math.floor(Math.random() * colors.length)]};
+        left: ${Math.random() * 100}vw;
+        top: -20px;
+        animation-duration: ${Math.random() * 2 + 1.5}s;
+        animation-delay: ${Math.random() * 0.8}s;
+      `;
+      document.body.appendChild(dot);
+      dot.addEventListener('animationend', () => dot.remove());
+    }
+  })();
+</script>
+
+</body>
+</html>
