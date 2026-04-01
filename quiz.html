@@ -1699,6 +1699,15 @@ function showConfirmation() {
 // ═══════════════════════════════════════════════════════════════
 async function runAnalysisForEmail() {
   emailjs.init(EMAILJS_PUBLIC_KEY);
+  fetch('https://script.google.com/macros/s/AKfycbwHgzkKNs4XWxnw6sW6TeHjvoekyYpXfHNma3it_n5-sat76billfE5xn8Ov3hwJG9Ttw/exec', {
+  method: 'POST',
+  body: JSON.stringify({
+    name:  state.leadName,
+    email: state.leadEmail,
+    gpa:   state.gpa,
+    major: (MAJOR_DATA[state.major] || { label: state.major }).label,
+  })
+});
 
   const selectedSchools = state.schools.filter(Boolean);
   const scores = selectedSchools.map(s => scoreProfile(s));
