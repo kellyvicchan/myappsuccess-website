@@ -236,64 +236,107 @@
   .special-tags .tag { background: var(--gold-bg); border-color: var(--gold); color: var(--gold-dark); }
 
   /* BOOTCAMP SERIES */
-  .bootcamp { background: var(--navy); }
-  .bootcamp .section-eyebrow { background: rgba(240,180,30,0.15); border-color: rgba(240,180,30,0.4); color: var(--gold); }
-  .bootcamp .section-h2 { color: white; }
-  .bootcamp .section-h2 .accent { color: var(--gold); }
-  .bootcamp .section-p { color: rgba(255,255,255,0.7); }
+  .bootcamp { background: var(--white); }
+  .bootcamp .section-eyebrow { background: var(--gold-bg); border: 1.5px solid var(--gold); color: var(--gold-dark); }
+  .bootcamp .section-h2 { color: var(--navy); }
+  .bootcamp .section-h2 .accent { color: var(--gold-dark); }
+  .bootcamp .section-p { color: var(--muted); }
   .bootcamp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2.5rem 0; }
   .bootcamp-card {
-    background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1);
+    background: var(--off-white); border: 1.5px solid var(--border);
     border-radius: 14px; padding: 1.8rem;
     transition: border-color 0.2s, background 0.2s;
   }
-  .bootcamp-card:hover { border-color: rgba(240,180,30,0.5); background: rgba(255,255,255,0.08); }
-  .bootcamp-card h4 { font-size: 1rem; font-weight: 800; color: var(--gold); margin-bottom: 1rem; }
+  .bootcamp-card:hover { border-color: var(--gold); background: var(--gold-bg); }
+  .bootcamp-card h4 { font-size: 1rem; font-weight: 800; color: var(--gold-dark); margin-bottom: 1rem; }
   .bootcamp-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
   .bootcamp-card li {
-    font-size: 0.85rem; color: rgba(255,255,255,0.75);
+    font-size: 0.85rem; color: var(--text);
     display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.5;
   }
   .bc-check {
     width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
-    background: rgba(240,180,30,0.2); border: 1.5px solid var(--gold);
+    background: var(--gold-bg); border: 1.5px solid var(--gold);
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.6rem; color: var(--gold); margin-top: 2px;
+    font-size: 0.6rem; color: var(--gold-dark); margin-top: 2px;
   }
   .bootcamp-pricing { margin-top: 3rem; }
-  .bootcamp-pricing h3 { font-size: 1.1rem; font-weight: 800; color: white; margin-bottom: 1.5rem; }
+  .bootcamp-pricing h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 1.5rem; }
   .bc-price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
   .bc-price-card {
-    background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.12);
+    background: var(--off-white); border: 1.5px solid var(--border);
     border-radius: 14px; padding: 1.5rem;
     transition: border-color 0.2s, transform 0.2s;
   }
   .bc-price-card.interactive:hover { border-color: var(--gold); transform: translateY(-3px); }
-  .bc-price-card.popular { border-color: var(--gold); background: rgba(240,180,30,0.08); box-shadow: 0 12px 40px rgba(0,0,0,0.35); transform: translateY(-4px); }
+  .bc-price-card.popular { border-color: var(--gold); background: var(--gold-bg); box-shadow: 0 12px 40px rgba(30,70,110,0.15); transform: translateY(-4px); }
   .bc-price-card.static { cursor: default; }
-  .bc-price-card.static:hover { border-color: rgba(255,255,255,0.12); transform: none; }
+  .bc-price-card.static:hover { border-color: var(--border); transform: none; }
   .bc-badge {
     display: inline-block; background: var(--gold); color: var(--navy);
     font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
     padding: 0.2rem 0.6rem; border-radius: 999px; margin-bottom: 0.8rem;
   }
-  .bc-tier { font-size: 1rem; font-weight: 800; color: white; margin-bottom: 0.25rem; }
-  .bc-price { font-size: 1.4rem; font-weight: 800; color: var(--gold); margin-bottom: 0.5rem; }
-  .bc-price span { font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.5); }
-  .bc-price-card p { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 1rem; }
+  .bc-tier { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.25rem; }
+  .bc-price { font-size: 1.4rem; font-weight: 800; color: var(--gold-dark); margin-bottom: 0.5rem; }
+  .bc-price span { font-size: 0.78rem; font-weight: 500; color: var(--muted); }
+  .bc-price-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
   .bc-price-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .bc-price-card li { font-size: 0.8rem; color: rgba(255,255,255,0.7); display: flex; gap: 0.5rem; align-items: flex-start; }
+  .bc-price-card li { font-size: 0.8rem; color: var(--text); display: flex; gap: 0.5rem; align-items: flex-start; }
   .bc-addons {
-    margin-top: 1.5rem; background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.2rem 1.5rem;
+    margin-top: 1.5rem; background: var(--off-white);
+    border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem;
   }
-  .bc-addons h4 { font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .bc-addons h4 { font-size: 0.78rem; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
   .bc-addons ul { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .bc-addons li { font-size: 0.85rem; color: rgba(255,255,255,0.75); }
-  .bc-addons li strong { color: var(--gold); }
+  .bc-addons li { font-size: 0.85rem; color: var(--text); }
+  .bc-addons li strong { color: var(--gold-dark); }
+
+  /* BOOTCAMP: override inline white-on-navy styles for new white background */
+  .bootcamp [style*="color:white"],
+  .bootcamp [style*="color: white"] { color: var(--navy) !important; }
+  /* Gold text was designed against navy background; shift to gold-dark for contrast on white */
+  .bootcamp [style*="color:var(--gold)"]:not([style*="background:var(--gold)"]) { color: var(--gold-dark) !important; }
+  .bootcamp p[style*="rgba(255,255,255"] { color: var(--muted) !important; }
+  .bootcamp .bc-table-desktop table { color: var(--navy) !important; }
+  .bootcamp .bc-table-desktop th[style],
+  .bootcamp .bc-table-desktop td[style] { color: var(--navy) !important; }
+  .bootcamp .bc-table-desktop thead th { border-bottom-color: var(--border) !important; }
+  .bootcamp .bc-table-desktop thead th[style*="rgba(255,255,255,0.4)"] { color: var(--muted) !important; }
+  .bootcamp .bc-table-desktop tbody tr { border-bottom-color: var(--border) !important; }
+  .bootcamp .bc-table-desktop tbody td[style*="rgba(255,255,255,0.85)"] { color: var(--text) !important; }
+  .bootcamp .bc-table-desktop tbody td[style*="rgba(255,255,255,0.4)"] { color: var(--muted) !important; }
+  .bootcamp .bc-table-desktop tbody td[style*="rgba(255,255,255,0.2)"] { color: #c5cbd6 !important; }
+  .bootcamp .bc-table-desktop tbody td[style*="rgba(255,255,255,0.5)"] { color: var(--muted) !important; }
+  .bootcamp .bc-table-desktop tbody tr[style*="rgba(255,255,255,0.04)"] { background: var(--off-white) !important; }
+  .bootcamp .bc-table-desktop tbody tr[style*="rgba(255,255,255,0.15)"] { border-top-color: var(--border) !important; }
+  .bootcamp .bc-table-desktop tbody tr[style*="border-top"] { border-top-color: var(--border) !important; }
+  .bootcamp .bc-table-desktop tr[style*="background:rgba(240,180,30,0.12)"] td { color: var(--navy) !important; }
+  .bootcamp .bc-table-mobile > div[style*="rgba(255,255,255,0.05)"] { background: var(--off-white) !important; border-color: var(--border) !important; }
+  .bootcamp .bc-table-mobile > div > div[style*="color:white"] { color: var(--navy) !important; }
+  .bootcamp .bc-table-mobile > div > div[style*="rgba(255,255,255,0.4)"] { color: var(--muted) !important; }
+  .bootcamp .bc-table-mobile > div > ul > li[style*="rgba(255,255,255,0.85)"] { color: var(--text) !important; }
+  .bootcamp .bc-addons p[style*="rgba(255,255,255,0.55)"] { color: var(--muted) !important; }
+  .bootcamp .bc-addons p a[style*="color:var(--gold)"] { color: var(--gold-dark) !important; }
 
   /* PRICING */
-  .pricing { background: var(--white); }
+  .pricing { background: var(--navy); }
+  .pricing .section-eyebrow { background: rgba(240,180,30,0.15); border-color: rgba(240,180,30,0.4); color: var(--gold); }
+  .pricing .section-h2 { color: white; }
+  .pricing .section-h2 .accent { color: var(--gold); }
+  .pricing .section-p { color: rgba(255,255,255,0.7); }
+  .pricing .price-card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
+  .pricing .price-card h3 { color: white; }
+  .pricing .price-card .price-amount { color: var(--gold); }
+  .pricing .price-card p { color: rgba(255,255,255,0.65); }
+  .pricing .price-card li { color: rgba(255,255,255,0.82); }
+  .pricing .price-card .pc-label { color: var(--gold); }
+  .pricing .price-card .pc-divider { border-top-color: rgba(255,255,255,0.12); }
+  .pricing .price-card .check { background: rgba(240,180,30,0.2); border-color: var(--gold); color: var(--gold); }
+  .pricing .price-card:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(240,180,30,0.15); }
+  .pricing .price-card.selected { border-color: var(--gold); box-shadow: 0 8px 32px rgba(240,180,30,0.2); }
+  .pricing .price-card.selected h3 { color: var(--gold); }
+  .pricing .price-card .price-amount span { color: rgba(255,255,255,0.55) !important; }
   .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; align-items: stretch; }
   @supports (grid-template-rows: subgrid) {
     .pricing-grid { grid-template-rows: auto; }
@@ -609,7 +652,7 @@
 </a>  <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#outcomes">Outcomes</a></li>
-    <li><a href="#pricing">1:1 Sessions</a></li>
+    <li><a href="#pricing">One-on-One Sessions</a></li>
     <li><a href="#bootcamp">Bootcamp</a></li>
     <li><a href="#templates">Templates</a></li>
     <li><a href="#testimonials">Reviews</a></li>
@@ -626,7 +669,7 @@
   <ul>
     <li><a href="#about" onclick="closeMenu()">About</a></li>
     <li><a href="#outcomes" onclick="closeMenu()">Outcomes</a></li>
-    <li><a href="#pricing" onclick="closeMenu()">1:1 Sessions</a></li>
+    <li><a href="#pricing" onclick="closeMenu()">One-on-One Sessions</a></li>
     <li><a href="#bootcamp" onclick="closeMenu()">Bootcamp</a></li>
     <li><a href="#templates" onclick="closeMenu()">Templates</a></li>
     <li><a href="#testimonials" onclick="closeMenu()">Reviews</a></li>
@@ -838,89 +881,6 @@
   </div>
 </section>
 
-<!-- ONE-ON-ONE SESSIONS -->
-<section class="pricing" id="pricing">
-  <div class="container">
-    <div class="section-eyebrow fade-in">One-on-One Sessions</div>
-    <h2 class="section-h2 fade-in">Need more hands-on guidance? <span class="accent">We've got you.</span></h2>
-    <p class="section-p fade-in" style="margin-bottom:2rem;">In addition to the bootcamp, our one-on-one sessions give you personal access to an expert advisor for your specific needs.</p>
-
-    <div class="pricing-grid">
-      <div class="price-card fade-in" data-service="1:1 Video Call (Starting at $200 / 1-hour session)">
-        <div class="pc-header">
-          <h3>1:1 Video Call</h3>
-          <div class="price-amount">Starting at $200 <span style="font-size:0.78rem;font-weight:500;color:var(--muted);">/ 1-hour session</span></div>
-        </div>
-        <hr class="pc-divider">
-        <div class="pc-included">
-          <p class="pc-label">What&rsquo;s Included</p>
-          <ul>
-            <li><span class="check">+</span>Personal 1:1 guidance on a live video call with an expert advisor</li>
-            <li><span class="check">+</span>Ivy League-level positioning and deep narrative storytelling coaching personalized to you</li>
-            <li><span class="check">+</span>Proven methods that have led to acceptances</li>
-          </ul>
-        </div>
-        <hr class="pc-divider">
-        <div class="pc-for">
-          <p class="pc-label">Who Is This For?</p>
-          <ul>
-            <li><span class="check">+</span>Anyone starting from scratch OR with a draft: Personal Statements, Interview Prep, Supplemental Essays, Scholarship Essays, Resumes, Portfolios, Letters of Recommendation, or full online application start or reviewing</li>
-          </ul>
-        </div>
-      </div>
-      <div class="price-card fade-in" data-service="Virtual Review (Starting at $150 / 1-hour session)">
-        <div class="pc-header">
-          <h3>Virtual Review</h3>
-          <div class="price-amount">Starting at $150 <span style="font-size:0.78rem;font-weight:500;color:var(--muted);">/ 1-hour session</span></div>
-        </div>
-        <hr class="pc-divider">
-        <div class="pc-included">
-          <p class="pc-label">What&rsquo;s Included</p>
-          <ul>
-            <li><span class="check">+</span>Asynchronous Ivy League-level review from an expert advisor</li>
-            <li><span class="check">+</span>Revisions on storytelling, grammar/punctuation, structure, and personal voice</li>
-            <li><span class="check">+</span>Proven methods that have led to acceptances</li>
-          </ul>
-        </div>
-        <hr class="pc-divider">
-        <div class="pc-for">
-          <p class="pc-label">Who Is This For?</p>
-          <ul>
-            <li><span class="check">+</span>Anyone with a draft ready and needing expert eyes to review: Personal Statements, Supplemental Essays, Scholarship Essays, Resumes, Portfolios, Letters of Recommendation, or full online application reviewing</li>
-          </ul>
-        </div>
-      </div>
-      <div class="price-card fade-in" data-service="Custom Package (contact for quote)">
-        <div class="pc-header">
-          <h3>Custom Package</h3>
-          <div class="price-amount">Contact for quote</div>
-        </div>
-        <hr class="pc-divider">
-        <div class="pc-included">
-          <p class="pc-label">What&rsquo;s Included</p>
-          <ul>
-            <li><span class="check">+</span>Personal 1:1 guidance with a dedicated expert advisor</li>
-            <li><span class="check">+</span>Priority scheduling for live video call coaching, along with asynchronous support</li>
-            <li><span class="check">+</span>Long-term custom strategy tailored to you and your target schools</li>
-          </ul>
-        </div>
-        <hr class="pc-divider">
-        <div class="pc-for">
-          <p class="pc-label">Who Is This For?</p>
-          <ul>
-            <li><span class="check">+</span>Anyone looking for full-range dedicated support to walk through the entire process with an expert advisor</li>
-            <li><span class="check">+</span>International student custom packages available</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="pricing-cta fade-in" style="margin-top:2.5rem;">
-      <a href="service-form.html" class="btn-gold">Book Your Session</a>
-    </div>
-  </div>
-</section>
-
 <!-- BOOTCAMP SERIES -->
 <section class="bootcamp" id="bootcamp">
   <div class="container">
@@ -935,12 +895,11 @@
       <div class="bc-table-desktop" style="overflow-x:auto;margin-top:0.5rem;">
         <table style="width:100%;border-collapse:collapse;font-family:var(--font);font-size:0.95rem;color:white;">
           <colgroup>
-            <col style="width:32%;">
-            <col style="width:10%;">
-            <col style="width:14.5%;">
-            <col style="width:14.5%;">
-            <col style="width:14.5%;">
-            <col style="width:14.5%;">
+            <col style="width:36%;">
+            <col style="width:12%;">
+            <col style="width:17%;">
+            <col style="width:17%;">
+            <col style="width:18%;">
           </colgroup>
           <thead>
             <tr>
@@ -949,7 +908,6 @@
               <th style="padding:0.9rem 0.6rem;text-align:center;border-bottom:2px solid rgba(255,255,255,0.15);color:white;font-size:0.9rem;font-weight:800;letter-spacing:-0.01em;">Foundational</th>
               <th style="padding:0.9rem 0.6rem;text-align:center;border-bottom:2px solid var(--gold);background:rgba(240,180,30,0.08);border-radius:8px 8px 0 0;color:var(--gold);font-size:0.9rem;font-weight:800;letter-spacing:-0.01em;">Accelerator<br><span style="font-size:0.62rem;font-weight:600;opacity:0.8;">(most popular)</span></th>
               <th style="padding:0.9rem 0.6rem;text-align:center;border-bottom:2px solid rgba(255,255,255,0.15);color:white;font-size:0.9rem;font-weight:800;letter-spacing:-0.01em;">Elite</th>
-              <th style="padding:0.9rem 0.6rem;text-align:center;border-bottom:2px solid rgba(255,255,255,0.15);color:white;font-size:0.9rem;font-weight:800;letter-spacing:-0.01em;">Ivy-League Tier Add-On</th>
             </tr>
           </thead>
           <tbody>
@@ -959,14 +917,12 @@
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;background:rgba(240,180,30,0.05);">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
               <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">Weekly Education Webinars</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.4);font-size:0.88rem;">$1,200</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;background:rgba(240,180,30,0.05);">✓</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
@@ -975,14 +931,12 @@
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;background:rgba(240,180,30,0.05);">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
               <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">Access to Vetted Templates And Resources</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.4);font-size:0.88rem;">$500</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;background:rgba(240,180,30,0.05);">✓</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
@@ -991,14 +945,12 @@
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;background:rgba(240,180,30,0.05);">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
               <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">Internship &amp; Extracurricular Guidance</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.4);font-size:0.88rem;">$500</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.2);font-size:1rem;">—</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;background:rgba(240,180,30,0.05);">✓</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
@@ -1007,14 +959,12 @@
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.2);font-size:1rem;">—</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;background:rgba(240,180,30,0.05);">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
               <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">Additional Vetted Templates And Resources</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.4);font-size:0.88rem;">$200</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.2);font-size:1rem;">—</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;background:rgba(240,180,30,0.05);">✓</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
@@ -1023,22 +973,12 @@
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.2);font-size:1rem;">—</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;background:rgba(240,180,30,0.05);"><span style="font-size:0.84rem;color:var(--gold);font-weight:700;line-height:1.4;display:block;">Prospect Scholar Certification</span></td>
               <td style="padding:0.9rem 0.6rem;text-align:center;"><span style="font-size:0.84rem;color:var(--gold);font-weight:700;line-height:1.4;display:block;">Vantage Scholar Certification</span></td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
-              <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">3 Personalized 1:1 Sessions</td>
+              <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">3 Personalized One-on-One Sessions</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.4);font-size:0.88rem;">$600</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.2);font-size:1rem;">—</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.2);font-size:1rem;background:rgba(240,180,30,0.05);">—</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
-            </tr>
-            <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
-              <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">3 Ivy-League Specific Workshops and specific resources</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.4);font-size:0.88rem;">$1,000</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.2);font-size:1rem;">—</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.2);font-size:1rem;background:rgba(240,180,30,0.05);">—</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.2);font-size:1rem;">—</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-top:2px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.04);">
@@ -1047,7 +987,6 @@
              <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.5);font-weight:700;text-decoration:line-through;">$3,500</td>
 <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.5);font-weight:700;background:rgba(240,180,30,0.05);text-decoration:line-through;">$6,300</td>
 <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.5);font-weight:700;text-decoration:line-through;">$6,900</td>
-<td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.5);font-weight:700;text-decoration:line-through;">$7,900</td>
             </tr>
             <tr style="background:rgba(240,180,30,0.12);">
               <td style="padding:1rem 1rem;color:white;font-size:0.88rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;">Your Price</td>
@@ -1055,7 +994,6 @@
               <td style="padding:1rem 0.6rem;text-align:center;color:var(--gold);font-size:1.2rem;font-weight:800;">$1,999</td>
               <td style="padding:1rem 0.6rem;text-align:center;color:var(--gold);font-size:1.2rem;font-weight:800;background:rgba(240,180,30,0.08);">$3,499</td>
               <td style="padding:1rem 0.6rem;text-align:center;color:var(--gold);font-size:1.2rem;font-weight:800;">$3,999</td>
-              <td style="padding:1rem 0.6rem;text-align:center;color:var(--gold);font-size:1.2rem;font-weight:800;">$4,499</td>
             </tr>
           </tbody>
         </table>
@@ -1104,20 +1042,8 @@
           <div style="font-size:1.3rem;font-weight:800;color:var(--gold);margin-bottom:1rem;">$3,999</div>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:0.55rem;">
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Everything in Foundational &amp; Accelerator</li>
-            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>3 Personalized 1:1 Sessions</li>
+            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>3 Personalized One-on-One Sessions</li>
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Certificate: <strong style="color:var(--gold);">Vantage Scholar Certification</strong></li>
-          </ul>
-        </div>
-
-        <!-- IVY-LEAGUE TIER ADD-ON -->
-        <div style="background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.12);border-radius:14px;padding:1.4rem;">
-          <div style="font-size:1rem;font-weight:800;color:white;margin-bottom:0.2rem;">Ivy-League Tier Add-On</div>
-          <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);text-decoration:line-through;margin-bottom:0.1rem;">$7,900 value</div>
-          <div style="font-size:1.3rem;font-weight:800;color:var(--gold);margin-bottom:1rem;">$4,499</div>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:0.55rem;">
-            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Everything in Foundational, Accelerator &amp; Elite</li>
-            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>3 Ivy-League Specific Workshops and specific resources</li>
-            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Certificate of Completion To Include On Your Resume</li>
           </ul>
         </div>
 
@@ -1130,6 +1056,13 @@
         }
       </style>
       <div class="bc-addons">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:0.5rem;">
+          <h4 style="margin-bottom:0;">Ivy League Prep Add-On</h4>
+          <span style="display:inline-block;background:var(--gold);color:var(--navy);font-size:0.82rem;font-weight:800;padding:0.25rem 0.75rem;border-radius:999px;">$1,500</span>
+        </div>
+        <p style="margin-top:0.25rem;font-size:0.92rem;color:var(--muted);line-height:1.6;">Available to be added to any tier. 3 dedicated small group workshops and additional resources for candidates applying to Ivy league and top ranked schools.</p>
+      </div>
+      <div class="bc-addons">
         <h4>Need one-on-one help instead?</h4>
         <p style="margin-top:0.5rem;font-size:0.92rem;color:rgba(255,255,255,0.55);"><a href="#pricing" style="color:var(--gold);text-decoration:underline;">See our One-on-One Sessions</a> for standalone sessions and pricing.</p>
       </div>
@@ -1137,6 +1070,89 @@
 
     <div class="pricing-cta fade-in" style="margin-top:3rem;">
       <a href="form.html" class="btn-gold">Apply Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ONE-ON-ONE SESSIONS -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-eyebrow fade-in">One-on-One Sessions</div>
+    <h2 class="section-h2 fade-in">Need more hands-on guidance? <span class="accent">We've got you.</span></h2>
+    <p class="section-p fade-in" style="margin-bottom:2rem;">In addition to the bootcamp, our one-on-one sessions give you personal access to an expert advisor for your specific needs.</p>
+
+    <div class="pricing-grid">
+      <div class="price-card fade-in" data-service="One-on-One Video Call (Starting at $200 / 1-hour session)">
+        <div class="pc-header">
+          <h3>One-on-One Video Call</h3>
+          <div class="price-amount">Starting at $200 <span style="font-size:0.78rem;font-weight:500;color:var(--muted);">/ 1-hour session</span></div>
+        </div>
+        <hr class="pc-divider">
+        <div class="pc-included">
+          <p class="pc-label">What&rsquo;s Included</p>
+          <ul>
+            <li><span class="check">+</span>Personal one-on-one guidance on a live video call with an expert advisor</li>
+            <li><span class="check">+</span>Ivy League-level positioning and deep narrative storytelling coaching personalized to you</li>
+            <li><span class="check">+</span>Proven methods that have led to acceptances</li>
+          </ul>
+        </div>
+        <hr class="pc-divider">
+        <div class="pc-for">
+          <p class="pc-label">Who Is This For?</p>
+          <ul>
+            <li><span class="check">+</span>Anyone starting from scratch OR with a draft: Personal Statements, Interview Prep, Supplemental Essays, Scholarship Essays, Resumes, Portfolios, Letters of Recommendation, or full online application start or reviewing</li>
+          </ul>
+        </div>
+      </div>
+      <div class="price-card fade-in" data-service="Virtual Review (Starting at $150 / 1-hour session)">
+        <div class="pc-header">
+          <h3>Virtual Review</h3>
+          <div class="price-amount">Starting at $150 <span style="font-size:0.78rem;font-weight:500;color:var(--muted);">/ 1-hour session</span></div>
+        </div>
+        <hr class="pc-divider">
+        <div class="pc-included">
+          <p class="pc-label">What&rsquo;s Included</p>
+          <ul>
+            <li><span class="check">+</span>Asynchronous Ivy League-level review from an expert advisor</li>
+            <li><span class="check">+</span>Revisions on storytelling, grammar/punctuation, structure, and personal voice</li>
+            <li><span class="check">+</span>Proven methods that have led to acceptances</li>
+          </ul>
+        </div>
+        <hr class="pc-divider">
+        <div class="pc-for">
+          <p class="pc-label">Who Is This For?</p>
+          <ul>
+            <li><span class="check">+</span>Anyone with a draft ready and needing expert eyes to review: Personal Statements, Supplemental Essays, Scholarship Essays, Resumes, Portfolios, Letters of Recommendation, or full online application reviewing</li>
+          </ul>
+        </div>
+      </div>
+      <div class="price-card fade-in" data-service="Custom Package (contact for quote)">
+        <div class="pc-header">
+          <h3>Custom Package</h3>
+          <div class="price-amount">Contact for quote</div>
+        </div>
+        <hr class="pc-divider">
+        <div class="pc-included">
+          <p class="pc-label">What&rsquo;s Included</p>
+          <ul>
+            <li><span class="check">+</span>Personal one-on-one guidance with a dedicated expert advisor</li>
+            <li><span class="check">+</span>Priority scheduling for live video call coaching, along with asynchronous support</li>
+            <li><span class="check">+</span>Long-term custom strategy tailored to you and your target schools</li>
+          </ul>
+        </div>
+        <hr class="pc-divider">
+        <div class="pc-for">
+          <p class="pc-label">Who Is This For?</p>
+          <ul>
+            <li><span class="check">+</span>Anyone looking for full-range dedicated support to walk through the entire process with an expert advisor</li>
+            <li><span class="check">+</span>International student custom packages available</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-cta fade-in" style="margin-top:2.5rem;">
+      <a href="service-form.html" class="btn-gold">Book Your Session</a>
     </div>
   </div>
 </section>
@@ -1462,11 +1478,11 @@
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          What is the difference between the bootcamp and the 1-on-1 services?
+          What is the difference between the bootcamp and the One-on-One services?
           <span class="faq-arrow">+</span>
         </button>
         <div class="faq-a">
-          <p>The bootcamp is a structured 6-week group program with weekly sessions, community access, and resources. The 1-on-1 services are standalone sessions you can book individually for targeted help, such as an essay review or a strategy call. Many students do both.</p>
+          <p>The bootcamp is a structured 6-week group program with weekly sessions, community access, and resources. The One-on-One services are standalone sessions you can book individually for targeted help, such as an essay review or a strategy call. Many students do both.</p>
         </div>
       </div>
 
