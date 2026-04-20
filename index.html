@@ -187,14 +187,17 @@
   .about-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
   .about-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
 
-  /* Approach slideshow: dots hidden on desktop, layout unchanged */
-  .approach-dots { display: none; }
-  .approach-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--border); border: none; padding: 0;
-    cursor: pointer; transition: background 0.2s, transform 0.2s;
+  /* Approach slideshow nav: hidden on desktop, layout unchanged */
+  .approach-nav { display: none; }
+  .approach-nav-btn {
+    flex: 0 0 auto; display: flex; align-items: center;
+    background: transparent; border: none; padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    font-family: var(--font); color: var(--muted);
+    font-size: 0.85rem; font-weight: 600;
+    transition: color 0.2s;
   }
-  .approach-dot.active { background: var(--gold); transform: scale(1.25); }
+  .approach-nav-btn:hover { color: var(--navy); }
   .cred-block { background: #6b7280; border-radius: 20px; padding: 2.5rem; color: white; }
   .cred-block h3 { font-size: 1.3rem; font-weight: 800; color: var(--gold); margin-bottom: 0.7rem; }
   .cred-block p { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 1.5rem; }
@@ -272,7 +275,7 @@
     font-size: 0.6rem; color: var(--gold-dark); margin-top: 2px;
   }
   .bootcamp-pricing { margin-top: 3rem; }
-  .bootcamp-pricing h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 1.5rem; }
+  .bootcamp-pricing h3 { font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 1.5rem; }
   .bc-price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
   .bc-price-card {
     background: var(--off-white); border: 1.5px solid var(--border);
@@ -324,12 +327,16 @@
   .bootcamp .bc-table-desktop tbody tr[style*="rgba(255,255,255,0.15)"] { border-top-color: var(--border) !important; }
   .bootcamp .bc-table-desktop tbody tr[style*="border-top"] { border-top-color: var(--border) !important; }
   .bootcamp .bc-table-desktop tr[style*="background:rgba(240,180,30,0.12)"] td { color: var(--navy) !important; }
-  .bootcamp .bc-table-mobile > div[style*="rgba(255,255,255,0.05)"] { background: var(--off-white) !important; border-color: var(--border) !important; }
+  .bootcamp .bc-table-mobile > div[style*="rgba(255,255,255,0.05)"] { background: rgba(240,180,30,0.2) !important; border-color: rgba(240,180,30,0.35) !important; }
   .bootcamp .bc-table-mobile > div > div[style*="color:white"] { color: var(--navy) !important; }
   .bootcamp .bc-table-mobile > div > div[style*="rgba(255,255,255,0.4)"] { color: var(--muted) !important; }
   .bootcamp .bc-table-mobile > div > ul > li[style*="rgba(255,255,255,0.85)"] { color: var(--text) !important; }
   .bootcamp .bc-addons p[style*="rgba(255,255,255,0.55)"] { color: var(--muted) !important; }
   .bootcamp .bc-addons p a[style*="color:var(--gold)"] { color: var(--gold-dark) !important; }
+  /* Foundation & Elite tier columns in desktop table: pale yellow fill to match mobile cards */
+  .bootcamp .bc-table-desktop thead th[style*="color:white"] { background: rgba(240,180,30,0.2) !important; border-radius: 8px 8px 0 0; }
+  .bootcamp .bc-table-desktop tbody td:nth-child(3),
+  .bootcamp .bc-table-desktop tbody td:nth-child(5) { background: rgba(240,180,30,0.2); }
 
   /* PRICING */
   .pricing { background: var(--navy); }
@@ -350,28 +357,36 @@
   .pricing .price-card.selected h3 { color: var(--gold); }
   .pricing .price-card .price-amount span { color: rgba(255,255,255,0.55) !important; }
   .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; align-items: stretch; }
-  @supports (grid-template-rows: subgrid) {
-    .pricing-grid { grid-template-rows: auto; }
-    .price-card { display: grid; grid-row: span 5; grid-template-rows: subgrid; }
-  }
   /* Pricing slideshow nav (mobile only) */
   .pricing-nav { display: none; }
   .pricing-nav-btn {
     flex: 1; display: flex; align-items: center; gap: 0.5rem;
-    background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.15);
-    border-radius: 10px; padding: 0.7rem 0.9rem; cursor: pointer;
+    background: transparent; border: none; padding: 0.3rem 0;
+    cursor: pointer;
     font-family: var(--font); color: rgba(255,255,255,0.85);
-    font-size: 0.78rem; font-weight: 600; text-align: left;
-    transition: background 0.2s, border-color 0.2s;
+    font-size: 0.85rem; font-weight: 600; text-align: left;
+    transition: color 0.2s;
     min-width: 0;
   }
-  .pricing-nav-btn:hover:not(:disabled) { background: rgba(240,180,30,0.08); border-color: var(--gold); }
+  .pricing-nav-btn:hover:not(:disabled) { color: var(--gold); }
   .pricing-nav-btn:disabled { opacity: 0.35; cursor: default; }
   .pricing-nav-next { justify-content: flex-end; text-align: right; }
   .pn-arrow { color: var(--gold); font-size: 1rem; font-weight: 800; flex-shrink: 0; }
   .pn-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-  .pricing-nav-btn.to-section { border-color: var(--gold); background: rgba(240,180,30,0.12); }
-  .pricing-nav-btn.to-section .pn-label { color: var(--gold); }
+  .approach-nav-btn .pn-arrow,
+  .test-nav-btn .pn-arrow { font-size: 1.6rem; line-height: 1; }
+
+  /* Testimonials slideshow nav (mobile only) */
+  .test-nav { display: none; }
+  .test-nav-btn {
+    flex: 0 0 auto; display: flex; align-items: center;
+    background: transparent; border: none; padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    font-family: var(--font); color: rgba(255,255,255,0.85);
+    font-size: 0.85rem; font-weight: 600;
+    transition: color 0.2s;
+  }
+  .test-nav-btn:hover { color: var(--gold); }
   .price-card h3 { font-size: 1rem; }
   .price-card .price-amount { font-size: 1.3rem; margin: 0.2rem 0 0; }
   .price-card p { font-size: 0.85rem; color: var(--muted); margin: 0.2rem 0 0; }
@@ -379,7 +394,7 @@
   .price-card {
     background: white; border-radius: 16px; border: 2px solid var(--border); padding: 2rem;
     display: grid;
-    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-rows: auto auto auto auto auto 1fr;
     gap: 0;
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   }
@@ -476,8 +491,7 @@
   /* ── TABLET 1100px ── */
   @media (max-width: 1100px) {
     .about-grid { gap: 3rem; }
-    .test-grid { columns: 1; }
-    /* bc-price-grid and pricing-grid stay 3-col on tablet */
+    /* bc-price-grid and pricing-grid stay 3-col on tablet; testimonials stay 2-col */
     .outcomes-top { gap: 2.5rem; }
   }
 
@@ -516,6 +530,7 @@
     /* APPROACH: slideshow on mobile */
     .approach-cards {
       flex-direction: row !important;
+      align-items: stretch;
       overflow-x: auto; scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       gap: 0 !important;
@@ -526,22 +541,43 @@
     .approach-cards::-webkit-scrollbar { display: none; }
     .approach-cards > .about-card {
       flex: 0 0 100%; scroll-snap-align: center;
+      align-self: stretch; height: auto;
     }
     .approach-inner-row {
       display: contents !important;
     }
     .approach-inner-row > .about-card {
       flex: 0 0 100%; scroll-snap-align: center;
+      align-self: stretch; height: auto;
     }
-    .approach-dots {
+    .approach-nav {
       display: flex !important;
-      justify-content: center; gap: 0.5rem;
-      margin-top: 1rem;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.2rem;
     }
 
     /* OUTCOMES */
     .outcomes-top { grid-template-columns: 1fr; gap: 2rem; }
     .tag-row { grid-template-columns: 1fr 1fr; }
+    .outcomes-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+    .schools-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 1rem;
+    }
+    .schools-list > li {
+      font-size: 0.82rem !important;
+      padding: 0.5rem 0 !important;
+      line-height: 1.25;
+    }
+    /* Cap the schools list height and let it scroll on very long mobile renderings */
+    .outcomes-grid > div:first-child { min-width: 0; }
+    .outcomes .tag,
+    .outcomes-grid span[style*="background:rgba(255,255,255,0.08)"] {
+      font-size: 0.78rem !important;
+      padding: 0.28rem 0.65rem !important;
+    }
 
     /* BOOTCAMP */
     .bootcamp-grid { grid-template-columns: 1fr; gap: 1.2rem; }
@@ -568,18 +604,45 @@
       margin-right: 0.5rem;
     }
     .pricing-grid > .price-card:last-child { margin-right: 0; }
-    .price-card { padding: 1.5rem; }
+    .price-card { padding: 1.5rem; cursor: default; }
+    .pricing-grid > .price-card:hover,
+    .pricing .pricing-grid > .price-card:hover {
+      border-color: rgba(255,255,255,0.12);
+      box-shadow: none;
+      transform: none;
+    }
     .pricing-nav {
       display: flex !important;
       gap: 0.6rem; margin-top: 1.2rem;
     }
 
-    /* TESTIMONIALS */
-    .test-grid { columns: 1; }
-    .test-card {
-    break-inside: avoid;
-    margin-bottom: 1.5rem; padding: 1.5rem; }
+    /* TESTIMONIALS: auto-scrolling slideshow on mobile */
+    .test-grid {
+      columns: auto !important;
+      display: flex;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: 0;
+      margin-left: -1.2rem; margin-right: -1.2rem;
+      padding: 0 1.2rem 0.5rem;
+      scrollbar-width: none;
+    }
+    .test-grid::-webkit-scrollbar { display: none; }
+    .test-grid > .test-card {
+      flex: 0 0 calc(100% - 0.5rem);
+      scroll-snap-align: center;
+      margin-right: 0.5rem;
+      margin-bottom: 0;
+      padding: 1.5rem;
+    }
+    .test-grid > .test-card:last-child { margin-right: 0; }
     .test-quote { font-size: 0.88rem; }
+    .test-nav {
+      display: flex !important;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.2rem;
+    }
 
     /* NEWSLETTER */
     .newsletter-form { flex-direction: column; }
@@ -599,7 +662,6 @@
     .trust-label { font-size: 0.58rem; letter-spacing: 0.04em; }
     .section-h2 { font-size: clamp(1.4rem, 7vw, 1.8rem); }
     .bc-price-grid { grid-template-columns: 1fr; }
-    .test-grid { columns: 1; }
     .cred-block { padding: 1.4rem; }
     .bootcamp-card { padding: 1.2rem; }
     .about-card { padding: 1rem; }
@@ -735,8 +797,8 @@
 </a>  <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#outcomes">Outcomes</a></li>
-    <li><a href="#pricing">One-on-One Sessions</a></li>
     <li><a href="#bootcamp">Bootcamp</a></li>
+    <li><a href="#pricing">One-on-One Sessions</a></li>
     <li><a href="#templates">Templates</a></li>
     <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#faq">FAQ</a></li>
@@ -752,8 +814,8 @@
   <ul>
     <li><a href="#about" onclick="closeMenu()">About</a></li>
     <li><a href="#outcomes" onclick="closeMenu()">Outcomes</a></li>
-    <li><a href="#pricing" onclick="closeMenu()">One-on-One Sessions</a></li>
     <li><a href="#bootcamp" onclick="closeMenu()">Bootcamp</a></li>
+    <li><a href="#pricing" onclick="closeMenu()">One-on-One Sessions</a></li>
     <li><a href="#templates" onclick="closeMenu()">Templates</a></li>
     <li><a href="#testimonials" onclick="closeMenu()">Reviews</a></li>
     <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
@@ -771,7 +833,7 @@
   <div class="hero-arc"></div>
   <div class="hero-arc2"></div>
   <div class="hero-inner">
-    <h1 class="hero-h1">Your <span class="highlight">dream school</span><br>is within reach.</h1>
+    <h1 class="hero-h1">Confidently reaching your <span class="highlight">dream school.</span></h1>
     <p class="hero-sub">Ivy League-trained guidance and tools built to develop you as a confident candidate, not just polish your application.</p>
     <div class="hero-cta-row">
       <a href="form.html" class="btn-hero">Apply to Join the Waitlist</a>
@@ -863,10 +925,13 @@
             </div>
           </div>
         </div>
-        <div class="approach-dots" aria-hidden="true">
-          <button class="approach-dot active" data-slide="0" aria-label="Slide 1"></button>
-          <button class="approach-dot" data-slide="1" aria-label="Slide 2"></button>
-          <button class="approach-dot" data-slide="2" aria-label="Slide 3"></button>
+        <div class="approach-nav" aria-hidden="true">
+          <button class="approach-nav-btn approach-nav-prev" type="button" aria-label="Previous">
+            <span class="pn-arrow">←</span>
+          </button>
+          <button class="approach-nav-btn approach-nav-next" type="button" aria-label="Next">
+            <span class="pn-arrow">→</span>
+          </button>
         </div>
       </div>
 
@@ -882,12 +947,12 @@
     <p class="section-p fade-in">Students we have helped get accepted, from undergraduate to graduate and professional programs.</p>
     <p style="font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:0.5rem;margin-bottom:2rem;">&#9733; = graduate acceptance also on record</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;" class="fade-in">
+    <div class="outcomes-grid fade-in" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
 
       <!-- LEFT: Schools as clean ruled list -->
       <div>
         <p style="font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:0.6rem;">A &ndash; Z</p>
-        <ul style="list-style:none;">
+        <ul class="schools-list" style="list-style:none;">
           <li style="display:flex;align-items:center;gap:0.4rem;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">American University</li>
           <li style="display:flex;align-items:center;gap:0.4rem;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Bryn Mawr College</li>
           <li style="display:flex;align-items:center;gap:0.4rem;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:white;font-weight:500;">Columbia University <span style="color:var(--gold);font-size:0.75rem;line-height:1;vertical-align:middle;">&#9733;</span></li>
@@ -1021,7 +1086,7 @@
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
-              <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">Access to Vetted Templates And Resources</td>
+              <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">Access to Vetted Templates and Resources</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.4);font-size:0.88rem;">$500</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;">✓</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:var(--gold);font-size:1rem;background:rgba(240,180,30,0.05);">✓</td>
@@ -1059,8 +1124,8 @@
               <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">Certificate of Completion To Include On Your Resume</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.4);font-size:0.88rem;font-style:italic;">Bonus</td>
               <td style="padding:0.9rem 0.6rem;text-align:center;color:rgba(255,255,255,0.2);font-size:1rem;">—</td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;background:rgba(240,180,30,0.05);"><span style="font-size:0.84rem;color:var(--gold);font-weight:700;line-height:1.4;display:block;">Prospect Scholar Certification</span></td>
-              <td style="padding:0.9rem 0.6rem;text-align:center;"><span style="font-size:0.84rem;color:var(--gold);font-weight:700;line-height:1.4;display:block;">Vantage Scholar Certification</span></td>
+              <td style="padding:0.9rem 0.6rem;text-align:center;background:rgba(240,180,30,0.05);"><span style="font-size:0.84rem;color:var(--gold);font-weight:700;line-height:1.4;display:block;">Prospect Scholar</span></td>
+              <td style="padding:0.9rem 0.6rem;text-align:center;"><span style="font-size:0.84rem;color:var(--gold);font-weight:700;line-height:1.4;display:block;">Vantage Scholar</span></td>
             </tr>
             <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
               <td style="padding:0.9rem 1rem;color:rgba(255,255,255,0.85);line-height:1.4;">3 Personalized One-on-One Sessions</td>
@@ -1099,7 +1164,7 @@
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Curated bootcamp curriculum with Ivy League-trained advisors</li>
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Weekly Education Webinars</li>
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Weekly Open Q&amp;A Sessions</li>
-            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Vetted Templates And Resources</li>
+            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Access to Vetted Templates and Resources</li>
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Community Chat Access</li>
           </ul>
         </div>
@@ -1119,7 +1184,7 @@
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Internship &amp; Extracurricular Guidance</li>
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Exclusive Session With Admissions Representatives</li>
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Additional Vetted Templates And Resources</li>
-            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Certificate: <strong style="color:var(--gold);">Prospect Scholar Certification</strong></li>
+            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Certificate of Completion: <strong style="color:var(--gold);">Prospect Scholar</strong></li>
           </ul>
         </div>
 
@@ -1131,7 +1196,7 @@
           <ul style="list-style:none;display:flex;flex-direction:column;gap:0.55rem;">
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Everything in Foundational &amp; Accelerator</li>
             <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>3 Personalized One-on-One Sessions</li>
-            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Certificate: <strong style="color:var(--gold);">Vantage Scholar Certification</strong></li>
+            <li style="display:flex;gap:0.6rem;font-size:0.95rem;color:rgba(255,255,255,0.85);"><span style="color:var(--gold);flex-shrink:0;">✓</span>Certificate of Completion: <strong style="color:var(--gold);">Vantage Scholar</strong></li>
           </ul>
         </div>
 
@@ -1143,16 +1208,13 @@
           .bc-table-mobile { display: flex !important; }
         }
       </style>
-      <div class="bc-addons">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:0.5rem;">
-          <h4 style="margin-bottom:0;">Ivy League Prep Add-On</h4>
-          <span style="display:inline-block;background:var(--gold);color:var(--navy);font-size:0.82rem;font-weight:800;padding:0.25rem 0.75rem;border-radius:999px;">$1,500</span>
+      <div style="margin-top:3rem;padding-top:2rem;border-top:2px dashed rgba(240,180,30,0.4);">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:0.6rem;">Optional Add-On</div>
+        <div style="display:flex;justify-content:flex-start;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:0.5rem;">
+          <h4 style="margin-bottom:0;font-size:1.05rem;font-weight:800;color:var(--navy);">Ivy League Prep</h4>
+          <span style="display:inline-block;background:var(--gold);color:var(--navy);font-size:0.82rem;font-weight:800;padding:0.25rem 0.75rem;border-radius:999px;">+$1,500</span>
         </div>
-        <p style="margin-top:0.25rem;font-size:0.92rem;color:var(--muted);line-height:1.6;">Available to be added to any tier. 3 dedicated small group workshops and additional resources for candidates applying to Ivy league and top ranked schools.</p>
-      </div>
-      <div class="bc-addons">
-        <h4>Need one-on-one help instead?</h4>
-        <p style="margin-top:0.5rem;font-size:0.92rem;color:rgba(255,255,255,0.55);"><a href="#pricing" style="color:var(--gold);text-decoration:underline;">See our One-on-One Sessions</a> for standalone sessions and pricing.</p>
+        <p style="font-size:0.92rem;color:rgba(255,255,255,0.65);line-height:1.6;max-width:640px;">Available to be added to any tier. Three dedicated close-group workshops and additional curated resources for applicants targeting Ivy League and top-ranked universities.</p>
       </div>
     </div>
 
@@ -1170,10 +1232,10 @@
     <p class="section-p fade-in" style="margin-bottom:2rem;">In addition to the bootcamp, our one-on-one sessions give you personal access to an expert advisor for your specific needs.</p>
 
     <div class="pricing-grid">
-      <div class="price-card fade-in" data-service="One-on-One Video Call (Starting at $200 / 1-hour session)">
+      <div class="price-card fade-in" data-service="Video Call (Starting at $200 /1 hour session)">
         <div class="pc-header">
-          <h3>One-on-One Video Call</h3>
-          <div class="price-amount">Starting at $200 <span style="font-size:0.78rem;font-weight:500;color:var(--muted);">/ 1-hour session</span></div>
+          <h3>Video Call</h3>
+          <div class="price-amount">Starting at $200 <span style="font-size:0.78rem;font-weight:500;color:var(--muted);display:block;">/1 hour session</span></div>
         </div>
         <hr class="pc-divider">
         <div class="pc-included">
@@ -1192,10 +1254,10 @@
           </ul>
         </div>
       </div>
-      <div class="price-card fade-in" data-service="Virtual Review (Starting at $150 / 1-hour session)">
+      <div class="price-card fade-in" data-service="Virtual Review (Starting at $150 /1 hour session)">
         <div class="pc-header">
           <h3>Virtual Review</h3>
-          <div class="price-amount">Starting at $150 <span style="font-size:0.78rem;font-weight:500;color:var(--muted);">/ 1-hour session</span></div>
+          <div class="price-amount">Starting at $150 <span style="font-size:0.78rem;font-weight:500;color:var(--muted);display:block;">/1 hour session</span></div>
         </div>
         <hr class="pc-divider">
         <div class="pc-included">
@@ -1354,7 +1416,7 @@
       <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
         <button onclick="toggleCat('cat-lor')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
           <div style="display:flex;align-items:center;gap:0.9rem;">
-            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Letter of Recommendation Resources</span>
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Letters of Recommendation Guides</span>
             <span style="font-size:0.75rem;color:var(--muted);">3 resources</span>
           </div>
           <svg id="arr-cat-lor" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1400,7 +1462,7 @@
       <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
         <button onclick="toggleCat('cat-test')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
           <div style="display:flex;align-items:center;gap:0.9rem;">
-            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Test Prep</span>
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Standardized Test Prep</span>
             <span style="font-size:0.75rem;color:var(--muted);">3 resources</span>
           </div>
           <svg id="arr-cat-test" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1544,6 +1606,14 @@
         </div>
       </div>
     </div>
+    <div class="test-nav" aria-hidden="true">
+      <button class="test-nav-btn test-nav-prev" type="button" aria-label="Previous">
+        <span class="pn-arrow">←</span>
+      </button>
+      <button class="test-nav-btn test-nav-next" type="button" aria-label="Next">
+        <span class="pn-arrow">→</span>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -1644,7 +1714,7 @@
 <section class="newsletter">
   <div class="newsletter-inner">
     <h3>Stay in the Loop</h3>
-    <p>Get admissions tips, resource updates, and insights from our team, straight to your inbox. Biweekly emails, no spam. Opt out any time.</p>
+    <p>Get free admissions tips, resource updates, and insights from our team, straight to your inbox. Biweekly emails, no spam. Opt out any time.</p>
     <form class="newsletter-form" action="https://formsubmit.co/12ideas12months@gmail.com" method="POST" onsubmit="handleNewsletter(event)">
       <input type="hidden" name="_subject" value="New Newsletter Signup - MyAppSuccess" />
       <input type="hidden" name="_captcha" value="false" />
@@ -1668,12 +1738,24 @@
     grids.forEach(function(grid) {
       var cards = grid.querySelectorAll('.price-card');
       if (cards.length < 2) return;
-      // Reset
+      // Reset both header and included heights
       cards.forEach(function(c) {
+        var hd = c.querySelector('.pc-header');
         var inc = c.querySelector('.pc-included');
+        if (hd) hd.style.minHeight = '';
         if (inc) inc.style.minHeight = '';
       });
-      // Measure and match pc-included heights so pc-for aligns
+      // Match pc-header heights so first divider aligns
+      var maxHd = 0;
+      cards.forEach(function(c) {
+        var hd = c.querySelector('.pc-header');
+        if (hd) maxHd = Math.max(maxHd, hd.offsetHeight);
+      });
+      cards.forEach(function(c) {
+        var hd = c.querySelector('.pc-header');
+        if (hd) hd.style.minHeight = maxHd + 'px';
+      });
+      // Match pc-included heights so second divider (above "Who Is This For?") aligns
       var maxH = 0;
       cards.forEach(function(c) {
         var inc = c.querySelector('.pc-included');
@@ -1773,27 +1855,63 @@
     }
   });
 
-  // ── Approach slideshow (mobile) ──
+  // ── Approach slideshow with looping arrow nav (mobile) ──
   (function() {
     var track = document.querySelector('.approach-cards');
-    var dots = document.querySelectorAll('.approach-dot');
-    if (!track || !dots.length) return;
-    var slides = track.querySelectorAll('.about-card');
+    var nav = document.querySelector('.approach-nav');
+    if (!track || !nav) return;
+    var cards = track.querySelectorAll('.about-card');
+    if (cards.length < 2) return;
+    var prevBtn = nav.querySelector('.approach-nav-prev');
+    var nextBtn = nav.querySelector('.approach-nav-next');
+    var prevLabel = prevBtn.querySelector('.pn-label');
+    var nextLabel = nextBtn.querySelector('.pn-label');
 
-    // Update active dot based on scroll position
-    function syncDot() {
-      var idx = Math.round(track.scrollLeft / track.clientWidth);
-      dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
-    }
-    track.addEventListener('scroll', syncDot, { passive: true });
-
-    // Click a dot to jump to that slide
-    dots.forEach(function(dot, i) {
-      dot.addEventListener('click', function() {
-        var target = slides[i];
-        if (target) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
-      });
+    // Card titles from each h4
+    var titles = Array.prototype.map.call(cards, function(c) {
+      var h = c.querySelector('h4');
+      return h ? h.textContent.trim() : '';
     });
+    // Shorter nav labels for any titles that are too long
+    var shorten = {
+      'Advisors Who Have Been There': 'Our Story',
+      'Other Programs Prep Applications, We Prep Candidates': 'We Prep Candidates'
+    };
+    var navLabels = titles.map(function(t) { return shorten[t] || t; });
+
+    var currentIdx = 0;
+
+    function setLabels(idx) {
+      if (!prevLabel || !nextLabel) return;
+      var prevIdx = (idx - 1 + cards.length) % cards.length;
+      var nextIdx = (idx + 1) % cards.length;
+      prevLabel.textContent = navLabels[prevIdx];
+      nextLabel.textContent = navLabels[nextIdx];
+    }
+
+    function sync() {
+      if (!track.clientWidth) return;
+      var idx = Math.round(track.scrollLeft / track.clientWidth);
+      if (idx < 0) idx = 0;
+      if (idx > cards.length - 1) idx = cards.length - 1;
+      currentIdx = idx;
+      setLabels(idx);
+    }
+    track.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+
+    prevBtn.addEventListener('click', function() {
+      var targetIdx = (currentIdx - 1 + cards.length) % cards.length;
+      var target = cards[targetIdx];
+      if (target) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', function() {
+      var targetIdx = (currentIdx + 1) % cards.length;
+      var target = cards[targetIdx];
+      if (target) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    });
+
+    setLabels(0);
   })();
 
   // ── Pricing slideshow with labeled arrows (mobile) ──
@@ -1810,12 +1928,10 @@
     // Tier names pulled from each card's h3
     var tiers = Array.prototype.map.call(cards, function(c) {
       var h = c.querySelector('h3');
-      return h ? h.textContent.trim() : '';
+      return h ? h.textContent.replace(/\s+/g, ' ').trim() : '';
     });
-    // Shorter display labels for the nav buttons
-    var navLabels = tiers.map(function(t) {
-      return t === 'One-on-One Video Call' ? 'Video Call' : t;
-    });
+    // h3 text is used directly as the nav label
+    var navLabels = tiers.slice();
 
     var currentIdx = 0;
 
@@ -1851,6 +1967,119 @@
     });
 
     setLabels(0);
+  })();
+
+  // ── Testimonials auto-scrolling carousel (mobile only) ──
+  (function() {
+    var track = document.querySelector('.test-grid');
+    if (!track) return;
+    var cards = track.querySelectorAll('.test-card');
+    if (cards.length < 2) return;
+
+    var MQ = window.matchMedia('(max-width: 768px)');
+
+    // Ensure all cards are visible on mobile (fade-in observer doesn't catch
+    // horizontally off-screen siblings)
+    function ensureVisible() {
+      if (MQ.matches) {
+        cards.forEach(function(c) { c.classList.add('visible'); });
+      }
+    }
+    ensureVisible();
+
+    // Arrow nav setup
+    var nav = document.querySelector('.test-nav');
+    var prevBtn = nav && nav.querySelector('.test-nav-prev');
+    var nextBtn = nav && nav.querySelector('.test-nav-next');
+    var prevLabel = prevBtn && prevBtn.querySelector('.pn-label');
+    var nextLabel = nextBtn && nextBtn.querySelector('.pn-label');
+
+    // Reviewer names pulled from each card
+    var names = Array.prototype.map.call(cards, function(c) {
+      var n = c.querySelector('.test-name');
+      return n ? n.textContent.trim() : '';
+    });
+
+    function setLabels(idx) {
+      if (!prevLabel || !nextLabel) return;
+      var prevIdx = (idx - 1 + cards.length) % cards.length;
+      var nextIdx = (idx + 1) % cards.length;
+      prevLabel.textContent = names[prevIdx];
+      nextLabel.textContent = names[nextIdx];
+    }
+
+    var timer = null;
+    var inView = false;
+    var paused = false;
+
+    function currentIdx() {
+      return Math.round(track.scrollLeft / track.clientWidth);
+    }
+    function advance() {
+      var next = currentIdx() + 1;
+      if (next >= cards.length) next = 0;
+      var target = cards[next];
+      if (target) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    }
+    function start() {
+      stop();
+      if (!MQ.matches || !inView || paused) return;
+      timer = setInterval(advance, 3000);
+    }
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+    function pauseBriefly() {
+      paused = true;
+      stop();
+      clearTimeout(pauseBriefly._t);
+      pauseBriefly._t = setTimeout(function() { paused = false; start(); }, 5000);
+    }
+
+    // Pause while user is actively interacting
+    track.addEventListener('touchstart', pauseBriefly, { passive: true });
+    track.addEventListener('mousedown', pauseBriefly);
+    track.addEventListener('wheel', pauseBriefly, { passive: true });
+
+    // Update labels as user scrolls
+    track.addEventListener('scroll', function() { setLabels(currentIdx()); }, { passive: true });
+    window.addEventListener('resize', function() { setLabels(currentIdx()); });
+
+    // Arrow click handlers (pause auto-scroll, then jump)
+    if (prevBtn) prevBtn.addEventListener('click', function() {
+      pauseBriefly();
+      var idx = currentIdx();
+      var targetIdx = (idx - 1 + cards.length) % cards.length;
+      var target = cards[targetIdx];
+      if (target) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    });
+    if (nextBtn) nextBtn.addEventListener('click', function() {
+      pauseBriefly();
+      var idx = currentIdx();
+      var targetIdx = (idx + 1) % cards.length;
+      var target = cards[targetIdx];
+      if (target) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    });
+
+    setLabels(0);
+
+    // Only auto-scroll when section is visible
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries) {
+        inView = entries[0].isIntersecting;
+        if (inView) start(); else stop();
+      }, { threshold: 0.25 });
+      io.observe(track);
+    } else {
+      inView = true;
+      start();
+    }
+
+    // Stop/restart on breakpoint change
+    MQ.addEventListener('change', function() {
+      ensureVisible();
+      if (MQ.matches) start(); else stop();
+    });
   })();
 </script>
 </body>
