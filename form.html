@@ -616,9 +616,13 @@
 <script>
   // Fire-and-forget contact webhook then reveal rest of form
   function submitContactAndContinue(role) {
-    var firstName = document.getElementById(role === 'student' ? 's-first-name' : 'p-first-name').value.trim();
-    var lastName  = document.getElementById(role === 'student' ? 's-last-name'  : 'p-last-name').value.trim();
-    var email     = document.getElementById(role === 'student' ? 's-email'       : 'p-email').value.trim();
+    var firstNameEl = document.getElementById(role === 'student' ? 's-first-name' : 'p-first-name');
+    var lastNameEl  = document.getElementById(role === 'student' ? 's-last-name'  : 'p-last-name');
+    var emailEl     = document.getElementById(role === 'student' ? 's-email'      : 'p-email');
+
+    var firstName = firstNameEl ? firstNameEl.value.trim() : '';
+    var lastName  = lastNameEl  ? lastNameEl.value.trim()  : '';
+    var email     = emailEl     ? emailEl.value.trim()     : '';
 
     if (!firstName || !lastName || !email) {
       alert('Please fill in your first name, last name, and email before continuing.');
@@ -631,15 +635,18 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: firstName + ' ' + lastName, email: email, gpa: '', major: '' }),
       mode: 'no-cors'
-    }).catch(function() {}); // ignore errors
+    }).catch(function() {});
 
-    // Hide continue button, show rest of form
+    // Hide continue button, show rest of form and submit button
     document.getElementById(role + '-continue-wrap').style.display = 'none';
-    document.getElementById(role + '-rest').style.display = 'block';
-    document.getElementById('submit-wrap').style.display = 'block';
     var restEl = document.getElementById(role + '-rest');
-    var top = restEl.getBoundingClientRect().top + window.pageYOffset - 20;
-    window.scrollTo({ top: top, behavior: 'smooth' });
+    restEl.style.display = 'block';
+    document.getElementById('submit-wrap').style.display = 'block';
+    document.getElementById('submit-btn').disabled = false;
+    setTimeout(function() {
+      var top = restEl.getBoundingClientRect().top + window.pageYOffset - 20;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 100);
   }
 
   // Role selection
@@ -649,7 +656,6 @@
     document.querySelector('input[name="role"][value="' + role + '"]').checked = true;
     document.getElementById('section-student').classList.toggle('active', role === 'student');
     document.getElementById('section-parent').classList.toggle('active', role === 'parent');
-    document.getElementById('submit-btn').disabled = false;
     document.getElementById('required-note').style.display = 'block';
     setTimeout(() => {
       document.getElementById('section-' + role).scrollIntoView({ behavior: 'smooth', block: 'start' });
