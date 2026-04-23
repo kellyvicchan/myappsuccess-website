@@ -188,7 +188,6 @@
   }
 
   .divider { height: 1px; background: var(--border); margin: 2rem 0; }
-  .rest-hidden { display: none; }
   .hint { font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; line-height: 1.6; }
 
   .form-submit { text-align: center; margin-top: 2.5rem; }
@@ -304,8 +303,54 @@
             <button type="button" class="btn-gold" onclick="submitContactAndContinue('student')">Continue →</button>
           </div>
 
-          <!-- REST OF STUDENT FORM (hidden until contact submitted) -->
-          <div id="s-rest" class="rest-hidden">
+
+        </div>
+
+        <!-- ══════════════ PARENT FORM ══════════════ -->
+        <div class="form-section" id="section-parent">
+
+          <div class="section-label">Contact Info</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Your First Name *</label>
+              <input type="text" id="p-first-name" placeholder="Your first name" />
+            </div>
+            <div class="form-group">
+              <label>Your Last Name *</label>
+              <input type="text" id="p-last-name" placeholder="Your last name" />
+            </div>
+            <div class="form-group">
+              <label>Your Phone Number *</label>
+              <input type="tel" placeholder="+1 (555) 000-0000" />
+            </div>
+            <div class="form-group">
+              <label>Your Email *</label>
+              <input type="email" id="p-email" placeholder="you@email.com" />
+            </div>
+            <div class="form-group full">
+              <label>Where are you currently located? *</label>
+              <div class="radio-group" id="p-location-group">
+                <label class="radio-label"><input type="radio" name="p-location" value="US" /><span class="radio-custom"></span><span>United States and Territories</span></label>
+                <label class="radio-label"><input type="radio" name="p-location" value="Outside US" /><span class="radio-custom"></span><span>Outside the United States</span></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTINUE BUTTON after contact -->
+          <div id="p-continue-wrap" style="text-align:center;margin-top:1.5rem;">
+            <button type="button" class="btn-gold" onclick="submitContactAndContinue('parent')">Continue →</button>
+          </div>
+
+
+        </div>
+
+        <div class="form-submit" id="submit-wrap" style="display:none;">
+          <button type="submit" class="btn-gold" id="submit-btn" disabled>Submit Application →</button>
+        </div>
+
+        <!-- ══════════════ STEP 2: STUDENT REST ══════════════ -->
+        <div id="step2-student" style="display:none;">
+
 
           <div class="divider"></div>
           <div class="section-label">Background</div>
@@ -384,6 +429,15 @@
           </div>
 
           <div class="divider"></div>
+          <div class="section-label">Referral</div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Who referred you to My App Success? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+              <input type="text" placeholder="Name of person who referred you" />
+            </div>
+          </div>
+
+          <div class="divider"></div>
           <label class="consent-row" id="s-consent-row" onclick="toggleConsent('s-consent-row', 's-consent-input')">
             <input type="checkbox" id="s-consent-input" required />
             <span class="check-custom">
@@ -391,46 +445,12 @@
             </span>
             <span class="consent-text">Yes, add me to the My App Success email list for tips, updates, and admissions insights. No spam. Opt out any time.</span>
           </label>
-          </div><!-- end s-rest -->
+
         </div>
 
-        <!-- ══════════════ PARENT FORM ══════════════ -->
-        <div class="form-section" id="section-parent">
+        <!-- ══════════════ STEP 2: PARENT REST ══════════════ -->
+        <div id="step2-parent" style="display:none;">
 
-          <div class="section-label">Contact Info</div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Your First Name *</label>
-              <input type="text" id="p-first-name" placeholder="Your first name" />
-            </div>
-            <div class="form-group">
-              <label>Your Last Name *</label>
-              <input type="text" id="p-last-name" placeholder="Your last name" />
-            </div>
-            <div class="form-group">
-              <label>Your Phone Number *</label>
-              <input type="tel" placeholder="+1 (555) 000-0000" />
-            </div>
-            <div class="form-group">
-              <label>Your Email *</label>
-              <input type="email" id="p-email" placeholder="you@email.com" />
-            </div>
-            <div class="form-group full">
-              <label>Where are you currently located? *</label>
-              <div class="radio-group" id="p-location-group">
-                <label class="radio-label"><input type="radio" name="p-location" value="US" /><span class="radio-custom"></span><span>United States and Territories</span></label>
-                <label class="radio-label"><input type="radio" name="p-location" value="Outside US" /><span class="radio-custom"></span><span>Outside the United States</span></label>
-              </div>
-            </div>
-          </div>
-
-          <!-- CONTINUE BUTTON after contact -->
-          <div id="p-continue-wrap" style="text-align:center;margin-top:1.5rem;">
-            <button type="button" class="btn-gold" onclick="submitContactAndContinue('parent')">Continue →</button>
-          </div>
-
-          <!-- REST OF PARENT FORM (hidden until contact submitted) -->
-          <div id="p-rest" class="rest-hidden">
 
           <div class="divider"></div>
           <div class="section-label">About Your Student</div>
@@ -583,6 +603,15 @@
           </div>
 
           <div class="divider"></div>
+          <div class="section-label">Referral</div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Who referred you to My App Success? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+              <input type="text" placeholder="Name of person who referred you" />
+            </div>
+          </div>
+
+          <div class="divider"></div>
           <label class="consent-row" id="p-consent-row" onclick="toggleConsent('p-consent-row', 'p-consent-input')">
             <input type="checkbox" id="p-consent-input" required />
             <span class="check-custom">
@@ -590,11 +619,7 @@
             </span>
             <span class="consent-text">Yes, add me to the My App Success email list for tips, updates, and admissions insights. No spam. Opt out any time.</span>
           </label>
-          </div><!-- end p-rest -->
-        </div>
 
-        <div class="form-submit" id="submit-wrap" style="display:none;">
-          <button type="submit" class="btn-gold" id="submit-btn" disabled>Submit Application →</button>
         </div>
       </form>
     </div>
@@ -638,23 +663,19 @@
       mode: 'no-cors'
     }).catch(function() {});
 
-    // Hide continue button
-    document.getElementById(role + '-continue-wrap').style.display = 'none';
+    // Hide the contact form section
+    document.getElementById('section-' + role).style.display = 'none';
 
-    // Show rest of form
-    var restEl = document.getElementById(role + '-rest');
-    restEl.classList.remove('rest-hidden');
+    // Show step 2
+    var step2 = document.getElementById('step2-' + role);
+    step2.style.display = 'block';
 
     // Show submit button
     document.getElementById('submit-wrap').style.display = 'block';
     document.getElementById('submit-btn').disabled = false;
 
-    // Scroll: place an anchor at the top of restEl and jump to it
-    var anchor = document.createElement('div');
-    anchor.id = 'continue-anchor';
-    restEl.insertBefore(anchor, restEl.firstChild);
-    window.location.hash = '';
-    window.location.hash = 'continue-anchor';
+    // Scroll to top of step 2
+    window.scrollTo({ top: step2.offsetTop - 20, behavior: 'smooth' });
   }
 
   // Role selection
