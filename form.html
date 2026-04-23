@@ -637,11 +637,9 @@
     document.getElementById(role + '-continue-wrap').style.display = 'none';
     document.getElementById(role + '-rest').style.display = 'block';
     document.getElementById('submit-wrap').style.display = 'block';
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        document.getElementById(role + '-rest').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
+    var restEl = document.getElementById(role + '-rest');
+    var top = restEl.getBoundingClientRect().top + window.pageYOffset - 20;
+    window.scrollTo({ top: top, behavior: 'smooth' });
   }
 
   // Role selection
