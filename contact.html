@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact Us | MyAppSuccess</title>
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #1e466e;
+  --navy-mid: #285888;
+  --gold: #f0b41e;
+  --gold-dark: #c99012;
+  --gold-bg: #fef9e6;
+  --white: #ffffff;
+  --off-white: #f5f7fa;
+  --text: #1e466e;
+  --muted: #5c6a82;
+  --border: #e2e8f0;
+  --font: 'League Spartan', sans-serif;
+  --radius: 14px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--text); background: var(--off-white); overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; height: 72px;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 2px 16px rgba(30,70,110,0.07);
+}
+.nav-logo img { height: 50px; width: auto; display: block; }
+.nav-back { font-size: 0.82rem; font-weight: 600; color: var(--navy); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+.nav-back:hover { color: var(--navy-mid); }
+@media (max-width: 600px) { nav { padding: 0 1.2rem; } }
+
+/* MAIN */
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 110px 1.5rem 3rem; }
+
+.contact-card {
+  background: white; border-radius: 18px;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 4px 32px rgba(30,70,110,0.08);
+  padding: 2.8rem 2.5rem;
+  width: 100%; max-width: 500px;
+}
+
+.contact-eyebrow {
+  font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--gold-dark);
+  margin-bottom: 0.6rem;
+}
+.contact-card h1 {
+  font-size: 1.75rem; font-weight: 800; color: var(--navy);
+  letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.5rem;
+}
+.contact-card h1 span { color: var(--gold-dark); }
+.contact-sub {
+  font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* FORM */
+.form-group { margin-bottom: 1.1rem; }
+label {
+  display: block; font-size: 0.78rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 0.35rem; letter-spacing: 0.02em;
+}
+input, textarea, select {
+  width: 100%; font-family: var(--font); font-size: 0.9rem;
+  color: var(--text); background: var(--off-white);
+  border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 0.75rem 1rem; outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--navy); background: white;
+}
+textarea { resize: vertical; min-height: 120px; }
+
+.btn-submit {
+  width: 100%; margin-top: 0.5rem;
+  background: var(--gold); color: var(--navy);
+  font-family: var(--font); font-weight: 800; font-size: 0.95rem;
+  border: none; border-radius: 10px; padding: 0.9rem 1.5rem;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.01em;
+}
+.btn-submit:hover { background: var(--gold-dark); transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.6; cursor: default; transform: none; }
+
+.privacy-note {
+  font-size: 0.72rem; color: var(--muted); text-align: center;
+  margin-top: 0.9rem; line-height: 1.5;
+}
+
+/* SUCCESS */
+.success-screen {
+  display: none; text-align: center; padding: 1rem 0;
+}
+.success-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--gold-bg); border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.2rem;
+  font-size: 1.4rem;
+}
+.success-screen h2 { font-size: 1.3rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+.success-screen p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem; }
+.btn-home {
+  display: inline-block; background: var(--navy); color: white;
+  font-family: var(--font); font-weight: 700; font-size: 0.88rem;
+  text-decoration: none; padding: 0.7rem 1.6rem;
+  border-radius: 10px; transition: background 0.2s;
+}
+.btn-home:hover { background: var(--navy-mid); }
+
+/* FOOTER */
+footer {
+  background: var(--navy); padding: 1.2rem 3rem;
+  text-align: center; border-top: 2px solid rgba(240,180,30,0.25);
+}
+footer p { font-size: 0.76rem; color: rgba(255,255,255,0.3); }
+@media (max-width: 600px) { footer { padding: 1rem 1.2rem; } }
+@media (max-width: 540px) {
+  .contact-card { padding: 2rem 1.4rem; }
+  .contact-card h1 { font-size: 1.4rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="NavLogo" alt="MyAppSuccess" /></a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="contact-card">
+
+    <!-- FORM VIEW -->
+    <div id="form-view">
+      <div class="contact-eyebrow">Get in Touch</div>
+      <h1>We'd love to <span>hear from you.</span></h1>
+      <p class="contact-sub">Questions about our programs, pricing, or anything else — send us a message and we'll get back to you shortly.</p>
+
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="First and Last name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject">
+            <option value="General Question">General Question</option>
+            <option value="The Bootcamp">The Bootcamp</option>
+            <option value="Private Sessions">Private Sessions</option>
+            <option value="Templates & Guides">Templates &amp; Guides</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="submit-btn">Send Message →</button>
+        <p class="privacy-note">We'll respond within 1 to 2 business days.</p>
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>myappsuccess.com · &copy; 2026 MyAppSuccess</p>
+</footer>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  var formData = new FormData();
+  formData.append('name', document.getElementById('name').value);
+  formData.append('email', document.getElementById('email').value);
+  formData.append('_subject', 'Contact: ' + document.getElementById('subject').value + ' — MyAppSuccess');
+  formData.append('_template', 'box');
+  formData.append('_captcha', 'false');
+  formData.append('message',
+    'From: ' + document.getElementById('name').value + '\n' +
+    'Email: ' + document.getElementById('email').value + '\n' +
+    'Subject: ' + document.getElementById('subject').value + '\n\n' +
+    document.getElementById('message').value
+  );
+
+  try {
+    await fetch('https://formsubmit.co/hello@myappsuccess.com', {
+      method: 'POST',
+      body: formData
+    });
+  } catch(err) {
+    // silent fail
+  }
+
+  window.location.href = 'thank-you.html';
+});
+</script>
+</body>
+</html>
