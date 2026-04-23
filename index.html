@@ -50,10 +50,11 @@
     box-shadow: 0 2px 16px rgba(30,70,110,0.07);
   }
   .nav-logo img { height: 50px; width: auto; display: block; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; margin: 0; padding: 0; }
+  .nav-links > li { display: flex; align-items: center; height: 72px; }
   .nav-links a {
     font-size: 0.88rem; font-weight: 600; text-decoration: none;
-    color: var(--navy); transition: color 0.2s;
+    color: var(--navy); transition: color 0.2s; line-height: 1;
   }
   .nav-links a:hover { color: var(--gold-dark); }
   .nav-cta {
@@ -62,6 +63,35 @@
     font-weight: 700 !important; transition: background 0.2s !important;
   }
   .nav-cta:hover { background: var(--gold-dark) !important; }
+
+  /* DROPDOWN */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > span { display: flex; align-items: center; gap: 0.3rem; font-size: 0.88rem; font-weight: 600; color: var(--navy); }
+  .nav-dropdown > span::after {
+    content: ''; display: inline-block;
+    width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid currentColor;
+    transition: transform 0.2s;
+    margin-top: 1px;
+  }
+  .nav-dropdown:hover > span::after { transform: rotate(180deg); }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 10px); left: 50%;
+    transform: translateX(-50%);
+    background: white; border: 1.5px solid var(--border);
+    border-radius: 10px; box-shadow: 0 8px 28px rgba(30,70,110,0.12);
+    min-width: 170px; padding: 0.4rem 0; list-style: none; z-index: 200;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu li a {
+    display: block; padding: 0.6rem 1.1rem;
+    font-size: 0.84rem; font-weight: 600; color: var(--gold-dark);
+    text-decoration: none; white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-dropdown-menu li a:hover { background: var(--gold-bg); color: var(--navy); }
 
   /* HERO */
   .hero {
@@ -480,9 +510,25 @@
   .test-source { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 0.1rem; }
 
   /* FOOTER */
-  footer { background: var(--navy); padding: 1.8rem 3rem; text-align: center; border-top: 2px solid rgba(240,180,30,0.2); }
-  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
-  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  footer { background: var(--navy); padding: 2rem 3rem 1.2rem; border-top: 2px solid rgba(240,180,30,0.25); }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; }
+  .footer-brand-logo { font-size: 1rem; font-weight: 800; color: white; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+  .footer-brand-logo span { color: var(--gold); }
+  .footer-tagline { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.5; max-width: 220px; }
+  .footer-col h5 { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.65rem; }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+  .footer-col ul li a { font-size: 0.8rem; font-weight: 500; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .footer-copy { font-size: 0.74rem; color: rgba(255,255,255,0.25); }
+  @media (max-width: 768px) {
+    footer { padding: 1.8rem 1.5rem 1rem; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+  }
+  @media (max-width: 480px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 1.2rem; }
+  }
 
   /* FADE IN */
   .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -495,9 +541,9 @@
     .outcomes-top { gap: 2.5rem; }
   }
 
-  /* ── TABLET/iPad NAV (switch to mobile nav mode) ── */
+  /* ── TABLET/iPad NAV ── */
   @media (max-width: 1024px) {
-    nav { padding: 0 1.5rem; }
+    nav { padding: 0 1.2rem; }
     .nav-links { display: none; }
   }
 
@@ -531,12 +577,13 @@
     .approach-cards {
       flex-direction: row !important;
       align-items: stretch;
-      overflow-x: auto; scroll-snap-type: x mandatory;
+      overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       gap: 0 !important;
       margin-left: -1.2rem; margin-right: -1.2rem;
       padding: 0 1.2rem;
       scrollbar-width: none;
+      touch-action: pan-x;
     }
     .approach-cards::-webkit-scrollbar { display: none; }
     .approach-cards > .about-card {
@@ -549,6 +596,7 @@
     .approach-inner-row > .about-card {
       flex: 0 0 100%; scroll-snap-align: center;
       align-self: stretch; height: auto;
+      touch-action: pan-x;
     }
     .approach-nav {
       display: flex !important;
@@ -590,12 +638,13 @@
       display: flex !important;
       grid-template-columns: none;
       grid-template-rows: none;
-      overflow-x: auto; scroll-snap-type: x mandatory;
+      overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       gap: 0 !important;
       margin-left: -1.2rem; margin-right: -1.2rem;
       padding: 0 1.2rem 0.5rem;
       scrollbar-width: none;
+      touch-action: pan-x;
     }
     .pricing-grid::-webkit-scrollbar { display: none; }
     .pricing-grid > .price-card {
@@ -620,12 +669,13 @@
     .test-grid {
       columns: auto !important;
       display: flex;
-      overflow-x: auto; scroll-snap-type: x mandatory;
+      overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       gap: 0;
       margin-left: -1.2rem; margin-right: -1.2rem;
       padding: 0 1.2rem 0.5rem;
       scrollbar-width: none;
+      touch-action: pan-x;
     }
     .test-grid::-webkit-scrollbar { display: none; }
     .test-grid > .test-card {
@@ -649,7 +699,7 @@
     .newsletter-form button { width: 100%; }
 
     /* FOOTER */
-    footer { padding: 1.5rem 1.2rem; }
+    footer { padding: 2rem 1.2rem 1.2rem; }
   }
 
   /* ── SMALL MOBILE 480px ── */
@@ -704,10 +754,11 @@
 
   /* HAMBURGER / MOBILE NAV */
   .hamburger {
-    display: none; flex-direction: column; justify-content: center;
+    display: flex; flex-direction: column; justify-content: center;
     gap: 5px; cursor: pointer; padding: 6px; border: none;
     background: transparent; z-index: 200;
   }
+  @media (min-width: 1025px) { .hamburger { display: none; } }
   .hamburger span {
     display: block; width: 24px; height: 2px;
     background: var(--navy); border-radius: 2px;
@@ -730,7 +781,7 @@
   }
   .mobile-menu ul { list-style: none; padding: 0; margin: 0; }
   .mobile-menu ul li a {
-    display: block; padding: 0.85rem 2rem;
+    display: block; padding: 0.85rem 1.5rem;
     font-size: 1rem; font-weight: 600; color: var(--navy);
     text-decoration: none; border-bottom: 1px solid var(--border);
     transition: background 0.15s;
@@ -738,17 +789,30 @@
   .mobile-menu ul li:last-child a { border-bottom: none; }
   .mobile-menu ul li a:hover { background: var(--gold-bg); }
   .mobile-menu .mob-cta {
-    display: block; margin: 1rem 2rem 0.5rem;
+    display: block; margin: 1rem 1.5rem 0.5rem;
     background: var(--gold); color: var(--navy) !important;
     text-align: center; padding: 0.75rem 1rem !important;
     border-radius: 8px; font-weight: 800 !important; border-bottom: none !important;
   }
   .mobile-menu .mob-cta:hover { background: var(--gold-dark) !important; }
-
-  @media (max-width: 1024px) {
-    .hamburger { display: flex; }
-    .nav-links { display: none; }
+  .mob-dropdown { border-bottom: 1px solid var(--border); }
+  .mob-dropdown-toggle {
+    width: 100%; text-align: left; background: none; border: none;
+    padding: 0.85rem 1.5rem; font-family: var(--font); font-size: 1rem;
+    font-weight: 600; color: var(--navy); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
   }
+  .mob-arrow { font-size: 1.1rem; transition: transform 0.2s; display: inline-block; }
+  .mob-dropdown-toggle[aria-expanded="true"] .mob-arrow { transform: rotate(90deg); }
+  .mob-sub { display: none; list-style: none; padding: 0; margin: 0; background: var(--off-white); }
+  .mob-sub.open { display: block; }
+  .mob-sub li a {
+    display: block; padding: 0.75rem 1.5rem 0.75rem 2.8rem !important;
+    font-size: 0.9rem; font-weight: 600; color: var(--gold-dark) !important;
+    text-decoration: none; border-bottom: 1px solid var(--border);
+  }
+  .mob-sub li a:hover { color: var(--navy) !important; background: var(--gold-bg); }
+  .mob-sub li:last-child a { border-bottom: none; }
 
   /* HERO BUTTONS: equal size */
   .btn-hero {
@@ -794,14 +858,21 @@
   <div class="nav-logo">
     <img src="NavLogo" alt="MyAppSuccess" />
   </div>
-</a>  <ul class="nav-links">
+</a>
+  <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#outcomes">Outcomes</a></li>
-    <li><a href="#bootcamp">The Bootcamp</a></li>
-    <li><a href="#pricing">Private Sessions</a></li>
-    <li><a href="#templates">Templates</a></li>
+    <li class="nav-dropdown">
+      <span style="cursor:default;">Services</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#bootcamp">The Bootcamp</a></li>
+        <li><a href="#pricing">Private Sessions</a></li>
+        <li><a href="#templates">Templates &amp; Guides</a></li>
+      </ul>
+    </li>
     <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
     <li><a href="form.html" class="nav-cta">Get Started</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -814,11 +885,19 @@
   <ul>
     <li><a href="#about" onclick="closeMenu()">About</a></li>
     <li><a href="#outcomes" onclick="closeMenu()">Outcomes</a></li>
-    <li><a href="#bootcamp" onclick="closeMenu()">The Bootcamp</a></li>
-    <li><a href="#pricing" onclick="closeMenu()">Private Sessions</a></li>
-    <li><a href="#templates" onclick="closeMenu()">Templates</a></li>
+    <li class="mob-dropdown">
+      <button class="mob-dropdown-toggle" onclick="toggleMobServices(this)" aria-expanded="false">
+        Services <span class="mob-arrow">›</span>
+      </button>
+      <ul class="mob-sub" id="mob-services-sub">
+        <li><a href="#bootcamp" onclick="closeMenu()">The Bootcamp</a></li>
+        <li><a href="#pricing" onclick="closeMenu()">Private Sessions</a></li>
+        <li><a href="#templates" onclick="closeMenu()">Templates &amp; Guides</a></li>
+      </ul>
+    </li>
     <li><a href="#testimonials" onclick="closeMenu()">Reviews</a></li>
     <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
+    <li><a href="contact.html" onclick="closeMenu()">Contact</a></li>
     <li><a href="form.html" class="mob-cta">Apply to Join the Waitlist</a></li>
   </ul>
 </div>
@@ -905,22 +984,21 @@
           <div class="approach-inner-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
             <div class="about-card fade-in">
               <div class="card-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M15.5 15.5L20 20"/><path d="M11 8v6M8 11h6"/></svg>
-              </div>
-              <div>
-                <h4>Elite Access, Real Guidance</h4>
-                <p>Direct connections to mentors and admissions officers, paired with resources designed to craft your unique, individual story. Our strategy is curated to help you build meaningful applications for every target school. Students will leave the bootcamp with knowledge of essential, real-world skills such as storytelling, personal branding, and self-awareness that serve them in the college admissions process and beyond. If you put in the work, you will leave feeling more confident, distinctive, and ready to tackle what's next than before.</p>
-              </div>
-            </div>
-            <div class="about-card fade-in">
-              <div class="card-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
               </div>
               <div>
                 <h4>Other Programs Prep Applications, We Prep Candidates</h4>
-                <p>What if we told you that you are more interesting and capable than you think?</p>
-                <p style="margin-top:0.2rem;">Our framework does more than help you navigate the college application process, but is designed to enable you throughout the process and long after college.</p>
+                <p>What if we told you that you are more interesting and capable than you think? Our framework does more than help you navigate the college application process and make you sound good on paper. It is designed to actually build you up throughout the process and long after college.</p>
                 <p style="margin-top:0.2rem;">The focus isn't just instruction, it's empowerment.</p>
+              </div>
+            </div>
+            <div class="about-card fade-in">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M15.5 15.5L20 20"/><path d="M11 8v6M8 11h6"/></svg>
+              </div>
+              <div>
+                <h4>Elite Access, Real Guidance</h4>
+                <p>Connections to mentors and admissions officers, paired with resources designed to craft your unique, individual story. Students will leave the bootcamp with knowledge of essential, real-world skills such as storytelling, personal branding, and self-awareness that serve them in the college admissions process and beyond. Our strategy is curated to help you build meaningful applications for every target school. Your results come from how you apply it. If you put in the work, you will leave feeling more confident, distinctive, and ready to tackle what's next.</p>
               </div>
             </div>
           </div>
@@ -1214,7 +1292,7 @@
           <h4 style="margin-bottom:0;font-size:1.05rem;font-weight:800;color:var(--navy);">Ivy League Prep</h4>
           <span style="display:inline-block;background:var(--gold);color:var(--navy);font-size:0.82rem;font-weight:800;padding:0.25rem 0.75rem;border-radius:999px;">+$1,500</span>
         </div>
-        <p style="font-size:0.92rem;color:rgba(255,255,255,0.65);line-height:1.6;max-width:640px;">Available to be added to any tier. Three dedicated close-group workshops and additional curated resources for applicants targeting Ivy League and top-ranked universities.</p>
+        <p style="font-size:0.92rem;color:rgba(255,255,255,0.65);line-height:1.6;">Available to be added to any tier. Three dedicated close-group workshops and additional curated resources for applicants targeting Ivy League and top-ranked universities.</p>
       </div>
     </div>
 
@@ -1321,16 +1399,16 @@
 <!-- TEMPLATES -->
 <section style="background:var(--off-white);padding:6rem 0;" id="templates">
   <div class="container">
-    <div class="section-eyebrow fade-in">Templates &amp; Resources</div>
+    <div class="section-eyebrow fade-in">Templates &amp; Guides</div>
     <h2 class="section-h2 fade-in">Built from real <span class="accent">admitted applications.</span></h2>
-    <p class="section-p fade-in" style="margin-bottom:0.4rem;">Every resource comes from what actually works. Real admitted student materials, adapted into frameworks you can apply to your own story.</p>
-    <p class="section-p fade-in" style="margin-bottom:2.5rem;">Each resource is available to purchase individually below, or you can save with the full bundle. All templates are also included at no extra cost as part of various <a href="#bootcamp" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">Bootcamp plan</a> tiers.</p>
+    <p class="section-p fade-in" style="margin-bottom:0.4rem;">Every template and guide comes from what actually works. Real admitted student materials, adapted into frameworks you can apply to your own story.</p>
+    <p class="section-p fade-in" style="margin-bottom:2.5rem;">Each resource is will be available soon for purchase individually. At this time, most templates and guides are included at no extra cost as part of various <a href="#bootcamp" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">Bootcamp plan</a> tiers.</p>
 
     <div style="display:flex;flex-direction:column;gap:0.7rem;margin-bottom:2rem;">
       <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
         <button onclick="toggleCat('cat-guides')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
           <div style="display:flex;align-items:center;gap:0.9rem;">
-            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Application Resources</span>
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Overall Applications</span>
             <span style="font-size:0.75rem;color:var(--muted);">11 resources</span>
           </div>
           <svg id="arr-cat-guides" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1339,47 +1417,47 @@
           <ul style="list-style:none;">
           <li onclick="openTemplateModal('Roadmap, Timeline & Checklist', 'A week-by-week plan and submission checklist from start to decision day.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Roadmap, Timeline & Checklist</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Guide to Picking Your School & Major', 'A framework for building a strategic, realistic college list aligned with your goals.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Guide to Picking Your School & Major</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Application Platforms Guide', 'Common App, UC, CSU, and UT: how each platform works and what to watch for.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Application Platforms Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Early Decision / Admissions Guide', 'When to apply early, what it means, and how to use it strategically.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Early Decision / Admissions Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Extracurriculars Guide', 'How to present your activities in a way that stands out to admissions readers.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Extracurriculars Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Guide to College Special Programs', 'An overview of honors programs, dual degrees, accelerated tracks, and other special admissions pathways.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Guide to College Special Programs</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Building Relationships with Schools', 'How to demonstrate genuine interest and build connections with admissions offices.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Building Relationships with Schools</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Scholarships Guide', 'Covers local, regional, and national scholarships as well as college-specific scholarship opportunities.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Scholarships Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('How to Get an Internship in High School', 'Curated pathways and strategies to strengthen your profile with real-world experience.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>How to Get an Internship in High School</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Interview Prep Guide', 'How to prepare for college interviews: common questions, what to wear, and how to leave a lasting impression.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Interview Prep Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Portfolio Guide', 'How to build and present a portfolio for art, design, architecture, and other programs that require one.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Portfolio Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           </ul>
         </div>
@@ -1387,7 +1465,7 @@
       <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
         <button onclick="toggleCat('cat-essay')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
           <div style="display:flex;align-items:center;gap:0.9rem;">
-            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Essay Guides</span>
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Personal Statements</span>
             <span style="font-size:0.75rem;color:var(--muted);">4 resources</span>
           </div>
           <svg id="arr-cat-essay" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1396,19 +1474,19 @@
           <ul style="list-style:none;">
           <li onclick="openTemplateModal('Essay Brainstorming Guide', 'Prompts and exercises to find your strongest personal narrative.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Essay Brainstorming Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Advanced Essay Brainstorming Guide', 'Deeper exercises for supplemental essays and school-specific prompts.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Advanced Essay Brainstorming Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Successful Essays Examples', 'Real admitted essays with line-by-line breakdowns explaining what made them work.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Successful Essays Examples</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Guide to Discussing Sensitive Topics & Family History', 'How to approach difficult personal experiences with honesty, intention, and strength.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Guide to Discussing Sensitive Topics & Family History</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           </ul>
         </div>
@@ -1416,7 +1494,7 @@
       <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
         <button onclick="toggleCat('cat-lor')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
           <div style="display:flex;align-items:center;gap:0.9rem;">
-            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Letters of Recommendation Guides</span>
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Letters of Recommendation</span>
             <span style="font-size:0.75rem;color:var(--muted);">3 resources</span>
           </div>
           <svg id="arr-cat-lor" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1425,15 +1503,15 @@
           <ul style="list-style:none;">
           <li onclick="openTemplateModal('Letter of Recommendation Template', 'A ready-to-use template for requesting a strong letter of recommendation.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Letter of Recommendation Template</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Letter of Recommendation Brag Sheet Template', 'A structured brag sheet to share with your recommender so they can write the most compelling letter possible.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Letter of Recommendation Brag Sheet Template</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('How to Ask for a Letter of Recommendation', 'How to ask, what to include, and how to make it easy for your recommender.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>How to Ask for a Letter of Recommendation</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           </ul>
         </div>
@@ -1441,7 +1519,7 @@
       <div style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;" class="fade-in">
         <button onclick="toggleCat('cat-resume')" style="width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font);">
           <div style="display:flex;align-items:center;gap:0.9rem;">
-            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Resume Resources</span>
+            <span style="font-size:0.62rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:var(--off-white);color:var(--gold-dark);border:1.5px solid currentColor;border-radius:999px;padding:0.2rem 0.75rem;white-space:nowrap;">Resumes</span>
             <span style="font-size:0.75rem;color:var(--muted);">2 resources</span>
           </div>
           <svg id="arr-cat-resume" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1450,11 +1528,11 @@
           <ul style="list-style:none;">
           <li onclick="openTemplateModal('Resume Template', 'A proven format for presenting your experience clearly and compellingly.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Resume Template</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('Resume Tips Checklist', 'A checklist to review your resume before submitting, covering formatting, language, and content.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>Resume Tips Checklist</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           </ul>
         </div>
@@ -1471,22 +1549,22 @@
           <ul style="list-style:none;">
           <li onclick="openTemplateModal('SAT Prep Guide', 'SAT strategy, section breakdown, and how your score fits into your overall application.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>SAT Prep Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('ACT Prep Guide', 'ACT strategy, section breakdown, and how your score fits into your overall application.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>ACT Prep Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           <li onclick="openTemplateModal('TOEFL Prep Guide', 'TOEFL strategy and guidance for international applicants navigating English proficiency requirements.')" style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;gap:1rem;" onmouseenter="this.style.color='var(--gold-dark)'" onmouseleave="this.style.color='var(--navy)'">
             <span style="font-size:0.88rem;font-weight:600;color:inherit;transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>TOEFL Prep Guide</span>
-            <span style="font-size:0.82rem;font-weight:800;color:var(--gold-dark);flex-shrink:0;">$25</span>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted);flex-shrink:0;">Coming Soon</span>
           </li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- BUNDLE BAR -->
+    <!-- BUNDLE BAR (hidden until available)
     <div style="background:var(--gold);border-radius:14px;padding:1.4rem 1.8rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;" class="fade-in">
       <div>
         <div style="font-size:1rem;font-weight:800;color:var(--navy);">Full Library &mdash; All 23 Resources</div>
@@ -1500,6 +1578,7 @@
         <a href="templates-purchase.html" style="display:inline-flex;align-items:center;background:var(--navy);color:white;font-weight:800;font-size:0.82rem;padding:0.7rem 1.4rem;border-radius:10px;text-decoration:none;">Get All 23</a>
       </div>
     </div>
+    -->
 
   </div>
   <!-- TEMPLATE MODAL -->
@@ -1511,7 +1590,7 @@
       <h3 id="tmpl-modal-title" style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:0.8rem;font-family:var(--font);"></h3>
       <p id="tmpl-modal-desc" style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.4rem;"></p>
       <div style="display:flex;gap:0.75rem;">
-        <a href="templates-purchase.html" style="display:inline-block;font-size:0.82rem;font-weight:800;background:var(--gold);color:var(--navy);padding:0.6rem 1.3rem;border-radius:9px;text-decoration:none;">Purchase for $25</a>
+        <button disabled style="display:inline-block;font-size:0.82rem;font-weight:800;background:var(--border);color:var(--muted);padding:0.6rem 1.3rem;border-radius:9px;border:none;cursor:default;">Coming Soon</button>
         <button onclick="closeTemplateModal()" style="font-size:0.82rem;font-weight:600;background:none;border:1.5px solid var(--border);color:var(--muted);padding:0.6rem 1.1rem;border-radius:9px;cursor:pointer;font-family:var(--font);">Close</button>
       </div>
     </div>
@@ -1727,8 +1806,34 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>myappsuccess.com &nbsp;&middot;&nbsp; Confidently Reach Your Dream School</p>
-  <p style="margin-top:0.4rem;">&copy; 2026</p>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-logo">MyApp<span>Success</span></div>
+      <p class="footer-tagline">Helping students confidently reach their dream schools through real guidance and proven strategy.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#bootcamp">The Bootcamp</a></li>
+        <li><a href="#pricing">Private Sessions</a></li>
+        <li><a href="#templates">Templates &amp; Guides</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#outcomes">Outcomes</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 MyAppSuccess. All rights reserved.</span>
+    <span class="footer-copy">myappsuccess.com</span>
+  </div>
 </footer>
 
 <script>
@@ -1847,6 +1952,11 @@
   function closeMenu() {
     hamburger.classList.remove('open');
     mobileMenu.classList.remove('open');
+  }
+  function toggleMobServices(btn) {
+    var sub = document.getElementById('mob-services-sub');
+    var open = sub.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
   // Close menu on outside click
   document.addEventListener('click', function(e) {
