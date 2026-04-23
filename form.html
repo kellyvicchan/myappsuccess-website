@@ -264,10 +264,9 @@
         </label>
       </div>
 
-    <form id="interestForm" onsubmit="handleSubmit(event)" action="https://formsubmit.co/kelly@myappsuccess.com" method="POST">        <input type="hidden" name="_subject" value="New Bootcamp Application - MyAppSuccess" />
-        <input type="hidden" name="_captcha" value="false" />
+    <!-- ══════════════ CONTACT STEP (outside form) ══════════════ -->
+    <div id="contact-step">
         <p class="required-note" id="required-note" style="display:none;margin-bottom:1.5rem;"><span>*</span> Required questions</p>
-
         <!-- ══════════════ STUDENT FORM ══════════════ -->
         <div class="form-section" id="section-student">
 
@@ -344,10 +343,11 @@
 
         </div>
 
-        <div class="form-submit" id="submit-wrap" style="display:none;">
-          <button type="submit" class="btn-gold" id="submit-btn" disabled>Submit Application →</button>
-        </div>
+    </div>
 
+    <form id="interestForm" onsubmit="handleSubmit(event)" action="https://formsubmit.co/kelly@myappsuccess.com" method="POST">
+        <input type="hidden" name="_subject" value="New Bootcamp Application - MyAppSuccess" />
+        <input type="hidden" name="_captcha" value="false" />
         <!-- ══════════════ STEP 2: STUDENT REST ══════════════ -->
         <div id="step2-student" style="display:none;">
 
@@ -621,7 +621,12 @@
           </label>
 
         </div>
+
+        <div class="form-submit" id="submit-wrap" style="display:none;">
+          <button type="submit" class="btn-gold" id="submit-btn" disabled>Submit Application →</button>
+        </div>
       </form>
+
     </div>
 
     <div id="thank-you">
