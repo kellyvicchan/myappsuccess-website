@@ -188,6 +188,7 @@
   }
 
   .divider { height: 1px; background: var(--border); margin: 2rem 0; }
+  .rest-hidden { display: none; }
   .hint { font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; line-height: 1.6; }
 
   .form-submit { text-align: center; margin-top: 2.5rem; }
@@ -304,7 +305,7 @@
           </div>
 
           <!-- REST OF STUDENT FORM (hidden until contact submitted) -->
-          <div id="s-rest" style="display:none;">
+          <div id="s-rest" class="rest-hidden">
 
           <div class="divider"></div>
           <div class="section-label">Background</div>
@@ -429,7 +430,7 @@
           </div>
 
           <!-- REST OF PARENT FORM (hidden until contact submitted) -->
-          <div id="p-rest" style="display:none;">
+          <div id="p-rest" class="rest-hidden">
 
           <div class="divider"></div>
           <div class="section-label">About Your Student</div>
@@ -637,16 +638,23 @@
       mode: 'no-cors'
     }).catch(function() {});
 
-    // Hide continue button, show rest of form and submit button
+    // Hide continue button
     document.getElementById(role + '-continue-wrap').style.display = 'none';
+
+    // Show rest of form
     var restEl = document.getElementById(role + '-rest');
-    restEl.style.display = 'block';
+    restEl.classList.remove('rest-hidden');
+
+    // Show submit button
     document.getElementById('submit-wrap').style.display = 'block';
     document.getElementById('submit-btn').disabled = false;
-    setTimeout(function() {
-      var top = restEl.getBoundingClientRect().top + window.pageYOffset - 20;
-      window.scrollTo({ top: top, behavior: 'smooth' });
-    }, 100);
+
+    // Scroll: place an anchor at the top of restEl and jump to it
+    var anchor = document.createElement('div');
+    anchor.id = 'continue-anchor';
+    restEl.insertBefore(anchor, restEl.firstChild);
+    window.location.hash = '';
+    window.location.hash = 'continue-anchor';
   }
 
   // Role selection
