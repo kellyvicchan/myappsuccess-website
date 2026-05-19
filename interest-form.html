@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bootcamp Interest Form - MyAppSuccess</title>
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1e4b78; --navy-mid: #265d96; --gold: #f0b41e; --gold-dark: #c99012;
+    --gold-bg: #fef9e6; --white: #ffffff; --off-white: #f5f7fa; --blue-light: #eef3fb;
+    --text: #1e4b78; --muted: #5c6a82; --border: #d0d9e8; --font: 'League Spartan', sans-serif;
+  }
+  body { font-family: var(--font); color: var(--text); background: var(--off-white); min-height: 100vh; }
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 72px; background: rgba(255,255,255,0.97);
+    border-bottom: 2px solid var(--gold); box-shadow: 0 2px 16px rgba(30,75,120,0.07);
+  }
+  .nav-logo img { height: 50px; width: auto; display: block; }
+  .nav-back { font-size: 0.88rem; font-weight: 600; text-decoration: none; color: var(--navy); }
+  .nav-back:hover { color: var(--gold-dark); }
+  .page { display: flex; align-items: flex-start; justify-content: center; padding: 3.5rem 1.5rem 5rem; }
+  .form-card {
+    background: var(--white); border-radius: 20px;
+    box-shadow: 0 8px 48px rgba(30,75,120,0.1);
+    padding: 3.5rem; width: 100%; max-width: 640px;
+  }
+  .eyebrow {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;
+  }
+  .eyebrow::before { content: ''; display: block; width: 20px; height: 2px; background: var(--gold); }
+  h1 { font-size: clamp(1.8rem,4vw,2.2rem); font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  h1 .accent { color: var(--gold); }
+  .sub { font-size: 0.92rem; color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--navy); margin: 1.8rem 0 1rem; padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--gold);
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .full { grid-column: 1 / -1; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group > label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--navy); }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 0.8rem 1rem; border: 2px solid var(--border); border-radius: 10px;
+    font-family: var(--font); font-size: 0.9rem; color: var(--text);
+    background: var(--off-white); outline: none;
+    transition: border-color 0.2s, background 0.2s; font-weight: 500;
+    appearance: none; -webkit-appearance: none;
+  }
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235c6a82' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
+    background-color: var(--off-white);
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--navy); background: var(--blue-light);
+  }
+  .form-group textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+  /* Radio options */
+  .radio-group { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.2rem; }
+  .radio-group.row { flex-direction: row; flex-wrap: wrap; gap: 0.8rem; }
+  .radio-label {
+    display: flex; align-items: center; gap: 0.7rem;
+    padding: 0.75rem 1rem; border: 2px solid var(--border); border-radius: 10px;
+    background: var(--off-white); cursor: pointer;
+    font-size: 0.9rem; font-weight: 500; color: var(--text); line-height: 1.4;
+    text-transform: none; letter-spacing: normal;
+    transition: border-color 0.2s, background 0.2s;
+    user-select: none; flex: 1 1 auto; min-width: 0;
+  }
+  .radio-label:hover { border-color: var(--navy-mid); }
+  .radio-label input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .radio-dot {
+    width: 1.1rem; height: 1.1rem; border-radius: 50%;
+    border: 2px solid var(--border); background: var(--white);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s;
+  }
+  .radio-dot::after {
+    content: ''; width: 0.55rem; height: 0.55rem; border-radius: 50%;
+    background: var(--navy); transform: scale(0); transition: transform 0.18s;
+  }
+  .radio-label.is-checked { border-color: var(--navy); background: var(--blue-light); }
+  .radio-label.is-checked .radio-dot { border-color: var(--navy); }
+  .radio-label.is-checked .radio-dot::after { transform: scale(1); }
+
+  /* Conditional reveal */
+  .conditional {
+    display: none; margin-top: 1rem; padding: 1.2rem;
+    background: var(--gold-bg); border-left: 3px solid var(--gold); border-radius: 8px;
+  }
+  .conditional.show { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+  .conditional .form-group > label { color: var(--navy); margin-bottom: 0.5rem; display: block; }
+
+  .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+  .consent-row {
+    display: flex; align-items: flex-start; gap: 0.9rem; margin-top: 0.25rem; cursor: pointer;
+  }
+  .consent-row input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .check-custom {
+    width: 1.2rem; height: 1.2rem; border-radius: 4px; border: 2px solid var(--border);
+    background: var(--white); flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .check-custom svg { display: none; width: 0.75rem; height: 0.75rem; }
+  .consent-row.is-checked .check-custom { border-color: var(--navy); background: var(--navy); }
+  .consent-row.is-checked .check-custom svg { display: block; }
+  .consent-text { font-size: 0.88rem; font-weight: 500; color: var(--muted); line-height: 1.55; }
+  .form-submit { text-align: center; margin-top: 2.5rem; }
+  .btn-gold {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--gold); color: var(--navy); font-family: var(--font);
+    font-weight: 800; font-size: 1rem; padding: 1rem 3rem;
+    border-radius: 10px; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 20px rgba(240,180,30,0.35);
+  }
+  .btn-gold:hover { background: var(--gold-dark); transform: translateY(-2px); }
+  .btn-gold:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  #thank-you { display: none; text-align: center; padding: 2rem 0; }
+  #thank-you .ty-icon {
+    width: 4rem; height: 4rem; border-radius: 50%; background: var(--navy);
+    margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center;
+  }
+  #thank-you .ty-icon svg { width: 2rem; height: 2rem; }
+  #thank-you h2 { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 0.7rem; }
+  #thank-you p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+  #thank-you a { display: inline-block; margin-top: 1.5rem; font-size: 0.88rem; font-weight: 600; color: var(--gold-dark); text-decoration: underline; }
+  footer { background: var(--navy); padding: 1.5rem 3rem; text-align: center; }
+  footer p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+  @media (max-width: 640px) {
+    nav { padding: 0 1.2rem; } .form-card { padding: 2rem 1.5rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .radio-group.row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div style="background:var(--gold);color:var(--navy);text-align:center;padding:0.65rem 1rem;font-family:var(--font);font-weight:800;font-size:0.9rem;letter-spacing:0.04em;">
+  Limited spots available — apply now to join our next bootcamp cohort
+</div>
+<nav>
+  <div class="nav-logo"><a href="index.html"><img src="/logo.png" alt="My App Success" onerror="this.style.display='none'" /></a></div>
+  <a href="index.html" class="nav-back">← Back to homepage</a>
+</nav>
+<div class="page">
+  <div class="form-card">
+    <div id="form-content">
+      <div class="eyebrow">Interest Form</div>
+      <h1>Join the <span class="accent">MyAppSuccess Programs</span></h1>
+      <p class="sub">We would love to share more about our programs and how we can help your student.</p>
+
+      <form id="interestForm" action="https://formsubmit.co/kelly@myappsuccess.com" method="POST">
+        <input type="hidden" name="_subject" value="New Bootcamp Interest - MyAppSuccess" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://myappsuccess.com/thank-you.html" />
+
+        <div class="section-label">Your Contact Info</div>
+        <div class="form-grid">
+          <div class="form-group"><label>First Name *</label><input type="text" name="first_name" id="first_name" required placeholder="First name" /></div>
+          <div class="form-group"><label>Last Name *</label><input type="text" name="last_name" id="last_name" required placeholder="Last name" /></div>
+          <div class="form-group"><label>Email *</label><input type="email" name="email" id="email" required placeholder="you@email.com" /></div>
+          <div class="form-group"><label>Phone Number *</label><input type="tel" name="phone" id="phone" required placeholder="+1 (555) 000-0000" /></div>
+        </div>
+
+        <div class="section-label">About the Student</div>
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Student Grade Level *</label>
+            <select name="grade_level" required>
+              <option value="" disabled selected>Select grade level</option>
+              <option>Pre-high school</option>
+              <option>Freshman</option>
+              <option>Sophomore</option>
+              <option>Junior</option>
+              <option>Senior</option>
+              <option>Graduated high school</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section-label">Free Consultation</div>
+        <div class="form-group full">
+          <label>Are you interested in a FREE 15 minute consultation? *</label>
+          <div class="radio-group row">
+            <label class="radio-label" data-consult="yes">
+              <input type="radio" name="consultation" value="Yes" required />
+              <span class="radio-dot"></span>
+              <span>Yes, I'd love a free consultation</span>
+            </label>
+            <label class="radio-label" data-consult="no">
+              <input type="radio" name="consultation" value="No" required />
+              <span class="radio-dot"></span>
+              <span>No, just send me info</span>
+            </label>
+          </div>
+
+          <div class="conditional" id="time-pref-wrap">
+            <div class="form-group full">
+              <label>What time of day works better for your schedule? *</label>
+              <div class="radio-group row">
+                <label class="radio-label" data-time="afternoon">
+                  <input type="radio" name="time_preference" value="Afternoons" />
+                  <span class="radio-dot"></span>
+                  <span>Afternoons</span>
+                </label>
+                <label class="radio-label" data-time="evening">
+                  <input type="radio" name="time_preference" value="Evenings" />
+                  <span class="radio-dot"></span>
+                  <span>Evenings</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <label class="consent-row" id="consent-row" onclick="toggleConsent(event)">
+          <input type="checkbox" id="consent-input" name="email_consent" required />
+          <span class="check-custom">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="consent-text">Yes, add me to the free MyAppSuccess email list for biweekly updates and admissions resources. Opt out any time.</span>
+        </label>
+
+        <div class="form-submit">
+          <button type="submit" class="btn-gold" id="submitBtn">Submit Interest</button>
+        </div>
+      </form>
+    </div>
+    <div id="thank-you">
+      <div class="ty-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2>Thanks for your interest!</h2>
+      <p>We've received your information about the MyAppSuccess bootcamp.<br>We'll be in touch within 1-2 business days with cohort details and next steps.</p>
+      <a href="index.html">← Back to homepage</a>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>myappsuccess.com &nbsp;&middot;&nbsp; Gain Acceptance to Your Dream College &nbsp;&middot;&nbsp; &copy; 2026</p>
+</footer>
+
+<script>
+  // ── Replace this with your deployed Google Apps Script Web App URL ──
+  var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/REPLACE_WITH_YOUR_SCRIPT_ID/exec';
+
+  // Consent checkbox toggle
+  function toggleConsent(e) {
+    if (e && e.target && e.target.tagName === 'INPUT') return; // let native click work
+    var row = document.getElementById('consent-row');
+    var input = document.getElementById('consent-input');
+    input.checked = !input.checked;
+    row.classList.toggle('is-checked', input.checked);
+  }
+  // Keep visual state in sync if user clicks the native input directly
+  document.getElementById('consent-input').addEventListener('change', function(){
+    document.getElementById('consent-row').classList.toggle('is-checked', this.checked);
+  });
+
+  // Radio visual state
+  function syncRadios(name) {
+    var radios = document.querySelectorAll('input[type="radio"][name="' + name + '"]');
+    radios.forEach(function(r){
+      var label = r.closest('.radio-label');
+      if (label) label.classList.toggle('is-checked', r.checked);
+    });
+  }
+
+  // Consultation Yes/No -> reveal time preference
+  var consultationRadios = document.querySelectorAll('input[name="consultation"]');
+  var timeWrap = document.getElementById('time-pref-wrap');
+  var timeRadios = document.querySelectorAll('input[name="time_preference"]');
+
+  consultationRadios.forEach(function(r){
+    r.addEventListener('change', function(){
+      syncRadios('consultation');
+      if (this.value === 'Yes') {
+        timeWrap.classList.add('show');
+        timeRadios.forEach(function(t){ t.required = true; });
+      } else {
+        timeWrap.classList.remove('show');
+        timeRadios.forEach(function(t){ t.required = false; t.checked = false; });
+        syncRadios('time_preference');
+      }
+    });
+  });
+
+  timeRadios.forEach(function(r){
+    r.addEventListener('change', function(){ syncRadios('time_preference'); });
+  });
+
+  // Fire-and-forget POST to Google Apps Script on submit, then let formsubmit.co handle the real submission.
+  // We capture lead info to Google Sheets even if formsubmit.co confirmation step is abandoned.
+  var leadSentForThisSubmit = false;
+  document.getElementById('interestForm').addEventListener('submit', function(e){
+    if (leadSentForThisSubmit) return; // allow the real submit to proceed
+
+    // Basic check — let the browser handle full validation via `required` attributes.
+    if (!this.checkValidity()) return;
+
+    e.preventDefault();
+    var form = this;
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    var payload = new FormData(form);
+    // Add a source tag so you can distinguish lead submissions in the sheet
+    payload.append('source', 'bootcamp-interest-form');
+    payload.append('submitted_at', new Date().toISOString());
+
+    // Fire-and-forget POST to Google Apps Script (no-cors so we don't block on response)
+    try {
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: payload
+      }).catch(function(){ /* silent */ });
+    } catch (err) { /* silent */ }
+
+    // Give the request a tiny moment to leave the browser, then submit the form normally to formsubmit.co
+    leadSentForThisSubmit = true;
+    setTimeout(function(){
+      form.submit();
+    }, 250);
+  });
+</script>
+</body>
+</html>
