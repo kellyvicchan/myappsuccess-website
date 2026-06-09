@@ -185,10 +185,7 @@
       <h1>MyAppSuccess <span class="accent">Programs</span></h1>
       <p class="sub">We would love to share more about our programs and how we can help your student.</p>
 
-      <form id="interestForm" action="https://formsubmit.co/kelly@myappsuccess.com" method="POST">
-        <input type="hidden" name="_subject" value="New Bootcamp Interest - MyAppSuccess" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://myappsuccess.com/thank-you.html" />
+      <form id="interestForm">
 
         <div class="section-label">Your Contact Info</div>
         <div class="form-grid">
@@ -351,32 +348,32 @@
     r.addEventListener('change', function() { syncRadios('time_preference'); });
   });
 
-  // ── Submit: fire-and-forget to Google Sheets, then let formsubmit.co handle it ──
-  var leadSentForThisSubmit = false;
+  // ── Submit: send to Google Sheet, then show thank-you in page ──
   document.getElementById('interestForm').addEventListener('submit', function(e) {
-    if (leadSentForThisSubmit) return;
+    e.preventDefault();
     if (!this.checkValidity()) return;
 
-    e.preventDefault();
     var form = this;
     var btn = document.getElementById('submitBtn');
     btn.disabled = true;
     btn.textContent = 'Submitting...';
 
-    var payload = new FormData(form);
-    payload.append('source', 'bootcamp-interest-form');
-    payload.append('submitted_at', new Date().toISOString());
+    var payload = {};
+    var data = new FormData(form);
+    data.forEach(function(value, key) { payload[key] = value; });
+    payload.source = 'interest-form';
+    payload.submitted_at = new Date().toISOString();
 
-    try {
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: payload
-      }).catch(function() {});
-    } catch (err) {}
-
-    leadSentForThisSubmit = true;
-    setTimeout(function() { form.submit(); }, 250);
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      mode: 'no-cors'
+    }).catch(function() {}).finally(function() {
+      document.getElementById('form-content').style.display = 'none';
+      document.getElementById('thank-you').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   });
 </script>
 </body>
