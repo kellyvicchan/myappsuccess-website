@@ -92,6 +92,29 @@
   .radio-label.is-checked .radio-dot { border-color: var(--navy); }
   .radio-label.is-checked .radio-dot::after { transform: scale(1); }
 
+  /* Checkbox option tiles (services) */
+  .check-group { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.2rem; }
+  .check-tile {
+    display: flex; align-items: center; gap: 0.7rem;
+    padding: 0.75rem 1rem; border: 2px solid var(--border); border-radius: 10px;
+    background: var(--off-white); cursor: pointer;
+    font-size: 0.9rem; font-weight: 500; color: var(--text); line-height: 1.4;
+    transition: border-color 0.2s, background 0.2s;
+    user-select: none;
+  }
+  .check-tile:hover { border-color: var(--navy-mid); }
+  .check-tile input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .check-box {
+    width: 1.1rem; height: 1.1rem; border-radius: 4px;
+    border: 2px solid var(--border); background: var(--white);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .check-box svg { display: none; width: 0.7rem; height: 0.7rem; }
+  .check-tile.is-checked { border-color: var(--navy); background: var(--blue-light); }
+  .check-tile.is-checked .check-box { border-color: var(--navy); background: var(--navy); }
+  .check-tile.is-checked .check-box svg { display: block; }
+
   /* Conditional reveal */
   .conditional {
     display: none; margin-top: 1rem; padding: 1.2rem;
@@ -102,6 +125,8 @@
   .conditional .form-group > label { color: var(--navy); margin-bottom: 0.5rem; display: block; }
 
   .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+  /* Consent checkbox */
   .consent-row {
     display: flex; align-items: flex-start; gap: 0.9rem; margin-top: 0.25rem; cursor: pointer;
   }
@@ -187,6 +212,33 @@
               <option>Graduated high school</option>
             </select>
           </div>
+
+          <div class="form-group full">
+            <label>Which service(s) are you interested in? *</label>
+            <div class="check-group">
+              <label class="check-tile" id="tile-bootcamp">
+                <input type="checkbox" name="service_bootcamp" value="6-Week Bootcamp" />
+                <span class="check-box">
+                  <svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span>6-Week Bootcamp</span>
+              </label>
+              <label class="check-tile" id="tile-private">
+                <input type="checkbox" name="service_private" value="Private Sessions" />
+                <span class="check-box">
+                  <svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span>Private Sessions (1 on 1 virtual, video, or custom reviews)</span>
+              </label>
+              <label class="check-tile" id="tile-templates">
+                <input type="checkbox" name="service_templates" value="Templates & Guides" />
+                <span class="check-box">
+                  <svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span>Templates &amp; Guides</span>
+              </label>
+            </div>
+          </div>
         </div>
 
         <div class="section-label">Free Consultation</div>
@@ -225,7 +277,7 @@
         </div>
 
         <div class="divider"></div>
-        <label class="consent-row" id="consent-row" onclick="toggleConsent(event)">
+        <label class="consent-row" id="consent-row">
           <input type="checkbox" id="consent-input" name="email_consent" required />
           <span class="check-custom">
             <svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -251,61 +303,58 @@
 </footer>
 
 <script>
-  // ── Replace this with your deployed Google Apps Script Web App URL ──
   var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/REPLACE_WITH_YOUR_SCRIPT_ID/exec';
 
-  // Consent checkbox toggle
-  function toggleConsent(e) {
-    if (e && e.target && e.target.tagName === 'INPUT') return; // let native click work
-    var row = document.getElementById('consent-row');
-    var input = document.getElementById('consent-input');
-    input.checked = !input.checked;
-    row.classList.toggle('is-checked', input.checked);
-  }
-  // Keep visual state in sync if user clicks the native input directly
-  document.getElementById('consent-input').addEventListener('change', function(){
-    document.getElementById('consent-row').classList.toggle('is-checked', this.checked);
+  // ── Service checkbox tiles ──
+  document.querySelectorAll('.check-tile').forEach(function(tile) {
+    var input = tile.querySelector('input[type="checkbox"]');
+    input.addEventListener('change', function() {
+      tile.classList.toggle('is-checked', this.checked);
+    });
   });
 
-  // Radio visual state
+  // ── Consent checkbox ──
+  var consentInput = document.getElementById('consent-input');
+  var consentRow = document.getElementById('consent-row');
+  consentInput.addEventListener('change', function() {
+    consentRow.classList.toggle('is-checked', this.checked);
+  });
+
+  // ── Radio visual state ──
   function syncRadios(name) {
-    var radios = document.querySelectorAll('input[type="radio"][name="' + name + '"]');
-    radios.forEach(function(r){
+    document.querySelectorAll('input[type="radio"][name="' + name + '"]').forEach(function(r) {
       var label = r.closest('.radio-label');
       if (label) label.classList.toggle('is-checked', r.checked);
     });
   }
 
-  // Consultation Yes/No -> reveal time preference
+  // ── Consultation Yes/No -> reveal time preference ──
   var consultationRadios = document.querySelectorAll('input[name="consultation"]');
   var timeWrap = document.getElementById('time-pref-wrap');
   var timeRadios = document.querySelectorAll('input[name="time_preference"]');
 
-  consultationRadios.forEach(function(r){
-    r.addEventListener('change', function(){
+  consultationRadios.forEach(function(r) {
+    r.addEventListener('change', function() {
       syncRadios('consultation');
       if (this.value === 'Yes') {
         timeWrap.classList.add('show');
-        timeRadios.forEach(function(t){ t.required = true; });
+        timeRadios.forEach(function(t) { t.required = true; });
       } else {
         timeWrap.classList.remove('show');
-        timeRadios.forEach(function(t){ t.required = false; t.checked = false; });
+        timeRadios.forEach(function(t) { t.required = false; t.checked = false; });
         syncRadios('time_preference');
       }
     });
   });
 
-  timeRadios.forEach(function(r){
-    r.addEventListener('change', function(){ syncRadios('time_preference'); });
+  timeRadios.forEach(function(r) {
+    r.addEventListener('change', function() { syncRadios('time_preference'); });
   });
 
-  // Fire-and-forget POST to Google Apps Script on submit, then let formsubmit.co handle the real submission.
-  // We capture lead info to Google Sheets even if formsubmit.co confirmation step is abandoned.
+  // ── Submit: fire-and-forget to Google Sheets, then let formsubmit.co handle it ──
   var leadSentForThisSubmit = false;
-  document.getElementById('interestForm').addEventListener('submit', function(e){
-    if (leadSentForThisSubmit) return; // allow the real submit to proceed
-
-    // Basic check — let the browser handle full validation via `required` attributes.
+  document.getElementById('interestForm').addEventListener('submit', function(e) {
+    if (leadSentForThisSubmit) return;
     if (!this.checkValidity()) return;
 
     e.preventDefault();
@@ -315,24 +364,19 @@
     btn.textContent = 'Submitting...';
 
     var payload = new FormData(form);
-    // Add a source tag so you can distinguish lead submissions in the sheet
     payload.append('source', 'bootcamp-interest-form');
     payload.append('submitted_at', new Date().toISOString());
 
-    // Fire-and-forget POST to Google Apps Script (no-cors so we don't block on response)
     try {
       fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         body: payload
-      }).catch(function(){ /* silent */ });
-    } catch (err) { /* silent */ }
+      }).catch(function() {});
+    } catch (err) {}
 
-    // Give the request a tiny moment to leave the browser, then submit the form normally to formsubmit.co
     leadSentForThisSubmit = true;
-    setTimeout(function(){
-      form.submit();
-    }, 250);
+    setTimeout(function() { form.submit(); }, 250);
   });
 </script>
 </body>
