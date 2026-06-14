@@ -926,7 +926,6 @@
       <a href="interest-form.html" class="btn-hero">Book A Free 15 Minute Consultation</a>
       <a href="#outcomes" class="btn-hero btn-hero-outline">See Our Results</a>
     </div>
-    <!-- <p style="margin-top:1rem;margin-bottom:3rem;font-size:0.9rem;color:rgba(255,255,255,0.55);">Looking for more help? See our <a href="#pricing" style="color:var(--gold);text-decoration:underline;font-weight:600;">private services</a>or <a href="#templates" style="color:var(--gold);text-decoration:underline;font-weight:600;">templates & guides</a></p> -->
     <div class="hero-trust">
       <div class="trust-item"><div class="trust-num">22</div><div class="trust-label">Years Experience</div></div>
       <div class="trust-divider"></div>
@@ -1577,26 +1576,7 @@
           </ul>
         </div>
       </div>
-     <!-- <div class="pricing-cta fade-in" style="margin-top:3rem;">
-      <a href="interest-form.html" class="btn-gold">Get Started</a>
-    </div> -->
     </div>
-
-    <!-- BUNDLE BAR (hidden until available)
-    <div style="background:var(--gold);border-radius:14px;padding:1.4rem 1.8rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;" class="fade-in">
-      <div>
-        <div style="font-size:1rem;font-weight:800;color:var(--navy);">Full Library &mdash; All 23 Resources</div>
-        <div style="font-size:0.82rem;color:var(--navy);opacity:0.7;margin-top:0.2rem;">Save over $100 versus purchasing individually</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:1.2rem;flex-shrink:0;">
-        <div>
-          <div style="font-size:0.72rem;color:var(--navy);opacity:0.45;text-decoration:line-through;">$575 individual</div>
-          <div style="font-size:1.1rem;font-weight:800;color:var(--navy);">$299 bundle</div>
-        </div>
-        <a href="templates-purchase.html" style="display:inline-flex;align-items:center;background:var(--navy);color:white;font-weight:800;font-size:0.82rem;padding:0.7rem 1.4rem;border-radius:10px;text-decoration:none;">Get All 23</a>
-      </div>
-    </div>
-    -->
 
   </div>
   <!-- TEMPLATE MODAL -->
@@ -1710,8 +1690,6 @@
       <button class="test-nav-btn test-nav-next" type="button" aria-label="Next">
         <span class="pn-arrow">→</span>
       </button>
-
-
     </div>
    <div class="pricing-cta fade-in" style="margin-top:3rem;">
       <a href="interest-form.html" class="btn-gold">Get Started</a>
@@ -1817,13 +1795,11 @@
   <div class="newsletter-inner">
     <h3>Stay in the Loop</h3>
     <p>Get free admissions tips, resource updates, and insights from our team, straight to your inbox. Biweekly emails, no spam. Opt out any time.</p>
-    <form class="newsletter-form" action="https://formsubmit.co/12ideas12months@gmail.com" method="POST" onsubmit="handleNewsletter(event)">
-      <input type="hidden" name="_subject" value="New Newsletter Signup - MyAppSuccess" />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="email" name="email" placeholder="Your email address" required />
-      <button type="submit">Subscribe</button>
+    <form class="newsletter-form" id="newsletter-form">
+      <input type="email" name="email" id="newsletter-email" placeholder="Your email address" required />
+      <button type="submit" id="newsletter-btn">Subscribe</button>
     </form>
-    <p class="newsletter-success" id="newsletter-success">You are on the list!</p>
+    <p class="newsletter-success" id="newsletter-success">We'll be in touch!</p>
   </div>
 </section>
 
@@ -1921,11 +1897,27 @@
     if (e.key === 'Escape') closeTemplateModal();
   });
 
-  function handleNewsletter(e) {
-    e.preventDefault();
-    e.target.style.display = 'none';
-    document.getElementById('newsletter-success').style.display = 'block';
-  }
+  // Newsletter: send to Google Sheet, show inline success message
+  (function() {
+    var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwtvI0rGuOArY1MPeLBMvxaMQvgMhu_0w9GeaDgrcrnIORDU8fV0MY0lUpERjFW_K6suQ/exec';
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('newsletter-email').value;
+      var btn = document.getElementById('newsletter-btn');
+      btn.disabled = true;
+      btn.textContent = 'Subscribing\u2026';
+      var payload = { email: email, source: 'newsletter', submitted_at: new Date().toISOString() };
+      fetch(SHEET_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors'
+      }).catch(function() {}).finally(function() {
+        document.getElementById('newsletter-form').style.display = 'none';
+        document.getElementById('newsletter-success').style.display = 'block';
+      });
+    });
+  })();
 
   // Pricing card selection
   document.querySelectorAll('.price-card[data-service]').forEach(function(card) {
