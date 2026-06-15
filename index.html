@@ -414,18 +414,21 @@
     .outcomes-test-rail .test-card { flex: 0 0 calc((100% - 1.5rem) / 2); }
   }
   @media (max-width: 768px) {
-    .outcome-stats { flex-direction: column; gap: 0.5rem; }
+    .outcomes { padding-top: 6.5rem; }
+    .outcome-stats { flex-direction: column; gap: 0.4rem; }
     .outcome-stat-preview { display: none; }
-    .outcome-stat-card { gap: 0.6rem; padding: 0.85rem 1.1rem; }
-    .outcome-stat-icon { width: 2rem; height: 2rem; }
-    .outcome-stat-icon svg { width: 20px; height: 20px; }
-    .outcome-stat-num { font-size: 1.3rem; }
-    .outcome-stat-label { font-size: 0.82rem; }
-    .outcomes-test-heading { font-size: 1.2rem; margin-bottom: 0.8rem; padding-top: 0.4rem; }
-    .outcomes-test-rail .test-card { flex: 0 0 calc(100% - 2.4rem); margin: 0 1.2rem; min-height: 150px; }
-    .outcomes-test-rail .test-quote { font-size: 0.82rem; line-height: 1.5; -webkit-line-clamp: 6; }
-    .outcomes-test-rail .test-quote-lg { font-size: 1rem; line-height: 1.5; }
-    .outcomes-test-rail .test-quote-mark { font-size: 1.6rem; margin-bottom: 0.2rem; }
+    .outcome-stat-card { gap: 0.6rem; padding: 0.7rem 1rem; }
+    .outcome-stat-icon { width: 1.9rem; height: 1.9rem; }
+    .outcome-stat-icon svg { width: 18px; height: 18px; }
+    .outcome-stat-num { font-size: 1.2rem; }
+    .outcome-stat-label { font-size: 0.8rem; }
+    .outcomes-testimonials { margin-top: 0.8rem; }
+    .outcomes-test-heading { font-size: 1.1rem; margin-bottom: 0.6rem; padding-top: 0.3rem; }
+    .outcomes-test-rail .test-card { flex: 0 0 calc(100% - 2.4rem); margin: 0 1.2rem; min-height: 130px; padding: 1rem 1.1rem; }
+    .outcomes-test-rail .test-quote { font-size: 0.8rem; line-height: 1.45; -webkit-line-clamp: 6; }
+    .outcomes-test-rail .test-quote-lg { font-size: 0.95rem; line-height: 1.45; }
+    .outcomes-test-rail .test-quote-mark { font-size: 1.4rem; margin-bottom: 0.15rem; }
+    .outcomes-test-nav { margin-top: 0.6rem; }
   }
 
   /* BOOTCAMP */
@@ -478,19 +481,17 @@
   /* COMPARE TABLE */
   .bc-tier-carousel { display: none; }
 
-  /* BOOTCAMP MOBILE TIER TILES */
+  /* BOOTCAMP MOBILE TIER TILES: arrow-only (no swipe, avoids vertical scroll conflicts) */
   .bc-tier-track {
-    display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory;
-    scroll-behavior: smooth; margin: 0 -1.2rem; padding: 0 1.2rem;
-    scrollbar-width: none;
+    display: flex; gap: 0; overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    will-change: transform;
   }
-  .bc-tier-track::-webkit-scrollbar { display: none; }
   .bc-tier-tile {
-    flex: 0 0 calc(100% - 0.8rem); margin-right: 0.8rem; scroll-snap-align: center;
+    flex: 0 0 100%;
     background: var(--off-white); border: 1.5px solid var(--border);
     border-radius: 14px; padding: 1.3rem 1.4rem;
   }
-  .bc-tier-tile:last-child { margin-right: 0; }
   .bc-tier-tile-popular { border-color: var(--gold); background: var(--gold-bg); }
   .bc-tier-tile-badge {
     display: inline-block; background: var(--gold); color: var(--navy);
@@ -758,8 +759,11 @@
     /* SECTIONS */
     section { padding: 4rem 0; padding-top: 6.5rem; }
     .container { padding: 0 1.2rem; }
-    .section-h2 { font-size: clamp(1.5rem, 6vw, 2rem); }
-    .section-p { font-size: 0.92rem; max-width: 100%; }
+    .section-eyebrow { margin-bottom: 0.6rem; }
+    .section-h2 { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 0.4rem; }
+    .section-p { font-size: 0.92rem; max-width: 100%; line-height: 1.5; }
+    .pricing-cta { margin-top: 0.8rem !important; padding-bottom: 0; }
+    .section-learn-more { margin-top: 0.5rem; margin-bottom: 0; font-size: 0.8rem; }
 
     /* TEMPLATES & GUIDES: compress to fit one screen */
     .templates { padding-top: 6.5rem; padding-bottom: 1.2rem; }
@@ -775,77 +779,89 @@
     .about-card { padding: 1.2rem; }
     .cred-block { padding: 1.8rem; }
 
-    /* APPROACH: slideshow on mobile */
+    /* ABOUT: compress to fit one screen */
+    .about { padding-top: 6.5rem; }
+    .approach-numbered { gap: 0; margin-top: 0.8rem !important; }
+    .approach-item {
+      background: white; border: 2px solid var(--border); border-radius: 14px; padding: 1rem;
+      gap: 1rem;
+    }
+    .approach-num { font-size: 2rem; width: 2.4rem; }
+    .approach-item h4 { font-size: 1rem; margin-bottom: 0.3rem; line-height: 1.25; }
+    .approach-item p { font-size: 0.85rem; line-height: 1.42; }
+
+    /* APPROACH: arrow-only slideshow on mobile (no swipe, avoids vertical scroll conflicts) */
     .approach-cards {
       display: flex !important;
       flex-direction: row !important;
       align-items: stretch;
-      overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
+      overflow: hidden;
       gap: 0 !important;
-      margin-left: -1.2rem; margin-right: -1.2rem;
-      padding: 0 1.2rem;
-      scrollbar-width: none;
-      touch-action: pan-x;
+      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+      will-change: transform;
     }
-    .approach-cards::-webkit-scrollbar { display: none; }
     .approach-cards > .about-card {
-      flex: 0 0 100%; scroll-snap-align: center;
+      flex: 0 0 100%;
       align-self: stretch; height: auto;
     }
     .approach-inner-row {
       display: contents !important;
     }
     .approach-inner-row > .about-card {
-      flex: 0 0 100%; scroll-snap-align: center;
+      flex: 0 0 100%;
       align-self: stretch; height: auto;
-      touch-action: pan-x;
-    }
-    .approach-item {
-      background: white; border: 2px solid var(--border); border-radius: 14px; padding: 1.2rem;
     }
     .approach-nav {
       display: flex !important;
-      gap: 0.6rem; margin-top: 1.2rem;
+      gap: 0.6rem; margin-top: 0.8rem;
     }
 
     /* BOOTCAMP: tile carousel replaces table on mobile */
+    .bootcamp { padding-top: 6.5rem; }
     .bc-desktop-table { display: none; }
     .bc-tier-carousel { display: block; }
-    .bc-head-row { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
-    .bc-faq-link { margin-bottom: 0.3rem; }
+    .bc-head-row { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    .bc-faq-link { margin-bottom: 0.2rem; }
     .bc-addon-row { gap: 0.5rem; }
-    .bootcamp-intro { font-size: 0.85rem; margin-bottom: 0.6rem; }
-    .bc-pricing-title { margin: 0.5rem 0 0.5rem; font-size: 1.1rem; }
+    .bootcamp-intro { font-size: 0.8rem; margin-bottom: 0.5rem; line-height: 1.4; }
+    .bc-pricing-title { margin: 0.3rem 0 0.4rem; font-size: 1.05rem; }
     .bc-compare-link { display: inline; }
-    .bc-tier-tile { padding: 1rem 1.2rem; }
-    .bc-tier-tile-price { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .bc-tier-tile-list { gap: 0.35rem; }
-    .bc-tier-tile-list li { font-size: 0.8rem; }
-    .bc-addon-card { padding: 0.7rem 1.1rem; margin-top: 0.6rem; }
-    .bc-addon-desc { font-size: 0.8rem; }
+    .bc-tier-tile { padding: 0.9rem 1.1rem; }
+    .bc-tier-tile-name { font-size: 0.98rem; margin-bottom: 0.1rem; }
+    .bc-tier-tile-value { font-size: 0.7rem; margin-bottom: 0.05rem; }
+    .bc-tier-tile-price { font-size: 1.15rem; margin-bottom: 0.45rem; }
+    .bc-tier-tile-badge { font-size: 0.65rem; padding: 0.18rem 0.6rem; margin-bottom: 0.3rem; }
+    .bc-tier-tile-list { gap: 0.28rem; }
+    .bc-tier-tile-list li { font-size: 0.76rem; line-height: 1.3; }
+    .bc-tier-nav { margin-top: 0.6rem; }
+    .bc-addon-card { padding: 0.6rem 1rem; margin-top: 0.5rem; }
+    .bc-addon-desc { font-size: 0.76rem; line-height: 1.35; }
 
-    /* PACKAGES: slideshow on mobile */
+    /* PACKAGES: arrow-only slideshow on mobile (no swipe, avoids vertical scroll conflicts) */
+    .pricing { padding-top: 6.5rem; }
     .pricing-grid {
       display: flex !important;
       grid-template-columns: none;
       grid-template-rows: none;
-      overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
+      overflow: hidden;
       gap: 0 !important;
-      margin-left: -1.2rem; margin-right: -1.2rem;
-      padding: 0 1.2rem 0.5rem;
-      scrollbar-width: none;
-      touch-action: pan-x;
+      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+      will-change: transform;
     }
-    .pricing-grid::-webkit-scrollbar { display: none; }
     .pricing-grid > .price-card {
-      flex: 0 0 calc(100% - 0.5rem);
-      scroll-snap-align: center;
-      margin-right: 0.5rem;
+      flex: 0 0 100%;
     }
-    .pricing-grid > .price-card:last-child { margin-right: 0; }
-    .price-card { padding: 1.1rem 1.3rem; cursor: default; }
+    .price-card { padding: 0.9rem 1.1rem; cursor: default; }
+    .price-card h3 { font-size: 1.05rem; margin-bottom: 0.1rem; }
+    .price-amount { font-size: 0.95rem; }
+    .price-card p { font-size: 0.8rem; line-height: 1.4; margin-bottom: 0.4rem; }
+    .price-card li { font-size: 0.78rem; line-height: 1.3; gap: 0.4rem; }
+    .price-card ul { gap: 0.32rem; }
+    .pc-divider { margin: 0.5rem 0; }
+    .pc-label { font-size: 0.64rem; margin-bottom: 0.35rem; }
+    .pc-help-tags { gap: 0.3rem; }
+    .pc-help-tag { font-size: 0.68rem; padding: 0.18rem 0.55rem; }
+    .check { width: 14px; height: 14px; font-size: 0.55rem; }
     .pricing-grid > .price-card:hover,
     .pricing .pricing-grid > .price-card:hover {
       border-color: rgba(255,255,255,0.12);
@@ -854,7 +870,7 @@
     }
     .pricing-nav {
       display: flex !important;
-      gap: 0.6rem; margin-top: 1.2rem;
+      gap: 0.6rem; margin-top: 1rem;
     }
 
     /* FOOTER */
@@ -1979,8 +1995,15 @@
 </footer>
 
 <script>
-  // Equalise "What Can We Help With?" row across pricing cards
+  // Equalise "What Can We Help With?" row across pricing cards (desktop/tablet only —
+  // on mobile only one card shows at a time, so equalizing wastes vertical space)
   function equaliseCards() {
+    if (window.innerWidth <= 768) {
+      document.querySelectorAll('.pc-header, .pc-included').forEach(function(el) {
+        el.style.minHeight = '';
+      });
+      return;
+    }
     var grids = document.querySelectorAll('.pricing-grid');
     grids.forEach(function(grid) {
       var cards = grid.querySelectorAll('.price-card');
@@ -2227,27 +2250,14 @@
       nextLabel.textContent = navLabels[nextIdx];
     }
 
-    function sync() {
-      if (!track.clientWidth) return;
-      var idx = Math.round(track.scrollLeft / track.clientWidth);
-      if (idx < 0) idx = 0;
-      if (idx > cards.length - 1) idx = cards.length - 1;
-      currentIdx = idx;
-      setLabels(idx);
+    function goTo(idx) {
+      currentIdx = (idx + cards.length) % cards.length;
+      track.style.transform = 'translateX(-' + (currentIdx * 100) + '%)';
+      setLabels(currentIdx);
     }
-    track.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', sync);
 
-    prevBtn.addEventListener('click', function() {
-      var targetIdx = (currentIdx - 1 + cards.length) % cards.length;
-      var target = cards[targetIdx];
-      if (target) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
-    });
-    nextBtn.addEventListener('click', function() {
-      var targetIdx = (currentIdx + 1) % cards.length;
-      var target = cards[targetIdx];
-      if (target) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
-    });
+    prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
+    nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
 
     setLabels(0);
   })();
@@ -2258,6 +2268,7 @@
     var nav = document.querySelector('.pricing-nav');
     if (!track || !nav) return;
     var cards = track.querySelectorAll('.price-card');
+    if (!cards.length) return;
     var prevBtn = nav.querySelector('.pricing-nav-prev');
     var nextBtn = nav.querySelector('.pricing-nav-next');
     var prevLabel = prevBtn.querySelector('.pn-label');
@@ -2282,27 +2293,14 @@
       nextBtn.classList.remove('to-section');
     }
 
-    function sync() {
-      if (!track.clientWidth) return;
-      var idx = Math.round(track.scrollLeft / track.clientWidth);
-      if (idx < 0) idx = 0;
-      if (idx > cards.length - 1) idx = cards.length - 1;
-      currentIdx = idx;
-      setLabels(idx);
+    function goTo(idx) {
+      currentIdx = (idx + cards.length) % cards.length;
+      track.style.transform = 'translateX(-' + (currentIdx * 100) + '%)';
+      setLabels(currentIdx);
     }
-    track.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', sync);
 
-    prevBtn.addEventListener('click', function() {
-      var targetIdx = (currentIdx - 1 + cards.length) % cards.length;
-      var target = cards[targetIdx];
-      if (target) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
-    });
-    nextBtn.addEventListener('click', function() {
-      var targetIdx = (currentIdx + 1) % cards.length;
-      var target = cards[targetIdx];
-      if (target) track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
-    });
+    prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
+    nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
 
     setLabels(0);
   })();
@@ -2313,6 +2311,7 @@
     var nav = document.querySelector('.bc-tier-nav');
     if (!track || !nav) return;
     var tiles = track.querySelectorAll('.bc-tier-tile');
+    if (!tiles.length) return;
     var prevBtn = nav.querySelector('.bc-tier-prev');
     var nextBtn = nav.querySelector('.bc-tier-next');
     var prevLabel = prevBtn.querySelector('.pn-label');
@@ -2323,24 +2322,23 @@
       return n ? n.textContent.trim() : '';
     });
 
-    function currentIdx() {
-      var idx = Math.round(track.scrollLeft / track.clientWidth);
-      return Math.max(0, Math.min(tiles.length - 1, idx));
-    }
+    var currentIdx = 0;
+
     function setLabels(idx) {
       var prevIdx = (idx - 1 + tiles.length) % tiles.length;
       var nextIdx = (idx + 1) % tiles.length;
       prevLabel.textContent = names[prevIdx];
       nextLabel.textContent = names[nextIdx];
     }
+
     function goTo(idx) {
-      idx = (idx + tiles.length) % tiles.length;
-      track.scrollTo({ left: idx * track.clientWidth, behavior: 'smooth' });
+      currentIdx = (idx + tiles.length) % tiles.length;
+      track.style.transform = 'translateX(-' + (currentIdx * 100) + '%)';
+      setLabels(currentIdx);
     }
-    track.addEventListener('scroll', function() { setLabels(currentIdx()); }, { passive: true });
-    window.addEventListener('resize', function() { setLabels(currentIdx()); });
-    prevBtn.addEventListener('click', function() { goTo(currentIdx() - 1); });
-    nextBtn.addEventListener('click', function() { goTo(currentIdx() + 1); });
+
+    prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
+    nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
 
     setLabels(0);
   })();
