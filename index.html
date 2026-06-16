@@ -38,7 +38,10 @@
     --border: #e2e8f0;
     --font: 'League Spartan', sans-serif;
   }
-  html { scroll-padding-top: 0; scroll-snap-type: y mandatory; }
+  html { scroll-padding-top: 0; scroll-snap-type: y proximity; }
+  @media (max-width: 768px) {
+    html { scroll-snap-type: y proximity; }
+  }
   body { font-family: var(--font); color: var(--text); background: var(--white); overflow-x: hidden; }
 
   nav {
@@ -185,7 +188,7 @@
   }
 
   /* SECTION SHELL */
-  section { padding: 4.5rem 0; padding-top: 7.5rem; height: 100dvh; scroll-snap-align: start; scroll-snap-stop: always; display: flex; align-items: center; box-sizing: border-box; overflow-y: auto; }
+  section { padding: 4.5rem 0; padding-top: 7.5rem; height: 100dvh; scroll-snap-align: start; scroll-snap-stop: normal; display: flex; align-items: center; box-sizing: border-box; overflow: hidden; }
   section > .container { width: 100%; }
   .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
   .section-eyebrow {
@@ -432,7 +435,7 @@
     .outcomes-test-rail .test-card { flex: 0 0 calc((100% - 1.5rem) / 2); }
   }
   @media (max-width: 768px) {
-    .outcomes { padding-top: 6.5rem; padding-bottom: 1.5rem; }
+    .outcomes { padding-top: 7.5rem; padding-bottom: 1.5rem; }
     .outcomes .section-h2 { margin-bottom: 0.5rem; }
     .outcome-stats { flex-direction: column; gap: 0.32rem; }
     .outcome-stat-preview { display: none; }
@@ -718,7 +721,7 @@
     background: var(--navy); padding: 4rem 0 2rem; border-top: 2px solid rgba(240,180,30,0.25);
     min-height: 40vh; box-sizing: border-box;
     display: flex; flex-direction: column; justify-content: center;
-    scroll-snap-align: end; scroll-snap-stop: always;
+    scroll-snap-align: end; scroll-snap-stop: normal;
   }
   .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
   .footer-brand-logo { font-size: 1.6rem; font-weight: 800; color: white; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
@@ -732,9 +735,8 @@
   .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
   @media (max-width: 768px) {
     footer {
-      padding: 6.5rem 0 1.5rem; /* top clears nav(72px) + banner(~24px) = ~96px */
+      padding: 7.5rem 0 1.5rem; /* top clears nav(72px) + banner(~35px) + buffer */
       min-height: 100dvh; box-sizing: border-box;
-      scroll-snap-align: start; /* snap from top like all other sections */
       justify-content: flex-start;
     }
     .footer-newsletter { padding-bottom: 1.4rem; margin-bottom: 1.4rem; }
@@ -791,7 +793,7 @@
     nav { padding: 0 1.2rem; }
 
     /* HERO */
-    .hero { padding: 6.5rem 1.2rem 3.5rem; }
+    .hero { padding: 7.5rem 1.2rem 3.5rem; }
     .hero-h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); margin-bottom: 0.8rem; }
     .hero-sub { font-size: 0.88rem; margin-bottom: 0.9rem; line-height: 1.5; }
     .hero-sub:last-of-type { margin-bottom: 1.2rem; }
@@ -806,7 +808,7 @@
     .marquee-sep { font-size: 1rem; }
 
     /* SECTIONS */
-    section { padding: 4rem 0; padding-top: 6.5rem; }
+    section { padding: 2.5rem 0; padding-top: 7.5rem; overflow: hidden; }
     .container { padding: 0 1.2rem; }
     .section-eyebrow { margin-bottom: 0.6rem; }
     .section-h2 { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 0.4rem; }
@@ -815,7 +817,7 @@
     .section-learn-more { margin-top: 0.5rem; margin-bottom: 0; font-size: 0.8rem; }
 
     /* TEMPLATES & GUIDES: compress to fit one screen */
-    .templates { padding-top: 6.5rem; padding-bottom: 1.2rem; }
+    .templates { padding-top: 7.5rem; padding-bottom: 1.2rem; }
     .tmpl-intro { font-size: 0.85rem; margin-bottom: 1rem; margin-top: 0.3rem; }
     .tmpl-cat-list { gap: 0.55rem; }
     .tmpl-cat-row { padding: 0.85rem 1.1rem; gap: 0.7rem; }
@@ -829,7 +831,7 @@
     .cred-block { padding: 1.8rem; }
 
     /* ABOUT: compress to fit one screen */
-    .about { padding-top: 6.5rem; }
+    .about { padding-top: 7.5rem; }
     .approach-numbered { gap: 0; margin-top: 0.8rem !important; }
     .approach-item {
       background: white; border: 2px solid var(--border); border-radius: 14px; padding: 1rem;
@@ -873,7 +875,7 @@
     }
 
     /* BOOTCAMP: tile carousel replaces table on mobile */
-    .bootcamp { padding-top: 6.5rem; padding-bottom: 1.5rem; }
+    .bootcamp { padding-top: 7.5rem; padding-bottom: 1.5rem; }
     .bootcamp .section-h2 { margin-bottom: 0.2rem; }
     .bc-desktop-table { display: none; }
     .bc-tier-carousel { display: block; overflow: hidden; touch-action: pan-y; }
@@ -896,7 +898,7 @@
     .bc-addon-desc { font-size: 0.72rem; line-height: 1.3; }
 
     /* PACKAGES: arrow-only slideshow on mobile (no swipe, avoids vertical scroll conflicts) */
-    .pricing { padding-top: 6.5rem; padding-bottom: 1.5rem; }
+    .pricing { padding-top: 7.5rem; padding-bottom: 1.5rem; }
     .pricing .section-h2 { margin-bottom: 0.3rem; }
     .pricing-carousel-wrap { overflow: hidden; touch-action: pan-y; }
     .pricing-grid {
@@ -951,7 +953,7 @@
     .about-card { padding: 1rem; }
     .card-icon { width: 38px; height: 38px; }
     .container { padding: 0 1rem; }
-    section { padding: 3rem 0; padding-top: 6.5rem; }
+    section { padding: 3rem 0; padding-top: 7.5rem; }
   }
 
   /* FOOTER NEWSLETTER */
@@ -1922,7 +1924,7 @@
 </section>
 
 <!-- FAQ -->
-<section style="background:var(--white);align-items:flex-start;" id="faq">
+<section style="background:var(--white);align-items:flex-start;overflow-y:auto;" id="faq">
   <div class="container" style="max-width:1320px;">
     <div class="faq-card">
       <div class="section-eyebrow fade-in faq-eyebrow">FAQ</div>
@@ -2250,10 +2252,12 @@
   // FAQ accordion
   function toggleFaq(btn) {
     var isOpen = btn.classList.contains('open');
+    // Close all first
     document.querySelectorAll('.faq-q').forEach(function(b) {
       b.classList.remove('open');
       b.nextElementSibling.classList.remove('open');
     });
+    // Open clicked one if it was closed
     if (!isOpen) {
       btn.classList.add('open');
       btn.nextElementSibling.classList.add('open');
@@ -2591,13 +2595,17 @@
   });
 
   // ── Smooth scroll for all internal #anchor links ──
-  // scroll-snap-type: y mandatory causes instant jumps on native hash links;
-  // intercept them and use a custom eased scroll for a deliberate, slower feel.
+  var HEADER_OFFSET = 96; // nav(72) + banner(~24)
   function smoothScrollTo(target) {
+    var rect = target.getBoundingClientRect();
+    var targetY = rect.top + window.scrollY - (window.innerWidth <= 768 ? HEADER_OFFSET : 0);
     var start = window.scrollY;
-    var end = target.getBoundingClientRect().top + start;
-    var duration = 900; // ms — adjust for speed
+    var end = targetY;
+    var duration = 800;
     var startTime = null;
+    // Temporarily disable snap so animation doesn't fight it
+    var prevSnap = document.documentElement.style.scrollSnapType;
+    document.documentElement.style.scrollSnapType = 'none';
     function easeInOutCubic(t) {
       return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
@@ -2606,7 +2614,14 @@
       var elapsed = timestamp - startTime;
       var progress = Math.min(elapsed / duration, 1);
       window.scrollTo(0, start + (end - start) * easeInOutCubic(progress));
-      if (progress < 1) requestAnimationFrame(step);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        // Re-enable snap after animation settles
+        setTimeout(function() {
+          document.documentElement.style.scrollSnapType = '';
+        }, 100);
+      }
     }
     requestAnimationFrame(step);
   }
@@ -2620,6 +2635,56 @@
     e.preventDefault();
     smoothScrollTo(target);
   });
+
+  // ── Section change observer (mobile only) ──
+  // Resets carousels to slide 0 and closes FAQ when a section leaves view.
+  if (window.IntersectionObserver && window.innerWidth <= 768) {
+    var carouselResetMap = [
+      { sectionSel: '.about',    trackSel: '.approach-cards',  type: 'approach' },
+      { sectionSel: '.bootcamp', trackSel: '.bc-tier-track',   type: 'bootcamp' },
+      { sectionSel: '.pricing',  trackSel: '.pricing-grid',    type: 'pricing'  },
+    ];
+
+    carouselResetMap.forEach(function(cfg) {
+      var section = document.querySelector(cfg.sectionSel);
+      if (!section) return;
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) {
+            var track = document.querySelector(cfg.trackSel);
+            if (track) track.style.transform = 'translateX(0)';
+            // reset nav labels to index 0
+            if (cfg.type === 'approach') {
+              var nav = document.querySelector('.approach-nav');
+              if (nav) {
+                var prev = nav.querySelector('.pn-label');
+                var labels = nav.querySelectorAll('.pn-label');
+                // just clear labels — setLabels(0) will run on next click
+              }
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+      obs.observe(section);
+    });
+
+    // Close FAQ when FAQ section leaves view
+    var faqSection = document.getElementById('faq');
+    if (faqSection) {
+      var faqObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) {
+            document.querySelectorAll('.faq-q.open').forEach(function(btn) {
+              btn.classList.remove('open');
+              var answer = btn.nextElementSibling;
+              if (answer) answer.classList.remove('open');
+            });
+          }
+        });
+      }, { threshold: 0.1 });
+      faqObs.observe(faqSection);
+    }
+  }
 </script>
 </body>
 </html>
