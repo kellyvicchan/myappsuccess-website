@@ -38,12 +38,15 @@
     --border: #e2e8f0;
     --font: 'League Spartan', sans-serif;
   }
-  html {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll; /* ensures the page itself is the scroll container */
+  html, body {
+    height: 100%; margin: 0; padding: 0;
   }
-
-  body { font-family: var(--font); color: var(--text); background: var(--white); overflow-x: hidden; }
+  body {
+    font-family: var(--font); color: var(--text); background: var(--white);
+    overflow-x: clip; /* clip doesn't create a scroll container unlike hidden */
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+  }
 
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
