@@ -185,7 +185,7 @@
   }
 
   /* SECTION SHELL */
-  section { padding: 4.5rem 0; padding-top: 7.5rem; height: 100vh; scroll-snap-align: start; scroll-snap-stop: always; display: flex; align-items: center; box-sizing: border-box; overflow-y: auto; }
+  section { padding: 4.5rem 0; padding-top: 7.5rem; height: 100vh; scroll-snap-align: start; scroll-snap-stop: always; display: flex; align-items: center; box-sizing: border-box; overflow: hidden; }
   section > .container { width: 100%; }
   .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
   .section-eyebrow {
@@ -504,19 +504,11 @@
   /* COMPARE TABLE */
   .bc-tier-carousel { display: none; }
 
-  /* BOOTCAMP MOBILE TIER TILES: arrow-only (no swipe, avoids vertical scroll conflicts) */
-  .bc-tier-track {
-    display: flex; gap: 0;
-    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
-    will-change: transform;
-    touch-action: pan-y;
-  }
+  /* BOOTCAMP MOBILE TIER TILES: arrow-only show/hide (no horizontal transform) */
+  .bc-tier-track { display: block; }
   .bc-tier-tile {
-    flex: 0 0 100%;
-    min-width: 100%;
     background: var(--off-white); border: 1.5px solid var(--border);
     border-radius: 14px; padding: 1.3rem 1.4rem;
-    touch-action: pan-y;
   }
   .bc-tier-tile-popular { border-color: var(--gold); background: var(--gold-bg); }
   .bc-tier-tile-badge {
@@ -838,34 +830,11 @@
     .approach-item h4 { font-size: 1rem; margin-bottom: 0.3rem; line-height: 1.25; }
     .approach-item p { font-size: 0.85rem; line-height: 1.42; }
 
-    /* APPROACH: arrow-only slideshow on mobile (no swipe, avoids vertical scroll conflicts) */
-    .approach-carousel-wrap {
-      overflow: hidden;
-      margin-top: 0.8rem;
-      touch-action: pan-y;
-    }
-    .approach-cards {
-      display: flex !important;
-      flex-direction: row !important;
-      gap: 0 !important;
-      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
-      will-change: transform;
-      margin-top: 0 !important;
-      touch-action: pan-y;
-    }
-    .approach-cards > .about-card {
-      flex: 0 0 100%;
-      min-width: 100%;
-      touch-action: pan-y;
-    }
-    .approach-inner-row {
-      display: contents !important;
-    }
-    .approach-inner-row > .about-card {
-      flex: 0 0 100%;
-      min-width: 100%;
-      touch-action: pan-y;
-    }
+    /* APPROACH: arrow-only show/hide on mobile (no horizontal transforms) */
+    .approach-carousel-wrap { display: block; margin-top: 0.8rem; }
+    .approach-cards { display: block !important; }
+    .approach-cards > .about-card, .approach-inner-row > .about-card { width: 100%; }
+    .approach-inner-row { display: contents !important; }
     .approach-nav {
       display: flex !important;
       gap: 0.6rem; margin-top: 0.8rem;
@@ -875,7 +844,8 @@
     .bootcamp { padding-top: 7.5rem; padding-bottom: 1.5rem; }
     .bootcamp .section-h2 { margin-bottom: 0.2rem; }
     .bc-desktop-table { display: none; }
-    .bc-tier-carousel { display: block; overflow: hidden; touch-action: pan-y; }
+    .bc-tier-carousel { display: block; }
+
     .bc-head-row { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
     .bc-faq-link { margin-bottom: 0.15rem; font-size: 0.76rem; }
     .bootcamp-intro { display: none; }
@@ -894,23 +864,15 @@
     .bc-addon-title { font-size: 0.88rem; }
     .bc-addon-desc { font-size: 0.72rem; line-height: 1.3; }
 
-    /* PACKAGES: arrow-only slideshow on mobile (no swipe, avoids vertical scroll conflicts) */
+    /* PACKAGES: arrow-only show/hide on mobile (no horizontal transform) */
     .pricing { padding-top: 7.5rem; padding-bottom: 1.5rem; }
     .pricing .section-h2 { margin-bottom: 0.3rem; }
-    .pricing-carousel-wrap { overflow: hidden; touch-action: pan-y; }
+    .pricing-carousel-wrap { display: block; }
     .pricing-grid {
-      display: flex !important;
-      grid-template-columns: none;
-      grid-template-rows: none;
-      gap: 0 !important;
-      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
-      will-change: transform;
-      touch-action: pan-y;
+      display: block !important;
     }
     .pricing-grid > .price-card {
-      flex: 0 0 100%;
-      min-width: 100%;
-      touch-action: pan-y;
+      width: 100%;
     }
     .price-card { padding: 0.8rem 1rem; cursor: default; }
     .price-card h3 { font-size: 0.98rem; margin-bottom: 0.08rem; }
@@ -1412,18 +1374,19 @@
     </div>
   </div>
 
-  <!-- OUTCOME DETAIL MODAL -->
-  <div id="outcome-modal" class="outcome-modal" aria-hidden="true">
-    <div class="outcome-modal-backdrop" onclick="closeOutcomeModal()"></div>
-    <div class="outcome-modal-card">
-      <button class="outcome-modal-close" onclick="closeOutcomeModal()" aria-label="Close">&#10005;</button>
-      <div id="outcome-modal-eyebrow" class="outcome-modal-eyebrow"></div>
-      <h3 id="outcome-modal-title" class="outcome-modal-title"></h3>
-      <p id="outcome-modal-note" class="outcome-modal-note"></p>
-      <div id="outcome-modal-body" class="outcome-modal-body"></div>
-    </div>
-  </div>
 </section>
+
+<!-- OUTCOME DETAIL MODAL -->
+<div id="outcome-modal" class="outcome-modal" aria-hidden="true">
+  <div class="outcome-modal-backdrop" onclick="closeOutcomeModal()"></div>
+  <div class="outcome-modal-card">
+    <button class="outcome-modal-close" onclick="closeOutcomeModal()" aria-label="Close">&#10005;</button>
+    <div id="outcome-modal-eyebrow" class="outcome-modal-eyebrow"></div>
+    <h3 id="outcome-modal-title" class="outcome-modal-title"></h3>
+    <p id="outcome-modal-note" class="outcome-modal-note"></p>
+    <div id="outcome-modal-body" class="outcome-modal-body"></div>
+  </div>
+</div>
 
 <!-- THE BOOTCAMP -->
 <section class="bootcamp" id="bootcamp">
@@ -1618,23 +1581,24 @@
       <a href="interest-form.html" class="btn-gold">Get Started</a>
     </div>
   </div>
+</section>
 
-  <!-- COMPARE TABLE MODAL (mobile) -->
-  <div id="compare-modal" class="outcome-modal" aria-hidden="true">
-    <div class="outcome-modal-backdrop" onclick="closeCompareModal()"></div>
-    <div class="outcome-modal-card compare-modal-card">
-      <button class="outcome-modal-close" onclick="closeCompareModal()" aria-label="Close">&#10005;</button>
-      <div class="outcome-modal-eyebrow">The Bootcamp</div>
-      <h3 class="outcome-modal-title">Compare All Inclusions</h3>
-      <div class="compare-table-wrap" style="overflow-x:auto;margin-top:0.8rem;">
-        <table style="width:100%;border-collapse:collapse;font-family:var(--font);font-size:0.78rem;color:var(--navy);">
-          <colgroup>
-            <col style="width:40%;">
-            <col style="width:13%;">
-            <col style="width:16%;">
-            <col style="width:16%;">
-            <col style="width:15%;">
-          </colgroup>
+<!-- COMPARE TABLE MODAL -->
+<div id="compare-modal" class="outcome-modal" aria-hidden="true">
+  <div class="outcome-modal-backdrop" onclick="closeCompareModal()"></div>
+  <div class="outcome-modal-card compare-modal-card">
+    <button class="outcome-modal-close" onclick="closeCompareModal()" aria-label="Close">&#10005;</button>
+    <div class="outcome-modal-eyebrow">The Bootcamp</div>
+    <h3 class="outcome-modal-title">Compare All Inclusions</h3>
+    <div class="compare-table-wrap" style="overflow-x:auto;margin-top:0.8rem;">
+      <table style="width:100%;border-collapse:collapse;font-family:var(--font);font-size:0.78rem;color:var(--navy);">
+        <colgroup>
+          <col style="width:40%;">
+          <col style="width:13%;">
+          <col style="width:16%;">
+          <col style="width:16%;">
+          <col style="width:15%;">
+        </colgroup>
           <thead>
             <tr>
               <th style="padding:0.36rem 0.5rem;text-align:left;border-bottom:2px solid var(--border);color:var(--muted);font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;"></th>
@@ -1737,7 +1701,6 @@
       </div>
     </div>
   </div>
-</section>
 
 <!-- PRIVATE SESSIONS -->
 <section class="pricing" id="pricing">
@@ -1892,36 +1855,36 @@
       <a href="interest-form.html" class="btn-gold">Get Started</a>
     </div>
   </div>
-
-  <!-- CATEGORY MODAL -->
-  <div id="category-modal" class="outcome-modal" aria-hidden="true">
-    <div class="outcome-modal-backdrop" onclick="closeCategoryModal()"></div>
-    <div class="outcome-modal-card">
-      <button class="outcome-modal-close" onclick="closeCategoryModal()" aria-label="Close">&#10005;</button>
-      <div class="outcome-modal-eyebrow">Templates &amp; Guides</div>
-      <h3 id="category-modal-title" class="outcome-modal-title"></h3>
-      <div id="category-modal-body" class="tmpl-modal-list"></div>
-    </div>
-  </div>
-
-  <!-- TEMPLATE MODAL -->
-  <div id="tmpl-modal" style="display:none;position:fixed;inset:0;z-index:700;align-items:center;justify-content:center;padding:1.5rem;">
-    <div onclick="closeTemplateModal()" style="position:absolute;inset:0;background:rgba(30,70,110,0.45);backdrop-filter:blur(3px);"></div>
-    <div style="position:relative;background:white;border-radius:18px;padding:2rem;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(30,70,110,0.2);">
-      <button onclick="closeTemplateModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;line-height:1;">&#10005;</button>
-      <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:0.5rem;">Resource</div>
-      <h3 id="tmpl-modal-title" style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:0.8rem;font-family:var(--font);"></h3>
-      <p id="tmpl-modal-desc" style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.4rem;"></p>
-      <div style="display:flex;gap:0.75rem;">
-        <button disabled style="display:inline-block;font-size:0.82rem;font-weight:800;background:var(--border);color:var(--muted);padding:0.6rem 1.3rem;border-radius:9px;border:none;cursor:default;">Order Now</button>
-        <button onclick="closeTemplateModal()" style="font-size:0.82rem;font-weight:600;background:none;border:1.5px solid var(--border);color:var(--muted);padding:0.6rem 1.1rem;border-radius:9px;cursor:pointer;font-family:var(--font);">Close</button>
-      </div>
-    </div>
-  </div>
 </section>
 
+<!-- CATEGORY MODAL -->
+<div id="category-modal" class="outcome-modal" aria-hidden="true">
+  <div class="outcome-modal-backdrop" onclick="closeCategoryModal()"></div>
+  <div class="outcome-modal-card">
+    <button class="outcome-modal-close" onclick="closeCategoryModal()" aria-label="Close">&#10005;</button>
+    <div class="outcome-modal-eyebrow">Templates &amp; Guides</div>
+    <h3 id="category-modal-title" class="outcome-modal-title"></h3>
+    <div id="category-modal-body" class="tmpl-modal-list"></div>
+  </div>
+</div>
+
+<!-- TEMPLATE MODAL -->
+<div id="tmpl-modal" style="display:none;position:fixed;inset:0;z-index:700;align-items:center;justify-content:center;padding:1.5rem;">
+  <div onclick="closeTemplateModal()" style="position:absolute;inset:0;background:rgba(30,70,110,0.45);backdrop-filter:blur(3px);"></div>
+  <div style="position:relative;background:white;border-radius:18px;padding:2rem;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(30,70,110,0.2);">
+    <button onclick="closeTemplateModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;line-height:1;">&#10005;</button>
+    <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:0.5rem;">Resource</div>
+    <h3 id="tmpl-modal-title" style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:0.8rem;font-family:var(--font);"></h3>
+    <p id="tmpl-modal-desc" style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.4rem;"></p>
+    <div style="display:flex;gap:0.75rem;">
+      <button disabled style="display:inline-block;font-size:0.82rem;font-weight:800;background:var(--border);color:var(--muted);padding:0.6rem 1.3rem;border-radius:9px;border:none;cursor:default;">Order Now</button>
+      <button onclick="closeTemplateModal()" style="font-size:0.82rem;font-weight:600;background:none;border:1.5px solid var(--border);color:var(--muted);padding:0.6rem 1.1rem;border-radius:9px;cursor:pointer;font-family:var(--font);">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- FAQ -->
-<section style="background:var(--white);align-items:flex-start;" id="faq">
+<section style="background:var(--white);" id="faq">
   <div class="container" style="max-width:1320px;">
     <div class="faq-card">
       <div class="section-eyebrow fade-in faq-eyebrow">FAQ</div>
@@ -2285,52 +2248,56 @@
   });
 
   // ── Approach slideshow with looping arrow nav (mobile) ──
+  // Uses show/hide (not translateX) so no horizontal composite layer blocks vertical snap
   (function() {
     var track = document.querySelector('.approach-cards');
     var nav = document.querySelector('.approach-nav');
     if (!track || !nav) return;
-    var cards = track.querySelectorAll('.about-card');
+    var cards = Array.prototype.slice.call(track.querySelectorAll('.about-card'));
     if (cards.length < 2) return;
     var prevBtn = nav.querySelector('.approach-nav-prev');
     var nextBtn = nav.querySelector('.approach-nav-next');
-    var prevLabel = prevBtn.querySelector('.pn-label');
-    var nextLabel = nextBtn.querySelector('.pn-label');
+    var prevLabel = prevBtn ? prevBtn.querySelector('.pn-label') : null;
+    var nextLabel = nextBtn ? nextBtn.querySelector('.pn-label') : null;
 
-    // Card titles from each h4
-    var titles = Array.prototype.map.call(cards, function(c) {
+    var titles = cards.map(function(c) {
       var h = c.querySelector('h4');
       return h ? h.textContent.trim() : '';
     });
-    // Shorter nav labels for any titles that are too long
     var shorten = {
       'We Are Advisors Who Have Been There': 'Our Story',
       'Other Programs Prep Applications, We Prep Candidates': 'We Empower Candidates'
     };
     var navLabels = titles.map(function(t) { return shorten[t] || t; });
-
     var currentIdx = 0;
 
+    function show(idx) {
+      cards.forEach(function(c, i) { c.style.display = i === idx ? '' : 'none'; });
+    }
     function setLabels(idx) {
       if (!prevLabel || !nextLabel) return;
-      var prevIdx = (idx - 1 + cards.length) % cards.length;
-      var nextIdx = (idx + 1) % cards.length;
-      prevLabel.textContent = navLabels[prevIdx];
-      nextLabel.textContent = navLabels[nextIdx];
+      prevLabel.textContent = navLabels[(idx - 1 + cards.length) % cards.length];
+      nextLabel.textContent = navLabels[(idx + 1) % cards.length];
     }
-
     function goTo(idx) {
       currentIdx = (idx + cards.length) % cards.length;
-      var wrap = track.closest('.approach-carousel-wrap') || track.parentElement;
-      var w = wrap ? wrap.offsetWidth : track.offsetWidth;
-      track.style.transform = 'translateX(-' + (currentIdx * w) + 'px)';
+      show(currentIdx);
       setLabels(currentIdx);
     }
+    function reset() { goTo(0); }
 
-    prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
-    nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
-    window.addEventListener('resize', function() { goTo(currentIdx); });
+    if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
 
-    setLabels(0);
+    // Reset to first when section leaves view
+    var section = document.querySelector('.about');
+    if (section && window.IntersectionObserver) {
+      new IntersectionObserver(function(entries) {
+        if (!entries[0].isIntersecting) reset();
+      }, { threshold: 0.1 }).observe(section);
+    }
+
+    show(0); setLabels(0);
   })();
 
   // ── Pricing slideshow with labeled arrows (mobile) ──
@@ -2338,45 +2305,44 @@
     var track = document.querySelector('.pricing-grid');
     var nav = document.querySelector('.pricing-nav');
     if (!track || !nav) return;
-    var cards = track.querySelectorAll('.price-card');
+    var cards = Array.prototype.slice.call(track.querySelectorAll('.price-card'));
     if (!cards.length) return;
     var prevBtn = nav.querySelector('.pricing-nav-prev');
     var nextBtn = nav.querySelector('.pricing-nav-next');
-    var prevLabel = prevBtn.querySelector('.pn-label');
-    var nextLabel = nextBtn.querySelector('.pn-label');
+    var prevLabel = prevBtn ? prevBtn.querySelector('.pn-label') : null;
+    var nextLabel = nextBtn ? nextBtn.querySelector('.pn-label') : null;
 
-    // Tier names pulled from each card's h3
-    var tiers = Array.prototype.map.call(cards, function(c) {
+    var navLabels = cards.map(function(c) {
       var h = c.querySelector('h3');
       return h ? h.textContent.replace(/\s+/g, ' ').trim() : '';
     });
-    // h3 text is used directly as the nav label
-    var navLabels = tiers.slice();
-
     var currentIdx = 0;
 
-    function setLabels(idx) {
-      var prevIdx = (idx - 1 + cards.length) % cards.length;
-      var nextIdx = (idx + 1) % cards.length;
-      prevLabel.textContent = navLabels[prevIdx];
-      nextLabel.textContent = navLabels[nextIdx];
-      prevBtn.classList.remove('to-section');
-      nextBtn.classList.remove('to-section');
+    function show(idx) {
+      cards.forEach(function(c, i) { c.style.display = i === idx ? '' : 'none'; });
     }
-
+    function setLabels(idx) {
+      if (prevLabel) prevLabel.textContent = navLabels[(idx - 1 + cards.length) % cards.length];
+      if (nextLabel) nextLabel.textContent = navLabels[(idx + 1) % cards.length];
+    }
     function goTo(idx) {
       currentIdx = (idx + cards.length) % cards.length;
-      var wrap = track.closest('.pricing-carousel-wrap') || track.parentElement;
-      var w = wrap ? wrap.offsetWidth : track.offsetWidth;
-      track.style.transform = 'translateX(-' + (currentIdx * w) + 'px)';
+      show(currentIdx);
       setLabels(currentIdx);
     }
+    function reset() { goTo(0); }
 
-    prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
-    nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
-    window.addEventListener('resize', function() { goTo(currentIdx); });
+    if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
 
-    setLabels(0);
+    var section = document.querySelector('.pricing');
+    if (section && window.IntersectionObserver) {
+      new IntersectionObserver(function(entries) {
+        if (!entries[0].isIntersecting) reset();
+      }, { threshold: 0.1 }).observe(section);
+    }
+
+    show(0); setLabels(0);
   })();
 
   // ── Bootcamp tier tile carousel (labeled arrows, mobile) ──
@@ -2384,40 +2350,44 @@
     var track = document.querySelector('.bc-tier-track');
     var nav = document.querySelector('.bc-tier-nav');
     if (!track || !nav) return;
-    var tiles = track.querySelectorAll('.bc-tier-tile');
+    var tiles = Array.prototype.slice.call(track.querySelectorAll('.bc-tier-tile'));
     if (!tiles.length) return;
     var prevBtn = nav.querySelector('.bc-tier-prev');
     var nextBtn = nav.querySelector('.bc-tier-next');
-    var prevLabel = prevBtn.querySelector('.pn-label');
-    var nextLabel = nextBtn.querySelector('.pn-label');
+    var prevLabel = prevBtn ? prevBtn.querySelector('.pn-label') : null;
+    var nextLabel = nextBtn ? nextBtn.querySelector('.pn-label') : null;
 
-    var names = Array.prototype.map.call(tiles, function(t) {
+    var names = tiles.map(function(t) {
       var n = t.querySelector('.bc-tier-tile-name');
       return n ? n.textContent.trim() : '';
     });
-
     var currentIdx = 0;
 
-    function setLabels(idx) {
-      var prevIdx = (idx - 1 + tiles.length) % tiles.length;
-      var nextIdx = (idx + 1) % tiles.length;
-      prevLabel.textContent = names[prevIdx];
-      nextLabel.textContent = names[nextIdx];
+    function show(idx) {
+      tiles.forEach(function(t, i) { t.style.display = i === idx ? '' : 'none'; });
     }
-
+    function setLabels(idx) {
+      if (prevLabel) prevLabel.textContent = names[(idx - 1 + tiles.length) % tiles.length];
+      if (nextLabel) nextLabel.textContent = names[(idx + 1) % tiles.length];
+    }
     function goTo(idx) {
       currentIdx = (idx + tiles.length) % tiles.length;
-      var wrap = track.closest('.bc-tier-carousel') || track.parentElement;
-      var w = wrap ? wrap.offsetWidth : track.offsetWidth;
-      track.style.transform = 'translateX(-' + (currentIdx * w) + 'px)';
+      show(currentIdx);
       setLabels(currentIdx);
     }
+    function reset() { goTo(0); }
 
-    prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
-    nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
-    window.addEventListener('resize', function() { goTo(currentIdx); });
+    if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
 
-    setLabels(0);
+    var section = document.querySelector('.bootcamp');
+    if (section && window.IntersectionObserver) {
+      new IntersectionObserver(function(entries) {
+        if (!entries[0].isIntersecting) reset();
+      }, { threshold: 0.1 }).observe(section);
+    }
+
+    show(0); setLabels(0);
   })();
 
 
@@ -2619,53 +2589,19 @@
     smoothScrollTo(target);
   });
 
-  // ── Section change observer (mobile only) ──
-  // Resets carousels to slide 0 and closes FAQ when a section leaves view.
-  if (window.IntersectionObserver && window.innerWidth <= 768) {
-    var carouselResetMap = [
-      { sectionSel: '.about',    trackSel: '.approach-cards',  type: 'approach' },
-      { sectionSel: '.bootcamp', trackSel: '.bc-tier-track',   type: 'bootcamp' },
-      { sectionSel: '.pricing',  trackSel: '.pricing-grid',    type: 'pricing'  },
-    ];
-
-    carouselResetMap.forEach(function(cfg) {
-      var section = document.querySelector(cfg.sectionSel);
-      if (!section) return;
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (!entry.isIntersecting) {
-            var track = document.querySelector(cfg.trackSel);
-            if (track) track.style.transform = 'translateX(0)';
-            // reset nav labels to index 0
-            if (cfg.type === 'approach') {
-              var nav = document.querySelector('.approach-nav');
-              if (nav) {
-                var prev = nav.querySelector('.pn-label');
-                var labels = nav.querySelectorAll('.pn-label');
-                // just clear labels — setLabels(0) will run on next click
-              }
-            }
-          }
-        });
-      }, { threshold: 0.1 });
-      obs.observe(section);
-    });
-
-    // Close FAQ when FAQ section leaves view
+  // ── Close FAQ when section leaves view (all viewports) ──
+  if (window.IntersectionObserver) {
     var faqSection = document.getElementById('faq');
     if (faqSection) {
-      var faqObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (!entry.isIntersecting) {
-            document.querySelectorAll('.faq-q.open').forEach(function(btn) {
-              btn.classList.remove('open');
-              var answer = btn.nextElementSibling;
-              if (answer) answer.classList.remove('open');
-            });
-          }
-        });
-      }, { threshold: 0.1 });
-      faqObs.observe(faqSection);
+      new IntersectionObserver(function(entries) {
+        if (!entries[0].isIntersecting) {
+          document.querySelectorAll('.faq-q.open').forEach(function(btn) {
+            btn.classList.remove('open');
+            var answer = btn.nextElementSibling;
+            if (answer) answer.classList.remove('open');
+          });
+        }
+      }, { threshold: 0.1 }).observe(faqSection);
     }
   }
 </script>
