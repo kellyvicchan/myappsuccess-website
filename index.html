@@ -38,15 +38,8 @@
     --border: #e2e8f0;
     --font: 'League Spartan', sans-serif;
   }
-  html, body {
-    height: 100%; margin: 0; padding: 0;
-  }
-  body {
-    font-family: var(--font); color: var(--text); background: var(--white);
-    overflow-x: clip; /* clip doesn't create a scroll container unlike hidden */
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-  }
+  html { scroll-padding-top: 0; scroll-snap-type: y mandatory; }
+  body { font-family: var(--font); color: var(--text); background: var(--white); overflow-x: hidden; }
 
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -109,7 +102,7 @@
 
   /* HERO */
   .hero {
-    height: 100svh; background: var(--navy);
+    height: 100vh; background: var(--navy);
     display: flex; align-items: center; justify-content: center;
     padding: 200px 3rem 5.5rem; position: relative; overflow: hidden; text-align: left;
     box-sizing: border-box;
@@ -191,15 +184,8 @@
     100% { transform: translateX(-50%); }
   }
 
-  /* SECTION SHELL — Apple-style: each section fills viewport, snaps cleanly */
-  section {
-    padding: 4.5rem 0; padding-top: 7.5rem;
-    height: 100svh; /* svh = small viewport height, accounts for mobile chrome */
-    scroll-snap-align: start;
-    display: flex; align-items: center;
-    box-sizing: border-box;
-    overflow: visible; /* never let sections create their own scroll context */
-  }
+  /* SECTION SHELL */
+  section { padding: 4.5rem 0; padding-top: 7.5rem; height: 100vh; scroll-snap-align: start; scroll-snap-stop: always; display: flex; align-items: center; box-sizing: border-box; overflow-y: auto; }
   section > .container { width: 100%; }
   .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
   .section-eyebrow {
@@ -732,7 +718,7 @@
     background: var(--navy); padding: 4rem 0 2rem; border-top: 2px solid rgba(240,180,30,0.25);
     min-height: 40vh; box-sizing: border-box;
     display: flex; flex-direction: column; justify-content: center;
-    scroll-snap-align: start;
+    scroll-snap-align: end; scroll-snap-stop: always;
   }
   .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
   .footer-brand-logo { font-size: 1.6rem; font-weight: 800; color: white; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
@@ -747,7 +733,7 @@
   @media (max-width: 768px) {
     footer {
       padding: 7.5rem 0 1.5rem; /* top clears nav(72px) + banner(~35px) + buffer */
-      min-height: 100svh; box-sizing: border-box;
+      min-height: 100vh; box-sizing: border-box;
       justify-content: flex-start;
     }
     .footer-newsletter { padding-bottom: 1.4rem; margin-bottom: 1.4rem; }
@@ -819,7 +805,7 @@
     .marquee-sep { font-size: 1rem; }
 
     /* SECTIONS */
-    section { padding: 2rem 0; padding-top: 7.5rem; height: 100svh; overflow: visible; }
+    section { padding: 2rem 0; padding-top: 7.5rem; }
     .container { padding: 0 1.2rem; }
     .section-eyebrow { margin-bottom: 0.6rem; }
     .section-h2 { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 0.4rem; }
