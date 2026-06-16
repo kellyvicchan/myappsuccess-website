@@ -38,10 +38,11 @@
     --border: #e2e8f0;
     --font: 'League Spartan', sans-serif;
   }
-  html { scroll-padding-top: 0; scroll-snap-type: y proximity; }
-  @media (max-width: 768px) {
-    html { scroll-snap-type: y proximity; }
+  html {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll; /* ensures the page itself is the scroll container */
   }
+
   body { font-family: var(--font); color: var(--text); background: var(--white); overflow-x: hidden; }
 
   nav {
@@ -105,7 +106,7 @@
 
   /* HERO */
   .hero {
-    height: 100dvh; background: var(--navy);
+    height: 100svh; background: var(--navy);
     display: flex; align-items: center; justify-content: center;
     padding: 200px 3rem 5.5rem; position: relative; overflow: hidden; text-align: left;
     box-sizing: border-box;
@@ -187,8 +188,15 @@
     100% { transform: translateX(-50%); }
   }
 
-  /* SECTION SHELL */
-  section { padding: 4.5rem 0; padding-top: 7.5rem; height: 100dvh; scroll-snap-align: start; scroll-snap-stop: normal; display: flex; align-items: center; box-sizing: border-box; overflow: hidden; }
+  /* SECTION SHELL — Apple-style: each section fills viewport, snaps cleanly */
+  section {
+    padding: 4.5rem 0; padding-top: 7.5rem;
+    height: 100svh; /* svh = small viewport height, accounts for mobile chrome */
+    scroll-snap-align: start;
+    display: flex; align-items: center;
+    box-sizing: border-box;
+    overflow: visible; /* never let sections create their own scroll context */
+  }
   section > .container { width: 100%; }
   .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
   .section-eyebrow {
@@ -721,7 +729,7 @@
     background: var(--navy); padding: 4rem 0 2rem; border-top: 2px solid rgba(240,180,30,0.25);
     min-height: 40vh; box-sizing: border-box;
     display: flex; flex-direction: column; justify-content: center;
-    scroll-snap-align: end; scroll-snap-stop: normal;
+    scroll-snap-align: start;
   }
   .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
   .footer-brand-logo { font-size: 1.6rem; font-weight: 800; color: white; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
@@ -736,7 +744,7 @@
   @media (max-width: 768px) {
     footer {
       padding: 7.5rem 0 1.5rem; /* top clears nav(72px) + banner(~35px) + buffer */
-      min-height: 100dvh; box-sizing: border-box;
+      min-height: 100svh; box-sizing: border-box;
       justify-content: flex-start;
     }
     .footer-newsletter { padding-bottom: 1.4rem; margin-bottom: 1.4rem; }
@@ -808,7 +816,7 @@
     .marquee-sep { font-size: 1rem; }
 
     /* SECTIONS */
-    section { padding: 2.5rem 0; padding-top: 7.5rem; overflow: hidden; }
+    section { padding: 2rem 0; padding-top: 7.5rem; height: 100svh; overflow: visible; }
     .container { padding: 0 1.2rem; }
     .section-eyebrow { margin-bottom: 0.6rem; }
     .section-h2 { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 0.4rem; }
@@ -1076,7 +1084,7 @@
     background: var(--navy); border-radius: 24px; padding: 3.5rem 4rem;
     width: 100%; box-sizing: border-box;
     display: flex; flex-direction: column; justify-content: center;
-    min-height: calc(100vh - 11rem);
+    min-height: calc(100svh - 11rem);
     margin-bottom: 2rem;
   }
   .faq-eyebrow { background: rgba(240,180,30,0.15); border-color: rgba(240,180,30,0.4); color: var(--gold); font-size: 0.85rem; align-self: flex-start; }
@@ -1924,7 +1932,7 @@
 </section>
 
 <!-- FAQ -->
-<section style="background:var(--white);align-items:flex-start;overflow-y:auto;" id="faq">
+<section style="background:var(--white);align-items:flex-start;" id="faq">
   <div class="container" style="max-width:1320px;">
     <div class="faq-card">
       <div class="section-eyebrow fade-in faq-eyebrow">FAQ</div>
@@ -2594,34 +2602,20 @@
     if (e.key === 'Escape') { closeOutcomeModal(); closeCategoryModal(); closeCompareModal(); }
   });
 
-  // ── Smooth scroll for all internal #anchor links ──
-  var HEADER_OFFSET = 96; // nav(72) + banner(~24)
+  // ── Smooth scroll for internal #anchor links ──
+  var HEADER_OFFSET = 120; // nav(72) + banner(~35) + buffer
   function smoothScrollTo(target) {
-    var rect = target.getBoundingClientRect();
-    var targetY = rect.top + window.scrollY - (window.innerWidth <= 768 ? HEADER_OFFSET : 0);
+    var targetY = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
     var start = window.scrollY;
     var end = targetY;
     var duration = 800;
     var startTime = null;
-    // Temporarily disable snap so animation doesn't fight it
-    var prevSnap = document.documentElement.style.scrollSnapType;
-    document.documentElement.style.scrollSnapType = 'none';
-    function easeInOutCubic(t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      var elapsed = timestamp - startTime;
-      var progress = Math.min(elapsed / duration, 1);
-      window.scrollTo(0, start + (end - start) * easeInOutCubic(progress));
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        // Re-enable snap after animation settles
-        setTimeout(function() {
-          document.documentElement.style.scrollSnapType = '';
-        }, 100);
-      }
+    function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var p = Math.min((ts - startTime) / duration, 1);
+      window.scrollTo(0, start + (end - start) * ease(p));
+      if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
