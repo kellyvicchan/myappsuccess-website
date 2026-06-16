@@ -483,12 +483,13 @@
 
   /* BOOTCAMP MOBILE TIER TILES: arrow-only (no swipe, avoids vertical scroll conflicts) */
   .bc-tier-track {
-    display: flex; gap: 0; overflow: hidden;
+    display: flex; gap: 0;
     transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
     will-change: transform;
   }
   .bc-tier-tile {
     flex: 0 0 100%;
+    min-width: 100%;
     background: var(--off-white); border: 1.5px solid var(--border);
     border-radius: 14px; padding: 1.3rem 1.4rem;
   }
@@ -791,25 +792,28 @@
     .approach-item p { font-size: 0.85rem; line-height: 1.42; }
 
     /* APPROACH: arrow-only slideshow on mobile (no swipe, avoids vertical scroll conflicts) */
+    .approach-carousel-wrap {
+      overflow: hidden;
+      margin-top: 0.8rem;
+    }
     .approach-cards {
       display: flex !important;
       flex-direction: row !important;
-      align-items: stretch;
-      overflow: hidden;
       gap: 0 !important;
       transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
       will-change: transform;
+      margin-top: 0 !important;
     }
     .approach-cards > .about-card {
       flex: 0 0 100%;
-      align-self: stretch; height: auto;
+      min-width: 100%;
     }
     .approach-inner-row {
       display: contents !important;
     }
     .approach-inner-row > .about-card {
       flex: 0 0 100%;
-      align-self: stretch; height: auto;
+      min-width: 100%;
     }
     .approach-nav {
       display: flex !important;
@@ -819,7 +823,7 @@
     /* BOOTCAMP: tile carousel replaces table on mobile */
     .bootcamp { padding-top: 6.5rem; }
     .bc-desktop-table { display: none; }
-    .bc-tier-carousel { display: block; }
+    .bc-tier-carousel { display: block; overflow: hidden; }
     .bc-head-row { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
     .bc-faq-link { margin-bottom: 0.2rem; }
     .bc-addon-row { gap: 0.5rem; }
@@ -839,17 +843,18 @@
 
     /* PACKAGES: arrow-only slideshow on mobile (no swipe, avoids vertical scroll conflicts) */
     .pricing { padding-top: 6.5rem; }
+    .pricing-carousel-wrap { overflow: hidden; }
     .pricing-grid {
       display: flex !important;
       grid-template-columns: none;
       grid-template-rows: none;
-      overflow: hidden;
       gap: 0 !important;
       transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
       will-change: transform;
     }
     .pricing-grid > .price-card {
       flex: 0 0 100%;
+      min-width: 100%;
     }
     .price-card { padding: 0.9rem 1.1rem; cursor: default; }
     .price-card h3 { font-size: 1.05rem; margin-bottom: 0.1rem; }
@@ -1158,7 +1163,8 @@
         <h2 class="section-h2 fade-in" style="font-size:clamp(1.6rem,3.5vw,2.8rem);">Most students have the potential to be <span class="accent">outstanding candidates</span>, they just don't know it.</h2>
         
 
-        <div class="approach-cards approach-numbered" style="margin-top:1.2rem;">
+        <div class="approach-carousel-wrap">
+        <div class="approach-cards approach-numbered" style="margin-top:0;">
           <!-- Featured: Why We Started -->
           <div class="about-card fade-in approach-item">
             <div class="approach-num">01</div>
@@ -1185,6 +1191,7 @@
             </div>
           </div>
         </div>
+        </div><!-- /.approach-carousel-wrap -->
         <div class="approach-nav" aria-hidden="true">
           <button class="approach-nav-btn approach-nav-prev" type="button" aria-label="Previous">
             <span class="pn-arrow">←</span>
@@ -1682,6 +1689,7 @@
     <h2 class="section-h2 fade-in">Need more hands-on guidance? <span class="accent">We've got you.</span></h2>
     <p class="section-p fade-in" style="margin-bottom:0.5rem;">In addition to the bootcamp, our private sessions give you one-on-one access to an expert advisor for your specific needs.</p>
 
+    <div class="pricing-carousel-wrap">
     <div class="pricing-grid">
       <div class="price-card fade-in" data-service="Video Call (Starting at $200 /1 hour session)">
         <div class="pc-header">
@@ -1768,6 +1776,7 @@
         </div>
       </div>
     </div>
+    </div><!-- /.pricing-carousel-wrap -->
 
     <div class="pricing-nav" aria-hidden="true">
       <button class="pricing-nav-btn pricing-nav-prev" type="button">
@@ -2252,12 +2261,15 @@
 
     function goTo(idx) {
       currentIdx = (idx + cards.length) % cards.length;
-      track.style.transform = 'translateX(-' + (currentIdx * 100) + '%)';
+      var wrap = track.closest('.approach-carousel-wrap') || track.parentElement;
+      var w = wrap ? wrap.offsetWidth : track.offsetWidth;
+      track.style.transform = 'translateX(-' + (currentIdx * w) + 'px)';
       setLabels(currentIdx);
     }
 
     prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
     nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
+    window.addEventListener('resize', function() { goTo(currentIdx); });
 
     setLabels(0);
   })();
@@ -2295,12 +2307,15 @@
 
     function goTo(idx) {
       currentIdx = (idx + cards.length) % cards.length;
-      track.style.transform = 'translateX(-' + (currentIdx * 100) + '%)';
+      var wrap = track.closest('.pricing-carousel-wrap') || track.parentElement;
+      var w = wrap ? wrap.offsetWidth : track.offsetWidth;
+      track.style.transform = 'translateX(-' + (currentIdx * w) + 'px)';
       setLabels(currentIdx);
     }
 
     prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
     nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
+    window.addEventListener('resize', function() { goTo(currentIdx); });
 
     setLabels(0);
   })();
@@ -2333,12 +2348,15 @@
 
     function goTo(idx) {
       currentIdx = (idx + tiles.length) % tiles.length;
-      track.style.transform = 'translateX(-' + (currentIdx * 100) + '%)';
+      var wrap = track.closest('.bc-tier-carousel') || track.parentElement;
+      var w = wrap ? wrap.offsetWidth : track.offsetWidth;
+      track.style.transform = 'translateX(-' + (currentIdx * w) + 'px)';
       setLabels(currentIdx);
     }
 
     prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
     nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
+    window.addEventListener('resize', function() { goTo(currentIdx); });
 
     setLabels(0);
   })();
