@@ -2249,6 +2249,7 @@
 
   // ── Approach slideshow with looping arrow nav (mobile) ──
   // Uses show/hide (not translateX) so no horizontal composite layer blocks vertical snap
+  // Desktop uses a different layout (.approach-numbered vertical list) — only run on mobile.
   (function() {
     var track = document.querySelector('.approach-cards');
     var nav = document.querySelector('.approach-nav');
@@ -2271,7 +2272,13 @@
     var navLabels = titles.map(function(t) { return shorten[t] || t; });
     var currentIdx = 0;
 
+    function isMobile() { return window.innerWidth <= 768; }
+
     function show(idx) {
+      if (!isMobile()) {
+        cards.forEach(function(c) { c.style.display = ''; });
+        return;
+      }
       cards.forEach(function(c, i) { c.style.display = i === idx ? '' : 'none'; });
     }
     function setLabels(idx) {
@@ -2288,6 +2295,7 @@
 
     if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
+    window.addEventListener('resize', function() { show(currentIdx); });
 
     // Reset to first when section leaves view
     var section = document.querySelector('.about');
@@ -2301,6 +2309,7 @@
   })();
 
   // ── Pricing slideshow with labeled arrows (mobile) ──
+  // Desktop uses a 3-column grid (.pricing-grid) — only run carousel logic on mobile.
   (function() {
     var track = document.querySelector('.pricing-grid');
     var nav = document.querySelector('.pricing-nav');
@@ -2318,7 +2327,13 @@
     });
     var currentIdx = 0;
 
+    function isMobile() { return window.innerWidth <= 768; }
+
     function show(idx) {
+      if (!isMobile()) {
+        cards.forEach(function(c) { c.style.display = ''; });
+        return;
+      }
       cards.forEach(function(c, i) { c.style.display = i === idx ? '' : 'none'; });
     }
     function setLabels(idx) {
@@ -2334,6 +2349,7 @@
 
     if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
+    window.addEventListener('resize', function() { show(currentIdx); });
 
     var section = document.querySelector('.pricing');
     if (section && window.IntersectionObserver) {
@@ -2346,6 +2362,7 @@
   })();
 
   // ── Bootcamp tier tile carousel (labeled arrows, mobile) ──
+  // .bc-tier-carousel itself is display:none on desktop, but guard show() too for safety.
   (function() {
     var track = document.querySelector('.bc-tier-track');
     var nav = document.querySelector('.bc-tier-nav');
@@ -2363,7 +2380,13 @@
     });
     var currentIdx = 0;
 
+    function isMobile() { return window.innerWidth <= 768; }
+
     function show(idx) {
+      if (!isMobile()) {
+        tiles.forEach(function(t) { t.style.display = ''; });
+        return;
+      }
       tiles.forEach(function(t, i) { t.style.display = i === idx ? '' : 'none'; });
     }
     function setLabels(idx) {
@@ -2379,6 +2402,7 @@
 
     if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
+    window.addEventListener('resize', function() { show(currentIdx); });
 
     var section = document.querySelector('.bootcamp');
     if (section && window.IntersectionObserver) {
