@@ -223,7 +223,7 @@
                 <span class="check-box">
                   <svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </span>
-                <span>Private Sessions (1 on 1 virtual, video, or custom reviews)</span>
+                <span>Private Sessions</span>
               </label>
               <label class="check-tile" id="tile-templates">
                 <input type="checkbox" name="service_templates" value="Templates & Guides" />
@@ -271,9 +271,36 @@
           </div>
         </div>
 
+        <div class="section-label">How You Found Us</div>
+        <div class="form-group full">
+          <label>Where did you hear about MyAppSuccess? *</label>
+          <select name="heard_about" id="heard_about" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="Referral">Referral</option>
+            <option value="School">School</option>
+            <option value="Tutoring/After School Program">Tutoring/After School Program</option>
+            <option value="Social Media">Social Media</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <div class="conditional" id="referral-wrap">
+            <div class="form-group full">
+              <label>Who referred you? *</label>
+              <input type="text" name="referral_name" id="referral_name" placeholder="Name of person who referred you" />
+            </div>
+          </div>
+
+          <div class="conditional" id="other-wrap">
+            <div class="form-group full">
+              <label>Please specify *</label>
+              <input type="text" name="heard_about_other" id="heard_about_other" placeholder="Tell us where you heard about us" />
+            </div>
+          </div>
+        </div>
+
         <div class="divider"></div>
         <label class="consent-row" id="consent-row">
-          <input type="checkbox" id="consent-input" name="email_consent" required />
+          <input type="checkbox" id="consent-input" name="email_consent" />
           <span class="check-custom">
             <svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -323,6 +350,33 @@
     });
   }
 
+  // ── Heard about us -> reveal referral / other text fields ──
+  var heardSelect = document.getElementById('heard_about');
+  var referralWrap = document.getElementById('referral-wrap');
+  var referralInput = document.getElementById('referral_name');
+  var otherWrap = document.getElementById('other-wrap');
+  var otherInput = document.getElementById('heard_about_other');
+
+  heardSelect.addEventListener('change', function() {
+    if (this.value === 'Referral') {
+      referralWrap.classList.add('show');
+      referralInput.required = true;
+    } else {
+      referralWrap.classList.remove('show');
+      referralInput.required = false;
+      referralInput.value = '';
+    }
+
+    if (this.value === 'Other') {
+      otherWrap.classList.add('show');
+      otherInput.required = true;
+    } else {
+      otherWrap.classList.remove('show');
+      otherInput.required = false;
+      otherInput.value = '';
+    }
+  });
+
   // ── Consultation Yes/No -> reveal time preference ──
   var consultationRadios = document.querySelectorAll('input[name="consultation"]');
   var timeWrap = document.getElementById('time-pref-wrap');
@@ -356,11 +410,24 @@
     btn.disabled = true;
     btn.textContent = 'Submitting...';
 
-    var payload = {};
-    var data = new FormData(form);
-    data.forEach(function(value, key) { payload[key] = value; });
-    payload.source = 'interest-form';
-    payload.submitted_at = new Date().toISOString();
+    var payload = {
+      first_name: document.getElementById('first_name').value,
+      last_name: document.getElementById('last_name').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      grade_level: form.querySelector('[name="grade_level"]').value,
+      service_bootcamp: document.getElementById('tile-bootcamp').querySelector('input').checked ? 'Yes' : 'No',
+      service_private: document.getElementById('tile-private').querySelector('input').checked ? 'Yes' : 'No',
+      service_templates: document.getElementById('tile-templates').querySelector('input').checked ? 'Yes' : 'No',
+      heard_about: heardSelect.value,
+      referral_name: referralInput.value,
+      heard_about_other: otherInput.value,
+      consultation: (form.querySelector('input[name="consultation"]:checked') || {}).value || '',
+      time_preference: (form.querySelector('input[name="time_preference"]:checked') || {}).value || '',
+      email_consent: consentInput.checked ? 'Yes' : 'No',
+      source: 'interest-form',
+      submitted_at: new Date().toISOString()
+    };
 
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
