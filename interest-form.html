@@ -289,13 +289,6 @@
               <input type="text" name="referral_name" id="referral_name" placeholder="Name of person who referred you" />
             </div>
           </div>
-
-          <div class="conditional" id="other-wrap">
-            <div class="form-group full">
-              <label>Please specify *</label>
-              <input type="text" name="heard_about_other" id="heard_about_other" placeholder="Tell us where you heard about us" />
-            </div>
-          </div>
         </div>
 
         <div class="divider"></div>
@@ -350,12 +343,10 @@
     });
   }
 
-  // ── Heard about us -> reveal referral / other text fields ──
+  // ── Heard about us -> reveal referral field ──
   var heardSelect = document.getElementById('heard_about');
   var referralWrap = document.getElementById('referral-wrap');
   var referralInput = document.getElementById('referral_name');
-  var otherWrap = document.getElementById('other-wrap');
-  var otherInput = document.getElementById('heard_about_other');
 
   heardSelect.addEventListener('change', function() {
     if (this.value === 'Referral') {
@@ -365,15 +356,6 @@
       referralWrap.classList.remove('show');
       referralInput.required = false;
       referralInput.value = '';
-    }
-
-    if (this.value === 'Other') {
-      otherWrap.classList.add('show');
-      otherInput.required = true;
-    } else {
-      otherWrap.classList.remove('show');
-      otherInput.required = false;
-      otherInput.value = '';
     }
   });
 
@@ -421,7 +403,6 @@
       service_templates: document.getElementById('tile-templates').querySelector('input').checked ? 'Yes' : 'No',
       heard_about: heardSelect.value,
       referral_name: referralInput.value,
-      heard_about_other: otherInput.value,
       consultation: (form.querySelector('input[name="consultation"]:checked') || {}).value || '',
       time_preference: (form.querySelector('input[name="time_preference"]:checked') || {}).value || '',
       email_consent: consentInput.checked ? 'Yes' : 'No',
