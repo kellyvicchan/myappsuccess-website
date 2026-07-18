@@ -172,11 +172,10 @@
     margin-bottom: 2.4rem;
   }
   .hero-services-row a { color: var(--gold); text-decoration: underline; font-weight: 400; }
-  .hero-trust { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.8rem; width: 100%; }
+  .hero-trust { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; padding-top: 1.8rem; width: 100%; }
   .trust-item { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
   .trust-num { font-size: 1.8rem; font-weight: 800; color: var(--gold); line-height: 1; }
   .trust-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
-  .trust-divider { width: 1px; background: rgba(255,255,255,0.15); align-self: stretch; }
 
   /* MARQUEE */
   .marquee-wrap {
@@ -323,6 +322,7 @@
     color: white; display: inline; margin-left: 0.45rem;
   }
   .outcome-stat-label-text { margin-left: 0; font-size: 1.15rem; }
+  .accent-gold { color: var(--gold); font-size: 1.7rem; font-weight: 800; line-height: 1; }
   .outcome-stat-note {
     font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.4;
     margin-top: 0.15rem;
@@ -394,6 +394,7 @@
     .outcome-stat-icon { width: 1.9rem; height: 1.9rem; }
     .outcome-stat-icon svg { width: 18px; height: 18px; }
     .outcome-stat-num { font-size: 1.2rem; }
+    .accent-gold { font-size: 1.2rem; }
     .outcome-stat-label { font-size: 0.82rem; }
     .outcome-stat-full .om-chip { font-size: 0.66rem; padding: 0.25rem 0.6rem; }
   }
@@ -494,7 +495,7 @@
   }
   .bc-compare-link {
     display: none;
-    background: none; border: none; padding: 0;
+    background: none; border: none; padding: 0 0 0.2rem;
     color: var(--gold-dark); font-family: var(--font); font-weight: 700;
     font-size: 0.85rem; cursor: pointer; text-decoration: underline;
     transition: color 0.2s; white-space: nowrap;
@@ -842,8 +843,7 @@
     .hero-cta-row { gap: 0.6rem; flex-direction: column; align-items: center; margin-bottom: 1rem; }
     .hero-cta-row .btn-gold, .hero-cta-row .btn-hero { width: 100%; max-width: 320px; justify-content: center; min-width: unset; font-size: 0.88rem; padding: 0.75rem 1.5rem; }
     .hero-services-row { font-size: 0.8rem; margin-bottom: 1.4rem; }
-    .hero-trust { gap: 1.2rem; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.2rem; }
-    .trust-divider { display: none; }
+    .hero-trust { gap: 1.2rem; flex-wrap: wrap; padding-top: 1.2rem; }
     .trust-num { font-size: 1.4rem; }
     .trust-label { font-size: 0.6rem; }
     .marquee-wrap { padding: 0.55rem 0; }
@@ -906,7 +906,7 @@
     .bootcamp-intro { display: none; }
     .bc-addon-row { gap: 0.4rem; }
     .bc-pricing-title { margin: 0.3rem 0 0.3rem; font-size: 1rem; }
-    .bc-compare-link { display: inline-block; font-size: 0.78rem; margin-top: 0.2rem; }
+    .bc-compare-link { display: inline-block; font-size: 0.78rem; margin-top: 0.2rem; margin-bottom: 1rem; }
     .bc-tier-tile { padding: 0.8rem 1rem; }
     .bc-tier-tile-name { font-size: 0.92rem; margin-bottom: 0.08rem; }
     .bc-tier-tile-value { font-size: 0.66rem; margin-bottom: 0.04rem; }
@@ -1181,7 +1181,7 @@
   <div class="hero-grid-bg"></div>
   <div class="hero-inner">
     <h1 class="hero-h1">Confidently reach your <span class="highlight">dream school</span></h1>
-    <p class="hero-sub">Ivy League-trained guidance and tools built to develop you as a confident candidate, not just polish your application.</p>
+    <p class="hero-sub">Ivy League-trained guidance and tools built to develop you as a confident candidate, not just polish your application</p>
     <div class="hero-cta-row">
       <a href="interest-form.html" class="btn-hero">Book A Free 15 Minute Consultation</a>
       <a href="#outcomes" class="btn-hero btn-hero-outline">See Our Results</a>
@@ -1189,9 +1189,7 @@
     <p class="hero-services-row"><a href="#bootcamp">The Bootcamp</a> | <a href="#pricing">Private Sessions</a> | <a href="#templates">Templates & Guides</a></p>
     <div class="hero-trust">
       <div class="trust-item"><div class="trust-num">22</div><div class="trust-label">Years Experience</div></div>
-      <div class="trust-divider"></div>
       <div class="trust-item"><div class="trust-num">113</div><div class="trust-label">School Acceptances</div></div>
-      <div class="trust-divider"></div>
       <div class="trust-item"><div class="trust-num">100%</div><div class="trust-label">Student-First Approach</div></div>
     </div>
   </div>
@@ -1308,7 +1306,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5M5 8v9a1 1 0 0 0 1 1h3M19 8v9a1 1 0 0 1-1 1h-3"/></svg>
           </div>
           <div class="outcome-stat-body">
-            <span class="outcome-stat-num">25</span><span class="outcome-stat-label">Majors Supported</span>
+            <span class="outcome-stat-num">25+</span><span class="outcome-stat-label">Majors Supported</span>
           </div>
         </div>
         <div class="outcome-stat-full" id="outcome-majors-list"></div>
@@ -1319,7 +1317,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18M3 12h18"/></svg>
           </div>
           <div class="outcome-stat-body">
-            <span class="outcome-stat-label outcome-stat-label-text">Many types of students</span>
+            <span class="outcome-stat-label outcome-stat-label-text"><span class="accent-gold">All</span> types of students</span>
           </div>
         </div>
         <div class="outcome-stat-full" id="outcome-types-list"></div>
