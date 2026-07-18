@@ -38,7 +38,7 @@
     --border: #e2e8f0;
     --font: 'League Spartan', sans-serif;
   }
-  html { scroll-padding-top: 0; scroll-snap-type: y mandatory; }
+  html { scroll-padding-top: 0; }
   body { font-family: var(--font); color: var(--text); background: var(--white); overflow-x: hidden; }
 
   nav {
@@ -50,6 +50,18 @@
     box-shadow: 0 2px 16px rgba(30,70,110,0.07);
   }
   .nav-logo img { height: 50px; width: auto; display: block; }
+
+  /* WAITLIST BANNER */
+  .waitlist-banner {
+    background: var(--gold); text-align: center; padding: 0.6rem 1.5rem;
+    font-size: 0.82rem; font-weight: 700; color: var(--navy); letter-spacing: 0.03em;
+    position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .waitlist-banner-link { color: var(--navy); text-decoration: underline; transition: color 0.3s ease; }
+  .waitlist-banner.dark { background: var(--navy); color: white; }
+  .waitlist-banner.dark .waitlist-banner-link { color: var(--gold); }
+
   .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; margin: 0; padding: 0; }
   .nav-links > li { display: flex; align-items: center; height: 72px; }
   .nav-links a {
@@ -102,9 +114,9 @@
 
   /* HERO */
   .hero {
-    height: 100vh; background: var(--navy);
+    min-height: 100vh; background: var(--navy);
     display: flex; align-items: center; justify-content: center;
-    padding: 200px 3rem 5.5rem; position: relative; overflow: hidden; text-align: left;
+    padding: 200px 3rem 5.5rem; position: relative; overflow: hidden; text-align: center;
     box-sizing: border-box;
   }
   .hero::before {
@@ -122,7 +134,7 @@
     background-size: 64px 64px;
     mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.9) 75%, transparent);
   }
-  .hero-inner { position: relative; max-width: 700px; }
+  .hero-inner { position: relative; max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
   .hero-h1 {
     font-size: clamp(2.4rem, 5.2vw, 4.2rem); font-weight: 800; line-height: 1.06;
     color: var(--white); margin-bottom: 1.5rem; letter-spacing: -0.03em;
@@ -133,7 +145,7 @@
     line-height: 1.7; max-width: 540px; margin: 0 0 2.2rem; font-weight: 400;
   }
   .hero-cta-row {
-    display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; margin-bottom: 2.4rem;
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.6rem;
   }
   .btn-gold {
     display: inline-flex; align-items: center; gap: 0.5rem;
@@ -145,6 +157,8 @@
     box-shadow: 0 4px 20px rgba(240,180,30,0.4);
   }
   .btn-gold:hover { background: var(--gold-dark); transform: translateY(-2px); }
+  .btn-white { background: white; color: var(--navy); box-shadow: 0 4px 20px rgba(30,70,110,0.25); }
+  .btn-white:hover { background: var(--off-white); }
   .btn-outline {
     display: inline-flex; align-items: center; gap: 0.5rem;
     background: transparent; color: var(--white); font-weight: 600; font-size: 0.95rem;
@@ -153,8 +167,13 @@
     transition: border-color 0.2s, background 0.2s;
   }
   .btn-outline:hover { border-color: var(--gold); background: rgba(240,180,30,0.08); }
-  .hero-trust { display: flex; gap: 2.5rem; justify-content: flex-start; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.8rem; }
-  .trust-item { display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+  .hero-services-row {
+    font-size: 0.92rem; color: rgba(255,255,255,0.55); font-weight: 400;
+    margin-bottom: 2.4rem;
+  }
+  .hero-services-row a { color: var(--gold); text-decoration: underline; font-weight: 400; }
+  .hero-trust { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.8rem; width: 100%; }
+  .trust-item { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
   .trust-num { font-size: 1.8rem; font-weight: 800; color: var(--gold); line-height: 1; }
   .trust-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
   .trust-divider { width: 1px; background: rgba(255,255,255,0.15); align-self: stretch; }
@@ -185,9 +204,9 @@
   }
 
   /* SECTION SHELL */
-  section { padding: 4.5rem 0; padding-top: 7.5rem; height: 100vh; scroll-snap-align: start; scroll-snap-stop: always; display: flex; align-items: center; box-sizing: border-box; overflow: hidden; }
+  section { padding: 5rem 0; padding-top: 7.5rem; box-sizing: border-box; }
   section > .container { width: 100%; }
-  .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 5rem; }
   .section-eyebrow {
     display: inline-flex; align-items: center; gap: 0.5rem;
     background: var(--gold-bg); border: 1.5px solid var(--gold);
@@ -197,14 +216,14 @@
     line-height: 1; white-space: nowrap;
   }
   .section-h2 {
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.15;
-    color: var(--navy); margin-bottom: 0.7rem; letter-spacing: -0.02em;
+    font-size: clamp(2rem, 3.8vw, 2.9rem); font-weight: 800; line-height: 1.15;
+    color: var(--navy); margin-bottom: 1rem; letter-spacing: -0.02em;
   }
   .section-h2 .accent { color: var(--gold-dark); }
-  .section-p { font-size: 1.08rem; color: var(--muted); line-height: 1.75; }
+  .section-p { font-size: 1.15rem; color: var(--muted); line-height: 1.8; }
 
   /* ABOUT */
-  .about { background: var(--off-white); padding-top: 7rem; padding-bottom: 0; }
+  .about { background: var(--white); padding-top: 6.5rem; padding-bottom: 4.5rem; }
   .about-grid { display: flex; flex-direction: column; gap: 2.5rem; }
   .about-cards { display: flex; flex-direction: column; gap: 1rem; }
   .about-card {
@@ -224,7 +243,7 @@
 
   /* APPROACH: numbered vertical layout */
   .approach-numbered {
-    display: flex; flex-direction: column; gap: 1.4rem;
+    display: flex; flex-direction: column; gap: 2.6rem;
   }
   .approach-numbered-row {
     display: contents;
@@ -238,8 +257,8 @@
     font-family: Georgia, serif; line-height: 1; flex-shrink: 0;
     width: 3.2rem;
   }
-  .approach-item h4 { font-size: 1.15rem; margin-bottom: 0.4rem; }
-  .approach-item p { font-size: 0.94rem; line-height: 1.55; }
+  .approach-item h4 { font-size: 1.25rem; margin-bottom: 0.55rem; }
+  .approach-item p { font-size: 1rem; line-height: 1.65; }
 
   /* Approach slideshow nav: hidden on desktop, layout unchanged */
   .approach-nav { display: none; }
@@ -272,7 +291,7 @@
   }
 
   /* OUTCOMES */
-  .outcomes { background: var(--navy); padding-top: 7rem; padding-bottom: 0; }
+  .outcomes { background: var(--navy); padding-top: 6.5rem; padding-bottom: 4.5rem; }
   .outcomes .section-eyebrow { background: rgba(240,180,30,0.15); border-color: rgba(240,180,30,0.4); color: var(--gold); }
   .outcomes .section-h2 { color: white; }
   .outcomes .section-h2 .accent { color: var(--gold); }
@@ -280,19 +299,17 @@
 
   /* OUTCOME STAT ROW */
   .outcome-stats {
-    display: flex; gap: 1rem;
-    margin-top: 1.4rem;
+    display: flex; gap: 1.5rem;
+    margin-top: 2.8rem;
+    align-items: stretch;
   }
   .outcome-stat-card {
-    flex: 1; min-width: 0; display: flex; align-items: center; gap: 1rem;
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 14px; padding: 1rem 1.3rem;
-    cursor: pointer; text-align: left;
-    transition: border-color 0.2s, background 0.2s;
+    flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.9rem;
+    background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.14);
+    border-radius: 14px; padding: 1.4rem 1.5rem;
+    text-align: left;
   }
-  .outcome-stat-card:hover {
-    border-color: rgba(240,180,30,0.5); background: rgba(240,180,30,0.06);
-  }
+  .outcome-stat-head { display: flex; align-items: center; gap: 1rem; }
   .outcome-stat-icon {
     flex-shrink: 0; width: 2.6rem; height: 2.6rem;
     display: flex; align-items: center; justify-content: center;
@@ -303,19 +320,25 @@
   .outcome-stat-num { font-size: 1.7rem; font-weight: 800; color: var(--gold); line-height: 1; display: inline; }
   .outcome-stat-label {
     font-size: 0.95rem; font-weight: 700;
-    color: rgba(255,255,255,0.85); display: inline; margin-left: 0.45rem;
+    color: white; display: inline; margin-left: 0.45rem;
   }
-  .outcome-stat-preview {
-    font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.4;
-    margin-top: 0.25rem;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  .outcome-stat-label-text { margin-left: 0; font-size: 1.15rem; }
+  .outcome-stat-note {
+    font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.4;
+    margin-top: 0.15rem;
   }
-  .osc-arrow {
-    flex-shrink: 0; color: rgba(255,255,255,0.35); transition: transform 0.2s, color 0.2s;
+  .outcome-stat-full {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
   }
-  .outcome-stat-card:hover .osc-arrow { transform: translateX(3px); color: var(--gold); }
+  .outcome-stat-full .om-chip {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 8px; padding: 0.3rem 0.7rem;
+    font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.85);
+  }
+  .outcome-stat-full .om-chip.om-gold { background: rgba(240,180,30,0.15); border-color: var(--gold); color: var(--gold); }
+  .outcome-stat-full .om-item-star { color: var(--gold); margin-left: 0.2rem; font-size: 0.68rem; }
 
-  /* OUTCOME DETAIL MODAL */
+  /* MODAL BASE (compare table, template category) */
   .outcome-modal {
     display: none; position: fixed; inset: 0; z-index: 600;
     align-items: center; justify-content: center; padding: 1.5rem;
@@ -362,113 +385,111 @@
     color: var(--gold-dark); margin-bottom: 0.5rem;
   }
   .outcome-modal-title { font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; font-family: var(--font); }
-  .outcome-modal-note { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.4rem; }
-  .outcome-modal-body { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .outcome-modal-body.list-mode {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 1.5rem;
-  }
-  .outcome-modal-body .om-item {
-    font-size: 0.9rem; color: var(--text); font-weight: 500;
-    padding: 0.55rem 0; border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 0.4rem;
-  }
-  .outcome-modal-body .om-item .om-star { color: var(--gold-dark); font-size: 0.78rem; }
-  .outcome-modal-body .om-chip {
-    background: var(--off-white); border: 1.5px solid var(--border);
-    border-radius: 8px; padding: 0.4rem 0.85rem;
-    font-size: 0.85rem; font-weight: 600; color: var(--navy);
-  }
-  .outcome-modal-body .om-chip.om-gold { background: var(--gold-bg); border-color: var(--gold); color: var(--gold-dark); }
-  @media (max-width: 640px) {
-    .outcome-modal-body.list-mode { grid-template-columns: 1fr; }
-    .outcome-modal-card { padding: 1.6rem; max-height: 85dvh; }
+
+  @media (max-width: 768px) {
+    .outcomes { padding-top: 7.5rem; padding-bottom: 2rem; }
+    .outcomes .section-h2 { margin-bottom: 0.5rem; }
+    .outcome-stats { flex-direction: column; gap: 1rem; margin-top: 1.2rem; }
+    .outcome-stat-card { padding: 1rem 1.1rem; gap: 0.7rem; }
+    .outcome-stat-icon { width: 1.9rem; height: 1.9rem; }
+    .outcome-stat-icon svg { width: 18px; height: 18px; }
+    .outcome-stat-num { font-size: 1.2rem; }
+    .outcome-stat-label { font-size: 0.82rem; }
+    .outcome-stat-full .om-chip { font-size: 0.66rem; padding: 0.25rem 0.6rem; }
   }
 
-  /* OUTCOMES TESTIMONIAL CAROUSEL */
-  .outcomes-testimonials { margin-top: 1.2rem; }
-  .outcomes-test-heading {
-    font-size: 1.6rem; font-weight: 800; color: white; margin-bottom: 1rem; padding-top: 0.5rem;
-  }
-  .outcomes-test-track {
-    position: relative;
-  }
-  .outcomes-test-rail-wrap { overflow: hidden; }
-  .outcomes-test-nav {
-    display: flex; justify-content: space-between; margin-top: 0.9rem;
-  }
-  .outcomes-test-rail {
-    display: flex; gap: 1.5rem; align-items: stretch;
+  /* TESTIMONIALS (standalone section, paginated 4-up) */
+  .testimonials { background: var(--off-white); padding-top: 6.5rem; padding-bottom: 4.5rem; }
+  .testimonials .section-eyebrow { background: var(--gold-bg); border-color: var(--gold); color: var(--gold-dark); }
+  .testimonials .section-h2 { color: var(--navy); }
+  .testimonials .section-h2 .accent { color: var(--gold-dark); }
+  .testimonials-viewport { overflow: hidden; margin-top: 2.8rem; }
+  .testimonials-track {
+    display: flex; gap: 1.4rem;
     transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
     will-change: transform;
   }
-  .outcomes-test-rail .test-card {
-    flex: 0 0 calc((100% - 4.5rem) / 4);
-    padding: 0;
-    display: grid; grid-template-rows: auto 1fr auto;
-    min-height: 230px;
+  .test-tile {
+    flex: 0 0 calc((100% - 3 * 1.4rem) / 4);
+    background: white; border: 1.5px solid var(--border); border-radius: 14px;
+    padding: 1.5rem; display: flex; flex-direction: column;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .outcomes-test-rail .test-quote-mark {
-    font-size: 2.4rem; line-height: 1; color: var(--gold); opacity: 0.4;
-    margin-bottom: 0.4rem; font-family: Georgia, serif;
+  .test-tile:hover { border-color: var(--gold); box-shadow: 0 8px 24px rgba(30,70,110,0.08); }
+  .test-tile .test-quote-mark {
+    font-size: 2.2rem; line-height: 1; color: var(--gold-dark); opacity: 0.5;
+    margin-bottom: 0.5rem; font-family: Georgia, serif;
   }
-  .outcomes-test-rail .test-quote {
-    font-size: 0.98rem; color: rgba(255,255,255,0.85); line-height: 1.6;
-    font-style: italic; font-weight: 400;
-    display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
-    align-self: center; margin: 0;
+  .test-tile .test-quote {
+    font-size: 0.92rem; color: var(--text); line-height: 1.6;
+    font-style: italic; font-weight: 400; margin-bottom: 1rem;
   }
-  .outcomes-test-rail .test-quote-lg {
-    font-size: 1.22rem; line-height: 1.5;
+  .test-tile .test-attr { margin-top: auto; }
+  .test-tile .test-avatar { background: var(--gold); color: var(--navy); }
+  .test-tile .test-name { color: var(--navy); }
+  .test-tile .test-detail { color: var(--gold-dark); }
+
+  .testimonials-nav { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 1.6rem; }
+  .testimonials-arrow {
+    background: white; border: 1.5px solid var(--border); border-radius: 50%;
+    width: 2.6rem; height: 2.6rem; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--navy); font-weight: 800; font-size: 1.1rem;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
   }
-  .outcomes-test-arrow {
-    background: transparent; border: none; padding: 0.3rem 0;
-    cursor: pointer;
-    font-family: var(--font); color: rgba(255,255,255,0.6);
-    transition: color 0.2s;
+  .testimonials-arrow:hover { border-color: var(--gold); color: var(--gold-dark); background: var(--gold-bg); }
+  .testimonials-dots { display: flex; gap: 0.5rem; }
+  .testimonials-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--border);
+    transition: background 0.2s, transform 0.2s;
   }
-  .outcomes-test-arrow .pn-arrow { color: var(--gold); font-size: 1.1rem; font-weight: 800; }
-  .outcomes-test-arrow:hover { color: var(--gold); }
-  @media (max-width: 1024px) {
-    .outcomes-test-rail .test-card { flex: 0 0 calc((100% - 1.5rem) / 2); }
-  }
-  @media (max-width: 768px) {
-    .outcomes { padding-top: 7.5rem; padding-bottom: 1.5rem; }
-    .outcomes .section-h2 { margin-bottom: 0.5rem; }
-    .outcome-stats { flex-direction: column; gap: 0.32rem; }
-    .outcome-stat-preview { display: none; }
-    .outcome-stat-card { gap: 0.5rem; padding: 0.6rem 0.9rem; }
-    .outcome-stat-icon { width: 1.7rem; height: 1.7rem; }
-    .outcome-stat-icon svg { width: 16px; height: 16px; }
-    .outcome-stat-num { font-size: 1.1rem; }
-    .outcome-stat-label { font-size: 0.76rem; }
-    .outcomes-testimonials { margin-top: 0.7rem; }
-    .outcomes-test-heading { font-size: 1rem; margin-bottom: 0.5rem; padding-top: 0; }
-    .outcomes-test-rail .test-card { flex: 0 0 calc(100% - 2.4rem); margin: 0 1.2rem; min-height: 0; padding: 0.85rem 1rem; }
-    .outcomes-test-rail .test-quote { font-size: 0.78rem; line-height: 1.4; -webkit-line-clamp: 5; }
-    .outcomes-test-rail .test-quote-lg { font-size: 0.88rem; line-height: 1.4; }
-    .outcomes-test-rail .test-quote-mark { font-size: 1.2rem; margin-bottom: 0.1rem; }
-    .test-name { font-size: 0.8rem; }
-    .test-detail { font-size: 0.72rem; }
-    .test-avatar { width: 2rem; height: 2rem; font-size: 0.7rem; }
-    .test-attr { gap: 0.6rem; margin-top: 0.6rem; }
-    .outcomes-test-nav { margin-top: 0.5rem; }
+  .testimonials-dot.active { background: var(--gold-dark); transform: scale(1.3); }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .testimonials-track { gap: 1rem; }
+    .test-tile { flex: 0 0 calc((100% - 3 * 1rem) / 4); padding: 1.1rem; }
+    .test-tile .test-quote { font-size: 0.82rem; }
+    .test-tile .test-quote-mark { font-size: 1.8rem; }
   }
 
+  @media (max-width: 768px) {
+    .testimonials { padding-top: 7.5rem; padding-bottom: 2rem; }
+    .testimonials-viewport { margin-top: 1.2rem; }
+    .testimonials-track { gap: 1rem; }
+    .test-tile { flex: 0 0 100%; padding: 1.1rem; }
+    .test-tile .test-quote { font-size: 0.82rem; }
+    .testimonials-nav { margin-top: 1.1rem; gap: 1rem; }
+    .testimonials-arrow { width: 2.2rem; height: 2.2rem; font-size: 0.95rem; }
+  }
+
+
   /* BOOTCAMP */
-  .bootcamp { background: var(--white); padding-top: 7rem; padding-bottom: 0; }
-  .bc-head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; }
-  .bc-faq-link { margin-top: 0; margin-bottom: 0.7rem; white-space: nowrap; }
+  .bootcamp { background: var(--white); padding-top: 6.5rem; padding-bottom: 4.5rem; }
+  .bc-title-wrap { text-align: center; }
+  .bc-title-wrap .section-eyebrow { justify-content: center; margin-bottom: 0; margin-top: 0.3rem; white-space: normal; }
+  .bc-head-row { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.6rem; }
+  .bc-faq-link.section-learn-more { margin: 0; white-space: nowrap; flex-shrink: 0; }
+  .bc-head-row .bootcamp-intro,
+  .bc-head-row .section-p { margin: 0; }
   .bootcamp .section-eyebrow { background: var(--gold-bg); border: 1.5px solid var(--gold); color: var(--gold-dark); margin-bottom: 0.4rem; }
-  .bootcamp .section-h2 { color: var(--navy); margin-bottom: 0.3rem; }
+  .bootcamp .section-h2 { color: var(--navy); margin-bottom: 0.15rem; font-size: clamp(3rem, 6.5vw, 5.2rem); line-height: 1; }
   .bootcamp .section-h2 .accent { color: var(--gold-dark); }
   .bootcamp .section-p { color: var(--muted); }
   .bootcamp-intro {
-    font-size: 0.92rem; color: var(--muted); line-height: 1.45; margin-bottom: 0.7rem; max-width: 760px;
+    font-size: 1.05rem; color: var(--muted); line-height: 1.65; margin-bottom: 0.7rem; flex: 1; min-width: 0;
   }
-  .bootcamp-pricing { margin-top: 0.2rem; }
-  .bc-pricing-title { font-size: 1.25rem; font-weight: 800; color: var(--navy); margin: 1.1rem 0 0.25rem; }
+  .bootcamp-pricing {
+    margin-top: 2.4rem; background: var(--off-white); border: 2px solid var(--gold);
+    border-radius: 22px; box-shadow: 0 12px 40px rgba(30,70,110,0.08);
+    box-sizing: border-box;
+    padding: 2.6rem 2.4rem;
+  }
+  .bootcamp-pricing-inner { max-width: 1280px; margin: 0 auto; }
+  .bc-pricing-title {
+    font-size: 1.25rem; font-weight: 800; color: var(--navy);
+    margin: 0 0 1rem; letter-spacing: -0.02em;
+  }
   .bc-pricing-title-row {
-    display: flex; align-items: baseline; justify-content: space-between;
+    display: flex; align-items: flex-start; justify-content: space-between;
     gap: 1rem; flex-wrap: wrap;
   }
   .bc-compare-link {
@@ -482,12 +503,12 @@
 
   /* OPTIONAL ADD-ON CARD */
   .bc-addon-card {
-    margin-top: 0.7rem; background: var(--navy); border-radius: 14px;
-    padding: 0.7rem 1.4rem; border: 1.5px solid var(--navy);
+    margin-top: 1.4rem; background: var(--navy); border-radius: 14px;
+    padding: 1rem 1.4rem 1.6rem; border: 1.5px solid var(--navy);
   }
   .bc-addon-row {
     display: flex; justify-content: flex-start; align-items: center;
-    gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.25rem;
+    gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem;
   }
   .bc-addon-title { margin-bottom: 0; font-size: 1.05rem; font-weight: 800; color: white; }
   .bc-addon-price {
@@ -543,44 +564,79 @@
 
 
   /* TEMPLATES & GUIDES */
+  .templates { background: var(--off-white); padding-top: 6.5rem; padding-bottom: 4.5rem; }
+  .templates .section-eyebrow { background: var(--gold-bg); border-color: var(--gold); color: var(--gold-dark); }
+  .templates .section-h2 { color: var(--navy); }
+  .templates .section-h2 .accent { color: var(--gold-dark); }
+  .templates .section-p { color: var(--muted); }
   .tmpl-intro {
-    max-width: 760px; margin-bottom: 1.8rem; margin-top: 0.5rem; font-size: 1.05rem;
+    margin-bottom: 2.4rem; margin-top: 0.8rem; font-size: 1.1rem;
   }
-  .tmpl-cat-list { display: flex; flex-direction: column; gap: 0.8rem; }
-  .tmpl-cat-row {
-    display: flex; align-items: center; gap: 1.1rem;
-    background: var(--off-white); border: 1.5px solid var(--border);
-    border-radius: 14px; padding: 1.3rem 1.6rem;
-    cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  .tmpl-intro a { color: var(--gold-dark) !important; }
+
+  /* TEMPLATES ACCORDION (single drill-down, description auto-shown) */
+  .tmpl-accordion { display: flex; flex-direction: column; gap: 1.1rem; }
+  .tmpl-cat-group {
+    background: white; border: 1.5px solid var(--border);
+    border-radius: 14px; overflow: hidden;
   }
-  .tmpl-cat-row:hover { border-color: var(--gold); background: var(--gold-bg); }
+  .tmpl-cat-toggle {
+    width: 100%; display: flex; align-items: center; gap: 1.1rem;
+    background: none; border: none; padding: 1.3rem 1.6rem;
+    cursor: pointer; transition: background 0.2s; text-align: left;
+    font-family: var(--font);
+  }
+  .tmpl-cat-toggle:hover { background: var(--gold-bg); }
+  .tmpl-cat-arrow { color: var(--muted); transition: transform 0.2s, color 0.2s; flex-shrink: 0; font-size: 1.1rem; }
+  .tmpl-cat-toggle[aria-expanded="true"] .tmpl-cat-arrow { transform: rotate(90deg); color: var(--gold-dark); }
   .tmpl-cat-badge {
     font-size: 0.88rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--gold-dark); border: 1.5px solid currentColor; border-radius: 999px;
     padding: 0.4rem 1.1rem; white-space: nowrap;
   }
   .tmpl-cat-count { font-size: 0.92rem; color: var(--muted); flex: 1; }
-  .tmpl-cat-arrow { color: var(--muted); transition: transform 0.2s, color 0.2s; flex-shrink: 0; }
-  .tmpl-cat-row:hover .tmpl-cat-arrow { transform: translateX(3px); color: var(--gold-dark); }
 
-  /* TEMPLATES CATEGORY MODAL LIST */
-  .tmpl-modal-list { display: flex; flex-direction: column; margin-top: 1rem; max-height: 50vh; overflow-y: auto; }
-  .tmpl-modal-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.85rem 0; border-bottom: 1px solid var(--border);
-    cursor: pointer; gap: 1rem; transition: color 0.15s;
-  }
-  .tmpl-modal-item:last-child { border-bottom: none; }
-  .tmpl-modal-item:hover { color: var(--gold-dark); }
-  .tmpl-modal-item-name {
-    font-size: 0.92rem; font-weight: 600; color: inherit;
+  .tmpl-cat-panel { display: none; padding: 0 1.6rem 1.2rem; }
+  .tmpl-cat-panel.open { display: block; }
+  .tmpl-item { border-top: 1px solid var(--border); padding: 0.95rem 0; }
+  .tmpl-item:first-child { border-top: none; }
+  .tmpl-item-name {
+    font-size: 0.95rem; font-weight: 700; color: var(--navy);
     display: flex; align-items: center; gap: 0.5rem;
   }
-  .tmpl-modal-item-name svg { flex-shrink: 0; opacity: 0.35; }
-  .tmpl-modal-item-cta { font-size: 0.78rem; font-weight: 700; color: var(--muted); flex-shrink: 0; }
+  .tmpl-item-cta {
+    font-size: 0.78rem; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase;
+    color: var(--gold); background: var(--navy); padding: 0.5rem 1.1rem;
+    border-radius: 999px; flex-shrink: 0; white-space: nowrap;
+    text-decoration: none; box-shadow: 0 3px 10px rgba(30,70,110,0.3);
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  }
+  .tmpl-item-cta:hover { background: var(--navy-mid); transform: translateY(-1px); box-shadow: 0 5px 14px rgba(30,70,110,0.4); }
+  .tmpl-item-cta-soon {
+    background: var(--border); color: var(--muted); box-shadow: none; cursor: default;
+  }
+  .tmpl-item-cta-soon:hover { background: var(--border); transform: none; box-shadow: none; }
+  .tmpl-item-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .tmpl-item-desc {
+    font-size: 0.85rem; color: var(--muted); line-height: 1.6;
+    margin-top: 0.4rem;
+  }
+
+  @media (max-width: 768px) {
+    .tmpl-cat-toggle { padding: 0.85rem 1.1rem; gap: 0.7rem; }
+    .tmpl-cat-badge { font-size: 0.7rem; padding: 0.3rem 0.8rem; }
+    .tmpl-cat-count { font-size: 0.78rem; }
+    .tmpl-cat-panel { padding: 0 1.1rem 0.8rem; }
+    .tmpl-item-name { font-size: 0.86rem; }
+    .tmpl-item-cta { font-size: 0.68rem; padding: 0.42rem 0.85rem; }
+    .tmpl-item-desc { font-size: 0.78rem; }
+  }
+
 
   /* PRICING */
-  .pricing { background: var(--navy); padding-top: 7rem; padding-bottom: 0; }
+  .pricing { background: var(--navy); padding-top: 6.5rem; padding-bottom: 4.5rem; }
   .pricing .section-eyebrow { background: rgba(240,180,30,0.15); border-color: rgba(240,180,30,0.4); color: var(--gold); }
   .pricing .section-h2 { color: white; }
   .pricing .section-h2 .accent { color: var(--gold); }
@@ -597,7 +653,7 @@
   .pricing .price-card.selected { border-color: var(--gold); box-shadow: 0 8px 32px rgba(240,180,30,0.2); }
   .pricing .price-card.selected h3 { color: var(--gold); }
   .pricing .price-card .price-amount span { color: rgba(255,255,255,0.55) !important; }
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 0.8rem; align-items: stretch; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.2rem; align-items: stretch; }
   /* Pricing slideshow nav (mobile only) */
   .pricing-nav { display: none; }
   .pricing-nav-btn {
@@ -621,7 +677,7 @@
   .price-card p { font-size: 0.85rem; color: var(--muted); margin: 0.2rem 0 0; }
   .price-card ul { margin: 0; }
   .price-card {
-    background: white; border-radius: 16px; border: 2px solid var(--border); padding: 1.1rem 1.3rem;
+    background: white; border-radius: 16px; border: 2px solid var(--border); padding: 1.7rem 1.7rem;
     display: grid;
     grid-template-rows: auto auto auto auto auto 1fr;
     gap: 0;
@@ -662,14 +718,14 @@
   }
   .price-card.featured .check { background: rgba(240,180,30,0.2); border-color: var(--gold); color: var(--gold); }
   .pc-header { margin-bottom: 0; }
-  .pc-divider { border: none; border-top: 1.5px solid var(--border); margin: 0.6rem 0; }
+  .pc-divider { border: none; border-top: 1.5px solid var(--border); margin: 1rem 0; }
   .pc-included { }
   .pc-for { }
   .pc-label {
     font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--gold-dark); margin-bottom: 0.45rem; margin-top: 0;
   }
-  .price-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0; }
+  .price-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0; }
   .pc-help-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .pc-help-tag {
     background: var(--off-white); border: 1.5px solid var(--border);
@@ -708,9 +764,7 @@
   /* FOOTER */
   footer {
     background: var(--navy); padding: 4rem 0 2rem; border-top: 2px solid rgba(240,180,30,0.25);
-    min-height: 40vh; box-sizing: border-box;
-    display: flex; flex-direction: column; justify-content: center;
-    scroll-snap-align: end; scroll-snap-stop: always;
+    box-sizing: border-box;
   }
   .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
   .footer-brand-logo { font-size: 1.6rem; font-weight: 800; color: white; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
@@ -724,9 +778,8 @@
   .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
   @media (max-width: 768px) {
     footer {
-      padding: 7.5rem 0 1.5rem; /* top clears nav(72px) + banner(~35px) + buffer */
-      min-height: 100vh; box-sizing: border-box;
-      justify-content: flex-start;
+      padding: 4rem 0 1.5rem;
+      box-sizing: border-box;
     }
     .footer-newsletter { padding-bottom: 1.4rem; margin-bottom: 1.4rem; }
     .footer-newsletter-text h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
@@ -782,12 +835,13 @@
     nav { padding: 0 1.2rem; }
 
     /* HERO */
-    .hero { padding: 7.5rem 1.2rem 3.5rem; }
+    .hero { padding: 7.5rem 2.4rem 3.5rem; }
     .hero-h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); margin-bottom: 0.8rem; }
     .hero-sub { font-size: 0.88rem; margin-bottom: 0.9rem; line-height: 1.5; }
     .hero-sub:last-of-type { margin-bottom: 1.2rem; }
-    .hero-cta-row { gap: 0.6rem; flex-direction: column; align-items: flex-start; margin-bottom: 1.4rem; }
+    .hero-cta-row { gap: 0.6rem; flex-direction: column; align-items: center; margin-bottom: 1rem; }
     .hero-cta-row .btn-gold, .hero-cta-row .btn-hero { width: 100%; max-width: 320px; justify-content: center; min-width: unset; font-size: 0.88rem; padding: 0.75rem 1.5rem; }
+    .hero-services-row { font-size: 0.8rem; margin-bottom: 1.4rem; }
     .hero-trust { gap: 1.2rem; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.2rem; }
     .trust-divider { display: none; }
     .trust-num { font-size: 1.4rem; }
@@ -797,8 +851,8 @@
     .marquee-sep { font-size: 1rem; }
 
     /* SECTIONS */
-    section { padding: 2rem 0; padding-top: 7.5rem; }
-    .container { padding: 0 1.2rem; }
+    section { padding: 2.5rem 0; padding-top: 7.5rem; }
+    .container { padding: 0 2.4rem; }
     .section-eyebrow { margin-bottom: 0.6rem; }
     .section-h2 { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 0.4rem; }
     .section-p { font-size: 0.92rem; max-width: 100%; line-height: 1.5; }
@@ -806,7 +860,7 @@
     .section-learn-more { margin-top: 0.5rem; margin-bottom: 0; font-size: 0.8rem; }
 
     /* TEMPLATES & GUIDES: compress to fit one screen */
-    .templates { padding-top: 7.5rem; padding-bottom: 1.2rem; }
+    .templates { padding-top: 7.5rem; padding-bottom: 2.5rem; }
     .tmpl-intro { font-size: 0.85rem; margin-bottom: 1rem; margin-top: 0.3rem; }
     .tmpl-cat-list { gap: 0.55rem; }
     .tmpl-cat-row { padding: 0.85rem 1.1rem; gap: 0.7rem; }
@@ -820,7 +874,7 @@
     .cred-block { padding: 1.8rem; }
 
     /* ABOUT: compress to fit one screen */
-    .about { padding-top: 7.5rem; }
+    .about { padding-top: 7.5rem; padding-bottom: 2.5rem; }
     .approach-numbered { gap: 0; margin-top: 0.8rem !important; }
     .approach-item {
       background: white; border: 2px solid var(--border); border-radius: 14px; padding: 1rem;
@@ -841,17 +895,18 @@
     }
 
     /* BOOTCAMP: tile carousel replaces table on mobile */
-    .bootcamp { padding-top: 7.5rem; padding-bottom: 1.5rem; }
-    .bootcamp .section-h2 { margin-bottom: 0.2rem; }
+    .bootcamp { padding-top: 7.5rem; padding-bottom: 2.5rem; }
+    .bootcamp .section-h2 { margin-bottom: 0.2rem; font-size: clamp(2.2rem, 10vw, 3rem); }
     .bc-desktop-table { display: none; }
     .bc-tier-carousel { display: block; }
+    .bootcamp-pricing { padding: 1.2rem 1.1rem; border-radius: 16px; margin-top: 1.2rem; }
 
-    .bc-head-row { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+    .bc-head-row { flex-direction: column; align-items: flex-start; gap: 0.15rem; margin-top: 0.3rem; }
     .bc-faq-link { margin-bottom: 0.15rem; font-size: 0.76rem; }
     .bootcamp-intro { display: none; }
     .bc-addon-row { gap: 0.4rem; }
     .bc-pricing-title { margin: 0.3rem 0 0.3rem; font-size: 1rem; }
-    .bc-compare-link { display: inline; font-size: 0.78rem; }
+    .bc-compare-link { display: inline-block; font-size: 0.78rem; margin-top: 0.2rem; }
     .bc-tier-tile { padding: 0.8rem 1rem; }
     .bc-tier-tile-name { font-size: 0.92rem; margin-bottom: 0.08rem; }
     .bc-tier-tile-value { font-size: 0.66rem; margin-bottom: 0.04rem; }
@@ -865,7 +920,7 @@
     .bc-addon-desc { font-size: 0.72rem; line-height: 1.3; }
 
     /* PACKAGES: arrow-only show/hide on mobile (no horizontal transform) */
-    .pricing { padding-top: 7.5rem; padding-bottom: 1.5rem; }
+    .pricing { padding-top: 7.5rem; padding-bottom: 2.5rem; }
     .pricing .section-h2 { margin-bottom: 0.3rem; }
     .pricing-carousel-wrap { display: block; }
     .pricing-grid {
@@ -911,7 +966,7 @@
     .cred-block { padding: 1.4rem; }
     .about-card { padding: 1rem; }
     .card-icon { width: 38px; height: 38px; }
-    .container { padding: 0 1rem; }
+    .container { padding: 0 2rem; }
     section { padding: 3rem 0; padding-top: 7.5rem; }
   }
 
@@ -1035,7 +1090,6 @@
     background: var(--navy); border-radius: 24px; padding: 3.5rem 4rem;
     width: 100%; box-sizing: border-box;
     display: flex; flex-direction: column; justify-content: center;
-    min-height: calc(100svh - 11rem);
     margin-bottom: 2rem;
   }
   .faq-eyebrow { background: rgba(240,180,30,0.15); border-color: rgba(240,180,30,0.4); color: var(--gold); font-size: 0.85rem; align-self: flex-start; }
@@ -1058,7 +1112,7 @@
   .faq-a.open { display: block; }
   .faq-a p { font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
   @media (max-width: 768px) {
-    .faq-card { padding: 2rem 1.5rem 3rem; border-radius: 16px; min-height: auto; margin-bottom: 0; }
+    .faq-card { padding: 2rem 1.5rem 3rem; border-radius: 16px; margin-bottom: 0; }
     .faq-h2 { font-size: clamp(1.6rem, 7vw, 2.2rem); }
     .faq-subp { font-size: 0.95rem; }
     .faq-q { font-size: 0.95rem; padding: 0.9rem 0; }
@@ -1118,21 +1172,21 @@
 </div>
 
 <!-- WAITLIST BANNER -->
-<div style="background:var(--gold);text-align:center;padding:0.6rem 1.5rem;font-size:0.82rem;font-weight:700;color:var(--navy);letter-spacing:0.03em;position:fixed;top:72px;left:0;right:0;z-index:99;">
-  Waitlist Only At This Time, <a href="interest-form.html" style="color:var(--navy);text-decoration:underline;"><b>Apply Now</b></a>
+<div id="waitlist-banner" class="waitlist-banner">
+  Waitlist Only At This Time, <a href="interest-form.html" class="waitlist-banner-link"><b>Apply Now</b></a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid-bg"></div>
   <div class="hero-inner">
-    <h1 class="hero-h1">Confidently reach your <span class="highlight">dream school.</span></h1>
+    <h1 class="hero-h1">Confidently reach your <span class="highlight">dream school</span></h1>
     <p class="hero-sub">Ivy League-trained guidance and tools built to develop you as a confident candidate, not just polish your application.</p>
-    <p class="hero-sub" style="margin-bottom:2.2rem;"><a href="#bootcamp" style="color:var(--gold);text-decoration:underline;font-weight:600;">The Bootcamp</a> | <a href="#pricing" style="color:var(--gold);text-decoration:underline;font-weight:600;">Private Sessions</a> | <a href="#templates" style="color:var(--gold);text-decoration:underline;font-weight:600;">Templates & Guides</a></p>
     <div class="hero-cta-row">
       <a href="interest-form.html" class="btn-hero">Book A Free 15 Minute Consultation</a>
       <a href="#outcomes" class="btn-hero btn-hero-outline">See Our Results</a>
     </div>
+    <p class="hero-services-row"><a href="#bootcamp">The Bootcamp</a> | <a href="#pricing">Private Sessions</a> | <a href="#templates">Templates & Guides</a></p>
     <div class="hero-trust">
       <div class="trust-item"><div class="trust-num">22</div><div class="trust-label">Years Experience</div></div>
       <div class="trust-divider"></div>
@@ -1178,7 +1232,7 @@
     <div class="about-grid">
       <div>
         <div class="section-eyebrow fade-in">Our Approach</div>
-        <h2 class="section-h2 fade-in" style="font-size:clamp(1.6rem,3.5vw,2.8rem);">Most students have the potential to be <span class="accent">outstanding candidates</span>, they just don't know it.</h2>
+        <h2 class="section-h2 fade-in" style="font-size:clamp(1.6rem,3.5vw,2.8rem);margin-bottom:1.6rem;">Most students have the potential to be <span class="accent">outstanding candidates</span>, they just don't know it</h2>
         
 
         <div class="approach-carousel-wrap">
@@ -1220,9 +1274,8 @@
             <span class="pn-arrow">→</span>
           </button>
         </div>
-        <div class="pricing-cta fade-in" style="margin-top:1.5rem;">
+        <div class="pricing-cta fade-in" style="margin-top:2rem;">
       <a href="interest-form.html" class="btn-gold">Get Started</a>
-      <p class="section-learn-more"><a href="#bootcamp">Learn more about our programs &rarr;</a></p>
     </div>
       </div>
 
@@ -1237,174 +1290,170 @@
     <h2 class="section-h2 fade-in">School <span class="accent">Acceptances</span></h2>
 
     <div class="outcome-stats fade-in">
-      <div class="outcome-stat-card" onclick="openOutcomeModal('schools')">
-        <div class="outcome-stat-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <div class="outcome-stat-card">
+        <div class="outcome-stat-head">
+          <div class="outcome-stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          </div>
+          <div class="outcome-stat-body">
+            <span class="outcome-stat-num">19+</span><span class="outcome-stat-label">Schools Said Yes</span>
+          </div>
         </div>
-        <div class="outcome-stat-body">
-          <span class="outcome-stat-num">19+</span><span class="outcome-stat-label">Schools Said Yes</span>
-          <div class="outcome-stat-preview">Harvard, Cornell, Columbia, UPenn &amp; more</div>
-        </div>
-        <span class="osc-arrow">→</span>
+        <div class="outcome-stat-full" id="outcome-schools-list"></div>
+        <div class="outcome-stat-note">★ = graduate acceptance also on record</div>
       </div>
-      <div class="outcome-stat-card" onclick="openOutcomeModal('majors')">
-        <div class="outcome-stat-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5M5 8v9a1 1 0 0 0 1 1h3M19 8v9a1 1 0 0 1-1 1h-3"/></svg>
+      <div class="outcome-stat-card">
+        <div class="outcome-stat-head">
+          <div class="outcome-stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5M5 8v9a1 1 0 0 0 1 1h3M19 8v9a1 1 0 0 1-1 1h-3"/></svg>
+          </div>
+          <div class="outcome-stat-body">
+            <span class="outcome-stat-num">25</span><span class="outcome-stat-label">Majors Supported</span>
+          </div>
         </div>
-        <div class="outcome-stat-body">
-          <span class="outcome-stat-num">25+</span><span class="outcome-stat-label">Majors</span>
-          <div class="outcome-stat-preview">CS, Pre-Med, Business, Engineering &amp; more</div>
-        </div>
-        <span class="osc-arrow">→</span>
+        <div class="outcome-stat-full" id="outcome-majors-list"></div>
       </div>
-      <div class="outcome-stat-card" onclick="openOutcomeModal('types')">
-        <div class="outcome-stat-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18M3 12h18"/></svg>
-        </div>
-        <div class="outcome-stat-body">
-          <span class="outcome-stat-num">14</span><span class="outcome-stat-label">Students Supported</span>
-          <div class="outcome-stat-preview">International, first-gen, transfer &amp; more</div>
-        </div>
-        <span class="osc-arrow">→</span>
-      </div>
-    </div>
-
-    <!-- TESTIMONIALS CAROUSEL -->
-    <div class="outcomes-testimonials fade-in">
-      <p class="outcomes-test-heading">From the students we have worked with:</p>
-      <div class="outcomes-test-track">
-        <div class="outcomes-test-rail-wrap">
-        <div class="outcomes-test-rail" id="outcomes-test-rail">
-          <div class="test-card">
-            <div class="test-quote-mark">&ldquo;</div>
-            <p class="test-quote">"They listened to what I wanted to say and kept my essays in my own voice. The team came up with creative angles I never would have thought of."</p>
-            <div class="test-attr">
-              <div class="test-avatar">JC</div>
-              <div><div class="test-name">Julie C, Florida</div><div class="test-detail">Admitted to Harvard and Cornell</div></div>
-            </div>
+      <div class="outcome-stat-card">
+        <div class="outcome-stat-head">
+          <div class="outcome-stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18M3 12h18"/></svg>
           </div>
-          <div class="test-card">
-            <div class="test-quote-mark">&ldquo;</div>
-            <p class="test-quote">"They gave thoughtful, strategic feedback and helped combine my essays. The edits strengthened my voice without changing it, and they went above and beyond to polish everything."</p>
-            <div class="test-attr">
-              <div class="test-avatar">SP</div>
-              <div><div class="test-name">Salma P, New Jersey</div><div class="test-detail">Admitted to Columbia, Cornell, UPenn, Johns Hopkins</div></div>
-            </div>
-          </div>
-          <div class="test-card">
-            <div class="test-quote-mark">&ldquo;</div>
-            <p class="test-quote">"They edited my personal statement and got me into USC and Cornell. Thorough feedback that improved my flow. I have recommended them to others."</p>
-            <div class="test-attr">
-              <div class="test-avatar">GC</div>
-              <div><div class="test-name">Gordon C, California</div><div class="test-detail">Admitted to Cornell and University of Southern California</div></div>
-            </div>
-          </div>
-          <div class="test-card">
-            <div class="test-quote-mark">&ldquo;</div>
-            <p class="test-quote">"They helped me with 3 M7 business school applications and I got into all of them. I was stuck, but the team knew exactly what to do. The best advisor and coach!"</p>
-            <div class="test-attr">
-              <div class="test-avatar">JB</div>
-              <div><div class="test-name">Jen B, Hawaii</div><div class="test-detail">Admitted to Columbia, UPenn, and Dartmouth</div></div>
-            </div>
-          </div>
-          <div class="test-card">
-            <div class="test-quote-mark">&ldquo;</div>
-            <p class="test-quote test-quote-lg">"The entire mood and tone of my essay was changed while the events and experiences explained were the same or similar."</p>
-            <div class="test-attr">
-              <div class="test-avatar">KP</div>
-              <div><div class="test-name">Kelly P, California</div><div class="test-detail">Admitted to Samuel Merritt University</div></div>
-            </div>
-          </div>
-          <div class="test-card">
-            <div class="test-quote-mark">&ldquo;</div>
-            <p class="test-quote test-quote-lg">"I loved working with them. The team helped with rearranging my words so clearly it felt like magic."</p>
-            <div class="test-attr">
-              <div class="test-avatar">SS</div>
-              <div><div class="test-name">Sasha S, Florida</div><div class="test-detail">Current High School Senior</div></div>
-            </div>
-          </div>
-          <div class="test-card">
-            <div class="test-quote-mark">&ldquo;</div>
-            <p class="test-quote test-quote-lg">"I had written two drafts before starting, but I had the easiest time with proper guidance which sped up the process a thousandfold."</p>
-            <div class="test-attr">
-              <div class="test-avatar">GD</div>
-              <div><div class="test-name">Guilherme D, Florida</div><div class="test-detail">Current High School Senior</div></div>
-            </div>
-          </div>
-          <div class="test-card">
-            <div class="test-quote-mark">&ldquo;</div>
-            <p class="test-quote">"Coming into this, I had very little confidence in my application despite countless hours into it. After careful restructuring, I came out with an essay I loved and felt confident about."</p>
-            <div class="test-attr">
-              <div class="test-avatar">DF</div>
-              <div><div class="test-name">David F, Florida</div><div class="test-detail">Current High School Senior</div></div>
-            </div>
-          </div>
-          <div class="test-card">
-            <div class="test-quote-mark">&ldquo;</div>
-            <p class="test-quote">"I believe the work is extremely good and helpful. When I started I had no idea how to create and transform an essay, and they gave me the ideas to become more perceptive of what to add and modify."</p>
-            <div class="test-attr">
-              <div class="test-avatar">DM</div>
-              <div><div class="test-name">Davi M, Florida</div><div class="test-detail">Current High School Senior</div></div>
-            </div>
-          </div>
-          <div class="test-card">
-            <div class="test-quote-mark">&ldquo;</div>
-            <p class="test-quote">"Working with them was one of the best decisions I made preparing for college. Before I started, I had no clue what to do, but after one session, my whole perspective changed."</p>
-            <div class="test-attr">
-              <div class="test-avatar">LA</div>
-              <div><div class="test-name">Lorenzo A, Florida</div><div class="test-detail">Current High School Senior</div></div>
-            </div>
+          <div class="outcome-stat-body">
+            <span class="outcome-stat-label outcome-stat-label-text">Many types of students</span>
           </div>
         </div>
-        </div>
-      </div>
-      <div class="outcomes-test-nav">
-        <button class="outcomes-test-arrow outcomes-test-prev" type="button" aria-label="Previous testimonials">
-          <span class="pn-arrow">&larr;</span>
-        </button>
-        <button class="outcomes-test-arrow outcomes-test-next" type="button" aria-label="Next testimonials">
-          <span class="pn-arrow">&rarr;</span>
-        </button>
+        <div class="outcome-stat-full" id="outcome-types-list"></div>
       </div>
     </div>
 
-   <div class="pricing-cta fade-in" style="margin-top:1rem;">
+   <div class="pricing-cta fade-in" style="margin-top:2rem;">
       <a href="interest-form.html" class="btn-gold">Get Started</a>
-      <p class="section-learn-more"><a href="#bootcamp">Learn more about our programs &rarr;</a></p>
     </div>
   </div>
 
 </section>
 
-<!-- OUTCOME DETAIL MODAL -->
-<div id="outcome-modal" class="outcome-modal" aria-hidden="true">
-  <div class="outcome-modal-backdrop" onclick="closeOutcomeModal()"></div>
-  <div class="outcome-modal-card">
-    <button class="outcome-modal-close" onclick="closeOutcomeModal()" aria-label="Close">&#10005;</button>
-    <div id="outcome-modal-eyebrow" class="outcome-modal-eyebrow"></div>
-    <h3 id="outcome-modal-title" class="outcome-modal-title"></h3>
-    <p id="outcome-modal-note" class="outcome-modal-note"></p>
-    <div id="outcome-modal-body" class="outcome-modal-body"></div>
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-eyebrow fade-in">Vetted by real admitted applicants</div>
+    <h2 class="section-h2 fade-in">From <span class="accent">students we've worked with</span></h2>
+
+    <div class="testimonials-viewport fade-in">
+    <div class="testimonials-track" id="testimonials-track">
+      <div class="test-tile">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-quote">"They listened to what I wanted to say and kept my essays in my own voice. The team came up with creative angles I never would have thought of."</p>
+        <div class="test-attr">
+          <div class="test-avatar">JC</div>
+          <div><div class="test-name">Julie C, Florida</div><div class="test-detail">Admitted to Harvard and Cornell</div></div>
+        </div>
+      </div>
+      <div class="test-tile">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-quote">"They gave thoughtful, strategic feedback and helped combine my essays. The edits strengthened my voice without changing it, and they went above and beyond to polish everything."</p>
+        <div class="test-attr">
+          <div class="test-avatar">SP</div>
+          <div><div class="test-name">Salma P, New Jersey</div><div class="test-detail">Admitted to Columbia, Cornell, UPenn, Johns Hopkins</div></div>
+        </div>
+      </div>
+      <div class="test-tile">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-quote">"They edited my personal statement and got me into USC and Cornell. Thorough feedback that improved my flow. I have recommended them to others."</p>
+        <div class="test-attr">
+          <div class="test-avatar">GC</div>
+          <div><div class="test-name">Gordon C, California</div><div class="test-detail">Admitted to Cornell and University of Southern California</div></div>
+        </div>
+      </div>
+      <div class="test-tile">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-quote">"They helped me with 3 M7 business school applications and I got into all of them. I was stuck, but the team knew exactly what to do. The best advisor and coach!"</p>
+        <div class="test-attr">
+          <div class="test-avatar">JB</div>
+          <div><div class="test-name">Jen B, Hawaii</div><div class="test-detail">Admitted to Columbia, UPenn, and Dartmouth</div></div>
+        </div>
+      </div>
+      <div class="test-tile">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-quote">"The entire mood and tone of my essay was changed while the events and experiences explained were the same or similar."</p>
+        <div class="test-attr">
+          <div class="test-avatar">KP</div>
+          <div><div class="test-name">Kelly P, California</div><div class="test-detail">Admitted to Samuel Merritt University</div></div>
+        </div>
+      </div>
+      <div class="test-tile">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-quote">"I loved working with them. The team helped with rearranging my words so clearly it felt like magic."</p>
+        <div class="test-attr">
+          <div class="test-avatar">SS</div>
+          <div><div class="test-name">Sasha S, Florida</div><div class="test-detail">Current High School Senior</div></div>
+        </div>
+      </div>
+      <div class="test-tile">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-quote">"I had written two drafts before starting, but I had the easiest time with proper guidance which sped up the process a thousandfold."</p>
+        <div class="test-attr">
+          <div class="test-avatar">GD</div>
+          <div><div class="test-name">Guilherme D, Florida</div><div class="test-detail">Current High School Senior</div></div>
+        </div>
+      </div>
+      <div class="test-tile">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-quote">"Coming into this, I had very little confidence in my application despite countless hours into it. After careful restructuring, I came out with an essay I loved and felt confident about."</p>
+        <div class="test-attr">
+          <div class="test-avatar">DF</div>
+          <div><div class="test-name">David F, Florida</div><div class="test-detail">Current High School Senior</div></div>
+        </div>
+      </div>
+      <div class="test-tile">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-quote">"I believe the work is extremely good and helpful. When I started I had no idea how to create and transform an essay, and they gave me the ideas to become more perceptive of what to add and modify."</p>
+        <div class="test-attr">
+          <div class="test-avatar">DM</div>
+          <div><div class="test-name">Davi M, Florida</div><div class="test-detail">Current High School Senior</div></div>
+        </div>
+      </div>
+      <div class="test-tile">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-quote">"Working with them was one of the best decisions I made preparing for college. Before I started, I had no clue what to do, but after one session, my whole perspective changed."</p>
+        <div class="test-attr">
+          <div class="test-avatar">LA</div>
+          <div><div class="test-name">Lorenzo A, Florida</div><div class="test-detail">Current High School Senior</div></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="testimonials-nav fade-in">
+      <button class="testimonials-arrow testimonials-prev" type="button" aria-label="Previous testimonials">&larr;</button>
+      <div class="testimonials-dots" id="testimonials-dots"></div>
+      <button class="testimonials-arrow testimonials-next" type="button" aria-label="Next testimonials">&rarr;</button>
+    </div>
+
+    <div class="pricing-cta fade-in" style="margin-top:2rem;">
+      <a href="interest-form.html" class="btn-gold">Get Started</a>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- THE BOOTCAMP -->
 <section class="bootcamp" id="bootcamp">
   <div class="container">
+    <div class="bc-title-wrap">
+      <h2 class="section-h2 fade-in">The <span class="accent">Bootcamp</span></h2>
+      <div class="section-eyebrow fade-in">Train like a top candidate</div>
+    </div>
     <div class="bc-head-row">
-      <div>
-        <div class="section-eyebrow fade-in">The Bootcamp</div>
-        <h2 class="section-h2 fade-in">Train like a <span class="accent">top candidate.</span></h2>
-      </div>
+      <p class="fade-in bootcamp-intro">We combine proven strategy with real admissions insight, but your results come from how you apply it. Engage fully and you'll build a more compelling application, greater confidence, and a clearer personal narrative.</p>
       <p class="section-learn-more bc-faq-link"><a href="#faq">Have questions? See our FAQ &rarr;</a></p>
     </div>
-    <p class="fade-in bootcamp-intro">We combine proven strategy with real admissions insight, but your results come from how you apply it. Engage fully and you'll build a more compelling application, greater confidence, and a clearer personal narrative.</p>
 
     <div class="bootcamp-pricing fade-in">
+    <div class="bootcamp-pricing-inner">
       <div class="bc-pricing-title-row">
         <h3 class="bc-pricing-title">6-Week Bootcamp</h3>
-        <button type="button" class="bc-compare-link" onclick="openCompareModal()">View Full Comparison</button>
       </div>
+      <button type="button" class="bc-compare-link" onclick="openCompareModal()">View Full Comparison</button>
 
       <div class="compare-table-wrap bc-desktop-table" style="overflow-x:auto;">
         <table style="width:100%;border-collapse:collapse;font-family:var(--font);font-size:0.85rem;color:var(--navy);">
@@ -1576,8 +1625,9 @@
         <p class="bc-addon-desc">Three dedicated close-group workshops and additional curated resources for applicants targeting Ivy League and top-ranked universities. Can be added to any tier.</p>
       </div>
     </div>
+    </div>
 
-    <div class="pricing-cta fade-in" style="margin-top:0.5rem;">
+    <div class="pricing-cta fade-in" style="margin-top:2.4rem;">
       <a href="interest-form.html" class="btn-gold">Get Started</a>
     </div>
   </div>
@@ -1701,13 +1751,17 @@
       </div>
     </div>
   </div>
+</div>
 
 <!-- PRIVATE SESSIONS -->
 <section class="pricing" id="pricing">
   <div class="container">
     <div class="section-eyebrow fade-in">Private Sessions</div>
-    <h2 class="section-h2 fade-in">Need more hands-on guidance? <span class="accent">We've got you.</span></h2>
-    <p class="section-p fade-in" style="margin-bottom:0.5rem;">In addition to the bootcamp, our private sessions give you one-on-one access to an expert advisor for your specific needs.</p>
+    <h2 class="section-h2 fade-in">Need more hands-on guidance? <span class="accent">We've got you</span></h2>
+    <div class="bc-head-row">
+      <p class="section-p fade-in" style="margin-bottom:0;flex:1;min-width:0;">In addition to the bootcamp, our private sessions give you one-on-one access to an expert advisor for your specific needs.</p>
+      <p class="section-learn-more bc-faq-link"><a href="#faq">Have questions? See our FAQ &rarr;</a></p>
+    </div>
 
     <div class="pricing-carousel-wrap">
     <div class="pricing-grid">
@@ -1809,79 +1863,22 @@
       </button>
     </div>
 
-    <div class="pricing-cta fade-in" style="margin-top:0.8rem;">
+    <div class="pricing-cta fade-in" style="margin-top:2.6rem;">
       <a href="interest-form.html" class="btn-gold">Get Started</a>
-      <p class="section-learn-more"><a href="#faq">Have questions? See our FAQ &rarr;</a></p>
     </div>
   </div>
 </section>
 
 <!-- TEMPLATES -->
-<section class="templates" style="background:var(--white);" id="templates">
+<section class="templates" id="templates">
   <div class="container">
     <div class="section-eyebrow fade-in">Templates &amp; Guides</div>
-    <h2 class="section-h2 fade-in">Built from real <span class="accent">admitted applications.</span></h2>
+    <h2 class="section-h2 fade-in">Built from real <span class="accent">admitted applications</span></h2>
     <p class="section-p fade-in tmpl-intro">Every template and guide comes from what actually works, adapted from real admitted student materials. Most are included at no extra cost as part of various <a href="#bootcamp" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">Bootcamp plan</a> tiers, with individual purchases coming soon.</p>
 
-    <div class="tmpl-cat-list fade-in">
-      <div class="tmpl-cat-row" onclick="openCategoryModal('guides')">
-        <span class="tmpl-cat-badge">Overall Applications</span>
-        <span class="tmpl-cat-count">11 resources</span>
-        <span class="tmpl-cat-arrow">→</span>
-      </div>
-      <div class="tmpl-cat-row" onclick="openCategoryModal('essay')">
-        <span class="tmpl-cat-badge">Personal Statements</span>
-        <span class="tmpl-cat-count">4 resources</span>
-        <span class="tmpl-cat-arrow">→</span>
-      </div>
-      <div class="tmpl-cat-row" onclick="openCategoryModal('lor')">
-        <span class="tmpl-cat-badge">Letters of Recommendation</span>
-        <span class="tmpl-cat-count">3 resources</span>
-        <span class="tmpl-cat-arrow">→</span>
-      </div>
-      <div class="tmpl-cat-row" onclick="openCategoryModal('resume')">
-        <span class="tmpl-cat-badge">Resumes</span>
-        <span class="tmpl-cat-count">2 resources</span>
-        <span class="tmpl-cat-arrow">→</span>
-      </div>
-      <div class="tmpl-cat-row" onclick="openCategoryModal('test')">
-        <span class="tmpl-cat-badge">Standardized Test Prep</span>
-        <span class="tmpl-cat-count">3 resources</span>
-        <span class="tmpl-cat-arrow">→</span>
-      </div>
-    </div>
-
-    <div class="pricing-cta fade-in" style="margin-top:1.5rem;">
-      <a href="interest-form.html" class="btn-gold">Get Started</a>
-    </div>
+    <div class="tmpl-accordion fade-in" id="tmpl-accordion" style="margin-bottom:0.5rem;"></div>
   </div>
 </section>
-
-<!-- CATEGORY MODAL -->
-<div id="category-modal" class="outcome-modal" aria-hidden="true">
-  <div class="outcome-modal-backdrop" onclick="closeCategoryModal()"></div>
-  <div class="outcome-modal-card">
-    <button class="outcome-modal-close" onclick="closeCategoryModal()" aria-label="Close">&#10005;</button>
-    <div class="outcome-modal-eyebrow">Templates &amp; Guides</div>
-    <h3 id="category-modal-title" class="outcome-modal-title"></h3>
-    <div id="category-modal-body" class="tmpl-modal-list"></div>
-  </div>
-</div>
-
-<!-- TEMPLATE MODAL -->
-<div id="tmpl-modal" style="display:none;position:fixed;inset:0;z-index:700;align-items:center;justify-content:center;padding:1.5rem;">
-  <div onclick="closeTemplateModal()" style="position:absolute;inset:0;background:rgba(30,70,110,0.45);backdrop-filter:blur(3px);"></div>
-  <div style="position:relative;background:white;border-radius:18px;padding:2rem;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(30,70,110,0.2);">
-    <button onclick="closeTemplateModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;line-height:1;">&#10005;</button>
-    <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:0.5rem;">Resource</div>
-    <h3 id="tmpl-modal-title" style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:0.8rem;font-family:var(--font);"></h3>
-    <p id="tmpl-modal-desc" style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.4rem;"></p>
-    <div style="display:flex;gap:0.75rem;">
-      <button disabled style="display:inline-block;font-size:0.82rem;font-weight:800;background:var(--border);color:var(--muted);padding:0.6rem 1.3rem;border-radius:9px;border:none;cursor:default;">Order Now</button>
-      <button onclick="closeTemplateModal()" style="font-size:0.82rem;font-weight:600;background:none;border:1.5px solid var(--border);color:var(--muted);padding:0.6rem 1.1rem;border-radius:9px;cursor:pointer;font-family:var(--font);">Close</button>
-    </div>
-  </div>
-</div>
 
 <!-- FAQ -->
 <section style="background:var(--white);" id="faq">
@@ -2069,6 +2066,8 @@
   window.addEventListener('load', equaliseCards);
   window.addEventListener('resize', equaliseCards);
 
+  // Each item: [title, description, optional URL]. Add a URL as the 3rd array
+  // value to link "Order Now" to a real page — it opens in a new tab automatically.
   var TEMPLATE_CATEGORIES = {
     guides: {
       title: 'Overall Applications',
@@ -2112,6 +2111,7 @@
     },
     test: {
       title: 'Standardized Test Prep',
+      comingSoon: true,
       items: [
         ['SAT Prep Guide', 'SAT strategy, section breakdown, and how your score fits into your overall application.'],
         ['ACT Prep Guide', 'ACT strategy, section breakdown, and how your score fits into your overall application.'],
@@ -2120,56 +2120,56 @@
     }
   };
 
-  function openCategoryModal(key) {
-    var cat = TEMPLATE_CATEGORIES[key];
-    if (!cat) return;
-    document.getElementById('category-modal-title').textContent = cat.title;
-    var body = document.getElementById('category-modal-body');
-    body.innerHTML = '';
-    cat.items.forEach(function(item) {
-      var row = document.createElement('div');
-      row.className = 'tmpl-modal-item';
-      row.onclick = function() { openTemplateModal(item[0], item[1]); };
-      var nameSpan = document.createElement('span');
-      nameSpan.className = 'tmpl-modal-item-name';
-      nameSpan.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
-      nameSpan.appendChild(document.createTextNode(item[0]));
-      var ctaSpan = document.createElement('span');
-      ctaSpan.className = 'tmpl-modal-item-cta';
-      ctaSpan.textContent = 'Order Now';
-      row.appendChild(nameSpan);
-      row.appendChild(ctaSpan);
-      body.appendChild(row);
-    });
-    var modal = document.getElementById('category-modal');
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeCategoryModal() {
-    var modal = document.getElementById('category-modal');
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
+  (function buildTemplateAccordion() {
+    var wrap = document.getElementById('tmpl-accordion');
+    if (!wrap) return;
+    Object.keys(TEMPLATE_CATEGORIES).forEach(function(catKey) {
+      var cat = TEMPLATE_CATEGORIES[catKey];
+      var group = document.createElement('div');
+      group.className = 'tmpl-cat-group';
 
-  function openTemplateModal(title, desc) {
-    document.getElementById('tmpl-modal-title').innerHTML = title;
-    document.getElementById('tmpl-modal-desc').textContent = desc;
-    var modal = document.getElementById('tmpl-modal');
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeTemplateModal() {
-    document.getElementById('tmpl-modal').style.display = 'none';
-    var catModal = document.getElementById('category-modal');
-    if (!catModal.classList.contains('open')) {
-      document.body.style.overflow = '';
-    }
-  }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeTemplateModal();
-  });
+      var toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'tmpl-cat-toggle';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.innerHTML =
+        '<span class="tmpl-cat-arrow">›</span>' +
+        '<span class="tmpl-cat-badge">' + cat.title + '</span>' +
+        '<span class="tmpl-cat-count">' + cat.items.length + ' resources</span>';
+
+      var panel = document.createElement('div');
+      panel.className = 'tmpl-cat-panel';
+
+      cat.items.forEach(function(item) {
+        var itemEl = document.createElement('div');
+        itemEl.className = 'tmpl-item';
+        var ctaHtml;
+        if (cat.comingSoon) {
+          ctaHtml = '<span class="tmpl-item-cta tmpl-item-cta-soon">Coming Soon</span>';
+        } else {
+          var url = item[2] || '#';
+          ctaHtml = '<a class="tmpl-item-cta" href="' + url + '" target="_blank" rel="noopener">Order Now</a>';
+        }
+        itemEl.innerHTML =
+          '<div class="tmpl-item-head">' +
+            '<span class="tmpl-item-name">' + item[0] + '</span>' +
+            ctaHtml +
+          '</div>' +
+          '<p class="tmpl-item-desc">' + item[1] + '</p>';
+        panel.appendChild(itemEl);
+      });
+
+      toggle.addEventListener('click', function() {
+        var isOpen = panel.classList.contains('open');
+        panel.classList.toggle('open', !isOpen);
+        toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      });
+
+      group.appendChild(toggle);
+      group.appendChild(panel);
+      wrap.appendChild(group);
+    });
+  })();
 
   // Newsletter: send to Google Sheet, show inline success message immediately
   (function() {
@@ -2297,14 +2297,6 @@
     if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
     window.addEventListener('resize', function() { show(currentIdx); });
 
-    // Reset to first when section leaves view
-    var section = document.querySelector('.about');
-    if (section && window.IntersectionObserver) {
-      new IntersectionObserver(function(entries) {
-        if (!entries[0].isIntersecting) reset();
-      }, { threshold: 0.1 }).observe(section);
-    }
-
     show(0); setLabels(0);
   })();
 
@@ -2350,13 +2342,6 @@
     if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
     window.addEventListener('resize', function() { show(currentIdx); });
-
-    var section = document.querySelector('.pricing');
-    if (section && window.IntersectionObserver) {
-      new IntersectionObserver(function(entries) {
-        if (!entries[0].isIntersecting) reset();
-      }, { threshold: 0.1 }).observe(section);
-    }
 
     show(0); setLabels(0);
   })();
@@ -2404,37 +2389,37 @@
     if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
     window.addEventListener('resize', function() { show(currentIdx); });
 
-    var section = document.querySelector('.bootcamp');
-    if (section && window.IntersectionObserver) {
-      new IntersectionObserver(function(entries) {
-        if (!entries[0].isIntersecting) reset();
-      }, { threshold: 0.1 }).observe(section);
-    }
-
     show(0); setLabels(0);
   })();
 
-
-  // ── Outcomes testimonial carousel (arrow navigation, by page) ──
+  // ── Testimonials carousel: 4-per-page (2 on tablet, 1 on mobile), arrows + dots ──
   (function() {
-    var track = document.querySelector('.outcomes-test-track');
-    var rail = document.getElementById('outcomes-test-rail');
-    var prevBtn = document.querySelector('.outcomes-test-prev');
-    var nextBtn = document.querySelector('.outcomes-test-next');
-    if (!track || !rail || !prevBtn || !nextBtn) return;
-    var cards = rail.querySelectorAll('.test-card');
+    var track = document.getElementById('testimonials-track');
+    var prevBtn = document.querySelector('.testimonials-prev');
+    var nextBtn = document.querySelector('.testimonials-next');
+    var dotsWrap = document.getElementById('testimonials-dots');
+    if (!track || !prevBtn || !nextBtn) return;
+    var cards = Array.prototype.slice.call(track.querySelectorAll('.test-tile'));
     var total = cards.length;
+    if (!total) return;
 
     function perView() {
       if (window.innerWidth <= 768) return 1;
-      if (window.innerWidth <= 1024) return 2;
       return 4;
     }
 
     var pageIdx = 0;
 
-    function totalPages() {
-      return Math.max(1, Math.ceil(total / perView()));
+    function totalPages() { return Math.max(1, Math.ceil(total / perView())); }
+
+    function renderDots() {
+      dotsWrap.innerHTML = '';
+      var pages = totalPages();
+      for (var i = 0; i < pages; i++) {
+        var dot = document.createElement('span');
+        dot.className = 'testimonials-dot' + (i === pageIdx ? ' active' : '');
+        dotsWrap.appendChild(dot);
+      }
     }
 
     function update() {
@@ -2445,7 +2430,8 @@
         ? (cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left)
         : cards[0].getBoundingClientRect().width;
       var offset = startIdx * step;
-      rail.style.transform = 'translateX(-' + offset + 'px)';
+      track.style.transform = 'translateX(-' + offset + 'px)';
+      renderDots();
     }
 
     prevBtn.addEventListener('click', function() {
@@ -2456,7 +2442,6 @@
       pageIdx = (pageIdx >= totalPages() - 1) ? 0 : pageIdx + 1;
       update();
     });
-
     window.addEventListener('resize', function() {
       pageIdx = 0;
       update();
@@ -2465,13 +2450,9 @@
     update();
   })();
 
-  // ── Outcome detail modals (Schools / Majors / Student Types) ──
+
   var OUTCOME_DATA = {
     schools: {
-      eyebrow: 'Admissions Outcomes',
-      title: 'School Acceptances',
-      note: '\u2605 = graduate acceptance also on record.',
-      mode: 'list',
       items: [
         { name: 'American University' },
         { name: 'Bryn Mawr College' },
@@ -2496,10 +2477,6 @@
       ]
     },
     majors: {
-      eyebrow: 'Admissions Outcomes',
-      title: "Majors We've Supported",
-      note: 'Students we work with have pursued an enormous range of fields, from STEM to the humanities to pre-professional tracks.',
-      mode: 'chips',
       items: [
         'Analytics','Art','Biological Engineering','Biology','Business','Chemical Engineering',
         'Cognitive Science','Computer Engineering','Computer Science','Design','History',
@@ -2509,10 +2486,6 @@
       ]
     },
     types: {
-      eyebrow: 'Admissions Outcomes',
-      title: "Students We've Supported",
-      note: 'Every student deserves a strong application. Here are some of the backgrounds and situations we regularly support.',
-      mode: 'chips',
       items: [
         'All high school grade students','Seniors on a tight timeline','Competitive program applicants',
         'International students','Prospective transfer students','Scholarship applicants',
@@ -2522,53 +2495,31 @@
     }
   };
 
-  function openOutcomeModal(key) {
-    var data = OUTCOME_DATA[key];
-    if (!data) return;
-    document.getElementById('outcome-modal-eyebrow').textContent = data.eyebrow;
-    document.getElementById('outcome-modal-title').textContent = data.title;
-    document.getElementById('outcome-modal-note').textContent = data.note;
-    var body = document.getElementById('outcome-modal-body');
-    body.innerHTML = '';
-    if (data.mode === 'list') {
-      body.className = 'outcome-modal-body list-mode';
-      data.items.forEach(function(item) {
-        var div = document.createElement('div');
-        div.className = 'om-item';
-        if (item.muted) div.style.color = 'var(--muted)';
-        if (item.muted) div.style.fontStyle = 'italic';
-        if (item.muted) div.style.borderBottom = 'none';
-        var label = document.createElement('span');
-        label.textContent = item.name;
-        div.appendChild(label);
-        if (item.star) {
-          var star = document.createElement('span');
-          star.className = 'om-star';
-          star.textContent = '\u2605';
-          div.appendChild(star);
-        }
-        body.appendChild(div);
-      });
-    } else {
-      body.className = 'outcome-modal-body';
-      data.items.forEach(function(item) {
-        var chip = document.createElement('span');
-        chip.className = 'om-chip' + (item === 'And many more' ? ' om-gold' : '');
-        chip.textContent = item;
-        body.appendChild(chip);
-      });
-    }
-    var modal = document.getElementById('outcome-modal');
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+  function renderOutcomeList(containerId, data) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    data.items.forEach(function(item) {
+      var chip = document.createElement('span');
+      var isObj = typeof item === 'object';
+      var label = isObj ? item.name : item;
+      var isGold = label === 'And many more';
+      var isMuted = isObj && item.muted;
+      chip.className = 'om-chip' + (isGold ? ' om-gold' : '');
+      if (isMuted) chip.style.fontStyle = 'italic';
+      chip.textContent = label;
+      if (isObj && item.star) {
+        var star = document.createElement('span');
+        star.className = 'om-item-star';
+        star.textContent = '★';
+        chip.appendChild(star);
+      }
+      container.appendChild(chip);
+    });
   }
-  function closeOutcomeModal() {
-    var modal = document.getElementById('outcome-modal');
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
+  renderOutcomeList('outcome-schools-list', OUTCOME_DATA.schools);
+  renderOutcomeList('outcome-majors-list', OUTCOME_DATA.majors);
+  renderOutcomeList('outcome-types-list', OUTCOME_DATA.types);
+
   function openCompareModal() {
     var modal = document.getElementById('compare-modal');
     modal.classList.add('open');
@@ -2582,7 +2533,7 @@
     document.body.style.overflow = '';
   }
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') { closeOutcomeModal(); closeCategoryModal(); closeCompareModal(); }
+    if (e.key === 'Escape') { closeCompareModal(); }
   });
 
   // ── Smooth scroll for internal #anchor links ──
@@ -2628,6 +2579,19 @@
       }, { threshold: 0.1 }).observe(faqSection);
     }
   }
+
+  // ── Waitlist banner turns dark blue while the Bootcamp section is in view ──
+  (function() {
+    var banner = document.getElementById('waitlist-banner');
+    var bootcampSection = document.getElementById('bootcamp');
+    if (!banner || !bootcampSection || !window.IntersectionObserver) return;
+    // Trigger when the section is behind the fixed nav+banner bar (~110px from top)
+    new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        banner.classList.toggle('dark', entry.isIntersecting);
+      });
+    }, { rootMargin: '-110px 0px -85% 0px', threshold: 0 }).observe(bootcampSection);
+  })();
 </script>
 </body>
 </html>
