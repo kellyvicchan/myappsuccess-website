@@ -686,7 +686,6 @@
   }
   .price-card:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(240,180,30,0.15); transform: translateY(-3px); }
   .price-card.featured { border-color: var(--gold); background: var(--navy); color: white; box-shadow: 0 12px 40px rgba(30,70,110,0.2); }
-  .price-card { cursor: pointer; }
   .about-card { cursor: default; }
   .price-card.selected { border-color: var(--navy); box-shadow: 0 8px 32px rgba(30,70,110,0.18); transform: translateY(-4px); }
   .price-card.selected h3 { color: var(--navy); }
@@ -929,7 +928,7 @@
     .pricing-grid > .price-card {
       width: 100%;
     }
-    .price-card { padding: 0.8rem 1rem; cursor: default; }
+    .price-card { padding: 0.8rem 1rem; }
     .price-card h3 { font-size: 0.98rem; margin-bottom: 0.08rem; }
     .price-amount { font-size: 0.88rem; }
     .price-card > p { font-size: 0.76rem; line-height: 1.35; margin-bottom: 0.3rem; }
@@ -1096,7 +1095,7 @@
   .faq-h2 { color: white; font-size: clamp(2.1rem, 4.2vw, 3rem); }
   .faq-h2 .accent { color: var(--gold); }
   .faq-subp { color: rgba(255,255,255,0.55); font-size: 1.1rem; }
-  .faq-list { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, auto); grid-auto-flow: column; gap: 0 3.5rem; }
+  .faq-list { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(5, auto); grid-auto-flow: column; gap: 0 3.5rem; }
   .faq-item { border-bottom: 1px solid rgba(255,255,255,0.12); }
   .faq-q {
     width: 100%; text-align: left; background: none; border: none;
@@ -1141,6 +1140,7 @@
         <li><a href="#templates">Templates &amp; Guides</a></li>
       </ul>
     </li>
+    <li><a href="for-agencies.html">For Agencies</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="contact.html">Contact</a></li>
     <li><a href="interest-form.html" class="nav-cta">Get Started</a></li>
@@ -1165,6 +1165,7 @@
         <li><a href="#templates" onclick="closeMenu()">Templates &amp; Guides</a></li>
       </ul>
     </li>
+    <li><a href="for-agencies.html" onclick="closeMenu()">For Agencies</a></li>
     <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
     <li><a href="contact.html" onclick="closeMenu()">Contact</a></li>
     <li><a href="interest-form.html" class="mob-cta">Book A Free 15 Min Consult</a></li>
@@ -1763,7 +1764,7 @@
 
     <div class="pricing-carousel-wrap">
     <div class="pricing-grid">
-      <div class="price-card fade-in" data-service="Private Video Call (Starting at $200 /1 hour session)">
+      <div class="price-card fade-in">
         <div class="pc-header">
           <h3>Private Video Call</h3>
           <div class="price-amount">Starting at $200 <span style="font-size:0.78rem;font-weight:500;color:var(--muted);display:block;">/1 hour session</span></div>
@@ -1792,7 +1793,7 @@
           </div>
         </div>
       </div>
-      <div class="price-card fade-in" data-service="Virtual Review (Starting at $150 /1 hour session)">
+      <div class="price-card fade-in">
         <div class="pc-header">
           <h3>Virtual Review</h3>
           <div class="price-amount">Starting at $150 <span style="font-size:0.78rem;font-weight:500;color:var(--muted);display:block;">/1 hour session</span></div>
@@ -1820,7 +1821,7 @@
           </div>
         </div>
       </div>
-      <div class="price-card fade-in" data-service="Custom Package (contact for quote)">
+      <div class="price-card fade-in">
         <div class="pc-header">
           <h3>Custom Package</h3>
           <div class="price-amount">Contact for quote</div>
@@ -1967,6 +1968,16 @@
         </div>
       </div>
 
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if I'm from an agency or another education business and want to partner?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>We'd love to talk. In addition to working with students, we build websites, lead generation tools, marketing quizzes, and automation workflows for college admissions consultancies, test prep companies, and other education brands. Visit our <a href="for-agencies.html" style="color:var(--gold)">page for agencies</a> to learn more, or email us directly at <a href="mailto:marketing@myappsuccess.com" style="color:var(--gold)">marketing@myappsuccess.com</a> to set up an intro call.</p>
+        </div>
+      </div>
+
     </div>
     </div>
   </div>
@@ -1999,6 +2010,7 @@
           <li><a href="#bootcamp">The Bootcamp</a></li>
           <li><a href="#pricing">Private Sessions</a></li>
           <li><a href="#templates">Templates &amp; Guides</a></li>
+          <li><a href="for-agencies.html">For Agencies</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2186,21 +2198,6 @@
       }).catch(function() {});
     });
   })();
-
-  // Pricing card selection
-  document.querySelectorAll('.price-card[data-service]').forEach(function(card) {
-    card.addEventListener('click', function() {
-      document.querySelectorAll('.price-card[data-service]').forEach(function(c) { c.classList.remove('selected'); });
-      this.classList.add('selected');
-      var service = this.getAttribute('data-service');
-      document.getElementById('selected-service-label').textContent = service;
-      var wrap = document.getElementById('book-btn-wrap');
-      wrap.classList.add('visible');
-      var btn = document.getElementById('book-btn');
-      btn.href = 'interest-form.html?service=' + encodeURIComponent(service);
-      wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
-  });
 
   // (fade-in-on-scroll animations removed for snappier section-snap navigation)
 
