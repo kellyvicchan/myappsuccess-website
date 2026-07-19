@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Agencies & Education Brands | MyAppSuccess</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Open Graph / link preview -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="For Agencies & Education Brands | MyAppSuccess" />
+<meta property="og:description" content="MyAppSuccess Studio works with college admissions consultancies, test prep companies, and other education brands, whether you need something built or you're looking to partner." />
+<meta property="og:image" content="https://myappsuccess.com/NavLogo" />
+<meta property="og:url" content="https://myappsuccess.com/for-agencies.html" />
+<meta property="og:site_name" content="MyAppSuccess" />
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="For Agencies & Education Brands | MyAppSuccess" />
+<meta name="twitter:description" content="MyAppSuccess Studio works with education brands, whether you need something built or you're looking to partner." />
+<meta name="twitter:image" content="https://myappsuccess.com/NavLogo" />
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1e466e;
+    --navy-mid: #285888;
+    --gold: #f0b41e;
+    --gold-dark: #c99012;
+    --gold-bg: #fef9e6;
+    --white: #ffffff;
+    --off-white: #f5f7fa;
+    --text: #1e466e;
+    --muted: #5c6a82;
+    --border: #e2e8f0;
+    --font: 'League Spartan', sans-serif;
+  }
+  html { scroll-padding-top: 0; }
+  body { font-family: var(--font); color: var(--text); background: var(--white); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 72px;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 2px solid var(--gold);
+    box-shadow: 0 2px 16px rgba(30,70,110,0.07);
+  }
+  .nav-logo img { height: 50px; width: auto; display: block; }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; margin: 0; padding: 0; }
+  .nav-links > li { display: flex; align-items: center; height: 72px; }
+  .nav-links a {
+    font-size: 0.88rem; font-weight: 600; text-decoration: none;
+    color: var(--navy); transition: color 0.2s; line-height: 1;
+  }
+  .nav-links a:hover { color: var(--gold-dark); }
+  .nav-cta {
+    background: var(--gold) !important; color: var(--navy) !important;
+    padding: 0.6rem 1.4rem; border-radius: 8px;
+    font-weight: 700 !important; transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-dark) !important; }
+  .nav-agencies { color: var(--muted) !important; }
+  .nav-agencies:hover { color: var(--gold-dark) !important; }
+
+  /* DROPDOWN */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > span { display: flex; align-items: center; gap: 0.3rem; font-size: 0.88rem; font-weight: 600; color: var(--navy); }
+  .nav-dropdown > span::after {
+    content: ''; display: inline-block;
+    width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid currentColor;
+    transition: transform 0.2s;
+    margin-top: 1px;
+  }
+  .nav-dropdown:hover > span::after { transform: rotate(180deg); }
+  .nav-dropdown::after {
+    content: ''; position: absolute;
+    top: 100%; left: 0; right: 0; height: 14px;
+    background: transparent;
+  }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    background: white; border: 1.5px solid var(--border);
+    border-radius: 10px; box-shadow: 0 8px 28px rgba(30,70,110,0.12);
+    min-width: 170px; padding: 0.4rem 0; list-style: none; z-index: 200;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu li a {
+    display: block; padding: 0.6rem 1.1rem;
+    font-size: 0.84rem; font-weight: 600; color: var(--gold-dark);
+    text-decoration: none; white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-dropdown-menu li a:hover { background: var(--gold-bg); color: var(--navy); }
+
+  /* HAMBURGER / MOBILE NAV */
+  .hamburger {
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 5px; cursor: pointer; padding: 6px; border: none;
+    background: transparent; z-index: 200;
+  }
+  @media (min-width: 1025px) { .hamburger { display: none; } }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--navy); border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none; position: fixed; top: 72px; left: 0; right: 0;
+    background: white; border-bottom: 2px solid var(--gold);
+    box-shadow: 0 8px 24px rgba(30,70,110,0.12);
+    z-index: 99; padding: 1rem 0;
+    animation: slideDown 0.25s ease;
+  }
+  .mobile-menu.open { display: block; }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .mobile-menu ul { list-style: none; padding: 0; margin: 0; }
+  .mobile-menu ul li a {
+    display: block; padding: 0.85rem 1.5rem;
+    font-size: 1rem; font-weight: 600; color: var(--navy);
+    text-decoration: none; border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .mobile-menu ul li:last-child a { border-bottom: none; }
+  .mobile-menu ul li a:hover { background: var(--gold-bg); }
+  .mobile-menu .mob-cta {
+    display: block; margin: 1rem 1.5rem 0.5rem;
+    background: var(--gold); color: var(--navy) !important;
+    text-align: center; padding: 0.75rem 1rem !important;
+    border-radius: 8px; font-weight: 800 !important; border-bottom: none !important;
+  }
+  .mobile-menu .mob-cta:hover { background: var(--gold-dark) !important; }
+  .mob-dropdown { border-bottom: 1px solid var(--border); }
+  .mob-dropdown-toggle {
+    width: 100%; text-align: left; background: none; border: none;
+    padding: 0.85rem 1.5rem; font-family: var(--font); font-size: 1rem;
+    font-weight: 600; color: var(--navy); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .mob-arrow { font-size: 1.1rem; transition: transform 0.2s; display: inline-block; }
+  .mob-dropdown-toggle[aria-expanded="true"] .mob-arrow { transform: rotate(90deg); }
+  .mob-sub { display: none; list-style: none; padding: 0; margin: 0; background: var(--off-white); }
+  .mob-sub.open { display: block; }
+  .mob-sub li a {
+    display: block; padding: 0.75rem 1.5rem 0.75rem 2.8rem !important;
+    font-size: 0.9rem; font-weight: 600; color: var(--gold-dark) !important;
+    text-decoration: none; border-bottom: 1px solid var(--border);
+  }
+  .mob-sub li a:hover { color: var(--navy) !important; background: var(--gold-bg); }
+  .mob-sub li:last-child a { border-bottom: none; }
+
+  @media (max-width: 1024px) {
+    nav { padding: 0 1.2rem; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 1.2rem; }
+  }
+
+  /* SECTION SHELL */
+  section { padding: 5rem 0; box-sizing: border-box; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 5rem; }
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--gold-bg); border: 1.5px solid var(--gold);
+    color: var(--gold-dark); border-radius: 999px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.35rem 1rem; margin-bottom: 0.9rem;
+    line-height: 1; white-space: nowrap;
+  }
+  .section-h2 {
+    font-size: clamp(2rem, 3.8vw, 2.9rem); font-weight: 800; line-height: 1.15;
+    color: var(--navy); margin-bottom: 1rem; letter-spacing: -0.02em;
+  }
+  .section-h2 .accent { color: var(--gold-dark); }
+  .section-p { font-size: 1.15rem; color: var(--muted); line-height: 1.8; }
+
+  /* HERO */
+  .ag-hero {
+    min-height: 72vh; background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    padding: 160px 3rem 4rem; position: relative; overflow: hidden; text-align: center;
+    box-sizing: border-box;
+  }
+  .ag-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle 480px at 88% 18%, rgba(240,180,30,0.16) 0%, transparent 70%),
+      radial-gradient(circle 600px at 50% 100%, rgba(120,160,220,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .ag-hero-grid-bg {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.9) 75%, transparent);
+  }
+  .ag-hero-inner { position: relative; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+  .ag-hero-eyebrow {
+    background: rgba(240,180,30,0.15); border: 1.5px solid rgba(240,180,30,0.4); color: var(--gold);
+    display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 999px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.35rem 1rem; margin-bottom: 1.4rem;
+  }
+  .ag-hero-h1 {
+    font-size: clamp(2.2rem, 4.8vw, 3.6rem); font-weight: 800; line-height: 1.1;
+    color: var(--white); margin-bottom: 1.4rem; letter-spacing: -0.03em;
+  }
+  .ag-hero-h1 .highlight { color: var(--gold); display: inline-block; }
+  .ag-hero-sub {
+    font-size: 1.1rem; color: rgba(255,255,255,0.65);
+    line-height: 1.7; max-width: 560px; margin: 0 0 2.2rem; font-weight: 400;
+  }
+  .ag-hero-cta-row {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  }
+  .btn-hero {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 200px; text-align: center;
+    background: var(--gold); color: var(--navy);
+    font-family: var(--font); font-weight: 800; font-size: 0.95rem;
+    padding: 0.9rem 1.5rem; border-radius: 10px; border: 2px solid var(--gold);
+    text-decoration: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s, border-color 0.2s;
+    box-shadow: 0 4px 20px rgba(240,180,30,0.35);
+  }
+  .btn-hero:hover { background: var(--gold-dark); border-color: var(--gold-dark); transform: translateY(-2px); }
+  .btn-hero-outline {
+    background: transparent; color: var(--white);
+    border-color: rgba(255,255,255,0.4); box-shadow: none;
+  }
+  .btn-hero-outline:hover { background: rgba(255,255,255,0.08); border-color: var(--gold); color: var(--white); }
+  .btn-gold {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--gold); color: var(--navy);
+    font-weight: 800; font-size: 0.95rem;
+    padding: 0.9rem 2rem; border-radius: 10px; border: none;
+    text-decoration: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 20px rgba(240,180,30,0.4);
+  }
+  .btn-gold:hover { background: var(--gold-dark); transform: translateY(-2px); }
+
+  /* WHAT WE BUILD */
+  .ag-offer { background: var(--off-white); }
+  .ag-offer-list { margin-top: 1.6rem; display: flex; flex-direction: column; }
+  .ag-offer-row {
+    display: flex; flex-direction: row; gap: 1rem; align-items: center;
+    padding: 1rem 0; border-top: 1.5px solid var(--border);
+  }
+  .ag-offer-row:first-child { border-top: none; }
+  .ag-offer-row > div:last-child { flex: 1; min-width: 0; }
+  .ag-offer-icon {
+    flex-shrink: 0; width: 26px; height: 26px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-dark);
+  }
+  .ag-offer-icon svg { width: 24px; height: 24px; }
+  .ag-offer-row h4 { font-size: 1rem; font-weight: 800; color: var(--navy); display: inline; margin-right: 0.5rem; }
+  .ag-offer-row p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; display: inline; }
+
+  /* WHO IT'S FOR */
+  .ag-why { background: var(--white); }
+  .ag-why .section-eyebrow { background: var(--gold-bg); border-color: var(--gold); color: var(--gold-dark); }
+  .ag-why .section-h2 { color: var(--navy); }
+  .ag-why .section-h2 .accent { color: var(--gold-dark); }
+  .ag-why .section-p { color: var(--muted); }
+  .ag-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 2.6rem; }
+  .ag-why-card {
+    background: var(--off-white); border-radius: 14px; padding: 1.5rem;
+    border: 1.5px solid var(--border);
+  }
+  .ag-why-num { font-size: 2rem; font-weight: 800; color: var(--gold-dark); opacity: 0.85; font-family: Georgia, serif; line-height: 1; margin-bottom: 0.6rem; }
+  .ag-why-card h4 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+  .ag-why-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+  .ag-who-chips-grid { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+  .ag-who-chip-light {
+    background: var(--off-white); border: 1.5px solid var(--border);
+    color: var(--navy); border-radius: 999px; font-size: 0.88rem; font-weight: 600;
+    padding: 0.55rem 1.2rem;
+  }
+
+  /* WHO IT'S FOR */
+  .ag-who { background: var(--white); }
+  .ag-who .section-eyebrow { background: rgba(240,180,30,0.15); border-color: rgba(240,180,30,0.4); color: var(--gold-dark); }
+  .ag-who .section-h2 { color: var(--navy); }
+  .ag-who .section-h2 .accent { color: var(--gold-dark); }
+  .ag-who .section-p { color: var(--muted); }
+  .ag-why-grid-dark { grid-template-columns: repeat(2, 1fr); }
+  .ag-why-card-dark {
+    background: var(--navy); border-color: var(--navy);
+  }
+  .ag-why-card-dark h4 { color: white; }
+  .ag-why-card-dark p { color: rgba(255,255,255,0.7); }
+
+  /* OTHER PARTNERSHIPS */
+  .ag-partner { background: var(--navy); }
+  .ag-partner .section-eyebrow { background: rgba(240,180,30,0.15); border-color: rgba(240,180,30,0.4); color: var(--gold); }
+  .ag-partner .section-h2 { color: white; }
+  .ag-partner .section-h2 .accent { color: var(--gold); }
+  .ag-partner .section-p { color: rgba(255,255,255,0.7); }
+  .ag-partner-card {
+    max-width: 780px; margin: 0 auto; text-align: center;
+  }
+  .ag-partner-card .section-eyebrow { justify-content: center; }
+  .ag-partner-card .section-p { max-width: 620px; margin: 0 auto; }
+
+  /* CTA / CONTACT BLOCK */
+  .ag-contact { background: var(--off-white); }
+  .ag-contact-card {
+    background: var(--gold-bg); border: 2px solid var(--gold);
+    border-radius: 22px; padding: 3rem; text-align: center;
+    max-width: 780px; margin: 0 auto;
+  }
+  .ag-contact-card h3 { font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 0.8rem; }
+  .ag-contact-card p { font-size: 1rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.8rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .ag-contact-email {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 1.15rem; font-weight: 800; color: var(--navy);
+    background: white; border: 2px solid var(--navy); border-radius: 12px;
+    padding: 0.9rem 1.8rem; text-decoration: none; margin-bottom: 1rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .ag-contact-email:hover { background: var(--navy); color: white; }
+  .ag-contact-note { font-size: 0.85rem; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); padding: 4rem 0 2rem; border-top: 2px solid rgba(240,180,30,0.25);
+    box-sizing: border-box;
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+  .footer-brand-logo { font-size: 1.6rem; font-weight: 800; color: white; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+  .footer-brand-logo span { color: var(--gold); }
+  .footer-tagline { font-size: 0.92rem; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 320px; }
+  .footer-col h5 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1.2rem; }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-col ul li a { font-size: 0.95rem; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 1.8rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+
+  @media (max-width: 1024px) {
+    .ag-why-grid { grid-template-columns: repeat(1, 1fr); }
+    .ag-why-grid-dark { grid-template-columns: repeat(1, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .ag-hero { padding: 7.5rem 2.4rem 3rem; min-height: unset; }
+    .ag-hero-h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+    .ag-hero-sub { font-size: 0.9rem; }
+    .ag-hero-cta-row { flex-direction: column; align-items: center; gap: 0.6rem; }
+    .ag-hero-cta-row .btn-hero { width: 100%; max-width: 320px; }
+
+    section { padding: 2.6rem 0; }
+    .container { padding: 0 2.4rem; }
+    .section-h2 { font-size: clamp(1.5rem, 6vw, 2rem); }
+    .section-p { font-size: 0.92rem; }
+
+    .ag-offer-list { margin-top: 1.2rem; }
+    .ag-offer-row { padding: 0.9rem 0; gap: 0.8rem; align-items: flex-start; }
+    .ag-offer-icon { width: 22px; height: 22px; }
+    .ag-offer-icon svg { width: 20px; height: 20px; }
+    .ag-offer-row h4 { font-size: 0.92rem; display: block; margin-bottom: 0.2rem; }
+    .ag-offer-row p { font-size: 0.82rem; display: block; }
+
+    .ag-why-grid { gap: 1rem; margin-top: 1.6rem; }
+    .ag-why-card { padding: 1.2rem; }
+
+    .ag-who-chips-grid { margin-top: 1.4rem; gap: 0.5rem; }
+    .ag-who-chip-light { font-size: 0.8rem; padding: 0.45rem 0.95rem; }
+
+    .ag-contact-card { padding: 1.8rem 1.4rem; border-radius: 16px; }
+    .ag-contact-card h3 { font-size: 1.3rem; }
+    .ag-contact-card p { font-size: 0.88rem; }
+    .ag-contact-email { font-size: 1rem; padding: 0.75rem 1.3rem; word-break: break-all; }
+
+    footer { padding: 4rem 0 1.5rem; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+    .footer-brand-logo { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .footer-tagline { font-size: 0.82rem; line-height: 1.5; }
+    .footer-col h5 { font-size: 0.68rem; margin-bottom: 0.8rem; }
+    .footer-col ul { gap: 0.5rem; }
+    .footer-col ul li a { font-size: 0.88rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.3rem; padding-top: 1.2rem; }
+    .footer-copy { font-size: 0.75rem; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0 2rem; }
+    section { padding: 2.4rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+<a href="index.html" style="text-decoration:none;">
+  <div class="nav-logo">
+    <img src="NavLogo" alt="MyAppSuccess" />
+  </div>
+</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#outcomes">Outcomes</a></li>
+    <li class="nav-dropdown">
+      <span style="cursor:default;">Services</span>
+      <ul class="nav-dropdown-menu">
+        <li><a href="index.html#bootcamp">The Bootcamp</a></li>
+        <li><a href="index.html#pricing">Private Sessions</a></li>
+        <li><a href="index.html#templates">Templates &amp; Guides</a></li>
+      </ul>
+    </li>
+    <li><a href="for-agencies.html" class="nav-agencies">For Agencies</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="interest-form.html" class="nav-cta">Get Started</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><a href="index.html#about" onclick="closeMenu()">About</a></li>
+    <li><a href="index.html#outcomes" onclick="closeMenu()">Outcomes</a></li>
+    <li class="mob-dropdown">
+      <button class="mob-dropdown-toggle" onclick="toggleMobServices(this)" aria-expanded="false">
+        Services <span class="mob-arrow">›</span>
+      </button>
+      <ul class="mob-sub" id="mob-services-sub">
+        <li><a href="index.html#bootcamp" onclick="closeMenu()">The Bootcamp</a></li>
+        <li><a href="index.html#pricing" onclick="closeMenu()">Private Sessions</a></li>
+        <li><a href="index.html#templates" onclick="closeMenu()">Templates &amp; Guides</a></li>
+      </ul>
+    </li>
+    <li><a href="for-agencies.html" onclick="closeMenu()">For Agencies</a></li>
+    <li><a href="index.html#faq" onclick="closeMenu()">FAQ</a></li>
+    <li><a href="contact.html" onclick="closeMenu()">Contact</a></li>
+    <li><a href="interest-form.html" class="mob-cta">Book A Free 15 Min Consult</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="ag-hero">
+  <div class="ag-hero-grid-bg"></div>
+  <div class="ag-hero-inner">
+    <span class="ag-hero-eyebrow">For Agencies &amp; Education Brands</span>
+    <h1 class="ag-hero-h1">Let's <span class="highlight">work together</span></h1>
+    <p class="ag-hero-sub">We work with college admissions consultancies, test prep companies, schools, and other education brands, whether you want us to build something for you or you're looking to partner in other ways.</p>
+    <div class="ag-hero-cta-row">
+      <a href="mailto:marketing@myappsuccess.com" class="btn-hero">Get in Touch</a>
+      <a href="index.html" class="btn-hero btn-hero-outline">See What We've Built</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="ag-who" id="ag-why">
+  <div class="container">
+    <div class="section-eyebrow">Why Work With Us</div>
+    <h2 class="section-h2">We're an <span class="accent">education brand ourselves</span></h2>
+    <p class="section-p">We already understand your business, your students, and what actually works, because we run one of these businesses too.</p>
+
+    <div class="ag-why-grid ag-why-grid-dark">
+      <div class="ag-why-card ag-why-card-dark">
+        <div class="ag-why-num">01</div>
+        <h4>We Run One of These Businesses Ourselves</h4>
+        <p>We've grown MyAppSuccess and worked with other education brands directly, so we understand your students, your market, and what it takes to succeed.</p>
+      </div>
+      <div class="ag-why-card ag-why-card-dark">
+        <div class="ag-why-num">02</div>
+        <h4>We Think in Outcomes</h4>
+        <p>Whatever the project looks like, we start with what you're trying to achieve and work backward from there.</p>
+      </div>
+      <div class="ag-why-card ag-why-card-dark">
+        <div class="ag-why-num">03</div>
+        <h4>One Team, Easy to Work With</h4>
+        <p>You'll work directly with the same small team from start to finish, so nothing gets lost in translation and things move quickly.</p>
+      </div>
+      <div class="ag-why-card ag-why-card-dark">
+        <div class="ag-why-num">04</div>
+        <h4>Global Experience, Any Client Size</h4>
+        <p>We've worked with both small and enterprise clients across the U.S., Asia (China and India), and South America (Brazil), so we know how to work across different markets and scales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE BUILD -->
+<section class="ag-offer" id="ag-offer">
+  <div class="container">
+    <div class="section-eyebrow">What We Build</div>
+    <h2 class="section-h2">If you want to build with us, <span class="accent">here's what we offer</span></h2>
+    <p class="section-p">All of it built in house, the same way we built this site.</p>
+
+    <div class="ag-offer-list">
+      <div class="ag-offer-row">
+        <div class="ag-offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H4z"/><path d="M4 9h16M9 20h6M12 16v4"/></svg>
+        </div>
+        <div>
+          <h4>Websites</h4>
+          <p>Custom designed, mobile optimized sites built to convert.</p>
+        </div>
+      </div>
+      <div class="ag-offer-row">
+        <div class="ag-offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+        </div>
+        <div>
+          <h4>Lead generation</h4>
+          <p>Our proprietary system has driven a 60% increase in leads for clients.</p>
+        </div>
+      </div>
+      <div class="ag-offer-row">
+        <div class="ag-offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>
+        </div>
+        <div>
+          <h4>Marketing quizzes</h4>
+          <p>Interactive assessments like our own <a href="quiz.html" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">Admissions Assessment Quiz</a>.</p>
+        </div>
+      </div>
+      <div class="ag-offer-row">
+        <div class="ag-offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <div>
+          <h4>Automation workflows</h4>
+          <p>Systems that route leads and handle follow ups automatically.</p>
+        </div>
+      </div>
+      <div class="ag-offer-row">
+        <div class="ag-offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </div>
+        <div>
+          <h4>Custom product builds</h4>
+          <p>Have your own idea? We can prototype and build it too.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER PARTNERSHIPS -->
+<section class="ag-partner" id="ag-partner">
+  <div class="container">
+    <div class="ag-partner-card">
+      <div class="section-eyebrow">Other Ways to Work Together</div>
+      <h2 class="section-h2">Not looking for a build? <span class="accent">Let's talk anyway</span></h2>
+      <p class="section-p">If you're a business interested in an affiliate partnership, a marketing collaboration, or anything else that doesn't fit neatly into a project, we're still happy to hear from you. Reach out and let's see what makes sense.</p>
+      <a href="mailto:marketing@myappsuccess.com?subject=Partnership%20Inquiry" class="btn-gold" style="margin-top:1.6rem;display:inline-flex;">Reach Out to Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="ag-why" id="ag-who">
+  <div class="container">
+    <div class="section-eyebrow">Who We Work With</div>
+    <h2 class="section-h2">For <span class="accent">education businesses</span> of every kind</h2>
+    <p class="section-p">If you work with students or families navigating any part of the education journey, we want to talk to you!</p>
+
+    <div class="ag-why-grid ag-who-chips-grid">
+      <span class="ag-who-chip-light">College Admissions Consulting Agencies</span>
+      <span class="ag-who-chip-light">Test Prep Companies</span>
+      <span class="ag-who-chip-light">Tutoring Businesses</span>
+      <span class="ag-who-chip-light">Scholarship and Financial Aid Advisors</span>
+      <span class="ag-who-chip-light">Study Abroad Programs</span>
+      <span class="ag-who-chip-light">Independent Educational Consultants</span>
+      <span class="ag-who-chip-light">Ed Tech Startups</span>
+      <span class="ag-who-chip-light">Career and Internship Coaches</span>
+      <span class="ag-who-chip-light">High Schools</span>
+      <span class="ag-who-chip-light">Middle Schools</span>
+      <span class="ag-who-chip-light">Colleges</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="ag-contact" id="ag-contact">
+  <div class="container">
+    <div class="ag-contact-card">
+      <h3>Let's talk</h3>
+      <p>Tell us a bit about your business and what you have in mind. We'll set up a free intro call to see if it's a fit.</p>
+      <a href="mailto:marketing@myappsuccess.com" class="ag-contact-email">marketing@myappsuccess.com</a>
+      <p class="ag-contact-note">We typically respond within one to two business days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand-logo">MyApp<span>Success</span></div>
+        <p class="footer-tagline">Helping students confidently reach their dream schools through real guidance and proven strategy.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="index.html#bootcamp">The Bootcamp</a></li>
+          <li><a href="index.html#pricing">Private Sessions</a></li>
+          <li><a href="index.html#templates">Templates &amp; Guides</a></li>
+          <li><a href="for-agencies.html">For Agencies</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#outcomes">Outcomes</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 MyAppSuccess. All rights reserved.</span>
+      <span class="footer-copy">MyAppSuccess Studio, powered by <a href="https://runpathlabs.com/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.45);text-decoration:underline;">Runpath Labs</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger menu
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+  function toggleMobServices(btn) {
+    var sub = document.getElementById('mob-services-sub');
+    var open = sub.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  document.addEventListener('click', function(e) {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      closeMenu();
+    }
+  });
+</script>
+</body>
+</html>
