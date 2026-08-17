@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html alang="en">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -532,15 +532,23 @@
     background: var(--off-white); border: 1.5px solid var(--border);
     border-radius: 14px; padding: 1.3rem 1.4rem;
   }
-  .bc-tier-tile-popular { border-color: var(--gold); background: var(--gold-bg); }
+  .bc-tier-tile-popular { position: relative; border-color: var(--navy); background: var(--navy); margin-top: 1.1rem; }
   .bc-tier-tile-badge {
     display: inline-block; background: var(--gold); color: var(--navy);
     font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.2rem 0.65rem; border-radius: 999px; margin-bottom: 0.6rem; line-height: 1;
+    padding: 0.2rem 0.65rem; border-radius: 999px; line-height: 1;
+    position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
+    white-space: nowrap; box-shadow: 0 2px 8px rgba(30,70,110,0.25);
   }
   .bc-tier-tile-name { font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-bottom: 0.15rem; }
   .bc-tier-tile-value { font-size: 0.74rem; color: var(--muted); text-decoration: line-through; margin-bottom: 0.1rem; }
   .bc-tier-tile-price { font-size: 1.4rem; font-weight: 800; color: var(--gold-dark); margin-bottom: 0.8rem; }
+  .bc-tier-tile-popular .bc-tier-tile-name { color: white; }
+  .bc-tier-tile-popular .bc-tier-tile-value { color: rgba(255,255,255,0.55); }
+  .bc-tier-tile-popular .bc-tier-tile-price { color: var(--gold); }
+  .bc-tier-tile-popular .bc-tier-tile-list li { color: rgba(255,255,255,0.85); }
+  .bc-tier-tile-popular .bc-tier-tile-list li::before { color: var(--gold); }
+  .bc-tier-tile-popular .bc-tier-tile-list li strong { color: var(--gold); }
   .bc-tier-tile-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
   .bc-tier-tile-list li {
     font-size: 0.85rem; color: var(--text); line-height: 1.4;
@@ -1121,7 +1129,6 @@
 </style>
 </head>
 <body>
-
 <!-- NAV -->
 <nav>
 <a href="#" style="text-decoration:none;" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
@@ -1232,7 +1239,7 @@
       <div>
         <div class="section-eyebrow fade-in">Our Approach</div>
         <h2 class="section-h2 fade-in" style="font-size:clamp(1.6rem,3.5vw,2.8rem);margin-bottom:1.6rem;">Most students have the potential to be <span class="accent">outstanding candidates</span>, they just don't know it</h2>
-        
+       
 
         <div class="approach-carousel-wrap">
         <div class="approach-cards approach-numbered" style="margin-top:0;">
@@ -1331,7 +1338,6 @@
   </div>
 
 </section>
-
 <!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
   <div class="container">
@@ -1458,7 +1464,6 @@
     </div>
   </div>
 </section>
-
 <!-- THE BOOTCAMP -->
 <section class="bootcamp" id="bootcamp">
   <div class="container">
@@ -1492,8 +1497,8 @@
               <th style="padding:0.36rem 0.8rem;text-align:left;border-bottom:2px solid var(--border);color:var(--muted);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;"></th>
               <th style="padding:0.36rem 0.5rem;text-align:center;border-bottom:2px solid var(--border);color:var(--muted);font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;">Value</th>
               <th style="padding:0.36rem 0.5rem;text-align:center;border-bottom:2px solid var(--border);color:var(--navy);font-size:0.82rem;font-weight:800;">Foundational</th>
-              <th style="padding:0.36rem 0.5rem;text-align:center;border-bottom:2px solid var(--gold);background:var(--gold-bg);border-radius:8px 8px 0 0;color:var(--gold-dark);font-size:0.82rem;font-weight:800;">Accelerator</th>
-              <th style="padding:0.36rem 0.5rem;text-align:center;border-bottom:2px solid var(--border);color:var(--navy);font-size:0.82rem;font-weight:800;">Elite</th>
+              <th style="padding:0.36rem 0.5rem;text-align:center;border-bottom:2px solid var(--border);color:var(--navy);font-size:0.82rem;font-weight:800;">Accelerator</th>
+              <th style="padding:0.36rem 0.5rem;text-align:center;border-bottom:2px solid var(--navy);background:var(--navy);border-radius:8px 8px 0 0;color:white;font-size:0.82rem;font-weight:800;"><span style="display:block;font-size:0.6rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--gold);margin-bottom:0.15rem;">Most Popular</span>Elite</th>
             </tr>
           </thead>
           <tbody>
@@ -1501,86 +1506,93 @@
               <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Personalized One-on-One Sessions</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$200 each</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);font-size:0.8rem;font-weight:600;">1 Session</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);font-size:0.8rem;font-weight:600;background:var(--gold-bg);">2 Sessions</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);font-size:0.8rem;font-weight:600;">3 Sessions</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);font-size:0.8rem;font-weight:600;">2 Sessions</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);font-size:0.8rem;font-weight:600;background:var(--gold-bg);">6 Sessions</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Curated curriculum with Ivy League-trained advisors</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$500</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Weekly Education Webinars</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$1,200</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Weekly Open Q&amp;A Sessions</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$1,200</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$1,000</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Access to Vetted Templates and Resources</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$500</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$500+</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Community Chat Access</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$100</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Internship &amp; Extracurricular Guidance</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$500</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:#c5cbd6;">—</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Exclusive Group Session With Admissions Reps</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$2,100</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:#c5cbd6;">—</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Additional Vetted Templates &amp; Resources</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$200</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:#c5cbd6;">—</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Ivy League Prep: Workshops &amp; Tailored Resources</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;">$1,500</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:#c5cbd6;">—</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:#c5cbd6;">—</td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.8rem;color:var(--text);line-height:1.3;">Certificate of Completion</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:var(--muted);font-size:0.8rem;font-style:italic;">Bonus</td>
               <td style="padding:0.36rem 0.5rem;text-align:center;color:#c5cbd6;">—</td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;background:var(--gold-bg);"><span style="font-size:0.78rem;color:var(--gold-dark);font-weight:700;">Prospect Scholar</span></td>
-              <td style="padding:0.36rem 0.5rem;text-align:center;"><span style="font-size:0.78rem;color:var(--gold-dark);font-weight:700;">Vantage Scholar</span></td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;"><span style="font-size:0.78rem;color:var(--gold-dark);font-weight:700;">Prospect Scholar</span></td>
+              <td style="padding:0.36rem 0.5rem;text-align:center;background:var(--gold-bg);"><span style="font-size:0.78rem;color:var(--gold-dark);font-weight:700;">Vantage Scholar</span></td>
             </tr>
             <tr style="background:var(--gold-bg);">
               <td style="padding:0.45rem 0.7rem;color:var(--navy);font-size:0.85rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;">Your Price</td>
               <td style="padding:0.45rem 0.4rem;"></td>
               <td style="padding:0.45rem 0.4rem;text-align:center;">
-                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.72rem;text-decoration:line-through;">$3,700</span>
-                <span style="display:block;color:var(--gold-dark);font-size:1.15rem;font-weight:800;">$1,999</span>
+                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.72rem;text-decoration:line-through;">$3,500</span>
+                <span style="display:block;color:var(--gold-dark);font-size:1.15rem;font-weight:800;">$1,499</span>
               </td>
               <td style="padding:0.45rem 0.4rem;text-align:center;">
-                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.72rem;text-decoration:line-through;">$6,700</span>
+                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.72rem;text-decoration:line-through;">$6,500</span>
                 <span style="display:block;color:var(--gold-dark);font-size:1.15rem;font-weight:800;">$3,499</span>
               </td>
               <td style="padding:0.45rem 0.4rem;text-align:center;">
-                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.72rem;text-decoration:line-through;">$6,900</span>
-                <span style="display:block;color:var(--gold-dark);font-size:1.15rem;font-weight:800;">$3,999</span>
+                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.72rem;text-decoration:line-through;">$8,800</span>
+                <span style="display:block;color:var(--gold-dark);font-size:1.15rem;font-weight:800;">$5,499</span>
               </td>
             </tr>
           </tbody>
@@ -1592,8 +1604,8 @@
         <div class="bc-tier-track">
           <div class="bc-tier-tile">
             <div class="bc-tier-tile-name">Foundational</div>
-            <div class="bc-tier-tile-value">$3,700 value</div>
-            <div class="bc-tier-tile-price">$1,999</div>
+            <div class="bc-tier-tile-value">$3,500 value</div>
+            <div class="bc-tier-tile-price">$1,499</div>
             <ul class="bc-tier-tile-list">
               <li><strong>1 Personalized 1:1 Session</strong></li>
               <li>Curated curriculum with Ivy League-trained advisors</li>
@@ -1603,10 +1615,9 @@
               <li>Community chat access</li>
             </ul>
           </div>
-          <div class="bc-tier-tile bc-tier-tile-popular">
-            <div class="bc-tier-tile-badge">Most Popular</div>
+          <div class="bc-tier-tile">
             <div class="bc-tier-tile-name">Accelerator</div>
-            <div class="bc-tier-tile-value">$6,700 value</div>
+            <div class="bc-tier-tile-value">$6,500 value</div>
             <div class="bc-tier-tile-price">$3,499</div>
             <ul class="bc-tier-tile-list">
               <li><strong>2 Personalized 1:1 Sessions</strong></li>
@@ -1617,13 +1628,15 @@
               <li>Certificate: Prospect Scholar</li>
             </ul>
           </div>
-          <div class="bc-tier-tile">
+          <div class="bc-tier-tile bc-tier-tile-popular">
+            <div class="bc-tier-tile-badge">Most Popular</div>
             <div class="bc-tier-tile-name">Elite</div>
-            <div class="bc-tier-tile-value">$6,900 value</div>
-            <div class="bc-tier-tile-price">$3,999</div>
+            <div class="bc-tier-tile-value">$8,800 value</div>
+            <div class="bc-tier-tile-price">$5,499</div>
             <ul class="bc-tier-tile-list">
-              <li><strong>3 Personalized 1:1 Sessions</strong></li>
+              <li><strong>6 Personalized 1:1 Sessions</strong></li>
               <li>Everything in Foundational &amp; Accelerator</li>
+              <li>Ivy League Prep: workshops &amp; tailored resources</li>
               <li>Certificate: Vantage Scholar</li>
             </ul>
           </div>
@@ -1643,9 +1656,9 @@
       <div class="bc-addon-card">
         <div class="bc-addon-row">
           <h4 class="bc-addon-title">Ivy League Prep</h4>
-          <span class="bc-addon-price"><span class="bc-addon-price-label">Optional Add-On</span> +$1,500</span>
+          <span class="bc-addon-price"><span class="bc-addon-price-label">Available with the Elite tier</span></span>
         </div>
-        <p class="bc-addon-desc">Three dedicated close-group workshops and additional curated resources for applicants targeting Ivy League and top-ranked universities. Can be added to any tier.</p>
+        <p class="bc-addon-desc">Dedicated close-group workshops and additional curated resources for applicants targeting Ivy League and top-ranked universities. Only available in the Elite tier.</p>
       </div>
     </div>
     </div>
@@ -1655,7 +1668,6 @@
     </div>
   </div>
 </section>
-
 <!-- COMPARE TABLE MODAL -->
 <div id="compare-modal" class="outcome-modal" aria-hidden="true">
   <div class="outcome-modal-backdrop" onclick="closeCompareModal()"></div>
@@ -1677,8 +1689,8 @@
               <th style="padding:0.36rem 0.5rem;text-align:left;border-bottom:2px solid var(--border);color:var(--muted);font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;"></th>
               <th style="padding:0.36rem 0.4rem;text-align:center;border-bottom:2px solid var(--border);color:var(--muted);font-size:0.64rem;letter-spacing:0.04em;text-transform:uppercase;font-weight:700;">Value</th>
               <th style="padding:0.36rem 0.4rem;text-align:center;border-bottom:2px solid var(--border);color:var(--navy);font-size:0.74rem;font-weight:800;">Foundational</th>
-              <th style="padding:0.36rem 0.4rem;text-align:center;border-bottom:2px solid var(--gold);background:var(--gold-bg);border-radius:8px 8px 0 0;color:var(--gold-dark);font-size:0.74rem;font-weight:800;">Accelerator</th>
-              <th style="padding:0.36rem 0.4rem;text-align:center;border-bottom:2px solid var(--border);color:var(--navy);font-size:0.74rem;font-weight:800;">Elite</th>
+              <th style="padding:0.36rem 0.4rem;text-align:center;border-bottom:2px solid var(--border);color:var(--navy);font-size:0.74rem;font-weight:800;">Accelerator</th>
+              <th style="padding:0.36rem 0.4rem;text-align:center;border-bottom:2px solid var(--navy);background:var(--navy);border-radius:8px 8px 0 0;color:white;font-size:0.74rem;font-weight:800;"><span style="display:block;font-size:0.54rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--gold);margin-bottom:0.12rem;">Most Popular</span>Elite</th>
             </tr>
           </thead>
           <tbody>
@@ -1686,86 +1698,93 @@
               <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Personalized One-on-One Sessions</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$200 each</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);font-size:0.72rem;font-weight:600;">1 Session</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);font-size:0.72rem;font-weight:600;background:var(--gold-bg);">2 Sessions</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);font-size:0.72rem;font-weight:600;">3 Sessions</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);font-size:0.72rem;font-weight:600;">2 Sessions</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);font-size:0.72rem;font-weight:600;background:var(--gold-bg);">6 Sessions</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Curated curriculum with Ivy League-trained advisors</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$500</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Weekly Education Webinars</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$1,200</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Weekly Open Q&amp;A Sessions</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$1,200</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$1,000</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Access to Vetted Templates and Resources</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$500</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$500+</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Community Chat Access</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$100</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Internship &amp; Extracurricular Guidance</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$500</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:#c5cbd6;">—</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Exclusive Group Session With Admissions Reps</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$2,100</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:#c5cbd6;">—</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Additional Vetted Templates &amp; Resources</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$200</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:#c5cbd6;">—</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);">✓</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Ivy League Prep: Workshops &amp; Tailored Resources</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;">$1,500</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:#c5cbd6;">—</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:#c5cbd6;">—</td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--gold-dark);background:var(--gold-bg);">✓</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:0.36rem 0.5rem;color:var(--text);line-height:1.25;">Certificate of Completion</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:var(--muted);font-size:0.72rem;font-style:italic;">Bonus</td>
               <td style="padding:0.36rem 0.4rem;text-align:center;color:#c5cbd6;">—</td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;background:var(--gold-bg);"><span style="font-size:0.7rem;color:var(--gold-dark);font-weight:700;">Prospect Scholar</span></td>
-              <td style="padding:0.36rem 0.4rem;text-align:center;"><span style="font-size:0.7rem;color:var(--gold-dark);font-weight:700;">Vantage Scholar</span></td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;"><span style="font-size:0.7rem;color:var(--gold-dark);font-weight:700;">Prospect Scholar</span></td>
+              <td style="padding:0.36rem 0.4rem;text-align:center;background:var(--gold-bg);"><span style="font-size:0.7rem;color:var(--gold-dark);font-weight:700;">Vantage Scholar</span></td>
             </tr>
             <tr style="background:var(--gold-bg);">
               <td style="padding:0.42rem 0.5rem;color:var(--navy);font-size:0.76rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;">Your Price</td>
               <td style="padding:0.42rem 0.4rem;"></td>
               <td style="padding:0.42rem 0.4rem;text-align:center;">
-                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.62rem;text-decoration:line-through;">$3,700</span>
-                <span style="display:block;color:var(--gold-dark);font-size:0.98rem;font-weight:800;">$1,999</span>
+                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.62rem;text-decoration:line-through;">$3,500</span>
+                <span style="display:block;color:var(--gold-dark);font-size:0.98rem;font-weight:800;">$1,499</span>
               </td>
               <td style="padding:0.42rem 0.4rem;text-align:center;">
-                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.62rem;text-decoration:line-through;">$6,700</span>
+                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.62rem;text-decoration:line-through;">$6,500</span>
                 <span style="display:block;color:var(--gold-dark);font-size:0.98rem;font-weight:800;">$3,499</span>
               </td>
               <td style="padding:0.42rem 0.4rem;text-align:center;">
-                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.62rem;text-decoration:line-through;">$6,900</span>
-                <span style="display:block;color:var(--gold-dark);font-size:0.98rem;font-weight:800;">$3,999</span>
+                <span style="display:block;color:var(--muted);font-weight:700;font-size:0.62rem;text-decoration:line-through;">$8,800</span>
+                <span style="display:block;color:var(--gold-dark);font-size:0.98rem;font-weight:800;">$5,499</span>
               </td>
             </tr>
           </tbody>
@@ -1775,7 +1794,6 @@
     </div>
   </div>
 </div>
-
 <!-- PRIVATE SESSIONS -->
 <section class="pricing" id="pricing">
   <div class="container">
@@ -2053,7 +2071,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   // Equalise "What Can We Help With?" row across pricing cards (desktop/tablet only —
   // on mobile only one card shows at a time, so equalizing wastes vertical space)
@@ -2610,5 +2627,10 @@
     }, { rootMargin: '-110px 0px -85% 0px', threshold: 0 }).observe(bootcampSection);
   })();
 </script>
+
+
+
+
+
 </body>
 </html>
