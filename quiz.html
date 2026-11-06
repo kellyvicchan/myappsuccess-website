@@ -646,7 +646,7 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
       <div class="field" id="field-major">
         <label>Intended major/field of study <span class="req">*</span></label>
         <select id="major-select">
-          <option value="">— Select your intended major —</option>
+          <option value="">Select your intended major</option>
           <optgroup label="STEM">
             <option value="computer_science">Computer Science/Software Engineering</option>
             <option value="data_science">Data Science/Statistics</option>
@@ -740,7 +740,7 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
       <div class="field">
         <label>Class Rank (optional)</label>
         <select id="class-rank">
-          <option value="">— Select rank percentile —</option>
+          <option value="">Select rank percentile</option>
           <option value="top1">Top 1%</option>
           <option value="top5">Top 5%</option>
           <option value="top10">Top 10%</option>
@@ -753,7 +753,7 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
       <div class="field">
         <label>Course Rigor</label>
         <select id="course-rigor">
-          <option value="">— Select —</option>
+          <option value="">Select</option>
           <option value="mostly_ap">Mostly AP/IB courses</option>
           <option value="some_ap">Some AP/IB courses</option>
           <option value="honors">Honors/Dual Enrollment</option>
@@ -1000,9 +1000,9 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
 
     <div class="results-cta">
       <h3>Want to <span class="hl">strengthen your application?</span></h3>
-      <p>Our team of Ivy League graduates has helped hundreds of students get into their dream schools. Book a free strategy call or join our 8-week bootcamp, tailored to exactly where you are today.</p>
+      <p>Our team of Ivy League graduates has helped hundreds of students get into their dream schools. Book a free strategy call or join our 6-week bootcamp, tailored to exactly where you are today.</p>
       <div class="cta-buttons">
-        <a href="https://myappsuccess.com/#pricing" class="btn-cta-gold"> Book a Free Strategy Call</a>
+        <a href="https://myappsuccess.com/interest-form.html" class="btn-cta-gold">Book a Free Strategy Call</a>
         <a href="https://myappsuccess.com/#bootcamp" class="btn-cta-outline">Learn About the Bootcamp →</a>
       </div>
     </div>
@@ -1015,7 +1015,7 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
 <div class="lead-overlay" id="lead-overlay">
   <div class="lead-modal">
     <h2>Where should we send your results?</h2>
-    <p>Enter your name and email and we'll send your full personalized admissions profile — including school-by-school breakdowns, your strengths and areas to strengthen — straight to your inbox.</p>
+    <p>Enter your name and email and we'll send your full personalized admissions profile, including school-by-school breakdowns, your strengths and areas to strengthen, straight to your inbox.</p>
     <div class="lead-fields">
       <input type="text" id="lead-name" placeholder="Your first name" />
       <input type="email" id="lead-email" placeholder="Your email address" />
@@ -1722,7 +1722,7 @@ async function runAnalysisForEmail() {
 
   // ── Recommendation logic — replace these with your own conditions ──
   let recommendation_headline = 'Your next step is a free strategy call with our team.';
-  let recommendation_description = 'Based on your profile, one of our Ivy League counselors can map out a personalized action plan for your application. Book a free 30-minute call at myappsuccess.com/#pricing.';
+  let recommendation_description = 'Based on your profile, one of our Ivy League counselors can map out a personalized action plan for your application. Book a free 15-minute call at myappsuccess.com/interest-form.html.';
 
   const templateParams = {
     to_name:                    state.leadName,
