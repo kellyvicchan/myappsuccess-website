@@ -150,7 +150,7 @@ footer p { font-size: 0.76rem; color: rgba(255,255,255,0.3); }
     <div id="form-view">
       <div class="contact-eyebrow">Get in Touch</div>
       <h1>We'd love to <span>hear from you.</span></h1>
-      <p class="contact-sub">Questions about our programs, pricing, or anything else — send us a message and we'll get back to you shortly.</p>
+      <p class="contact-sub">Questions about our programs, pricing, or anything else? Send us a message and we'll get back to you shortly.</p>
 
       <form id="contact-form">
         <div class="form-group">
@@ -198,7 +198,7 @@ document.getElementById('contact-form').addEventListener('submit', async functio
   var formData = new FormData();
   formData.append('name', document.getElementById('name').value);
   formData.append('email', document.getElementById('email').value);
-  formData.append('_subject', 'Contact: ' + document.getElementById('subject').value + ' — MyAppSuccess');
+  formData.append('_subject', 'Contact: ' + document.getElementById('subject').value + ' | MyAppSuccess');
   formData.append('_template', 'box');
   formData.append('_captcha', 'false');
   formData.append('message',
