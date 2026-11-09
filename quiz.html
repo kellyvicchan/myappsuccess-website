@@ -58,7 +58,7 @@ nav {
 .quiz-hero.slim .quiz-badge { margin-bottom: 0.6rem; }
 .quiz-hero::before {
   content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(240,180,30,0.12) 0%, transparent 70%);
+  background: none;
 }
 .quiz-hero-inner { position: relative; max-width: 680px; margin: 0 auto; }
 .quiz-badge {
@@ -78,7 +78,7 @@ nav {
 .progress-inner { max-width: 860px; margin: 0 auto; padding: 0.9rem 2rem; display: flex; align-items: center; gap: 1rem; }
 .progress-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
 .progress-bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
-.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-dark)); border-radius: 999px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+.progress-bar-fill { height: 100%; background: var(--gold); border-radius: 999px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
 .progress-steps { display: flex; gap: 0.3rem; }
 .ps { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background 0.3s; }
 .ps.done { background: var(--gold); }
@@ -330,11 +330,11 @@ nav {
 .chance-pct-label { font-size: 0.72rem; color: var(--muted); font-weight: 600; }
 .chance-track { height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; }
 .chance-fill { height: 100%; border-radius: 999px; transition: width 1s cubic-bezier(0.4,0,0.2,1); }
-.fill-reach { background: linear-gradient(90deg, #f87171, #dc2626); }
-.fill-hard-target { background: linear-gradient(90deg, #fb923c, #ea580c); }
-.fill-target { background: linear-gradient(90deg, #fbbf24, #d97706); }
-.fill-likely { background: linear-gradient(90deg, #4ade80, #16a34a); }
-.fill-safety { background: linear-gradient(90deg, #34d399, #059669); }
+.fill-reach { background: #dc2626; }
+.fill-hard-target { background: #ea580c; }
+.fill-target { background: #d97706; }
+.fill-likely { background: #16a34a; }
+.fill-safety { background: #059669; }
 
 .result-card-body { padding: 1.2rem 1.5rem 1.5rem; }
 .result-section-label {
