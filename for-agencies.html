@@ -199,19 +199,10 @@
   }
   .ag-hero::before {
     content: ''; position: absolute; inset: 0;
-    background:
-      radial-gradient(circle 480px at 88% 18%, rgba(240,180,30,0.16) 0%, transparent 70%),
-      radial-gradient(circle 600px at 50% 100%, rgba(120,160,220,0.08) 0%, transparent 70%);
+    background: none;
     pointer-events: none;
   }
-  .ag-hero-grid-bg {
-    position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.9) 75%, transparent);
-  }
+  .ag-hero-grid-bg { display: none; }
   .ag-hero-inner { position: relative; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
   .ag-hero-eyebrow {
     background: rgba(240,180,30,0.15); border: 1.5px solid rgba(240,180,30,0.4); color: var(--gold);
