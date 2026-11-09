@@ -121,19 +121,10 @@
   }
   .hero::before {
     content: ''; position: absolute; inset: 0;
-    background:
-      radial-gradient(circle 480px at 88% 18%, rgba(240,180,30,0.16) 0%, transparent 70%),
-      radial-gradient(circle 600px at 50% 100%, rgba(120,160,220,0.08) 0%, transparent 70%);
+    background: none;
     pointer-events: none;
   }
-  .hero-grid-bg {
-    position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.9) 75%, transparent);
-  }
+  .hero-grid-bg { display: none; }
   .hero-inner { position: relative; max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
   .hero-h1 {
     font-size: clamp(2.4rem, 5.2vw, 4.2rem); font-weight: 800; line-height: 1.06;
@@ -582,6 +573,24 @@
     margin-bottom: 2.4rem; margin-top: 0.8rem; font-size: 1.1rem;
   }
   .tmpl-intro a { color: var(--gold-dark) !important; }
+
+  /* TEMPLATES LANGUAGE PICKER */
+  .tmpl-lang { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .tmpl-lang-label { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .tmpl-lang-options { display: inline-flex; flex-wrap: wrap; background: white; border: 1.5px solid var(--navy); border-radius: 999px; padding: 3px; gap: 3px; }
+  .tmpl-lang-btn {
+    font-family: var(--font); font-size: 0.9rem; font-weight: 700; color: var(--navy);
+    background: transparent; border: none; border-radius: 999px; padding: 0.5rem 1.1rem; cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .tmpl-lang-btn:hover { background: var(--gold-bg); }
+  .tmpl-lang-btn[aria-pressed="true"] { background: var(--navy); color: var(--gold); }
+  .tmpl-lang-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  @media (max-width: 768px) {
+    .tmpl-lang { gap: 0.6rem; }
+    .tmpl-lang-options { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; border-radius: 14px; }
+    .tmpl-lang-btn { padding: 0.5rem 0.3rem; font-size: 0.85rem; border-radius: 10px; }
+  }
 
   /* TEMPLATES ACCORDION (single drill-down, description auto-shown) */
   .tmpl-accordion { display: flex; flex-direction: column; gap: 1.1rem; }
@@ -1135,6 +1144,61 @@
     .faq-a p { font-size: 0.85rem; }
     .faq-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; gap: 0; }
   }
+
+  /* FOUNDERS (inside About) */
+  .founders { margin-top: 3.5rem; }
+  .founders-head { margin-bottom: 1.6rem; }
+  .founders-head .section-h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); margin-bottom: 0.4rem; }
+  .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .founder-card {
+    background: white; border: 2px solid var(--border); border-radius: 16px;
+    padding: 1.6rem; display: flex; flex-direction: column; gap: 1rem;
+  }
+  .founder-top { display: flex; align-items: center; gap: 1.1rem; }
+  .founder-photo {
+    width: 96px; height: 96px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
+    border: 3px solid var(--gold); background: var(--gold-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; font-weight: 800; color: var(--navy);
+  }
+  .founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .founder-name { font-size: 1.35rem; font-weight: 800; color: var(--navy); line-height: 1.15; }
+  .founder-role { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-dark); margin-top: 0.3rem; }
+  .founder-bio { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+  .founder-leland {
+    margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid var(--border); padding-top: 1rem;
+  }
+  .founder-rating { display: flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; font-weight: 700; color: var(--navy); }
+  .founder-rating svg { width: 16px; height: 16px; fill: var(--gold); }
+  .founder-rating small { font-weight: 500; color: var(--muted); font-size: 0.85rem; }
+  .founder-leland a {
+    font-size: 0.88rem; font-weight: 700; color: var(--navy); text-decoration: underline;
+    text-underline-offset: 3px; text-decoration-color: var(--gold); white-space: nowrap;
+  }
+  @media (max-width: 768px) {
+    .founders { margin-top: 2.5rem; }
+    .founders-grid { grid-template-columns: 1fr; }
+    .founder-photo { width: 76px; height: 76px; font-size: 1.4rem; }
+    .founder-leland { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  }
+
+  /* PRO BONO */
+  .probono { background: var(--gold-bg); padding-top: 5rem; padding-bottom: 5rem; }
+  .probono-card {
+    background: white; border: 2px solid var(--gold); border-radius: 18px;
+    padding: 2.6rem 3rem; display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: center;
+  }
+  .probono-card .section-h2 { margin-bottom: 0.8rem; }
+  .probono-card .section-p { font-size: 1.05rem; }
+  .probono-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .probono-list li { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.98rem; color: var(--navy); font-weight: 600; line-height: 1.5; }
+  .probono-list svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; stroke: var(--gold-dark); fill: none; stroke-width: 2.5; }
+  @media (max-width: 768px) {
+    .probono { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+    .probono-card { grid-template-columns: 1fr; padding: 1.8rem 1.4rem; gap: 1.2rem; }
+    .probono .btn-gold { display: block; text-align: center; }
+  }
 </style>
 </head>
 <body>
@@ -1291,6 +1355,44 @@
             <span class="pn-arrow">→</span>
           </button>
         </div>
+        <!-- FOUNDERS -->
+        <div class="founders" id="founders">
+          <div class="founders-head">
+            <div class="section-eyebrow fade-in">Meet the Founders</div>
+            <h2 class="section-h2 fade-in">The advisors <span class="accent">behind MyAppSuccess</span></h2>
+          </div>
+          <div class="founders-grid">
+          <div class="founder-card fade-in">
+            <div class="founder-top">
+              <div class="founder-photo"><img src="data:image/jpeg;base64,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" alt="Emily Chen" width="96" height="96" loading="lazy"></div>
+              <div>
+                <div class="founder-name">Emily Chen</div>
+                <div class="founder-role">Co-Founder &amp; Head Consultant</div>
+              </div>
+            </div>
+            <p class="founder-bio">Emily attended Cornell on a full scholarship as a QuestBridge Scholar, earning a B.S. in Human-Centered Design with a minor in business. Her career in UX research spans Accenture and Harvard University. Since 2020 she has guided 50+ students to admission at schools including Columbia, Wharton, Harvard, NYU, and Vanderbilt. She tailors each application to a student's strengths and brings firsthand experience with scholarships and financial aid.</p>
+            <div class="founder-leland">
+              <div class="founder-rating"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg>5.0 <small>rating on Leland</small></div>
+              <a href="https://www.joinleland.com/emily-chen-11" target="_blank" rel="noopener">Read Emily's reviews on Leland</a>
+            </div>
+          </div>
+          <div class="founder-card fade-in">
+            <div class="founder-top">
+              <div class="founder-photo"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCADwAPADASIAAhEBAxEB/8QAHQAAAQQDAQEAAAAAAAAAAAAAAAECBgcEBQgDCf/EAD4QAAEDAwMBBQYDBgQHAQAAAAEAAgMEBREGEiExBxNBUWEUIjJxgZFCobEIFSNSwdEzQ2LhFiRTcoKi8ML/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQMEAgUG/8QAJBEBAQACAwACAgEFAAAAAAAAAAECEQMhMQQSMkEiEyNRYeH/2gAMAwEAAhEDEQA/AOuMJcJUqsckwjCVCkIhKhAiEqECISoQNIRhOQgZhCfhIUDUYS4SqA3CMJyMJsNwlwnYQpCIwlQoCYRhOwjCbDcIwnYRhQG4SgJwCXCBuEYTkIGYS4T8IwgZhGE/CMIGYRhPwjCkMwjCfhGEDMIwn4RhAzCMJ+EhCBuEicmuIAyThSES4UYveutMafmbBcbtC2od0gYd8h/8Ryn2rWNqvUTZaFz9p/6jdpU/W0SRC84Z2Sjhey50GoT8Ix6IG4S4TsJcIGYRhPwjCBoCXCVLhA3CMJ6FAZhGE9CBMJE5IgRCdhGEDUJcIwgRCXCMIEQlwjCBEJcLX3m823T9mqrxd6ptLRUrDJLK48Af1KBbrdbbZLTUXW7VkdJRUzS+SWQ4DQuMO1H9pu9agq57PoZ0lttgJYatoxNN65/APzUI7a+2q6dpN4NHSufR2CmcRBSg/wCJ/rf5n08FT8Jke/YzAHr0CJ0lNLqq+0NU6q/er+/ccl2/c4n5lZNbr3UdS4SMudQ05ziOQtx9lG2uhiYRViJ58NpSMnp45d0YZK08DB5Cn7VMi1NFduGuNPTsMV2kq42O5p6xxkY8eWeo+i7K7Le1uw9pVrDaV3sd3hb/AMxQSH3m+bm/zN9R9V84qIHv3TQchpy5vjhbyiud0sN6pb9Yq6ajqYXB7JInEFp/+8PFN00+peOEiqnsZ7XaLtK042OpdHT6gpWgVdMOA8dO8Z6HxHgVayOQhKjCgIlQAlQCEIwgEIwjCASowhAFInJEAEIQgRCdhIQgRCMIwgEJcJOEDXO28rib9p3tVfqG8HRllqM2m3PzVSMPE0w6j1Df1yujO2zX7NB6AnmppGi6V+aajbnkOI5f/wCI5+eF84rpVzVle6JjnSZdnJ5LyfEqLdOoxGd29xySc+S9AJGPLaYOwfMZU2012aXa6wtqJWGBjuRuPVWjZ+yughEZrHGZw6jwWbPnxxbeP4nJn3pQtPYa+p2Ewvdu9OVJaPQ1fI6N/sLy09CV0tSaOtkLWCOmaA0ccLef8OU0rY8NDdgwOFTfk2/pqnwte1yNqfS9TYXx1MMLo3ge83OQsGmeXRiog5jP+JGfD1XSWs9EMr6CURe+5vIaeoXOtxp5rFWyUk8e0xuyMjgg9QfRX8PL9umXn4P6faSaM1HX6N1NSX2zz93PA7cBn3Xt/E13oV9CtHapt+stJ0Ooba7+FUs95meY3jhzT8ivmdT1jWtBJ9zdgFdOfss6vdS3e46OqZf4NZmppwTw2Ro94D5t5+i1bYq614QkHKUBQ5CEuEmEAEqEJsCEJR1UbCpMJUIEKROQmw1LhKhAJClSFAiEITYE1xDWlzjgAZJPgE5RPtHvD7F2bX25RHEsdM4MPqRhSOI+3fXU+su0mtlil3UNsaYKZgPA55I+ZUA0LbIai7zVVSwSdw4BoPiVr5ZjUTPmkOXSOD359XZUs0DDl0paMl8jifuqeb8Wv48lzm132Vsb6WNjGYAHRS6lpGuA8gorZcMja0jBUzp52NhHIXlXHt9Djl02VPCxrQtxFQE0+5oHI6qM+3huMOW2h1LS01Liqe1jMfE5wAV2En7Ucn29jTV8JE7xnIzhU52oaMF1t7q2jjxUxAngdR5KzK7Wunva3tZWGY5+GJhctbVXaguUW2nccnq1wwcKrWWN3HeX15MfrXHkE8lPO+kqBtwdu0+BU40jqOq03cKG/UL9tVRzNlbz1IPI+o4Xl2qabbbb4LrSsxDUnLgPwuUOoa4iF0JPK9XDP7Y7fPcmH0yuNfVDSGpqDV+krfqG3Pa6CsiD9oPwHxafUHhb5cf/ALJOtZmV900ZUzZp5Girpmk/A7o8D58FdgA56K1TZoIQhEBLhASqAmEYSoQCEIUAwhKkQCEIUgQhCATU5JhAip79pGt9i7Dbyc4Mvdxj5l4VxLnj9reqMPZDS04OO/rmg+uGkqYmeuGoqjLpueABj6FTHR9zuEM7qe0UgqZ3P3AO6AEqvA/bMTlTfRV4Fmn9rlGIzkbgPEeCp5PxaOH8lyU0naJTRmoFjp5mYztY7lbih1PcXMDbhQ+yyeLD4KDx9q2rIaZtZbbH3lGJBFl25z3Z6kNClNBdL/quON9107Lb5Zi4RzFuOnTcDy3PqseWOpuvVw5Jv641JW3MzDczotDVUguty2Vs7jEDnbuIGFK9OWKQxOjnwXDzC0mqLBcIO9fTVBg3cb2tLi0eOB5+SqaLdxJ7M/Sdqpu5aKON+Ory0OKStktFX/EpxFI5vR0eP6Kmouz+ir73JO7UhipXPje6l7oue4t8Nx6A85+aszTmg6Kgeailqavuyd3dvf7o+QKtyk16pwyt9mkU13p5tz09VwlnvFpcw+RC5ew6Kcgja5pwQu2tT04FA/AAGDlcZXpgZeasN5Heu/VWfHvsYvmY9zJa/YHcjbO2Kw1DHbWyy9w71DhhfRxvAwvmR2OzFnaVYnY+CsiP/thfTWI5YtkefkehCFLgo6JUgSoBCEIBCEIFQhCBChLhGECIS4RhAiEuEiBCuT/2vblJUWe1UMZPcwuMpA8SSRn8l1XK4iN2OuFx9+07Oaqrr6VjRikZA35AjJP3Kl1j65CcQXK3+yyGjr7fJSTsY495nlucKoJhtkO1Tvs0u3sF77pzsNeR91VyzeLR8fKTkm3RNu0a6F+aW5SxxdQwAcfVSqislLQgyzyyzv6lz3lYlnuUb6ZvvjovK/agp6OKKmjeH1NQ4MYz1K867/b25JJtKrKxrZwQRh3C3VRSw5w9jXE+mVFNLzVPtDIKwNEhAxg8KRXfvxC/2eoFOWDIeRnlJei43b1prLbnTNe2mjDvE7QvWvihpgRGB08FXFt7Q5YK80F4j9mqGuIjePgmA8WlSCp1HTzs398DuGeq7t3HEx1dtDq2ZrLTUnPIacLjerhNXcq3b8XeOI+66q1XcWzUEoB4wVymJSy7yyDoZnH6ZV3B+2D5l8TTshY5naZaw4csna4g+hyvphSyboGkHOQCvmdpmrZbNYUlyj91rHBxcvolpO+U93tNPNERkxh2M9R5hbMfHn5eJV1blIkB4wnYUWOAEqEIBCEKQIQhAqEIQCEIQCEIKAym+JSpD0QeMpw0nyXIf7S1Lspv3lH0uBY2T0Lc4/L9F1pWyERFrTgu4z5LmHt821tq9gDcls21rB1yAen5ruTp3h64slb/ABCPosm2SvorxEd205xnyXtWUpp5CXHqSVr5i58/fc5JyqrP0ny7dAadul4ngayny93AWzrqeSS3VHf1Riuzz7jieYyOmFDezbVEbZ4RI4CRpAcD6K1NYWC1ant/tga4S7RtdG8sIPzC87PrLVezw/3MeqgVBqntEstW1rhFdWE4Dt20tU1o7fddSmO6aw1A63wscHexRTbG4/1c+8ohprT9hirnUtwqJ5HjgtnmLSPXPiptUWjTFHRBgpYKmfJAL5zK4jwwOi61NNeHx+TX/Y9NV3DRt1pYbLT1TJK0YFOKc5e0+axLTYLxTU4FxmLtvwuz8TfAlSPT2mLbSRuuLKKJlTKAHP2jOB0C9L7cBSU7mg4LVVvvUV54TFXus65tBa5G55AJP2XP8Ue8d9jndk/UqZdoGonVteLbFLkvPvHPQeSjb4dlI8DqQt3HjrF5HPlMstPeKR5pZDEfeiyceWF1d2DaykuFqFNNUATURbgZ52O4x9D+q4/o60x1D8/DJw4eat3skmnt+sKARPO2oYSQP5QQVowvaj2PoXHkxNJ6+K9FgWuoFTboZc5y0HKz1NVBCQpFyg5CEKQIQhAqEIQCMpD1QgVIUIQCEI8EGlukxhj3AZc44aPMrnLVzWXe9VdRvD4rRBvceuaiQ4I+jcq+dZVj7fQtmix3hOxhPg93A/uuebi02OjvFuMoc95lldI/xIZlxcfr+iuncWYuTr4GyXOdsZ9zvXbflnhYEVOJHtHhnCyqkElzuS4kYz1S0LS2UxH4gCfqqEsWnq5rNdO9ZlpB5XR+gtR015tMcUsoMnQgrm26vEzy/wDEOCsrTmoq7T9eyeB52ZyW56rPy4faNHBy3DL/AE62n0Vb7nI2QyGN38zeq2Vq0BS0EhlFW6bx98Ks9O9rNurIWR1FUKebH4ui3p7V7ZRBwfcYn+oKyfXKdV6+PJjZ1Vm1Xc2+k954AAVDa91m18slHQuD5nEggeC1Wpu1W46jl/d9lY9rX+6ZMY4Wjjspo7bNVVBMkr2kl7uuVOOGruqOTk+3WKvQx9TqIOnJLi/3it2C3L43dH8BaulG68Of5ZKzw5r3PZnkFehPHkNTUU7oanGMDOVcHZLIJNaUvevwG0zmt9CR/sqwEftEpY89AMEqddmm+PVkDGOI3NcAfou8Z2mPoDo+YzaYo5D8Rbz91JAVDNAVAm06HM+BrzHjyIAypkF1l1VNOKMJULhAQhCkCEIQKUiEKAIQhSEyjKRIXNaC5xDQOpJwgdlBIHVa+e9Wqnz3tdECPAHJWrrNY2imYSwyTcfhbj9VG461WBr8N/cBqHfDC4POBnBBXLPbje4rLq27WuIAyV9JAWNafgy33yfmAFYPat2w1v7gntVBSR0vfu2l7veft/ouQ9RXquu9/mudwq5aqok4MkjtxIHRT9/1HclnrUVMzfaSXcFpQx+y5skzgOwVgy7pHOceT1KyA7fDGT8TTj6KEbNr4Syre0dM8J8VudJAHAEnCzZ4g+pic7kPbkqW2yyiaON8fLS3Kq5LqbXceG6gYoKkEAROW3otPVdY9oLCAfRWZS6bL8Zi/JSS3aeEbm/w/wAlmvM2Y8KO6b0iymia4swcdcLK1dEykssobxhpVhwW18cfDfDwChOv6KZllqJXtIZt8VTjlvJoywmOCjre3fVyy+QTHOcycuJ8QVnW+Noppng88heU8W9zsDo3+q9J5FgI71uYipj2c1RoNRUdRUDc3vHNx644P5qF0+WxvDeo6KTaUnY29UPtDg1gkGSegyeq6npH0C0DA+3afhpZjzuLyfMnGfzU6CrvRVyjudip4nS7ZYmnP8wA6EqbQ1TmOEdQ3Hg14+E/2VuU2pvrYBKmNORkJ2VWgqEmUqAQhCAQhCAQhNLsDJ4CDVXy+0ljpWyTuBlk4ijzy8/2VbXG83O4TukqZjtPwtZ0AUc17cqi+VdTXUszgKN+6Bo6FjOo+vKzaOqZXUENRGctlYHgj1GVRnl/hp48eu2QHE8k8+rlo9R3eO2W2WUtL5NjtrGZJPC2FTOKaNzThnHVaI0H7yE7qh2WvZtG4dVT9mjTkK7XK71t3mdUVM+55dhsjiR18FHZnO7zBdnBwra7SrMy24laGsMUpAwMdVTzpNzyfEFacbtly6unvE47jxk4S7y3LOmF4xOc2UOHUj7omOZGuB5HULtW3JnDmQSgZY33T8irk7LLWy7RzwPG7ufh9QeVSNFnBjPvMkHu/wBlf/YRKZKioA+JpGfos/N+LZ8b8ln0unoYyYpoxv6g46hbOGxwRvBDApIadkzGuA94cg+RWFHc7fUXKW0xyA10LcuiA6fVYdPT2xTb42sLWxguIwMeCqLtpElDpQHgd7II+PDhXq2N0UZDh73mqT7fo3P0XA5o4jqA4/Yrvjx/lHHLl/Cua6GcASR55HKyZpO6HeN5LwRhaSGXu6ku/CVnVpeaZj2Z91wOV6Dx97j3tzxI8g+P6LMimMNYNvg78lqaSUR7ZWj3XEjHktoS1hkn8NuR9VMIuTROr7q0RSx3Cbv6UAjDzyzP6j9F1BpftFp7lb2092YHPDf8VnAePPHmuC9NXeWguMVQxxOHgYHiPL7K77ff5KQxmjd3r5wHQsPBY7POfRV/a43a24zKOwLNd6C4Nlhp6xkhhcG4J97BGRkLcYwqE06ZKakZO2Vz5Jj3j5ehc4/0Vk6e1Q59Q2guUmd/Ecp8D5H+6snJL6py49eJklHVJ1PCU9V2pKhNS5QGUqahSHLR6ruH7t0ncaoHD2xFrSPM8D9VusqFdp03daIe3/qzxsPyzn+ihMm6qikYX05a4B24CP78lM05Mab2uyycGjlLW/8AYeW/2WRbx0cBxlx+yw6/NHeaK4AbWz/8vNjxzy0/fj6rFfW6NpeWd7bZ3xD3mDgrXUtW0M2u3PDRj3RyCty5jaillj3Y3NwAtDPO+h7iuae6iDu6nYRy1/n6rh2o3twqqdzKOkpy90krzI5xbtwB4fmqGc7bMCB04V6du9bS1WobfDSzNdI2B4kA6Nycj6qiiMyOI5HRa8PGTk9ZEcjdzmOb7ucg+SyJ6cd0Zu8GT0AWKxjmENfkA/miffjGDjdgLtWy6edoh27tkzCPkVenYPWBuoK1uA0yRBxbnoQVQ/s7nMJZ8TD73yU/7K6i5xaqjltjs1NOx8hYf81oA3N+oVPL3i0/Hus47Wgd7uR0K84bRaYrk65RUjG1jiSZRnJyOV42qsguNsgracgxTMDx6eizXZasT1PXpJgtVIduz2nR74c8k5+xVyySkNVKdsrO+0/PKeQwZx9V3jd1XydY1ytMzu8tIx4hZlPPuo3xyjLHNwfT1WNcJu8qjs6BPbj2Jr2np7pW55LOp4I5rY9jCDIzkJfemo9u7kcn6LUQSTU9SdjuVs4K1vfZe3Y/OHDz9QpRKz6GmkYYmxjL9wx81dNut7rdR0EtTt710gY95zwDzg/ZRLs/s7LlfYpC0mOEFw2jOD5/2Vp32CO56ktelaU/A8T1Lx1aNpAB9TyqM7204TpOLJdO/o4KWhjyY+XPPTHVb+J8rGMe52XN2nPqvO2UcFvoYaeCMRsaNgGF7vJ7knj4R+q4ldWLY0/cBcbPDUE++Bsf8wtrlQvQVQZKKthP+XKHD6qZrZj3GHKatKhIlXTkJMoKRAqrrtal2aZoIs/4lY38mlWKqt7YpdtussX81U4/Zv8Auld4+oLRzmJoDugZk/VyzbvRe3WmoZH8RjJjPk8cg/dYMMPe0x3cHuwP/YrPpKg09TJTVBw0kBp/VYa2R52WsZV2ynmPx7eR4tcOv5rB1Eym9mqDLMf4kZDscDjkFae5XR+nrrWUkEZPtH8en4znPxDHz/VRDUd61ObfM8TwOb3RMgdCGFgxzzlculK6yuLZhVyzsDqmqcwMcerQMkkfooNDE4tklx7jcbvTPRbS+XBlwuMUjI3NETQ3DvH1Wpmce7LRkAgdOh+a1Y9Rjzu696mQsfHHJy+PgkdCnsqWva6FzQQeh8Vg7S8BznZKYCWPBA6crty28Ujoah5dkCQY2keCs/sfhEGso3gbiGOcSPAHhVHTumrK9jXvyXnHyCvvsItTC2918xzJFI2Ebj0bglU8t1K1fHn84vvSLvZ2VtE53uRS72DGMB3JH3UgmqGgcKPacY97ayrkZtbI/A+QGFspSfBYO3qySd090j5Q4NHA68qBdotv9r0hcI3RN7wwHGPNTuFkD2bu/wBxHTAxlR3UkDqqgfTZ3McDk+gV+M0x55feuHthdUyNcMYJ4RTguzED5nH0Ul1VZjab7UbWkbiSB9VFYJTFVgu6ZIPyPC1y7m2DKapoky84HvcFbKZveujeBgPaMfNa10Lo5ix/DgfyW9fEJYY2s4LSAB5rquZE57J9Ux2e51lHVAO7yMujcT0I8Fe3Z7aZTSz36vBdWV0oncf5WnoPsuXKOifSajpgz3Wuww/MjldeaGuLLhpOmc0NbJFEIpGjwc3hZuSd7jVx+aqWYw703/0Xk8/whz+H+qdk55/mC8nnMQ/7R+q4d1Muz15NTcm+GGH9VYCrXs7mxc6yI/5kQd9j/urKW7D8YwZ/lQlSIBXTghSIykygXOFUHbFUF1fZaRoyY2vm/MD+it0lUj2k1AqtdsiBy2lgbGfmck/qucrqO8PWmpXOMLgf5f8A9f7rPq4O/imwcOGC0rEgYQx2B+F36rYhwzID6LFfW2Ibfqc1pNaW4qLcA8A/iZ+Mfb9FC+0+Wmda7cG52yMfK4/zhoGB8iSFbtdSsLXSsaM4w71HkqL1gHOrqO3OeCKd74xu8GcOGfoPyTHsUdXwOMD5pG7Xvdn5c9FqA17t7DyQNwHot5qSpe+WBscXdxPyQSc7yD+S1TS2IibrI92Nvk1acZ0y5+vSiiiDHB2O8OA0ny8SmwUodNIS0kNPGfFesIhLA1h98Ej5jwW/Y2OqpYKOhgc6rlc2NgA53eOfopt0jGbam3WxklzbE/4TnBHkeMj5FX/2I07f3ZfKEuzUuqI93n8JGf1VbaqskWlKO37JA+oDWukaT9wrE7B21M1/u9bsMcEsecu8CXZA+2VRn3GjDqugKSmZSWwRN6MGFq56sioZG2IyuJAADsdfP0WyB35ZuwSMHCwZYWUtSH941xYOo6knoD/ZUTHtrvJvHTI3bpRStj28bnuaOGhai+NhjEncktZBHkgnrnrn7LcU4lpY3iWdjj8TsfzFVf2uX6e16fmpYHd1U3CRkEZHXBzkj6LtTtz9rm/R194qZIQHNc8ta70Cr95yeVvtQRxx1giYDuaNrvUjqtI5hwtUmoyZd3bKZUmRkRm5dH+LxI9VvrRuqboHtaO6pyJXfJRxsbmxlxGFKdNbCHRse0PlbseCefMJl4YepHp+jkuOqKeXb7r6lxwR0Cu/RtRJatTut8pIgro3AA9O8aM/mFFdEWRsFxpJ5WbS7PXwO1TCenkj1HbX0zcvpZHTSnyBGAPrystu2uTUWW0iTaQTj3TyvCb3GDnwH9V7QPa+Bj2/ia0/msaUl0rYx6lIipFoOQR6nYwn/Ehe39CrVKpjTEog1jQc8GQt+4IVzZBAOVsw8Y+SdhKkSgqxUZlIkJSZQKTgHJwAM5KoS8zx3LU9fXs+GWUkH0BwFb2rLp+6tL1dQ12JXt7qP/udx+mVS9O3aN3Xjp/981XyXpdxztsIQ3GPT9SsrA944z0WG0hhI9Q1ZDH8OP8AqWRqgmwIz/qHiqE7R2mmvclXgFhw0HwyP9sq8bjVsp6KaV5GWDPyVG9olXR1dBK0ShxIy1zecn+iY+mXimbtROmqWZHuBpc1xPUdVqhTRue5wdl2OPThZ1dccvdFjBAx8lhQzd3TuGMucOFqlZr3WE3dG92RgdFLNFzyUdx9ojpHVdV/ltOenphR+kpHVk7GN6HknwV39nlnhsrW1tRGDR1IEckpbkt6ePgMrnOzTvCd7Rh9gv8ArPUMc1dGdrHD+HH8DB4MHmfPyXR+k9N0+mrU2BgEkz/fkcBxk+H0WfQUNtp4WCGCMbeWho6fQLYuJIxjY0Ki1fJDnylmHl4BPgsV2x1SXGF2GncCD8Tz0+gSufmMhg+pSP72Sl7uJ2HdB5DPVcpLTmOrke14IZGcBx/ER1PyVIdu8r4rhZKrmSGkqA9+PJXxG5kbGwEDDRgKqu1a0Cutj3FneNLSPkusfXN8cxXmVk1zfIx25pJeT8zlYb2tDIQ8YGSXL0np9gdHuy9ji0tPULyDnSU7o3e86PotLLT6uSLY2KIg+ZWwtVHBcK6GjdUeySkHE3gPIH6qPPDiwO8CVJtNURr2viYHF/8Am4GXBvm0eKjLxOPq3dD6vrKSKKG807ZTSSugM0R3Fx6AuHr5q37XDBIN8UwmfNL3r3jxOOnyHQKlNB2kPu9TUQOD27WsDQfEHrj5eavmxUbmtMjm7Q0k9Oqy2NcvTdxZipWFw8AsenO6R8rh14CfNJ3hEQPujhekcXdsA8v7rqdOb2bbJhT6joJSfhnaT91eeNpx5LnuaTu60PBxhzefqF0FG7vIY5P5mg/cLVx+MvL7s/KMpEKxS//Z" alt="Kelly Chan" width="96" height="96" loading="lazy"></div>
+              <div>
+                <div class="founder-name">Kelly Chan</div>
+                <div class="founder-role">Co-Founder &amp; Head Consultant</div>
+              </div>
+            </div>
+            <p class="founder-bio">Kelly transferred into Cornell, where she earned a B.S. in Industrial and Labor Relations, and went on to an M.S. in Systems Engineering from Johns Hopkins. Her career spans Atlassian, Apple, Adobe, and Goldman Sachs. She specializes in transfer applicants, students with lower GPAs, and non-traditional candidates, and has helped 60+ students earn admission to schools including Columbia, Penn, Cornell, USC, and Vanderbilt.</p>
+            <div class="founder-leland">
+              <div class="founder-rating"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg>5.0 <small>rating on Leland</small></div>
+              <a href="https://www.joinleland.com/kelly-chan/college" target="_blank" rel="noopener">Read Kelly's reviews on Leland</a>
+            </div>
+          </div>
+          </div>
+        </div>
+
         <div class="pricing-cta fade-in" style="margin-top:2rem;">
       <a href="interest-form.html" class="btn-gold">Get Started</a>
     </div>
@@ -1481,8 +1583,19 @@
   <div class="container">
     <div class="section-eyebrow fade-in">Templates &amp; Guides</div>
     <h2 class="section-h2 fade-in">Built from real <span class="accent">admitted applications</span></h2>
-    <p class="section-p fade-in tmpl-intro">Every template and guide comes from what actually works, adapted from real admitted student materials. Most are included at no extra cost as part of various <a href="#bootcamp" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">Bootcamp plan</a> tiers, and each one can also be ordered individually in English or Chinese (中文版).</p>
+    <p class="section-p fade-in tmpl-intro">Every template and guide comes from what actually works, adapted from real admitted student materials. Most are included at no extra cost as part of various <a href="#bootcamp" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">Bootcamp plan</a> tiers, and each one can also be ordered individually in English, Chinese, Portuguese, Spanish, French, or Arabic.</p>
 
+    <div class="tmpl-lang fade-in" role="group" aria-label="Guide language">
+      <span class="tmpl-lang-label">Guide language</span>
+      <div class="tmpl-lang-options">
+        <button type="button" class="tmpl-lang-btn" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" class="tmpl-lang-btn" data-lang="zh" lang="zh-Hans" aria-pressed="false">中文</button>
+        <button type="button" class="tmpl-lang-btn" data-lang="pt" lang="pt-BR" aria-pressed="false">Português</button>
+        <button type="button" class="tmpl-lang-btn" data-lang="es" lang="es" aria-pressed="false">Español</button>
+        <button type="button" class="tmpl-lang-btn" data-lang="fr" lang="fr" aria-pressed="false">Français</button>
+        <button type="button" class="tmpl-lang-btn" data-lang="ar" lang="ar" dir="rtl" aria-pressed="false">العربية</button>
+      </div>
+    </div>
     <div class="tmpl-accordion fade-in" id="tmpl-accordion" style="margin-bottom:0.5rem;"></div>
   </div>
 </section>
@@ -1950,6 +2063,27 @@
   </div>
 </section>
 
+<!-- PRO BONO -->
+<section class="probono" id="pro-bono">
+  <div class="container">
+    <div class="probono-card fade-in">
+      <div>
+        <div class="section-eyebrow">Pro Bono Support</div>
+        <h2 class="section-h2">Cost should never stand between a student and <span class="accent">their dream school</span></h2>
+        <p class="section-p">We do pro bono work and provide free resources for students with financial need. This support is meant for under-resourced and underrepresented candidates, and anyone is welcome to reach out.</p>
+      </div>
+      <div>
+        <ul class="probono-list">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Pro bono advising for students with financial need</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Free access to our templates and guides</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Open to any student who reaches out</li>
+        </ul>
+        <a href="mailto:kelly@myappsuccess.com" class="btn-gold">Email Us About Pro Bono</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section style="background:var(--white);" id="faq">
   <div class="container" style="max-width:1320px;">
@@ -2147,31 +2281,31 @@
   window.addEventListener('load', equaliseCards);
   window.addEventListener('resize', equaliseCards);
 
-  // Each item: [title, description, English order URL, optional Chinese (中文版) order URL].
-  // Links open the Beacons listing in a new tab. Items without a Chinese URL show only the English button.
+  // Each item: [title, description, English, Chinese, Portuguese, Spanish, French, Arabic Beacons URLs].
+  // The language picker above the list sets which Beacons listing every Order button opens (new tab).
   // Items with no URL at all show a grey "Coming Soon" label instead of order buttons.
   var TEMPLATE_CATEGORIES = {
     guides: {
       title: 'Overall Applications',
       items: [
-        ['Roadmap, Timeline & Checklist', 'A foundational college application roadmap and timeline to keep you on track from start to decision day.', 'https://shop.beacons.ai/myappsuccess/13328c19-dac8-4f80-8997-3e6f6dc6a778', 'https://shop.beacons.ai/myappsuccess/df4c82ae-1b9c-4bce-9ab3-dc93b88beb8e'],
-        ['Guide to Picking Your School & Major', 'A guide with exercises for picking the right school or program aligned with your goals.', 'https://shop.beacons.ai/myappsuccess/dc40af4b-d089-4e01-abfd-79222f7560e4', 'https://shop.beacons.ai/myappsuccess/ed598cb9-dfab-413c-a857-159075fd0b58'],
-        ['Application Platforms & Deadlines Guide', 'A guide on application platforms and the different types of deadlines you\'ll encounter.', 'https://shop.beacons.ai/myappsuccess/ec0def37-1aaf-4aaa-aa6a-f9b9fde9d8ee', 'https://shop.beacons.ai/myappsuccess/5db48127-4ad9-462b-97b5-3cbae84e6ddc'],
-        ['Extracurriculars Guide', 'A guide on how to present your activities in a way that stands out to admissions readers.', 'https://shop.beacons.ai/myappsuccess/49870182-a5df-4950-855c-8ebb1e9d5d5c', 'https://shop.beacons.ai/myappsuccess/43b56ae8-2819-4b61-965c-dc2909214958'],
-        ['Grades & GPA Guide', 'A guide on how your grades and GPA factor into your overall application.', 'https://shop.beacons.ai/myappsuccess/20fb7cd3-aba8-4713-8ccf-1cdbed404322', 'https://shop.beacons.ai/myappsuccess/20cee9e8-8923-4472-b0c8-77a5155713bf'],
-        ['Financial Aid Guide', 'A guide on navigating financial aid options and the application process.', 'https://shop.beacons.ai/myappsuccess/8def3e3f-85cf-4543-9822-827ff9dfd8bd', 'https://shop.beacons.ai/myappsuccess/08919bc0-d320-47cf-9bd9-e10904187eb8'],
-        ['Scholarships Guide', 'A guide covering local, regional, and national scholarships as well as college-specific opportunities.', 'https://shop.beacons.ai/myappsuccess/6f3da537-7d28-45df-962a-39e97ac80243', 'https://shop.beacons.ai/myappsuccess/3f64d30b-85ea-4977-a8e9-368e829cad42'],
-        ['Interview Prep Guide', 'A guide for preparing for college interviews: common questions, what to wear, and how to leave a lasting impression.', 'https://shop.beacons.ai/myappsuccess/20a5763c-1050-4079-967c-4156dd9410f5', 'https://shop.beacons.ai/myappsuccess/c64d5439-f6df-4132-92e7-eec2e81802b8'],
-        ['Guide to Portfolio/Additional Materials', 'A guide for building and presenting a portfolio for art, design, architecture, and other programs that require one.', 'https://shop.beacons.ai/myappsuccess/2427efc8-c227-43e9-afef-fd52c7d1eee7', 'https://shop.beacons.ai/myappsuccess/183b25dc-aa40-4cfd-945f-6ea4b7580a1d']
+        ['Roadmap, Timeline & Checklist', 'A foundational college application roadmap and timeline to keep you on track from start to decision day.', 'https://shop.beacons.ai/myappsuccess/13328c19-dac8-4f80-8997-3e6f6dc6a778', 'https://shop.beacons.ai/myappsuccess/df4c82ae-1b9c-4bce-9ab3-dc93b88beb8e', 'https://shop.beacons.ai/myappsuccess/282997b5-2fbc-425c-8986-b8130d7cf87d', 'https://shop.beacons.ai/myappsuccess/e96e84a0-cf9a-4f1d-b203-6a167c6cd34d', 'https://shop.beacons.ai/myappsuccess/29324938-1734-4c43-8918-1acea1786907', 'https://shop.beacons.ai/myappsuccess/c8942bc4-43df-456a-ae5d-1dc7549d80f5'],
+        ['Guide to Picking Your School & Major', 'A guide with exercises for picking the right school or program aligned with your goals.', 'https://shop.beacons.ai/myappsuccess/dc40af4b-d089-4e01-abfd-79222f7560e4', 'https://shop.beacons.ai/myappsuccess/ed598cb9-dfab-413c-a857-159075fd0b58', 'https://shop.beacons.ai/myappsuccess/3592bd56-40a9-44aa-b701-4aa0a4a702fd', 'https://shop.beacons.ai/myappsuccess/26ebde5c-340a-4ade-b7b2-6e2507469378', 'https://shop.beacons.ai/myappsuccess/aebf009c-29af-49f4-87b0-40bcd173f701', 'https://shop.beacons.ai/myappsuccess/943562ab-05b2-4f59-ae1e-c0c6c216688c'],
+        ['Application Platforms & Deadlines Guide', 'A guide on application platforms and the different types of deadlines you\'ll encounter.', 'https://shop.beacons.ai/myappsuccess/ec0def37-1aaf-4aaa-aa6a-f9b9fde9d8ee', 'https://shop.beacons.ai/myappsuccess/5db48127-4ad9-462b-97b5-3cbae84e6ddc', 'https://shop.beacons.ai/myappsuccess/91e1ce48-463a-421b-9cd2-0e8026a63826', 'https://shop.beacons.ai/myappsuccess/e628d4b2-1b74-438a-b3b8-2f7e4db38479', 'https://shop.beacons.ai/myappsuccess/f29eb45b-466a-4998-8311-f153279bda85', 'https://shop.beacons.ai/myappsuccess/a3d00cf7-026a-44af-b144-ec4f21969707'],
+        ['Extracurriculars Guide', 'A guide on how to present your activities in a way that stands out to admissions readers.', 'https://shop.beacons.ai/myappsuccess/49870182-a5df-4950-855c-8ebb1e9d5d5c', 'https://shop.beacons.ai/myappsuccess/43b56ae8-2819-4b61-965c-dc2909214958', 'https://shop.beacons.ai/myappsuccess/eef2bf1f-a2d1-4689-a426-756cdbc108db', 'https://shop.beacons.ai/myappsuccess/2a404b08-e3f5-4eb1-a7d4-4cdf270448e1', 'https://shop.beacons.ai/myappsuccess/1a949b7f-1bcf-4c4e-8bf6-32ff90a98bb2', 'https://shop.beacons.ai/myappsuccess/f13651d8-8fae-483c-925b-826cc685541f'],
+        ['Grades & GPA Guide', 'A guide on how your grades and GPA factor into your overall application.', 'https://shop.beacons.ai/myappsuccess/20fb7cd3-aba8-4713-8ccf-1cdbed404322', 'https://shop.beacons.ai/myappsuccess/20cee9e8-8923-4472-b0c8-77a5155713bf', 'https://shop.beacons.ai/myappsuccess/92b7fc51-5adb-4c5d-bb98-f723f6596674', 'https://shop.beacons.ai/myappsuccess/e877040f-3b25-4962-8a0e-bf67dc2d7a4d', 'https://shop.beacons.ai/myappsuccess/fdaab19f-8ff4-4f69-a1bc-f5a4fb15a094', 'https://shop.beacons.ai/myappsuccess/2142f884-5f0f-465d-9816-5b60705ef1f2'],
+        ['Financial Aid Guide', 'A guide on navigating financial aid options and the application process.', 'https://shop.beacons.ai/myappsuccess/8def3e3f-85cf-4543-9822-827ff9dfd8bd', 'https://shop.beacons.ai/myappsuccess/08919bc0-d320-47cf-9bd9-e10904187eb8', 'https://shop.beacons.ai/myappsuccess/b07c00f3-400d-4068-83a1-5655118b1c74', 'https://shop.beacons.ai/myappsuccess/de0bef96-0fce-4c9a-90bf-c351897e39a1', 'https://shop.beacons.ai/myappsuccess/60c10c47-d5d6-4223-8764-214c3d92c509', 'https://shop.beacons.ai/myappsuccess/e7f89186-0682-4e32-898f-6ef5cf1fb117'],
+        ['Scholarships Guide', 'A guide covering local, regional, and national scholarships as well as college-specific opportunities.', 'https://shop.beacons.ai/myappsuccess/6f3da537-7d28-45df-962a-39e97ac80243', 'https://shop.beacons.ai/myappsuccess/3f64d30b-85ea-4977-a8e9-368e829cad42', 'https://shop.beacons.ai/myappsuccess/62fe1598-a422-434b-96ba-455ca4326b45', 'https://shop.beacons.ai/myappsuccess/748215aa-9bf1-47cd-9254-6bd0a5dbf40b', 'https://shop.beacons.ai/myappsuccess/07ee2d6a-a8fd-43fe-b52d-d8061d0bc0d2', 'https://shop.beacons.ai/myappsuccess/98965e05-56e9-4f8c-9af7-b96bdfc30d32'],
+        ['Interview Prep Guide', 'A guide for preparing for college interviews: common questions, what to wear, and how to leave a lasting impression.', 'https://shop.beacons.ai/myappsuccess/20a5763c-1050-4079-967c-4156dd9410f5', 'https://shop.beacons.ai/myappsuccess/c64d5439-f6df-4132-92e7-eec2e81802b8', 'https://shop.beacons.ai/myappsuccess/a35cecb8-06d0-4bc7-ad34-311ba63c6d72', 'https://shop.beacons.ai/myappsuccess/82ff42a3-9f26-4528-b070-3ece1a2f6a34', 'https://shop.beacons.ai/myappsuccess/61283940-1682-4c3f-b37a-28c45d3a3597', 'https://shop.beacons.ai/myappsuccess/95b4af97-7d05-4125-9889-f117bd5029c4'],
+        ['Guide to Portfolio/Additional Materials', 'A guide for building and presenting a portfolio for art, design, architecture, and other programs that require one.', 'https://shop.beacons.ai/myappsuccess/2427efc8-c227-43e9-afef-fd52c7d1eee7', 'https://shop.beacons.ai/myappsuccess/183b25dc-aa40-4cfd-945f-6ea4b7580a1d', 'https://shop.beacons.ai/myappsuccess/bb6ecdc2-ae78-4283-9bfd-acc1088602ef', 'https://shop.beacons.ai/myappsuccess/64cc5f6b-f098-467a-81e7-19c30df36268', 'https://shop.beacons.ai/myappsuccess/1211c985-43bf-45ee-ac11-7240bf92a048', 'https://shop.beacons.ai/myappsuccess/10b40de8-caf1-4192-a1f7-5bf0c1152d98']
       ]
     },
     essay: {
       title: 'Personal Statements',
       items: [
-        ['Personal Essay Brainstorming Guide', 'Prompts and exercises to find your strongest personal narrative.', 'https://shop.beacons.ai/myappsuccess/eef1358a-2cf3-4fef-9158-46672e3702ee', 'https://shop.beacons.ai/myappsuccess/de991d8a-d5f9-46dc-80d3-20f9dfb1649a'],
+        ['Personal Essay Brainstorming Guide', 'Prompts and exercises to find your strongest personal narrative.', 'https://shop.beacons.ai/myappsuccess/eef1358a-2cf3-4fef-9158-46672e3702ee', 'https://shop.beacons.ai/myappsuccess/de991d8a-d5f9-46dc-80d3-20f9dfb1649a', 'https://shop.beacons.ai/myappsuccess/d09ddcfb-5477-4aba-935d-0ddd2794b00d', 'https://shop.beacons.ai/myappsuccess/5cedf4e9-ac79-4a87-9d33-e0fba75f1945', 'https://shop.beacons.ai/myappsuccess/841701e1-0e56-437c-8861-dbbb5a209a91', 'https://shop.beacons.ai/myappsuccess/59dbdcce-3733-4c45-8137-61f85ed7d4bf'],
         ['Successful Essays Examples & Audits', 'Real admitted essays with line-by-line audits explaining what made them work.'],
-        ['Supplemental Essay Guide', 'A guide for approaching school-specific supplemental essay prompts.', 'https://shop.beacons.ai/myappsuccess/1db09952-0b5a-45da-b393-5ab0aeb110af', 'https://shop.beacons.ai/myappsuccess/fdb15a03-aaac-4036-b08f-2c93c31904f9'],
-        ['Guide for Discussing Sensitive Topics & Family History', 'How to approach difficult personal experiences with honesty, intention, and strength.', 'https://shop.beacons.ai/myappsuccess/944ef46f-778d-4758-85f7-a8b35da8258c', 'https://shop.beacons.ai/myappsuccess/52db936b-9332-4198-9704-10a23f457c47']
+        ['Supplemental Essay Guide', 'A guide for approaching school-specific supplemental essay prompts.', 'https://shop.beacons.ai/myappsuccess/1db09952-0b5a-45da-b393-5ab0aeb110af', 'https://shop.beacons.ai/myappsuccess/fdb15a03-aaac-4036-b08f-2c93c31904f9', 'https://shop.beacons.ai/myappsuccess/56ec2c2e-8c47-4395-b178-39c23c842e03', 'https://shop.beacons.ai/myappsuccess/e0dbfd2c-9f25-49a6-aac1-29634a872eaa', 'https://shop.beacons.ai/myappsuccess/26ca5dd4-384d-408b-8fd3-2790c8f5549b', 'https://shop.beacons.ai/myappsuccess/dc8dc297-ec81-4329-8d9a-dcab23c8f34c'],
+        ['Guide for Discussing Sensitive Topics & Family History', 'How to approach difficult personal experiences with honesty, intention, and strength.', 'https://shop.beacons.ai/myappsuccess/944ef46f-778d-4758-85f7-a8b35da8258c', 'https://shop.beacons.ai/myappsuccess/52db936b-9332-4198-9704-10a23f457c47', 'https://shop.beacons.ai/myappsuccess/4c555142-45b9-4d04-b59e-248ae14e4bbb', 'https://shop.beacons.ai/myappsuccess/02bbfff3-5f7a-4c03-a90f-5c6a2e9c4e3f', 'https://shop.beacons.ai/myappsuccess/313bb474-8bbd-4edb-8697-88f097aa2889', 'https://shop.beacons.ai/myappsuccess/e186bf36-9ed8-4d97-80c8-e57fd81a832a']
       ]
     },
     lor: {
@@ -2179,21 +2313,21 @@
       items: [
         ['Letter of Recommendation Template', 'A ready-to-use template for requesting a strong letter of recommendation.'],
         ['Letter of Recommendation Brag Sheet Template', 'A structured brag sheet to share with your recommender so they can write the most compelling letter possible.'],
-        ['Letter of Recommendation Guide & Tips Checklist', 'A guide and checklist covering how to ask, what to include, and how to make it easy for your recommender.', 'https://shop.beacons.ai/myappsuccess/6fe41e1b-272b-4075-9d2b-fcf2d655fee4', 'https://shop.beacons.ai/myappsuccess/d64ae873-e83d-4751-8802-d40ddd4474ac']
+        ['Letter of Recommendation Guide & Tips Checklist', 'A guide and checklist covering how to ask, what to include, and how to make it easy for your recommender.', 'https://shop.beacons.ai/myappsuccess/6fe41e1b-272b-4075-9d2b-fcf2d655fee4', 'https://shop.beacons.ai/myappsuccess/d64ae873-e83d-4751-8802-d40ddd4474ac', 'https://shop.beacons.ai/myappsuccess/bc7aac1f-100f-4a2b-8b65-45debfe29348', 'https://shop.beacons.ai/myappsuccess/45fd1806-df33-497a-bca2-575449214bab', 'https://shop.beacons.ai/myappsuccess/fdbd99da-f25f-499d-b5dd-b7e48378abc2', 'https://shop.beacons.ai/myappsuccess/7657a6e7-2f92-4a5f-ae08-9b14404753af']
       ]
     },
     resume: {
       title: 'Resumes',
       items: [
         ['Resume Template', 'A proven format for presenting your experience clearly and compellingly.'],
-        ['Resume Guide & Tips Checklist', 'A guide and checklist to review your resume before submitting, covering formatting, language, and content.', 'https://shop.beacons.ai/myappsuccess/adfa5bac-4d5a-4f82-a031-39c611040f1f', 'https://shop.beacons.ai/myappsuccess/2203dd49-4d33-4a64-b8a2-9257c3f439a8']
+        ['Resume Guide & Tips Checklist', 'A guide and checklist to review your resume before submitting, covering formatting, language, and content.', 'https://shop.beacons.ai/myappsuccess/adfa5bac-4d5a-4f82-a031-39c611040f1f', 'https://shop.beacons.ai/myappsuccess/2203dd49-4d33-4a64-b8a2-9257c3f439a8', 'https://shop.beacons.ai/myappsuccess/ab9dab1b-f81c-4c22-8b4c-27f5d9e66c14', 'https://shop.beacons.ai/myappsuccess/406e7195-8e50-4296-88b1-5c3056791e3f', 'https://shop.beacons.ai/myappsuccess/d89f3a84-7a72-4716-8d85-63b9d0b5a9b2', 'https://shop.beacons.ai/myappsuccess/1e40e20e-bb36-4dbb-8dd0-e81769fbaa5f']
       ]
     },
     test: {
       title: 'Standardized Test Prep',
       items: [
-        ['SAT Exam Prep Guide', 'SAT strategy, section breakdown, and how your score fits into your overall application.', 'https://shop.beacons.ai/myappsuccess/49cb7f7a-7491-4c25-9465-752f16fe8100', 'https://shop.beacons.ai/myappsuccess/7085f65d-b0d7-444d-8435-4ee607c1f9e9'],
-        ['ACT Exam Prep Guide', 'ACT strategy, section breakdown, and how your score fits into your overall application.', 'https://shop.beacons.ai/myappsuccess/9292812f-aa7a-4e2a-84c8-a634bbacaa63', 'https://shop.beacons.ai/myappsuccess/dd00945b-6eb0-4ef3-9e53-acfd34521c39']
+        ['SAT Exam Prep Guide', 'SAT strategy, section breakdown, and how your score fits into your overall application.', 'https://shop.beacons.ai/myappsuccess/49cb7f7a-7491-4c25-9465-752f16fe8100', 'https://shop.beacons.ai/myappsuccess/7085f65d-b0d7-444d-8435-4ee607c1f9e9', 'https://shop.beacons.ai/myappsuccess/a9760e9e-1ffa-4042-ba1c-9144be8a6d49', 'https://shop.beacons.ai/myappsuccess/d8be78d9-3ddb-48a7-a41d-aaff5809dc12', 'https://shop.beacons.ai/myappsuccess/644a8a1f-b9da-41fa-9c38-865899d94eb5', 'https://shop.beacons.ai/myappsuccess/f996d338-a145-415e-b458-f0cd283676aa'],
+        ['ACT Exam Prep Guide', 'ACT strategy, section breakdown, and how your score fits into your overall application.', 'https://shop.beacons.ai/myappsuccess/9292812f-aa7a-4e2a-84c8-a634bbacaa63', 'https://shop.beacons.ai/myappsuccess/dd00945b-6eb0-4ef3-9e53-acfd34521c39', 'https://shop.beacons.ai/myappsuccess/d09059bb-cc61-4afe-9879-f669eeadf083', 'https://shop.beacons.ai/myappsuccess/611888ab-3f9b-4813-8ef7-37ab247a06b0', 'https://shop.beacons.ai/myappsuccess/94527f79-331c-4c6b-9419-fb79465ffa05', 'https://shop.beacons.ai/myappsuccess/7f275a92-8e51-4020-ba5b-a18a40b20de5']
       ]
     }
   };
@@ -2225,10 +2359,12 @@
         if (cat.comingSoon || !item[2]) {
           ctaHtml = '<span class="tmpl-item-cta tmpl-item-cta-soon">Coming Soon</span>';
         } else {
-          var url = item[2] || '#';
           ctaHtml = '<span class="tmpl-item-ctas">' +
-            '<a class="tmpl-item-cta" href="' + url + '" target="_blank" rel="noopener" aria-label="Order ' + item[0] + ' (English)">Order Now</a>' +
-            (item[3] ? '<a class="tmpl-item-cta tmpl-item-cta-cn" href="' + item[3] + '" target="_blank" rel="noopener" lang="zh-Hans" aria-label="Order ' + item[0] + ' (Chinese version)">中文版</a>' : '') +
+            '<a class="tmpl-item-cta tmpl-order" href="' + item[2] + '" target="_blank" rel="noopener"' +
+            ' data-title="' + item[0].replace(/"/g, '&quot;') + '"' +
+            ' data-en="' + item[2] + '" data-zh="' + (item[3] || '') + '" data-pt="' + (item[4] || '') + '"' +
+            ' data-es="' + (item[5] || '') + '" data-fr="' + (item[6] || '') + '" data-ar="' + (item[7] || '') + '"' +
+            ' aria-label="Order ' + item[0] + ' (English)">Order Now</a>' +
             '</span>';
         }
         itemEl.innerHTML =
@@ -2249,6 +2385,33 @@
       group.appendChild(toggle);
       group.appendChild(panel);
       wrap.appendChild(group);
+    });
+
+    var LANGS = {
+      en: { label: 'Order Now', name: 'English', tag: 'en' },
+      zh: { label: '立即购买', name: 'Chinese', tag: 'zh-Hans' },
+      pt: { label: 'Comprar', name: 'Portuguese', tag: 'pt-BR' },
+      es: { label: 'Comprar', name: 'Spanish', tag: 'es' },
+      fr: { label: 'Acheter', name: 'French', tag: 'fr' },
+      ar: { label: 'اشترِ الآن', name: 'Arabic', tag: 'ar' }
+    };
+    function setGuideLanguage(lang) {
+      var cfg = LANGS[lang] || LANGS.en;
+      document.querySelectorAll('.tmpl-lang-btn').forEach(function(b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+      });
+      document.querySelectorAll('.tmpl-order').forEach(function(a) {
+        var hasLang = !!a.getAttribute('data-' + lang);
+        var use = hasLang ? cfg : LANGS.en;
+        a.href = a.getAttribute('data-' + (hasLang ? lang : 'en'));
+        a.textContent = use.label;
+        a.setAttribute('lang', use.tag);
+        if (use.tag === 'ar') { a.setAttribute('dir', 'rtl'); } else { a.removeAttribute('dir'); }
+        a.setAttribute('aria-label', 'Order ' + a.getAttribute('data-title') + ' (' + use.name + ')');
+      });
+    }
+    document.querySelectorAll('.tmpl-lang-btn').forEach(function(b) {
+      b.addEventListener('click', function() { setGuideLanguage(b.getAttribute('data-lang')); });
     });
   })();
 
