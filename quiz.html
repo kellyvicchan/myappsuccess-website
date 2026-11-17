@@ -33,7 +33,7 @@ html { scroll-behavior: smooth; }
 body { font-family: var(--font); color: var(--text); background: var(--off-white); overflow-x: hidden; }
 
 /* ── NAV ── */
-nav {
+.qz-oldnav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 2.5rem; height: 68px;
@@ -48,7 +48,7 @@ nav {
 
 /* ── HERO BANNER ── */
 .quiz-hero {
-  background: var(--navy); padding: 110px 2rem 3rem; text-align: center;
+  background: var(--navy); padding: 64px 2rem 3rem; text-align: center;
   position: relative; overflow: hidden;
 }
 .quiz-hero.slim {
@@ -74,7 +74,7 @@ nav {
 .quiz-hero p { font-size: 0.98rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 520px; margin: 0 auto; }
 
 /* ── PROGRESS ── */
-.progress-wrap { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 68px; z-index: 50; }
+.progress-wrap { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 69px; z-index: 40; }
 .progress-inner { max-width: 860px; margin: 0 auto; padding: 0.9rem 2rem; display: flex; align-items: center; gap: 1rem; }
 .progress-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
 .progress-bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
@@ -406,8 +406,8 @@ nav {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  nav { padding: 0 1.2rem; }
-  .quiz-hero { padding: 90px 1.2rem 2.5rem; }
+  .qz-oldnav { padding: 0 1.2rem; }
+  .quiz-hero { padding: 44px 1.2rem 2.5rem; }
   .quiz-main { padding: 1.5rem 1rem 5rem; }
   .step-card { padding: 1.8rem 1.4rem 1.5rem; }
   .form-row { grid-template-columns: 1fr; }
@@ -489,17 +489,40 @@ nav {
 /* ── FOOTER ── */
 #quiz-footer { display: none; }
 #quiz-footer.visible { display: block; }
-footer { background: var(--navy); padding: 1.8rem 3rem; text-align: center; border-top: 2px solid rgba(240,180,30,0.2); }
-footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+.qz-oldfoot { background: var(--navy); padding: 1.8rem 3rem; text-align: center; border-top: 2px solid rgba(240,180,30,0.2); }
+.qz-oldfoot p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
 @media (max-width: 480px) { footer { padding: 1.5rem 1.2rem; } }
 </style>
+<link rel="stylesheet" href="site.css">
+<style>body{display:block}.quiz-badge-dot{display:none}.quiz-hero h1{font-size:clamp(36px,5.4vw,60px);letter-spacing:-0.03em}</style>
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="logo" href="index.html#top">MyApp<span>Success</span></a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav">Menu</button>
+    <nav class="nav" id="siteNav" aria-label="Main">
+      <a href="index.html#about">About</a>
+      <a href="index.html#outcomes">Outcomes</a>
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button" aria-expanded="false" aria-controls="svcMenu">College Services<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-sub" id="svcMenu">
+          <a href="index.html#bootcamp">Bootcamp</a>
+          <a href="index.html#sessions">Private Sessions</a>
+          <a href="index.html#guides">Templates &amp; Guides</a>
+          <a href="resources.html">Resources</a>
+        </div>
+      </div>
+      <a href="for-agencies.html">For Partners</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="interest-form.html">Book a free call</a>
+    </nav>
+  </div>
+</header>
 
-<!-- NAV -->
-<nav>
-  <a href="https://myappsuccess.com" class="nav-logo">MyApp<span>Success</span></a>
-</nav>
 
 <!-- HERO -->
 <div class="quiz-hero" id="quiz-hero">
@@ -1002,8 +1025,8 @@ footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
       <h3>Want to <span class="hl">strengthen your application?</span></h3>
       <p>Our team of Ivy League graduates has helped hundreds of students get into their dream schools. Book a free strategy call or join our 6-week bootcamp, tailored to exactly where you are today.</p>
       <div class="cta-buttons">
-        <a href="https://myappsuccess.com/interest-form.html" class="btn-cta-gold">Book a Free Strategy Call</a>
-        <a href="https://myappsuccess.com/#bootcamp" class="btn-cta-outline">Learn About the Bootcamp →</a>
+        <a href="interest-form.html" class="btn-cta-gold">Book a Free Strategy Call</a>
+        <a href="index.html#bootcamp" class="btn-cta-outline">Learn About the Bootcamp →</a>
       </div>
     </div>
     <div class="retake-link"><button onclick="resetQuiz()">↺ Start over with different info</button></div>
@@ -1848,10 +1871,31 @@ function resetQuiz() {
 
 <!-- FOOTER -->
 <div id="quiz-footer">
-  <footer>
-    <p>myappsuccess.com &nbsp;&middot;&nbsp; Gain Acceptance to Your Dream College</p>
-    <p style="margin-top:0.4rem;">&copy; 2026</p>
-  </footer>
+<footer class="panel navy">
+  <div class="wrap">
+    <div class="foot" id="foot">
+      <div class="foot-brand">
+        <a class="logo" href="index.html#top">MyApp<span>Success</span></a>
+        <p class="foot-blurb" style="margin:10px 0 0;color:var(--border);font-size:16px">Helping applicants confidently reach their dream schools through real guidance and proven strategy.</p>
+        <h4 class="news-h">Stay in the loop</h4>
+        <p class="news-note">Free admissions tips and resource updates. No spam.</p>
+        <form class="news-form" id="newsForm">
+          <label for="newsEmail">Email address</label>
+          <input id="newsEmail" type="email" placeholder="you@email.com" autocomplete="email" required>
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+        <p class="news-msg" id="newsMsg" hidden>Thanks for subscribing. We'll be in touch!</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Services</h4><ul><li><a href="index.html#bootcamp">The Bootcamp</a></li><li><a href="index.html#sessions">Private Sessions</a></li><li><a href="index.html#guides">Templates &amp; Guides</a></li><li><a href="resources.html">Resources</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="index.html#about">About</a></li><li><a href="index.html#outcomes">Outcomes</a></li><li><a href="index.html#faq">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="foot-partners"><h4>For Partners</h4><p>Agencies, schools and education brands: let's build something together.</p><a class="btn" href="for-agencies.html">Partner with us</a></div>
+      </div>
+    </div>
+    <div class="copy">© 2026 MyAppSuccess. All rights reserved.</div>
+  </div>
+</footer>
+<script src="site.js"></script>
 </div>
 
 </body>

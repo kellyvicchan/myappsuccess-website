@@ -1,170 +1,139 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Free Resources | MyAppSuccess</title>
-<meta name="description" content="A curated directory of free and partner resources for college-bound students: research programs, tutoring, test prep, counseling, and enrichment." />
-<link rel="icon" type="image/png" href="/favicon.png" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<meta name="description" content="Research programs, tutoring, test prep, counseling and enrichment programs MyAppSuccess recommends.">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script>try{if('scrollRestoration' in history)history.scrollRestoration='manual';}catch(e){}</script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --navy: #1e466e;
-  --navy-mid: #285888;
-  --gold: #f0b41e;
-  --gold-dark: #c99012;
-  --gold-bg: #fef9e6;
-  --white: #ffffff;
-  --off-white: #f5f7fa;
-  --text: #1e466e;
-  --muted: #5c6a82;
-  --border: #e2e8f0;
-  --font: 'League Spartan', sans-serif;
-}
-html { scroll-behavior: smooth; }
-body { font-family: var(--font); color: var(--text); background: var(--off-white); overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
-
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 3rem; height: 72px;
-  background: rgba(255,255,255,0.97);
-  border-bottom: 2px solid var(--gold);
-  box-shadow: 0 2px 16px rgba(30,70,110,0.07);
-}
-.nav-logo img { height: 50px; width: auto; display: block; }
-.nav-back { font-size: 0.82rem; font-weight: 600; color: var(--navy); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
-.nav-back:hover { color: var(--navy-mid); }
-
-/* HERO */
-.res-hero { background: var(--navy); padding: 8.5rem 1.5rem 3.5rem; text-align: center; }
-.eyebrow {
-  display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--gold); border: 1.5px solid rgba(240,180,30,0.45); background: rgba(240,180,30,0.12);
-  padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1rem;
-}
-.res-hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; color: white; letter-spacing: -0.02em; line-height: 1.1; }
-.res-hero h1 span { color: var(--gold); }
-.res-hero p { max-width: 640px; margin: 1rem auto 0; font-size: 1.05rem; line-height: 1.65; color: rgba(255,255,255,0.78); }
-
-main { flex: 1; width: 100%; max-width: 1080px; margin: 0 auto; padding: 2.6rem 1.5rem 4rem; }
-
-/* FREE GUIDE BANNER */
-.free-guide {
-  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
-  background: var(--gold-bg); border: 1.5px solid var(--gold); border-radius: 16px;
-  padding: 1.4rem 1.6rem; margin-bottom: 2.4rem;
-}
-.free-guide h2 { font-size: 1.15rem; font-weight: 800; color: var(--navy); }
-.free-guide p { font-size: 0.92rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.55; max-width: 620px; }
-.btn-navy {
-  display: inline-block; background: var(--navy); color: var(--gold); font-weight: 800; font-size: 0.82rem;
-  letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; padding: 0.75rem 1.4rem; border-radius: 999px;
-  box-shadow: 0 3px 10px rgba(30,70,110,0.25); transition: background 0.2s, transform 0.15s; white-space: nowrap;
-}
-.btn-navy:hover { background: var(--navy-mid); transform: translateY(-1px); }
-
-/* FILTERS */
-.filters { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-bottom: 1.6rem; }
-.chip {
-  font-family: var(--font); font-size: 0.85rem; font-weight: 700; color: var(--navy);
-  background: white; border: 1.5px solid var(--border); border-radius: 999px; padding: 0.5rem 1rem; cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
-}
-.chip:hover { border-color: var(--gold); }
-.chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--gold); }
-.search {
-  margin-left: auto; font-family: var(--font); font-size: 0.9rem; color: var(--text);
-  border: 1.5px solid var(--border); border-radius: 999px; padding: 0.55rem 1rem; min-width: 220px; background: white; outline: none;
-}
-.search:focus { border-color: var(--navy); }
-
-/* CARDS */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.2rem; }
-.card {
-  background: white; border: 1.5px solid var(--border); border-radius: 16px; padding: 1.4rem 1.4rem 1.2rem;
-  display: flex; flex-direction: column; gap: 0.7rem; box-shadow: 0 3px 18px rgba(30,70,110,0.05);
-}
-.card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.tag {
-  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--gold-dark); border: 1.5px solid currentColor; border-radius: 999px; padding: 0.22rem 0.6rem;
-}
-.tag.loc { color: var(--muted); }
-.card h3 { font-size: 1.12rem; font-weight: 800; color: var(--navy); }
-.card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; flex: 1; }
-.card-meta { font-size: 0.8rem; color: var(--muted); }
-.card-meta strong { color: var(--navy); }
-.card a.visit { align-self: flex-start; font-size: 0.85rem; font-weight: 700; color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
-.card a.visit:hover { color: var(--gold-dark); }
-.empty { display: none; text-align: center; color: var(--muted); padding: 2rem 0; }
-
-/* PARTNER CTA */
-.partner-cta {
-  margin-top: 3rem; background: white; border: 1.5px solid var(--border); border-radius: 16px;
-  padding: 1.8rem; text-align: center;
-}
-.partner-cta h2 { font-size: 1.3rem; font-weight: 800; color: var(--navy); }
-.partner-cta p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; max-width: 620px; margin: 0.5rem auto 1.2rem; }
-.disclaimer { font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 1.4rem; line-height: 1.5; }
-
-footer { background: var(--navy); padding: 1.2rem 3rem; text-align: center; border-top: 2px solid rgba(240,180,30,0.25); }
-footer p { font-size: 0.76rem; color: rgba(255,255,255,0.4); }
-
-@media (max-width: 600px) {
-  nav { padding: 0 1.2rem; }
-  footer { padding: 1rem 1.2rem; }
-  .search { margin-left: 0; width: 100%; min-width: 0; }
-  .grid { grid-template-columns: 1fr; }
-}
+.res-guide{background:var(--gold-bg);border-bottom:1px solid #f3e2ad}
+.res-guide .wrap{padding-block:36px;text-align:center}
+.res-guide h2{margin:0;font-size:clamp(24px,3vw,32px);line-height:1.15;font-weight:800;letter-spacing:-0.02em}
+.res-guide p{margin:10px auto 0;max-width:640px;color:var(--muted);font-size:17px}
+.res-guide .btn{margin-top:18px}
+.dir{padding-block:64px 72px}
+.dir-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px 32px;flex-wrap:wrap}
+.dir-head h2{margin:0;font-size:clamp(32px,4vw,48px);line-height:1.02;letter-spacing:-0.025em;font-weight:800}
+.filters{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{font-family:var(--font);font-size:15px;font-weight:700;color:var(--navy);background:var(--white);border:1.5px solid var(--border);border-radius:999px;padding:9px 16px;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+.chip:hover{border-color:var(--navy)}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--gold)}
+.search{flex:0 1 320px;min-width:220px;font-family:var(--font);font-size:16px;color:var(--navy);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px}
+.search::placeholder{color:var(--soft)}
+.search:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(240,180,30,.35)}
+.grid{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:24px 24px 22px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--navy);background:var(--blue-light);padding:5px 10px;border-radius:999px}
+.tag.loc{background:var(--gold-bg);color:var(--gold-dark)}
+.card h3{margin:16px 0 0;font-size:24px;line-height:1.15;font-weight:800;letter-spacing:-0.01em}
+.card p{margin:10px 0 0;color:var(--muted);font-size:16px;line-height:1.5}
+.card-meta{margin-top:14px;font-size:15px;color:var(--muted)}
+.card-meta strong{color:var(--navy)}
+.visit{margin-top:auto;padding-top:18px;font-weight:700;font-size:16px;color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:5px}
+.empty{display:none;margin:28px 0 0;color:var(--muted)}
+.disclaimer{margin:32px 0 0;font-size:14px;color:var(--muted);max-width:820px}
+.partner{padding-block:60px;text-align:center}
+.partner h2{margin:0 auto;font-size:clamp(28px,3.4vw,40px);line-height:1.08;letter-spacing:-0.025em;font-weight:800;max-width:760px}
+.partner p{margin:12px auto 0;font-size:18px;color:var(--border);max-width:620px}
+.partner .btn{margin-top:22px}
+@media (max-width:720px){.dir{padding-block:44px 52px}.search{display:block;width:100%;margin-top:20px}.filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-24px;margin-right:-24px;padding:0 24px 4px}.filters::-webkit-scrollbar{display:none}.chip{white-space:nowrap}.grid{grid-template-columns:1fr}.partner{padding-block:44px}}
 </style>
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo"><img src="NavLogo" alt="MyAppSuccess" /></a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
-</nav>
-
-<!-- HERO -->
-<section class="res-hero">
-  <div class="eyebrow">Free Resources</div>
-  <h1>Resources for <span>college-bound students</span></h1>
-  <p>A growing directory of research programs, tutoring, test prep, counseling, and enrichment opportunities we recommend to our families, including local and online options.</p>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="logo" href="index.html#top">MyApp<span>Success</span></a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav">Menu</button>
+    <nav class="nav" id="siteNav" aria-label="Main">
+      <a href="index.html#about">About</a>
+      <a href="index.html#outcomes">Outcomes</a>
+      <div class="nav-dd">
+        <button class="nav-dd-btn is-current" type="button" aria-expanded="false" aria-controls="svcMenu">College Services<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-sub" id="svcMenu">
+          <a href="index.html#bootcamp">Bootcamp</a>
+          <a href="index.html#sessions">Private Sessions</a>
+          <a href="index.html#guides">Templates &amp; Guides</a>
+          <a href="resources.html" aria-current="page">Resources</a>
+        </div>
+      </div>
+      <a href="for-agencies.html">For Partners</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="interest-form.html">Book a free call</a>
+    </nav>
+  </div>
+</header>
+<main id="top">
+<section class="panel navy">
+  <div class="wrap page-hero">
+    <p class="label">Free resources</p>
+    <h1>Programs we recommend to <span>our families.</span></h1>
+    <p class="sub">A growing directory of research programs, tutoring, test prep, counseling and enrichment opportunities, including local and online options.</p>
+  </div>
 </section>
-
-<main>
-  <div class="free-guide">
-    <div>
-      <h2>Start with our free Roadmap, Timeline &amp; Checklist</h2>
-      <p>Our step-by-step college application roadmap, normally $25, is free. All of our guides are available in English, Chinese, and Brazilian Portuguese.</p>
+<section class="res-guide">
+  <div class="wrap">
+    <h2>Start with our free Roadmap, Timeline &amp; Checklist</h2>
+    <p>Our step-by-step application roadmap, normally $25, is free. Every guide is available in English, Chinese and Brazilian Portuguese.</p>
+    <a class="btn btn-navy" href="https://shop.beacons.ai/myappsuccess/45d5237a-25cc-488d-899d-908dfb822335" target="_blank" rel="noopener">Get the free guide</a>
+  </div>
+</section>
+<section class="dir">
+  <div class="wrap">
+    <div class="dir-head">
+      <div><p class="label">Directory</p><h2>Find a program</h2></div>
     </div>
-    <a class="btn-navy" href="https://shop.beacons.ai/myappsuccess/45d5237a-25cc-488d-899d-908dfb822335" target="_blank" rel="noopener">Get the free guide</a>
+    <div class="filters" id="filters" role="toolbar" aria-label="Filter resources by category"></div>
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty">No resources match that search yet. Check back soon, we add new partners regularly.</p>
+    <p class="disclaimer">Listings are for information only. MyAppSuccess is not affiliated with the programs listed unless noted as a partner. Please confirm details, costs and eligibility directly with each program.</p>
   </div>
-
-  <div class="filters" id="filters" role="toolbar" aria-label="Filter resources by category"></div>
-  <div class="grid" id="grid"></div>
-  <p class="empty" id="empty">No resources match that search yet. Check back soon, we add new partners regularly.</p>
-
-  <div class="partner-cta">
-    <h2>Run a tutoring, counseling, or enrichment program?</h2>
-    <p>We feature trusted programs here for free and love doing joint features with partners. Reach out and tell us about what you offer.</p>
-    <a class="btn-navy" href="mailto:kelly@myappsuccess.com?subject=Resource%20directory%20partnership">Become a featured resource</a>
+</section>
+<section class="panel navy partner">
+  <div class="wrap">
+    <p class="label">Featured resources</p>
+    <h2>Run a tutoring, counseling or enrichment program?</h2>
+    <p>We feature trusted programs here for free and love doing joint features with partners. Tell us what you offer.</p>
+    <a class="btn" href="mailto:kelly@myappsuccess.com?subject=Resource%20directory%20partnership">Become a featured resource</a>
   </div>
-
-  <p class="disclaimer">Listings are for information only. MyAppSuccess is not affiliated with the programs listed unless noted as a partner. Please confirm details, costs, and eligibility directly with each program.</p>
+</section>
 </main>
-
-<footer>
-  <p>myappsuccess.com · &copy; 2026 MyAppSuccess</p>
+<footer class="panel navy">
+  <div class="wrap">
+    <div class="foot" id="foot">
+      <div class="foot-brand">
+        <a class="logo" href="index.html#top">MyApp<span>Success</span></a>
+        <p class="foot-blurb" style="margin:10px 0 0;color:var(--border);font-size:16px">Helping applicants confidently reach their dream schools through real guidance and proven strategy.</p>
+        <h4 class="news-h">Stay in the loop</h4>
+        <p class="news-note">Free admissions tips and resource updates. No spam.</p>
+        <form class="news-form" id="newsForm">
+          <label for="newsEmail">Email address</label>
+          <input id="newsEmail" type="email" placeholder="you@email.com" autocomplete="email" required>
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+        <p class="news-msg" id="newsMsg" hidden>Thanks for subscribing. We'll be in touch!</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Services</h4><ul><li><a href="index.html#bootcamp">The Bootcamp</a></li><li><a href="index.html#sessions">Private Sessions</a></li><li><a href="index.html#guides">Templates &amp; Guides</a></li><li><a href="resources.html">Resources</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="index.html#about">About</a></li><li><a href="index.html#outcomes">Outcomes</a></li><li><a href="index.html#faq">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="foot-partners"><h4>For Partners</h4><p>Agencies, schools and education brands: let's build something together.</p><a class="btn" href="for-agencies.html">Partner with us</a></div>
+      </div>
+    </div>
+    <div class="copy">© 2026 MyAppSuccess. All rights reserved.</div>
+  </div>
 </footer>
-
+<script src="site.js"></script>
 <script>
-  // To add a resource, copy one object below and fill it in.
+// To add a resource, copy one object below and fill it in.
   // category must match one of the CATEGORIES labels. location can be "Online" or a city/region.
   var CATEGORIES = ['All', 'Research Programs', 'Tutoring & Test Prep', 'College Counseling', 'Enrichment & Leadership', 'Scholarships & Access'];
 
@@ -240,6 +209,9 @@ footer p { font-size: 0.76rem; color: rgba(255,255,255,0.4); }
     search.setAttribute('aria-label', 'Search resources');
     search.addEventListener('input', function () { query = search.value; render(); });
     filters.appendChild(search);
+    var mq = window.matchMedia('(max-width:720px)');
+    function placeSearch(){ if (mq.matches) filters.parentNode.insertBefore(search, filters); else document.querySelector('.dir-head').appendChild(search); }
+    placeSearch(); if (mq.addEventListener) mq.addEventListener('change', placeSearch);
 
     render();
   })();
