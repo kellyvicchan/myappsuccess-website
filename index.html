@@ -504,8 +504,17 @@ html.intro-run .hero-panel ~ section,html.intro-run footer{visibility:hidden}
 html.intro-run body::before{background:var(--navy)}
 html.intro-run .stage4{animation:eStage 2.95s linear .05s both;transform-origin:50% calc(100% - 135px)}
 @media (max-height:820px) and (min-width:721px){html.intro-run .stage4{transform-origin:50% calc(100% - 115px)}}
-html.intro-run .seal4{animation:eSeal .6s cubic-bezier(.4,0,.2,1) .6s both}
-html.intro-run .flap4{animation:eFlap .75s cubic-bezier(.55,0,.25,1) 1.1s both}
+html.intro-run .seal4{animation:eSeal .6s cubic-bezier(.4,0,.2,1) .6s both,eSealB 2.95s linear .05s both}
+html.intro-run .flap4{animation:eFlap .75s cubic-bezier(.55,0,.25,1) 1.1s both,eFlapB 2.95s linear .05s both}
+/* The envelope starts 1.25x taller (same width) and settles to its normal height as the letter rises */
+html.intro-run .env4{animation:eEnvH 2.95s linear .05s both}
+.env4{--eh0:338px;--eh1:270px}.flap4{--eh0:338px;--eh1:270px}.seal4{--sb0:237px;--sb1:189px}
+@keyframes eEnvH{0%,60%{height:var(--eh0);animation-timing-function:cubic-bezier(.45,0,.2,1)}100%{height:var(--eh1)}}
+@keyframes eFlapB{0%,60%{bottom:var(--eh0);animation-timing-function:cubic-bezier(.45,0,.2,1)}100%{bottom:var(--eh1)}}
+@keyframes eSealB{0%,60%{bottom:var(--sb0);animation-timing-function:cubic-bezier(.45,0,.2,1)}100%{bottom:var(--sb1)}}
+@keyframes eEnvHM{0%,43%{height:var(--eh0);animation-timing-function:cubic-bezier(.45,0,.2,1)}100%{height:var(--eh1)}}
+@keyframes eSealBM{0%,43%{bottom:var(--sb0);animation-timing-function:cubic-bezier(.45,0,.2,1)}100%{bottom:var(--sb1)}}
+@media (max-height:820px) and (min-width:721px){.env4,.flap4{--eh0:288px;--eh1:230px}.seal4{--sb0:201px;--sb1:161px}}
 html.intro-run .letter4{animation:eLetter 1.2s cubic-bezier(.16,1,.3,1) 1.8s both}
 html.intro-run .site-head,html.intro-run .marquee,html.intro-run .preview{animation:eFade .6s ease 2.4s both}
 html.intro-run .env4 .env-cta,html.intro-run .env4 .addr{animation:eFade .5s ease 2.5s both}
@@ -522,6 +531,9 @@ html.intro-run .skip-intro{display:block}
 @media (max-width:700px){
   html.intro-run .letter4{animation:eLetterM 1.65s cubic-bezier(.16,1,.3,1) 1.3s both}
   html.intro-run .stage4{animation:eStageM 2.95s linear .05s both;transform-origin:50% calc(100% - 105px)}
+  .env4{--eh0:263px;--eh1:210px}.seal4{--sb0:184px;--sb1:147px}
+  html.intro-run .env4{animation:eEnvHM 2.95s linear .05s both}
+  html.intro-run .seal4{animation:eSeal .6s cubic-bezier(.4,0,.2,1) .6s both,eSealBM 2.95s linear .05s both}
   html.intro-run .site-head,html.intro-run .marquee,html.intro-run .preview{animation-delay:2.4s}
   html.intro-run .env4 .env-cta{animation-delay:2.4s}
   @keyframes eLetterM{from{transform:translateY(100%)}to{transform:none}}
@@ -581,12 +593,10 @@ html.intro-run .skip-intro{display:block}
     window.masLift = function(shift){
       var s = document.querySelector('.stage4'), env = s.querySelector('.env4');
       var r = env.getBoundingClientRect(), mid = r.top - shift + r.height / 2 + window.scrollY;
-      // start 1.25x larger, but never wider than the screen
-      var z = Math.min(1.25, (window.innerWidth - 16) / s.offsetWidth);
+      var z = 1;
       var flap = s.querySelector('.flap4'), fh = flap ? flap.offsetHeight : 0;
       // centered on screen, but low enough that the opened flap stays in view
       var lift = Math.min(mid - window.innerHeight / 2, mid - 12 - (r.height / 2 + fh) * z);
-      s.style.setProperty('--zoom', z.toFixed(3));
       s.style.setProperty('--lift', Math.max(0, Math.round(lift)) + 'px');
     };
     if (document.documentElement.classList.contains('intro-run')) window.masLift(36);
